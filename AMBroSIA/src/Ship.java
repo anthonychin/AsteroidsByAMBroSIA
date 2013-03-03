@@ -6,10 +6,11 @@
 /**
  *
  * @author Nikolaos
- */
+ */     
 public class Ship {
-    private int lives;
-    private int fireRate;
+    int lives;
+    int fireRate;
+    
     Ship(int fireRate, int lives)
     {
     }
@@ -36,6 +37,6 @@ public class Ship {
     
     public void shoot()
     {
-        
+       Projectile p = new Projectile(int velocity, int heading, int[] coordinates, ImageIcon img, GameState gs, int ttl);        
     }
 }
