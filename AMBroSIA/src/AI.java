@@ -7,6 +7,21 @@
  *
  * @author Nikolaos
  */
+import java.util.ArrayList;
+
 public class AI {
+    public ArrayList<int[]> pathFind()
+    {
+        
+    }
     
+    public void alienPath()
+    {
+        
+    }
+    
+    public int[] targetPS(PlayerShip playerShip)
+    {
+        return playerShip.getCoord();
+    }
 }
