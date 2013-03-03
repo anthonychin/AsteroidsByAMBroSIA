@@ -59,7 +59,7 @@ public class MapObject {
         
     }
     
-    destroy()
+    public void destroy()
     {
         
     }
