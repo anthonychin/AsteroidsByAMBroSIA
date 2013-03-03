@@ -8,12 +8,11 @@
  * @author Nikolaos, Anthony
  */
 
-import java.util.Vector;
-import javax.swing.ImageIcon;
+import java.awt.Polygon;
 
 public class AlienShip extends Ship{
     
-    public AlienShip(int fireRate, int lives, int heading, Vector velocity, int[] coordinates, ImageIcon img){
-        super(heading, coordinates, img, fireRate, lives);
+    public AlienShip(int velocity, int heading, int[] coordinates, Polygon shape, GameState gameState, int fireRate, int lives){
+        super(velocity, heading, coordinates, shape, gameState, fireRate, lives);
     }
 }
