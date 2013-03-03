@@ -5,8 +5,10 @@
 
 /**
  *
- * @author Nikolaos
+ * @author Anthony
  */
-public class Projectile {
-    
+public class Projectile extends MapObject {
+    public Projectile(int velocity, int heading, int[] coordinates, ImageIcon img, GameState gs, int ttl){     
+        
+    }
 }
