@@ -55,6 +55,11 @@ public class MapObject {
         return this.shape;
     }
     
+    public GameState getGameState()
+    {
+        return this.gameState;
+    }
+    
     public void update()
     {
         
