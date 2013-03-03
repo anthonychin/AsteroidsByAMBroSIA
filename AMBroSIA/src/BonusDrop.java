@@ -29,4 +29,9 @@ public class BonusDrop extends MapObject {
     {
         return this.ttl;
     }
+    
+    public void destroy()
+    {
+        getGameState().removeBonusDrop(this);
+    }
 }
