@@ -9,4 +9,8 @@
  */
 public class Graphics {
     
+ public Graphics(GameState gamestate);
+ 
+ public void updateGraphics()
+    
 }
