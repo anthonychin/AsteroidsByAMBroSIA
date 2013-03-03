@@ -31,7 +31,7 @@ public class Ship {
     
     public void setLives(int lives)
     {
-        
+        this.lives = lives;
     }
     
     public void shoot()

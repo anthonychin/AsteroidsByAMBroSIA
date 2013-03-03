@@ -11,7 +11,7 @@ public class SidePanel {
     
     public SidePanel();
     
-    public void drawSidePanel();
+    public void drawSidePanel(Graphics graphic);
     
     public void updateSide();
     
