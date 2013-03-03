@@ -96,7 +96,7 @@ public class GameState {
         this.alienShip = null;
     }
     
-    public void addPlayerShip(PlayerShip playership)
+    public void addPlayerShip(PlayerShip playerShip)
     {
         this.playerShip = playerShip;
     }
