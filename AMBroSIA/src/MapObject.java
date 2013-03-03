@@ -17,12 +17,11 @@ public class MapObject {
     private GameState gameState;
     private Polygon shape;
     
-    public MapObject(int velocity, int heading, int[] coordinates, Polygon shape, GameState gameState)
+    public MapObject(int velocity, int heading, int[] coordinates, GameState gameState)
     {
         this.heading = heading;
         this.coordinates = coordinates;
         this.gameState = gameState;
-        this.shape = shape;
     }
     
     public int getVelocity()
@@ -53,6 +52,11 @@ public class MapObject {
     public Polygon getShape()
     {
         return this.shape;
+    }
+    
+    public void setShape(Polygon shape)
+    {
+        this.shape = shape;
     }
     
     public GameState getGameState()
