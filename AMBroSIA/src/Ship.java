@@ -10,8 +10,11 @@
 public class Ship {
     private int lives;
     private int fireRate;
+    
     Ship(int fireRate, int lives)
     {
+        this.lives = lives;
+        this.fireRate = fireRate;
     }
     
     public int getFireRate()
@@ -21,7 +24,7 @@ public class Ship {
     
     public void setFireRate(int fireRate)
     {
-        
+        this.fireRate = fireRate;
     }
     
     public int getLives()
