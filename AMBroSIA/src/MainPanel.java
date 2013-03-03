@@ -14,5 +14,13 @@ public class MainPanel {
     
     public void generateMenu();
     
+    public void loadTutorial();
+    
+    public void loadLeaderboard();
+    
+    public void quit();
+    
+    public void updateMain();
+    
     
 }
