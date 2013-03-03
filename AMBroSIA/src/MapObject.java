@@ -7,24 +7,54 @@
  *
  * @author Nikolaos
  */
+import javax.swing.ImageIcon;
+
 public class MapObject {
+    private int velocity;
+    private int heading;
+    private int[] coordinates;
+    private ImageIcon image;
     
-    public MapObject(Vector velocity, int heading, float[] coordinates, ImageIcon img, GameState gs);
+    public MapObject(int heading, int[] coordinates, ImageIcon img)
+    {
+        this.heading = heading;
+        this.coordinates = coordinates;
+        this.image = img;
+    }
     
-    public Vector getVelocity();
+    public int getVelocity()
+    {
+        return this.velocity;
+    }
     
-    public int getHeading();
+    public int getHeading()
+    {
+        return this.heading;
+    }
     
-    public void setHeading(int heading);
+    public void setHeading(int heading)
+    {
+        this.heading = heading;
+    }
     
-    ImageIcon getImage();;
+    ImageIcon getImage()
+    {
+        return this.image;
+    }
     
-    public float[] getCoord();
+    public int[] getCoord()
+    {
+        return this.coordinates;
+    }
     
-    public void setCoord(float[] coordinates);
+    public void setCoord(int[] coordinates)
+    {
+        this.coordinates = coordinates;
+    }
     
-    public void update();
-    
-    public void destroy();
+    public void update()
+    {
+        
+    }
     
 }
