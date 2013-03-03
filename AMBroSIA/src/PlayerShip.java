@@ -1,6 +1,4 @@
 
-import java.awt.Polygon;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -14,19 +12,26 @@ public class PlayerShip extends Ship{
     private int bomb;
     private int shieldPoints;
     private int acceleration;
+    private int angularVelocity;
     
-    public PlayerShip(int velocity, int heading, int[] coordinates, GameState gameState,int fireRate, int lives, int bomb, int shieldPoints, int acceleration){
+    public PlayerShip(int velocity, int heading, int[] coordinates, GameState gameState,int fireRate, int lives, int bomb, int shieldPoints, int acceleration, int angularVelocity){
         super(velocity, heading, coordinates, gameState, fireRate, lives);
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
+        this.angularVelocity = angularVelocity;
     }
     
     public int getBomb(){
        return this.bomb;
     }
     
-    public void setBomb(int bomb){
-        this.bomb = bomb;
+    public int addBomb(){
+        return this.bomb + 1;
+    }
+    
+    public void useBomb(){
+        bomb = bomb-1;
+        // do something
     }
     
     public int getShieldPoints(){
@@ -35,6 +40,18 @@ public class PlayerShip extends Ship{
     
     public void setShieldPoints(int shieldpoints){
         this.shieldPoints = shieldpoints;
+    }
+    
+    public void useShield(){
+        //do something
+    }
+    
+    public int getAngularVelocity(){
+        return this.angularVelocity;
+    }
+    
+    public void setAngularVelocity(int angularVelocity){
+        this.angularVelocity = angularVelocity;
     }
     
     public boolean isDead(){
@@ -50,7 +67,7 @@ public class PlayerShip extends Ship{
         this.acceleration = acceleration;
     }
     
-    public accelerate(){
-    
+    public void accelerate(){
+        
     }
 }

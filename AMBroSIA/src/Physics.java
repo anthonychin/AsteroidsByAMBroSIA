@@ -7,12 +7,21 @@
  *
  * @author Nikolaos
  */
+import java.util.ArrayList;
+
 public class Physics {
-    public void update(MapObject mapobject);
+    public void update(MapObject mapObject)
+    {
+        
+    }
     
-    public void update(Ship ship);
+    public void update(Ship ship)
+    {
+        
+    }
     
-    public List<Trajectory> getTrajectory(AlienShip alienship);
-    
-    public void checkCollision(MapObject PlayerShip, List <MapObject> AlienShip, List<MapObject> Asteroids, List<MapObject> Projectiles, List<MapObject> BonusDrops);
+    public void checkCollision(PlayerShip playerShip, AlienShip alienShip, ArrayList<Asteroid> asteroids, ArrayList<Projectile> projectiles, ArrayList<BonusDrop> bonusDrops)
+    {
+        
+    }
 }
