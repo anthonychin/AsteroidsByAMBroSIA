@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 public class Ship extends MapObject{
     private int lives;
     private int fireRate;
-    
+    // Contructor
     Ship(int heading, int[] coordinates, ImageIcon img,int fireRate, int lives){
         super(heading,coordinates,img);
         this.lives = lives;
