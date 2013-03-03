@@ -14,16 +14,15 @@ public class MapObject {
     private int velocity;
     private int heading;
     private int[] coordinates;
-    private ImageIcon image;
     private GameState gameState;
     private Polygon shape;
     
-    public MapObject(int velocity, int heading, int[] coordinates, ImageIcon img, GameState gameState)
+    public MapObject(int velocity, int heading, int[] coordinates, Polygon shape, GameState gameState)
     {
         this.heading = heading;
         this.coordinates = coordinates;
-        this.image = img;
         this.gameState = gameState;
+        this.shape = shape;
     }
     
     public int getVelocity()
@@ -39,11 +38,6 @@ public class MapObject {
     public void setHeading(int heading)
     {
         this.heading = heading;
-    }
-    
-    ImageIcon getImage()
-    {
-        return this.image;
     }
     
     public int[] getCoord()

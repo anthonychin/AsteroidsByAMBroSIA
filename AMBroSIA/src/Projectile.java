@@ -5,8 +5,24 @@
 
 /**
  *
- * @author Nikolaos
+ * @author Anthony
  */
-public class Projectile {
+
+import javax.swing.ImageIcon;
+
+public class Projectile extends MapObject {
+    private int velocity; // to be fixed
+    private int ttl;
     
+    public Projectile(int heading, int[] coordinates, ImageIcon img, int velocity, GameState gs, int ttl){     
+        super(heading,coordinates,img);
+        this.ttl = ttl;      
+    }
+    
+    public int getTTL(){
+        return this.heading;
+    }
+    public void setTTL(int ttl){
+        this.ttl = ttl;
+    }
 }

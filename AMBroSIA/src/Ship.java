@@ -5,14 +5,17 @@
 
 /**
  *
- * @author Nikolaos
+ * @author Anthony
  */
-public class Ship {
+
+import javax.swing.ImageIcon;
+
+public class Ship extends MapObject{
     private int lives;
     private int fireRate;
-    
-    Ship(int fireRate, int lives)
-    {
+    // Contructor
+    Ship(int heading, int[] coordinates, ImageIcon img,int fireRate, int lives){
+        super(heading,coordinates,img);
         this.lives = lives;
         this.fireRate = fireRate;
     }
@@ -39,6 +42,6 @@ public class Ship {
     
     public void shoot()
     {
-        
+       Projectile p = new Projectile(int velocity, int heading, int[] coordinates, ImageIcon img, GameState gs, int ttl);        
     }
 }
