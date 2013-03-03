@@ -16,7 +16,7 @@ public class MainPanel {
     
     public void loadTutorial();
     
-    public void loadLeaderboard(File f);
+    public void loadLeaderboard(File file);
     
     public void quit();
     

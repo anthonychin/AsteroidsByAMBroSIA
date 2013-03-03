@@ -11,29 +11,29 @@ public class GameState {
     
     public GameState(PlayerShip ship, int level, int highscore);
     
-    public void addAsteroid(Asteroid a);
+    public void addAsteroid(Asteroid asteroid);
     
-    public void removeAsteroid(Asteroid a);
+    public void removeAsteroid(Asteroid asteroid);
     
     public List<Asteroid> getAsteroids();
     
-    public void addProjectile(Projectile p);
+    public void addProjectile(Projectile projectile);
     
-    public void removeProjectile(Projectile p);
+    public void removeProjectile(Projectile projectile);
     
     public List<Projectile> getProjectiles();
     
-    public void addBonusDrop(BonusDrop bd);
+    public void addBonusDrop(BonusDrop bonusdrop);
     
-    public void removeBonusDrop(BonusDrop bd);
+    public void removeBonusDrop(BonusDrop bonusdrop);
     
     public List<BonusDrop> getBonusDrops();
     
-    public void addAlienShip(AlienShip as);
+    public void addAlienShip(AlienShip alienship);
     
     public AlienShip getAlienShip();
     
-    public void addPlayerShip(PlayerShip ps);
+    public void addPlayerShip(PlayerShip playership);
     
     public PlayerShip getPlayerShip();
     
