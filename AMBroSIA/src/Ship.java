@@ -6,13 +6,18 @@
 /**
  *
  * @author Nikolaos
- */     
-public class Ship {
-    int lives;
-    int fireRate;
+ */
+
+import javax.swing.ImageIcon;
+
+public class Ship extends MapObject{
+    private int lives;
+    private int fireRate;
     
-    Ship(int fireRate, int lives)
-    {
+    Ship(int heading, int[] coordinates, ImageIcon img,int fireRate, int lives){
+        super(heading,coordinates,img);
+        this.lives = lives;
+        this.fireRate = fireRate;
     }
     
     public int getFireRate()
@@ -22,7 +27,7 @@ public class Ship {
     
     public void setFireRate(int fireRate)
     {
-        
+        this.fireRate = fireRate;
     }
     
     public int getLives()
