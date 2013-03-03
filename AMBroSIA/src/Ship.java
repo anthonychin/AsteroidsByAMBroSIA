@@ -8,7 +8,6 @@
  * @author Anthony
  */
 
-import java.awt.Polygon;
 
 public class Ship extends MapObject{
     int lives;
@@ -42,6 +41,15 @@ public class Ship extends MapObject{
     
     public void shoot()
     {
-       Projectile p = new Projectile(velocity, heading, coordinates, gameState, ttl);        
+       Projectile p = new Projectile(Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), gameState, ttl);        
     }
+ 
+    private int[] calculateCoordinate(int[] shipCoord){
+        shipCoord = this.getCoord();
+        int i = 0;
+        while(i < shipCoord.length){
+            shipCoord[i] = shipCoord[i] + 1;
+        }     
+        return shipCoord;
+    }    
 }
