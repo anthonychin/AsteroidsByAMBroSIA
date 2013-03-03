@@ -7,6 +7,6 @@
  *
  * @author Nikolaos
  */
-public class BonusDrop {
+public class BonusDrop extends MapObject {
     
 }
