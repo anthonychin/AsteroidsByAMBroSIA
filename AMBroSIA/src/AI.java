@@ -8,11 +8,12 @@
  * @author Nikolaos
  */
 import java.util.ArrayList;
+import java.util.Random;
 
 public class AI {
     public ArrayList<int[]> pathFind()
     {
-        
+        return null;
     }
     
     public void alienPath()
@@ -23,5 +24,12 @@ public class AI {
     public int[] targetPS(PlayerShip playerShip)
     {
         return playerShip.getCoord();
+    }
+    
+    private int randomHeading()
+    {
+        Random randomGen = new Random();
+        int number = randomGen.next(9);
+        
     }
 }

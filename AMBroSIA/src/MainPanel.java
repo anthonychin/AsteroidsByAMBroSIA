@@ -12,15 +12,28 @@ public class MainPanel {
     public MainPanel() {
     }
     
-    public void generateMenu();
+    public void generateMenu()
+    {
+        
+    }
     
-    public void loadTutorial();
+    public void loadTutorial()
+    {
+        
+    }
     
-    public void loadLeaderboard(File file);
+    public void loadLeaderboard()
+    {
+        
+    }
     
-    public void quit();
+    public void quit()
+    {
+        
+    }
     
-    public void updateMain();
-    
-    
+    public void updateMain()
+    {
+        
+    }
 }

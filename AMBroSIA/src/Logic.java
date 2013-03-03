@@ -9,24 +9,54 @@
  */
 public class Logic {
     
-    public void main(String args[]);
+    public static void main(String args[])
+    {
+        
+    }
     
-    public void startSinglePlayer();
+    public static void startSinglePlayer()
+    {
+        
+    }
     
-    public void startTwoPlayer();
+    public static void startTwoPlayer()
+    {
+        
+    }
     
-    public void showTutorial();
+    public static void showTutorial()
+    {
+        
+    }
     
-    public boolean isPaused();
+    public boolean isPaused()
+    {
+        return false;
+    }
     
-    public void displayWinner();
+    public static void displayWinner()
+    {
+        
+    }
     
-    public void displayGameOver();
+    public static void displayGameOver()
+    {
+        
+    }
     
-    public void displayPlayerTwoTurn();
+    public static void displayPlayerTwoTurn()
+    {
+        
+    }
     
-    public void gameLogic();
+    public static void gameLogic()
+    {
+        
+    }
     
-    void startIOListener();
+    public static void startIOListener()
+    {
+        
+    }
     
 }
