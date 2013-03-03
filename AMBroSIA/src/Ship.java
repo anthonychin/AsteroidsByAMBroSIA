@@ -8,14 +8,14 @@
  * @author Anthony
  */
 
-import javax.swing.ImageIcon;
+import java.awt.Polygon;
 
 public class Ship extends MapObject{
     private int lives;
     private int fireRate;
     // Contructor
-    Ship(int heading, int[] coordinates, ImageIcon img,int fireRate, int lives){
-        super(heading,coordinates,img);
+    Ship(int velocity, int heading, int[] coordinates, Polygon shape, GameState gameState,int fireRate, int lives){
+        super(velocity, heading,coordinates,shape, gameState);
         this.lives = lives;
         this.fireRate = fireRate;
     }
@@ -42,6 +42,6 @@ public class Ship extends MapObject{
     
     public void shoot()
     {
-       Projectile p = new Projectile(int velocity, int heading, int[] coordinates, ImageIcon img, GameState gs, int ttl);        
+       Projectile p = new Projectile(velocity, heading, coordinates, gameState, ttl);        
     }
 }
