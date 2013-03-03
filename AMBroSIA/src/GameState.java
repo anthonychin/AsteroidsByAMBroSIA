@@ -1,48 +1,111 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
+ * The <code>GameState</code> class contains all the variables and object references that are required to keep the state of the game in memory.
+ * It provides all the methods to add and remove objects from the game and get an ArrayList of the objects of the same type.
  * @author Nikolaos
  */
+import java.util.ArrayList;
+
+
 public class GameState {
     
-    public GameState(PlayerShip ship, int level, int highscore);
+    private ArrayList<Asteroid> asteroidList;
+    private ArrayList<Projectile> projectileList;
+    private ArrayList<BonusDrop> bonusList;
+    private PlayerShip playerShip;
+    private AlienShip alienShip;
+    private int highScore;
+    private int level;
     
-    public void addAsteroid(Asteroid asteroid);
     
-    public void removeAsteroid(Asteroid asteroid);
+    public GameState(PlayerShip ship, int level, int highScore)
+    {
+        this.playerShip = ship;
+        this.level = level;
+        this.highScore = highScore;
+        
+        this.asteroidList= new ArrayList<>(0);
+        this.projectileList = new ArrayList<>(0);
+        this.bonusList = new ArrayList<>(0);
+    }
     
-    public List<Asteroid> getAsteroids();
+    public void addAsteroid(Asteroid asteroid) { this.asteroidList.add(asteroid); }
     
-    public void addProjectile(Projectile projectile);
+    public void removeAsteroid(Asteroid asteroid) { this.asteroidList.remove(asteroid); }
     
-    public void removeProjectile(Projectile projectile);
+    public ArrayList<Asteroid> getAsteroids() { return this.asteroidList; }
     
-    public List<Projectile> getProjectiles();
+    public void addProjectile(Projectile projectile)
+    {
+        this.projectileList.add(projectile);
+    }
     
-    public void addBonusDrop(BonusDrop bonusdrop);
+    public void removeProjectile(Projectile projectile)
+    {
+        this.projectileList.remove(projectile);
+    }
     
-    public void removeBonusDrop(BonusDrop bonusdrop);
+    public ArrayList<Projectile> getProjectiles()
+    {
+        return this.projectileList;
+    }
     
-    public List<BonusDrop> getBonusDrops();
+    public void addBonusDrop(BonusDrop bonusDrop)
+    {
+        this.bonusList.add(bonusDrop);
+    }
     
-    public void addAlienShip(AlienShip alienship);
+    public void removeBonusDrop(BonusDrop bonusDrop)
+    {
+        this.bonusList.remove(bonusDrop);
+    }
     
-    public AlienShip getAlienShip();
+    public ArrayList<BonusDrop> getBonusDrops()
+    {
+        return this.bonusList;
+    }
     
-    public void addPlayerShip(PlayerShip playership);
+    public void addAlienShip(AlienShip alienShip)
+    {
+        this.alienShip = alienShip;
+    }
     
-    public PlayerShip getPlayerShip();
+    public AlienShip getAlienShip()
+    {
+        return this.alienShip;
+    }
     
-    public int getLevel();
+    public void removeAlienShip()
+    {
+        this.alienShip = null;
+    }
     
-    public boolean isLevelComplete();
+    public void addPlayerShip(PlayerShip playership)
+    {
+        this.playerShip = playerShip;
+    }
     
-    public int getHighScore(int score);
+    public PlayerShip getPlayerShip()
+    {
+        return this.playerShip;
+    }
     
-    public void addToHighScore();
+    public int getLevel()
+    {
+        return this.level;
+    }
     
+    public boolean isLevelComplete()
+    {
+        return true;
+    }
+    
+    public int getHighScore()
+    {
+        return this.highScore;
+    }
+    
+    public void addToHighScore(int score)
+    {
+        this.highScore += score;
+    }
 }
