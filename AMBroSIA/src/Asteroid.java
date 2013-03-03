@@ -1,16 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author Nikolaos
  */
-public class Asteroid {
+import java.awt.Polygon;
+
+public class Asteroid extends MapObject{
+    private int size;
     
-    public Asteroid(int size);
+    Asteroid(int velocity, int heading, int[] coordinates, Polygon shape, GameState gameState, int size)
+    {
+        super(velocity, heading, coordinates, shape, gameState);
+        this.size = size;
+    }
     
-    public int getSize();
-    
+    public int getSize()
+    {
+        return this.size;
+    }
 }
