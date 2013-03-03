@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 public class GameState {
     
+    final public static int LARGE_ASTEROID_SCORE = 20;
+    final public static int MEDIUM_ASTEROID_SCORE = 50;
+    final public static int SMALL_ASTEROID_SCORE = 100;
+    final public static int ALIEN_SCORE = 200;
+    
     private ArrayList<Asteroid> asteroidList;
     private ArrayList<Projectile> projectileList;
     private ArrayList<BonusDrop> bonusList;
