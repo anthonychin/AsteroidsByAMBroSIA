@@ -17,5 +17,7 @@ public class AlienShip extends Ship{
     }
     
     public void destroy(){
+        getGameState().removeAlienShip();
+        getGameState().addToHighScore(GameState.ALIEN_SCORE);
     }
 }
