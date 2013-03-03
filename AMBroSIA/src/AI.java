@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class AI {
     public ArrayList<int[]> pathFind()
     {
-        
+        return null;
     }
     
     public void alienPath()
