@@ -14,12 +14,14 @@ public class MapObject {
     private int heading;
     private int[] coordinates;
     private ImageIcon image;
+    private GameState gameState;
     
-    public MapObject(int heading, int[] coordinates, ImageIcon img)
+    public MapObject(int velocity, int heading, int[] coordinates, ImageIcon img, GameState gameState)
     {
         this.heading = heading;
         this.coordinates = coordinates;
         this.image = img;
+        this.gameState = gameState;
     }
     
     public int getVelocity()
@@ -57,4 +59,8 @@ public class MapObject {
         
     }
     
+    destroy()
+    {
+        
+    }
 }
