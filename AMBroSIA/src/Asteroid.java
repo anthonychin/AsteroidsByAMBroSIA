@@ -9,4 +9,8 @@
  */
 public class Asteroid {
     
+    public Asteroid(int size);
+    
+    public int getSize();
+    
 }
