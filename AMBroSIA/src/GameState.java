@@ -11,6 +11,7 @@ public class GameState {
     private ArrayList<Asteroid> asteroidList;
     private ArrayList<Projectile> projectileList;
     private ArrayList<BonusDrop> bonusList;
+    private ArrayList<MapObject> explosionList;
     private PlayerShip playerShip;
     private AlienShip alienShip;
     private int highScore;
@@ -26,6 +27,7 @@ public class GameState {
         this.asteroidList= new ArrayList<>(0);
         this.projectileList = new ArrayList<>(0);
         this.bonusList = new ArrayList<>(0);
+        this.explosionList = new ArrayList<>(0);
     }
     
     public void addAsteroid(Asteroid asteroid) { this.asteroidList.add(asteroid); }
@@ -47,6 +49,21 @@ public class GameState {
     public ArrayList<Projectile> getProjectiles()
     {
         return this.projectileList;
+    }
+    
+    public void addExplosion(MapObject explosion)
+    {
+        this.explosionList.add(explosion);
+    }
+    
+    public void removeExplosion(MapObject explosion)
+    {
+        this.explosionList.remove(explosion);
+    }
+    
+    public ArrayList<MapObject> getExplosions()
+    {
+        return this.explosionList;
     }
     
     public void addBonusDrop(BonusDrop bonusDrop)
@@ -79,7 +96,7 @@ public class GameState {
         this.alienShip = null;
     }
     
-    public void addPlayerShip(PlayerShip playership)
+    public void addPlayerShip(PlayerShip playerShip)
     {
         this.playerShip = playerShip;
     }
