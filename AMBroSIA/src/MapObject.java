@@ -7,19 +7,22 @@
  *
  * @author Nikolaos
  */
+import java.awt.Polygon;
 import javax.swing.ImageIcon;
 
 public class MapObject {
     private int velocity;
     private int heading;
     private int[] coordinates;
-    private ImageIcon image;
+    private GameState gameState;
+    private Polygon shape;
     
-    public MapObject(int heading, int[] coordinates, ImageIcon img)
+    public MapObject(int velocity, int heading, int[] coordinates, Polygon shape, GameState gameState)
     {
         this.heading = heading;
         this.coordinates = coordinates;
-        this.image = img;
+        this.gameState = gameState;
+        this.shape = shape;
     }
     
     public int getVelocity()
@@ -37,11 +40,6 @@ public class MapObject {
         this.heading = heading;
     }
     
-    ImageIcon getImage()
-    {
-        return this.image;
-    }
-    
     public int[] getCoord()
     {
         return this.coordinates;
@@ -52,9 +50,18 @@ public class MapObject {
         this.coordinates = coordinates;
     }
     
+    public Polygon getShape()
+    {
+        return this.shape;
+    }
+    
     public void update()
     {
         
     }
     
+    public void destroy()
+    {
+        
+    }
 }
