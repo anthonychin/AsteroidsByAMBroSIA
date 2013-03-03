@@ -7,6 +7,7 @@
  *
  * @author Nikolaos
  */
+import java.awt.Polygon;
 import javax.swing.ImageIcon;
 
 public class MapObject {
@@ -15,6 +16,7 @@ public class MapObject {
     private int[] coordinates;
     private ImageIcon image;
     private GameState gameState;
+    private Polygon shape;
     
     public MapObject(int velocity, int heading, int[] coordinates, ImageIcon img, GameState gameState)
     {
@@ -52,6 +54,11 @@ public class MapObject {
     public void setCoord(int[] coordinates)
     {
         this.coordinates = coordinates;
+    }
+    
+    public Polygon getShape()
+    {
+        return this.shape;
     }
     
     public void update()
