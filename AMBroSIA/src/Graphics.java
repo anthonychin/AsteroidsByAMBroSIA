@@ -21,7 +21,8 @@ public class Graphics {
  
  public void updateGraphics()
  {
-     
+     //update player ship
+     updatePlayerShip();
  }
  
  private Polygon playerShape()
@@ -61,5 +62,20 @@ public class Graphics {
  {
      //TODO: Check explosion
      return new Polygon(new int[] {-2,2}, new int[] {0,0}, 2);
+ }
+ 
+ private void updatePlayerShip()
+ {
+     PlayerShip player = memory.getPlayerShip();
+     //default shape
+     Polygon playerShape = playerShape();
+     //move to appropriate position
+     playerShape.translate(player.getCoord()[0], player.getCoord()[1]);
+     player.setShape(null);
+ }
+ 
+ private void setPosition(Polygon object)
+ {
+     
  }
 }
