@@ -11,20 +11,21 @@ import java.awt.Polygon;
 import javax.swing.ImageIcon;
 
 public class MapObject {
-    private int velocity;
+    private int[] velocity;
     private int heading;
     private int[] coordinates;
     private GameState gameState;
     private Polygon shape;
     
-    public MapObject(int velocity, int heading, int[] coordinates, GameState gameState)
+    public MapObject(int[] velocity, int heading, int[] coordinates, GameState gameState)
     {
+        this.velocity = velocity;
         this.heading = heading;
         this.coordinates = coordinates;
         this.gameState = gameState;
     }
     
-    public int getVelocity()
+    public int[] getVelocity()
     {
         return this.velocity;
     }

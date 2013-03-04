@@ -11,10 +11,10 @@
 import java.awt.Polygon;
 
 public class Ship extends MapObject{
-    int lives;
+    private int lives;
     private int fireRate;
     // Contructor
-    public Ship(int velocity, int heading, int[] coordinates, GameState gameState,int fireRate, int lives){
+    public Ship(int[] velocity, int heading, int[] coordinates, GameState gameState, int fireRate, int lives){
         super(velocity, heading, coordinates, gameState);
         this.lives = lives;
         this.fireRate = fireRate;

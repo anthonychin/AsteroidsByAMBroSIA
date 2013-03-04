@@ -15,7 +15,7 @@ public class BonusDrop extends MapObject {
     
     BonusDrop(int[] coordinates, Polygon shape, GameState gameState, int type, int ttl)
     {
-        super(0, 0, coordinates, gameState);
+        super(new int[] {0, 0} , 0, coordinates, gameState);
         this.type = type;
         this.ttl = ttl;
     }

@@ -14,7 +14,7 @@ public class Projectile extends MapObject {
     private int velocity; // to be fixed
     private int ttl;
     
-    public Projectile(int velocity, int heading, int[] coordinates, GameState gameState, int ttl){     
+    public Projectile(int[] velocity, int heading, int[] coordinates, GameState gameState, int ttl){     
         super(velocity, heading, coordinates, gameState);
         this.ttl = ttl;      
     }

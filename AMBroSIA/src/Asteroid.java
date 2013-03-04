@@ -14,7 +14,7 @@ public class Asteroid extends MapObject{
     
     private int size;
     
-    Asteroid(int velocity, int heading, int[] coordinates, GameState gameState, int size)
+    Asteroid(int[] velocity, int heading, int[] coordinates, GameState gameState, int size)
     {
         super(velocity, heading, coordinates, gameState);
         this.size = size;
