@@ -3,10 +3,8 @@
  * @author Nikolaos Bukas
  */
 
-import java.util.ArrayList;
-import java.lang.Math;
 import java.awt.Polygon;
-import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 public class Physics {
     public static void update(MapObject gameObject, int time)
@@ -21,93 +19,67 @@ public class Physics {
         gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
     }
     
-    public static ArrayList<MapObject> getCollisions(PlayerShip playerShip, AlienShip alienShip, ArrayList<Asteroid> asteroids, ArrayList<Projectile> projectiles, ArrayList<BonusDrop> bonusDrops)
+    public static ArrayList<MapObject> getCollisions(PlayerShip playerShip, AlienShip alienShip, ArrayList<Asteroid> asteroidList, ArrayList<Projectile> projectileList, ArrayList<BonusDrop> bonusList)
     {
         ArrayList<MapObject> listOfCollisions = new ArrayList<>(0);
-        Polygon shipShape = Graphics.getPlayerShape();
+        Polygon shipShape = playerShip.getShape();
         
         //Checking for collisions between PlayerShip and Asteroids
-        for(int i = 0; i < asteroids.size(); i++)
+        for(Asteroid asteroid : asteroidList)
         {
-            Polygon asteroidShape;
-            if(asteroids.get(i).getSize() == Asteroid.LARGE_ASTEROID_SIZE)
-            {
-                asteroidShape = Graphics.getLargeAsteroidShape();
-            }
-            else if(asteroids.get(i).getSize() == Asteroid.MEDIUM_ASTEROID_SIZE)
-            {
-                asteroidShape = Graphics.getMediumAsteroidShape();
-            }
-            else if(asteroids.get(i).getSize() == Asteroid.SMALL_ASTEROID_SIZE)
-            {
-                asteroidShape = Graphics.getSmallAsteroidShape();
-            }
-            
-            if(detectCollision(shipShape, asteroidShape))
+            if(detectCollision(shipShape, asteroid.getShape()))
             {
                 listOfCollisions.add(playerShip);
-                listOfCollisions.add(asteroids.get(i));
+                listOfCollisions.add(asteroid);
             }
         }
         
         //Checking collisions between PlayerShip and Projectiles
-        for(int i = 0; i < projectiles.size(); i++)
+        for(Projectile projectile : projectileList)
         {
-            if(projectiles.get(i).getOwner() != Projectile.PLAYER_OWNER && detectCollision(shipShape, Graphics.getProjectileShape()))
+            if(projectile.getOwner() != Projectile.ALIEN_OWNER && detectCollision(shipShape, projectile.getShape()))
             {
-                listOfCollisions.add(playerShip);
-                listOfCollisions.add(projectiles.get(i));
+                    listOfCollisions.add(alienShip);
+                    listOfCollisions.add(projectile);
             }
         }
         
         //Checking collisions between PlayerShip and BonusDrops
-        for(int i = 0; i < bonusDrops.size(); i++)
+        for(BonusDrop bonusDrop : bonusList)
         {
-            if(projectiles.get(i).getOwner() != Projectile.PLAYER_OWNER && detectCollision(shipShape, Graphics.getProjectileShape()))
+            if(detectCollision(shipShape, bonusDrop.getShape()))
             {
-                listOfCollisions.add(playerShip);
-                listOfCollisions.add(projectiles.get(i));
+                    listOfCollisions.add(alienShip);
+                    listOfCollisions.add(bonusDrop);
             }
         }
         
         if(alienShip != null)
         {
-            shipShape = Graphics.getAlienShape();
+            shipShape = alienShip.getShape();
             
             //Checking collisions between AlienShip and Asteroids
-            for(int i = 0; i < asteroids.size(); i++)
+            for(Asteroid asteroid : asteroidList)
             {
-                Polygon asteroidShape;
-                if(asteroids.get(i).getSize() == Asteroid.LARGE_ASTEROID_SIZE)
-                {
-                    asteroidShape = Graphics.getLargeAsteroidShape();
-                }
-                else if(asteroids.get(i).getSize() == Asteroid.MEDIUM_ASTEROID_SIZE)
-                {
-                    asteroidShape = Graphics.getMediumAsteroidShape();
-                }
-                else if(asteroids.get(i).getSize() == Asteroid.SMALL_ASTEROID_SIZE)
-                {
-                    asteroidShape = Graphics.getSmallAsteroidShape();
-                }
-
-                if(detectCollision(shipShape, asteroidShape))
+                if(detectCollision(shipShape, asteroid.getShape()))
                 {
                     listOfCollisions.add(alienShip);
-                    listOfCollisions.add(asteroids.get(i));
+                    listOfCollisions.add(asteroid);
                 }
             }
             
             //Checkin collisions between AlienShip and Projectiles
-            for(int i = 0; i < projectiles.size(); i++)
+            for(Projectile projectile : projectileList)
             {
-                if(projectiles.get(i).getOwner() != Projectile.ALIEN_OWNER && detectCollision(shipShape, Graphics.getProjectileShape()))
+                if(projectile.getOwner() != Projectile.ALIEN_OWNER && detectCollision(shipShape, projectile.getShape()))
                 {
                     listOfCollisions.add(alienShip);
-                    listOfCollisions.add(projectiles.get(i));
+                    listOfCollisions.add(projectile);
                 }
             }
         }
+        
+        return listOfCollisions;
     }
     
     private static boolean detectCollision(Polygon shapeOne, Polygon shapeTwo)
