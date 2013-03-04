@@ -7,6 +7,22 @@ import java.awt.Polygon;
 import java.util.ArrayList;
 
 public class Physics {
+    public static void main(String[] args)
+    {
+        ArrayList<Asteroid> aList = new ArrayList<>(0);
+        ArrayList<Projectile> pList = new ArrayList<>(0);
+        
+        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {100, 100}, null, Asteroid.LARGE_ASTEROID_SIZE));
+        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {200, 200}, null, Asteroid.MEDIUM_ASTEROID_SIZE));
+        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {300, 300}, null, Asteroid.SMALL_ASTEROID_SIZE));
+        
+        AlienShip as = new AlienShip(new int[] {0, 0}, 0, new int[] {5,5}, null, 0, 0);
+        
+        ArrayList<MapObject> listCollisions = getCollisions(null, as, aList, pList, null);
+        System.out.println(listCollisions.size());
+        
+    }
+    
     public static void update(MapObject gameObject, int time)
     {
         int[] velocity = gameObject.getVelocity();
@@ -22,7 +38,10 @@ public class Physics {
     public static ArrayList<MapObject> getCollisions(PlayerShip playerShip, AlienShip alienShip, ArrayList<Asteroid> asteroidList, ArrayList<Projectile> projectileList, ArrayList<BonusDrop> bonusList)
     {
         ArrayList<MapObject> listOfCollisions = new ArrayList<>(0);
-        Polygon shipShape = playerShip.getShape();
+        Polygon shipShape;
+        if(playerShip != null)
+        {
+        shipShape = playerShip.getShape();
         
         //Checking for collisions between PlayerShip and Asteroids
         for(Asteroid asteroid : asteroidList)
@@ -52,6 +71,7 @@ public class Physics {
                     listOfCollisions.add(alienShip);
                     listOfCollisions.add(bonusDrop);
             }
+        }
         }
         
         if(alienShip != null)
