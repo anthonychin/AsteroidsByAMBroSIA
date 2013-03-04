@@ -31,4 +31,8 @@ public class Projectile extends MapObject {
     public void setTTL(int ttl){
         this.ttl = ttl;
     }
+    
+    public int getOwner(){
+        return this.owner;
+    }
 }
