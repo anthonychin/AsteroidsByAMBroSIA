@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author Anthony
  */
-
 
 public class Ship extends MapObject{
     private int lives;
@@ -41,7 +35,7 @@ public class Ship extends MapObject{
     
     public void shoot()
     {
-       Projectile p = new Projectile(Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), gameState, ttl);        
+        this.getGameState().addProjectile(new Projectile(Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), this.getGameState()));   
     }
  
     private int[] calculateCoordinate(int[] shipCoord){

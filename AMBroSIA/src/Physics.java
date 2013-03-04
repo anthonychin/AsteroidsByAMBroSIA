@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author Nikolaos
+ * @author Nikolaos Bukas
  */
+
 import java.util.ArrayList;
 import java.lang.Math;
 
@@ -51,6 +47,16 @@ public class Physics {
         
         displacement[0] = (int) (initialVelocity[0] * time + 0.5 * acceleration[0] * Math.pow(time, 2));
         displacement[1] = (int) (initialVelocity[1] * time + 0.5 * acceleration[1] * Math.pow(time, 2));
+        
+        return displacement;
+    }
+    
+    private static int[] calculateDisplacement(int[] speed, int time)
+    {
+        int[] displacement = {0, 0};
+        
+        displacement[0] = speed[0] * time;
+        displacement[1] = speed[1] * time;
         
         return displacement;
     }

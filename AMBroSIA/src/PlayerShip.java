@@ -1,9 +1,3 @@
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author Anthony
@@ -12,6 +6,7 @@ public class PlayerShip extends Ship{
     final public static int MAX_VELOCITY = 50;
     final public static int ACCELERATION = 3;
     final public static int DEACCELERATION = -2;
+    final public static int FIRE_RATE = 5;
     
     private int bomb;
     private int shieldPoints;
@@ -34,8 +29,15 @@ public class PlayerShip extends Ship{
     }
     
     public void useBomb(){
-        bomb = bomb-1;
-        // do something
+        if(bomb > 0)
+        {
+            bomb = bomb-1;
+            // do something
+        }
+        else
+        {
+            // do nothing
+        }
     }
     
     public int getShieldPoints(){

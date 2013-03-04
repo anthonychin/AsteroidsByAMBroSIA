@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author Nikolaos
+ * @author Nikolaos Bukas
  */
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,7 +24,8 @@ public class AI {
     private int randomHeading()
     {
         Random randomGen = new Random();
-        int number = randomGen.next(9);
+        //int number = randomGen.next(9);
+        return 0;
         
     }
 }
