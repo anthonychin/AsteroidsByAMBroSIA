@@ -9,7 +9,7 @@ public class AlienShip extends Ship{
     final public static int FIRE_RATE = 8;
     
     public AlienShip(int[] velocity, int heading, int[] coordinates, GameState gameState, int fireRate, int lives){
-        super(velocity, heading, coordinates, gameState, fireRate, lives);
+        super(velocity, heading, coordinates, 0, gameState, fireRate, lives);
     }
     
     public void destroy(boolean bombUsed){
