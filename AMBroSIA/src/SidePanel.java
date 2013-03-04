@@ -9,10 +9,19 @@
  */
 public class SidePanel {
     
-    public SidePanel();
+    public SidePanel()
+    {
+        
+    }
     
-    public void drawSidePanel(Graphics graphic);
+    public void drawSidePanel(Graphics graphic)
+    {
+        
+    }
     
-    public void updateSide();
+    public void updateSide()
+    {
+        
+    }
     
 }
