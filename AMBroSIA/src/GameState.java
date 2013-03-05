@@ -23,11 +23,11 @@ public class GameState {
     private int level;
     
     
-    public GameState(PlayerShip ship, int level, int highScore)
+    public GameState()
     {
-        this.playerShip = ship;
-        this.level = level;
-        this.highScore = highScore;
+        this.playerShip = null;
+        this.level = 1;
+        this.highScore = 0;
         
         this.asteroidList= new ArrayList<>(0);
         this.projectileList = new ArrayList<>(0);
