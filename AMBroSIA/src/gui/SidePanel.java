@@ -1,5 +1,9 @@
 package gui;
 
+/**
+ *
+ * @author Haisin Yip
+ */
 
 public class SidePanel 
 {

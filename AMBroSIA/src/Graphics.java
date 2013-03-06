@@ -10,13 +10,13 @@ import java.util.ArrayList;
  * 
  * @author Michael Smith
  */
-public class Graphics {
+public class GComputation {
     
  private GameState memory;
  private final int WIDTH = 800;
  private final int HEIGHT = 600;
     
- public Graphics(GameState gamestate)
+ public GComputation(GameState gamestate)
  {
     memory = gamestate;
  }

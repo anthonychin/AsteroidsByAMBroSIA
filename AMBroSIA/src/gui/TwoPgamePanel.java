@@ -2,6 +2,10 @@ package gui;
 
 import javax.swing.JPanel;
 
+/**
+ *
+ * @author Haisin Yip
+ */
 
 public class TwoPgamePanel extends JPanel
 {

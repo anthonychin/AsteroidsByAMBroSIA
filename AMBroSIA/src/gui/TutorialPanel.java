@@ -5,6 +5,10 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ *
+ * @author Haisin Yip
+ */
 
 public class TutorialPanel extends JPanel
 {
