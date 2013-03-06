@@ -11,6 +11,8 @@ public class PlayerShip extends Ship{
     
     private int bomb;
     private int shieldPoints;
+    private boolean isAccelerating = false;
+    private boolean isShieldOn = false;
     
     public PlayerShip(int[] velocity, int heading, int[] coordinates, int acceleration, GameState gameState,int fireRate, int lives, int bomb, int shieldPoints){
         super(velocity, heading, coordinates, 0, gameState, fireRate, lives);
@@ -46,10 +48,15 @@ public class PlayerShip extends Ship{
         this.shieldPoints = shieldpoints;
     }
     
-    public void useShield(){
-        //do something
+    public void activateShield(){
+        if (this.shieldPoints > 0){
+            isShieldOn = true;
+        }
     }
     
+    public boolean getShieldStatus(){
+        return isShieldOn; 
+    }
     public boolean isDead(){
         if(this.getLives() == 0){
             return true;
@@ -58,6 +65,10 @@ public class PlayerShip extends Ship{
     }
     
     public void accelerate(){
-        
+        this.isAccelerating = true;
+    }
+    
+    public boolean getAccelerate(){
+        return this.isAccelerating;
     }
 }
