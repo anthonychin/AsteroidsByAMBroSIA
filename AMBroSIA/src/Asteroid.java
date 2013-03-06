@@ -14,9 +14,9 @@ public class Asteroid extends MapObject{
     
     private int size;
     
-    Asteroid(int velocity, int heading, int[] coordinates, GameState gameState, int size)
+    Asteroid(int[] velocity, int heading, int[] coordinates, GameState gameState, int size)
     {
-        super(velocity, heading, coordinates, gameState);
+        super(velocity, heading, coordinates, 0, gameState);
         this.size = size;
     }
     
@@ -25,9 +25,10 @@ public class Asteroid extends MapObject{
         return this.size;
     }
     
-    public void destroy()
+    public void destroy(boolean bombUsed)
     {
         getGameState().removeAsteroid(this);
+        
         if(size == 3)
         {
             for(int i = 0; i < ASTEROIDS_FROM_LARGE; i++)
@@ -35,7 +36,7 @@ public class Asteroid extends MapObject{
                 getGameState().addAsteroid(new Asteroid(this.getVelocity(), this.getHeading(), this.getCoord(), this.getGameState(), MEDIUM_ASTEROID_SIZE));
             }
             
-            getGameState().addToHighScore(GameState.LARGE_ASTEROID_SCORE);
+            if(!bombUsed) { getGameState().addToHighScore(GameState.LARGE_ASTEROID_SCORE); }
         }
         else if(size == 2)
         {
@@ -44,11 +45,11 @@ public class Asteroid extends MapObject{
                 getGameState().addAsteroid(new Asteroid(this.getVelocity(), this.getHeading(), this.getCoord(), this.getGameState(), SMALL_ASTEROID_SIZE));
             }
             
-            getGameState().addToHighScore(GameState.MEDIUM_ASTEROID_SCORE);
+            if(!bombUsed) { getGameState().addToHighScore(GameState.MEDIUM_ASTEROID_SCORE); }
         }
         else
         {
-            getGameState().addToHighScore(GameState.SMALL_ASTEROID_SCORE);
+            if(!bombUsed) { getGameState().addToHighScore(GameState.SMALL_ASTEROID_SCORE); }
         }
     }
 }

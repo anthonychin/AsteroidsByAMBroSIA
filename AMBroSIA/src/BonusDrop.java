@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author Nikolaos
@@ -10,14 +5,21 @@
 import java.awt.Polygon;
 
 public class BonusDrop extends MapObject {
+    final public static int TIME_TO_LIVE = 3;
+    final public static int BOMB_BONUS_DROP = 0;
+    final public static int LIFE_BONUS_DROP = 1;
+    final public static int SHIELD_THREE_POINTS_DROP = 2;
+    final public static int SHIELD_TWO_POINTS_DROP = 3;
+    final public static int SHIELD_ONE_POINT_DROP = 4;
+    
     private int type;
     private int ttl;
     
-    BonusDrop(int[] coordinates, Polygon shape, GameState gameState, int type, int ttl)
+    BonusDrop(int[] coordinates, Polygon shape, GameState gameState, int type)
     {
-        super(0, 0, coordinates, gameState);
+        super(new int[] {0, 0} , 0, coordinates, 0, gameState);
         this.type = type;
-        this.ttl = ttl;
+        this.ttl = TIME_TO_LIVE;
     }
     
     public int getType()
@@ -28,6 +30,11 @@ public class BonusDrop extends MapObject {
     public int getTTL()
     {
         return this.ttl;
+    }
+    
+    public void setTTL(int ttl)
+    {
+        this.ttl = ttl;
     }
     
     public void destroy()

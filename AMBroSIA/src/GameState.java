@@ -1,7 +1,7 @@
 /**
  * The <code>GameState</code> class contains all the variables and object references that are required to keep the state of the game in memory.
  * It provides all the methods to add and remove objects from the game and get an ArrayList of the objects of the same type.
- * @author Nikolaos
+ * @author Nikolaos Bukas
  */
 import java.util.ArrayList;
 
@@ -23,11 +23,11 @@ public class GameState {
     private int level;
     
     
-    public GameState(PlayerShip ship, int level, int highScore)
+    public GameState()
     {
-        this.playerShip = ship;
-        this.level = level;
-        this.highScore = highScore;
+        this.playerShip = null;
+        this.level = 1;
+        this.highScore = 0;
         
         this.asteroidList= new ArrayList<>(0);
         this.projectileList = new ArrayList<>(0);

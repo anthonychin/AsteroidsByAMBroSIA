@@ -1,30 +1,44 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
- * @author Nikolaos
+ * @author Meong Hee
  */
 public class Sound {
     
-    public void playBackgroundSound();
+    private File file;
+    private AudioInputStream sound;
+    private Clip clip;
     
-    public void playGunSound();
+
+    //  The string inputFile should contain the Path of the sound file.
+    public Sound(String inputFile) throws UnsupportedAudioFileException, 
+            IOException, LineUnavailableException {
+        file = new File(inputFile);
+        sound = AudioSystem.getAudioInputStream(file);
+        clip = AudioSystem.getClip();
+        clip.open(sound);
+    }
     
-    public void playBombSound();
+    //  Plays the clip only once.
+    public void play() {
+        clip.setFramePosition(0);
+        clip.start();
+    }
     
-    public void playTheme();
+    //  Stops the currently playing clip.
+    public void stop() {
+        clip.stop();
+    }
     
-    public void playShieldSound();
-    
-    public void playThruster();
-    
-    public void playExplosion();
-    
-    public void playVictory();
-    
-    public void playDefeated();
-    
+    //  Plays the clip in continuously. e.g. BGM
+    public void playLoop() {
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
 }
