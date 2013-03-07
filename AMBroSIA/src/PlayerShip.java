@@ -14,8 +14,8 @@ public class PlayerShip extends Ship{
     private boolean isAccelerating = false;
     private boolean isShieldOn = false;
     
-    public PlayerShip(int[] velocity, int heading, int[] coordinates, int acceleration, GameState gameState,int fireRate, int lives, int bomb, int shieldPoints){
-        super(velocity, heading, coordinates, 0, gameState, fireRate, lives);
+    public PlayerShip(int[] velocity, int heading, int[] coordinates, int acceleration, GameState gameState, int lives, int bomb, int shieldPoints){
+        super(velocity, heading, coordinates, 0, gameState, FIRE_RATE, lives);
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
     }
