@@ -7,23 +7,55 @@ import java.awt.Polygon;
 import java.util.ArrayList;
 
 public class Physics {
-    public static void main(String[] args)
+    
+    private GameState gameState;
+    
+    public void main(String[] args)
     {
-        ArrayList<Asteroid> aList = new ArrayList<>(0);
-        ArrayList<Projectile> pList = new ArrayList<>(0);
-        
-        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {100, 100}, null, Asteroid.LARGE_ASTEROID_SIZE));
-        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {200, 200}, null, Asteroid.MEDIUM_ASTEROID_SIZE));
-        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {300, 300}, null, Asteroid.SMALL_ASTEROID_SIZE));
-        
-        AlienShip as = new AlienShip(new int[] {0, 0}, 0, new int[] {5,5}, null, 0, 0);
-        
-        ArrayList<MapObject> listCollisions = getCollisions(null, as, aList, pList, null);
-        System.out.println(listCollisions.size());
+//        ArrayList<Asteroid> aList = new ArrayList<>(0);
+//        ArrayList<Projectile> pList = new ArrayList<>(0);
+//        
+//        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {100, 100}, null, Asteroid.LARGE_ASTEROID_SIZE));
+//        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {200, 200}, null, Asteroid.MEDIUM_ASTEROID_SIZE));
+//        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {300, 300}, null, Asteroid.SMALL_ASTEROID_SIZE));
+//        
+//        AlienShip as = new AlienShip(new int[] {0, 0}, 0, new int[] {5,5}, null, 0, 0);
+//        
+//        ArrayList<MapObject> listCollisions = getCollisions(null, as, aList, pList, null);
+//        System.out.println(listCollisions.size());
         
     }
     
-    public static void update(MapObject gameObject, int time)
+    Physics(GameState gameState)
+    {
+        this.gameState = gameState;
+    }
+    
+    public void update()
+    {
+        updateObject(gameState.getPlayerShip());
+        if(gameState.getAlienShip() != null)
+        {
+            updateObject(gameState.getAlienShip());
+        }
+        
+        for(Asteroid asteroid : gameState.getAsteroids())
+        {
+            updateObject(asteroid);
+        }
+        
+        for(Projectile projectile : gameState.getProjectiles())
+        {
+            updateObject(projectile);
+        }
+        
+        for(BonusDrop bonusDrop : gameState.getBonusDrops())
+        {
+            updateObject(bonusDrop);
+        }
+    }
+    
+    private static void updateObject(MapObject gameObject)
     {
         int[] velocity = gameObject.getVelocity();
         int[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
@@ -35,10 +67,17 @@ public class Physics {
         gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
     }
     
-    public static ArrayList<MapObject> getCollisions(PlayerShip playerShip, AlienShip alienShip, ArrayList<Asteroid> asteroidList, ArrayList<Projectile> projectileList, ArrayList<BonusDrop> bonusList)
+    public ArrayList<MapObject> getCollisions()
     {
+        PlayerShip playerShip = gameState.getPlayerShip();
+        AlienShip alienShip = gameState.getAlienShip();
+        ArrayList<Asteroid> asteroidList = gameState.getAsteroids();
+        ArrayList<Projectile> projectileList = gameState.getProjectiles();
+        ArrayList<BonusDrop> bonusList = gameState.getBonusDrops();
+        
         ArrayList<MapObject> listOfCollisions = new ArrayList<>(0);
         Polygon shipShape;
+        
         if(playerShip != null)
         {
         shipShape = playerShip.getShape();
