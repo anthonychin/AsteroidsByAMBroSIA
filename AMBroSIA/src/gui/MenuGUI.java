@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.CardLayout;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -97,11 +98,11 @@ public class MenuGUI implements ActionListener
 		frame.setVisible(true);
 		frame.setResizable(true);
 		frame.setSize(500, 500);
-		frame.setLocation(500, 500);
+		frame.setLocation(100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-	}
-
+        }
+        
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
