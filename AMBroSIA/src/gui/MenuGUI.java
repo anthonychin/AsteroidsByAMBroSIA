@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,12 +17,12 @@ import javax.swing.JPanel;
  * @author Haisin Yip
  */
 
-public class MenuGUI implements ActionListener
+public class MenuGUI
 {
 	
 	static CardLayout cardLayout;
 	static JPanel card = new JPanel();
-	
+        
 	// menu buttons
 	static JButton singlePbutton = new JButton("SINGLE-PLAYER MODE");
 	static JButton twoPbutton = new JButton("TWO-PLAYER MODE");
@@ -35,16 +36,21 @@ public class MenuGUI implements ActionListener
 	// tutorial back button
 	static JButton backButtonT = new JButton("BACK");
 	
-	public static void main(String[] args)
+        /**
+         * Starts the GUI Menu.
+         * @param AL
+         * @param keyb 
+         */
+	public MenuGUI(ActionListener AL, KeyListener keyb)
 	{
 		// create and initialize frame
 		JFrame frame = new JFrame("Asteroids");
 		JPanel contentPane = (JPanel)frame.getContentPane();
 		cardLayout = new CardLayout();
 		card.setLayout(cardLayout);
-		
-		// create an action listener to listen for button presses in the MenuGUI
-		ActionListener AL = new MenuGUI();
+                
+                //allow keyboard input to frame
+                frame.addKeyListener(keyb);
 		
 		// create menu page with 5 options
 		JPanel cardMenu = new JPanel();
@@ -103,12 +109,11 @@ public class MenuGUI implements ActionListener
 		
         }
         
-	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void reactToButton(ActionEvent e) 
 	{
 		if(e.getSource() == singlePbutton)
 		{
-			cardLayout.show(card, "Single-Player Mode");
+                    cardLayout.show(card, "Single-Player Mode");
 		}
 		
 		if(e.getSource() == twoPbutton)

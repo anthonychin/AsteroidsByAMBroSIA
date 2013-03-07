@@ -1,22 +1,26 @@
 
+import gui.MenuGUI;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author Michael
+ * @author Nikolaos, Michael
  */
-public class Logic {
+public class Logic implements KeyListener, ActionListener{
     
     final public static int MAX_LEVEL = 30;
+    static ActionListener buttonPress = new Logic();
+    static KeyListener keyboard = new Logic();
+    static MenuGUI gui;
     
     public static void main(String args[])
     {
-        
+	
+        gui = new MenuGUI(buttonPress,keyboard);
     }
     
     public static void startSinglePlayer()
@@ -82,14 +86,33 @@ public class Logic {
         
     }
     
-    public static void startIOListener()
-    {
-        //testing branch
-    }
+    
     
     private static void setUpLevel(GameState gameState, int level)
     {
         
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        
+    }
+    
+    @Override
+    public void keyTyped(KeyEvent e) 
+    {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        gui.reactToButton(e);
     }
     
 }
