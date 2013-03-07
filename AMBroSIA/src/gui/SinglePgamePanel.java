@@ -11,12 +11,13 @@ import javax.swing.JPanel;
 public class SinglePgamePanel extends JPanel
 {
     
-    
+    // initialize side panel showing the player's current score,lives and current level
     
     @Override
     protected void paintComponent(Graphics g) 
     {
-        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        super.paintComponent(g);
+        
     }
     
     public SinglePgamePanel()
