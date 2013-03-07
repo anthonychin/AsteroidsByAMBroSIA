@@ -102,11 +102,6 @@ public class MapObject {
         return this.gameState;
     }
     
-    public void update(int time)
-    {
-        Physics.update(this, time);
-    }
-    
     public void destroy()
     {
         
