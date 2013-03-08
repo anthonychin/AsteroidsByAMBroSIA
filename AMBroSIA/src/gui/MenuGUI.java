@@ -68,7 +68,7 @@ public class MenuGUI
         
         // create single player mode game page
         JPanel cardGame1P = new JPanel();
-        this.gs = gamestate
+        this.gs = gamestate;
         JPanel singlePgamePanel = new SinglePgamePanel(gs);
         cardGame1P.add(singlePgamePanel);
         
