@@ -4,6 +4,7 @@ package game;
 import gui.MenuGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Nikolaos, Michael
  */
-public class Logic implements KeyListener, ActionListener{
+public class Logic extends KeyAdapter implements ActionListener{
     
     final public static int MAX_LEVEL = 30;
     final public static int ALIEN_SHIELD_DAMAGE = 1;
@@ -253,19 +254,23 @@ public class Logic implements KeyListener, ActionListener{
     @Override
     public void keyPressed(KeyEvent e)
     {
+        System.out.println(e.getKeyCode());
         //handles most basic key commands.  Should activate a boolean stating that the key has been pressed
         if (e.getKeyCode() == KeyEvent.VK_UP)
         {
             //accelerate
             accelerate = true;
+            System.out.println("accelerate");
         }
         else if (e.getKeyCode() == KeyEvent.VK_LEFT)
         {
             turnLeft = true;
+            System.out.println("left");
         }
         else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
         {
             turnRight = true;
+            System.out.println("right");
         }
         else if (e.getKeyCode() == KeyEvent.VK_DOWN)
         {
@@ -274,6 +279,7 @@ public class Logic implements KeyListener, ActionListener{
         else if (e.getKeyCode() == KeyEvent.VK_SPACE)
         {
             shoot = true;
+            System.out.println("shoot");
         }
         else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
         {
@@ -285,11 +291,6 @@ public class Logic implements KeyListener, ActionListener{
         }
     }
     
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-        ;//not needed
-    }
     
     @Override
     public void keyReleased(KeyEvent e)
@@ -316,29 +317,29 @@ public class Logic implements KeyListener, ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == MenuGUI.singlePbutton)
+        if(e.getSource() == gui.singlePbutton)
         {
             //TEMPORARY: this code should be in something like setUpLevel or startSinglePlayer
             gameState = new GameState(1, 0);
             gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
         }
         
-        else if(e.getSource() == MenuGUI.twoPbutton)
+        else if(e.getSource() == gui.twoPbutton)
         {
             
         }
         
-        else if(e.getSource() == MenuGUI.leaderBoardButton)
+        else if(e.getSource() == gui.leaderBoardButton)
         {
             
         }
         
-        else if(e.getSource() == MenuGUI.tutorialButton)
+        else if(e.getSource() == gui.tutorialButton)
         {
             
         }
         
-        else if(e.getSource() == MenuGUI.quitButton)
+        else if(e.getSource() == gui.quitButton)
         {
             System.exit(0);
         }

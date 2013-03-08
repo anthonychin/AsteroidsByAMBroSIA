@@ -21,25 +21,28 @@ import game.GameState;
 public class MenuGUI
 {
     
-    static CardLayout cardLayout;
-    static JPanel card = new JPanel();
+    CardLayout cardLayout;
+    JPanel card = new JPanel();
     
     // menu buttons
-    public static JButton singlePbutton = new JButton("SINGLE-PLAYER MODE");
-    public static JButton twoPbutton = new JButton("TWO-PLAYER MODE");
-    public static JButton leaderBoardButton = new JButton("LEADERBOARD");
-    public static JButton tutorialButton = new JButton("TUTORIAL");
-    public static JButton quitButton = new JButton("QUIT");
+    public JButton singlePbutton = new JButton("SINGLE-PLAYER MODE");
+    public JButton twoPbutton = new JButton("TWO-PLAYER MODE");
+    public JButton leaderBoardButton = new JButton("LEADERBOARD");
+    public JButton tutorialButton = new JButton("TUTORIAL");
+    public JButton quitButton = new JButton("QUIT");
     
     // leaderBoard back button
-    static JButton backButtonL = new JButton("BACK");
+    JButton backButtonL = new JButton("BACK");
     
     // tutorial back button
-    static JButton backButtonT = new JButton("BACK");
+    JButton backButtonT = new JButton("BACK");
     
-    //action listener
+    //main window
+    JFrame frame;
+    
+    
     ActionListener buttonClick;
-    
+    KeyListener keyboard;
     /**
      * Starts the GUI Menu.
      * @param AL
@@ -48,13 +51,12 @@ public class MenuGUI
     public MenuGUI(ActionListener AL, KeyListener keyb)
     {
         // create and initialize frame
-        JFrame frame = new JFrame("Asteroids");
+        frame = new JFrame("Asteroids");
         JPanel contentPane = (JPanel)frame.getContentPane();
         cardLayout = new CardLayout();
         card.setLayout(cardLayout);
         
-        //allow keyboard input to frame
-        frame.addKeyListener(keyb);
+        keyboard = keyb;
         
         //allow global access to actionlistener
         buttonClick = AL;
@@ -95,6 +97,9 @@ public class MenuGUI
             cardGame1P.add(new SinglePgamePanel(gs));
             card.add("Single-Player Mode", cardGame1P);
             cardLayout.show(card, "Single-Player Mode");
+            //allow keyboard input
+            frame.addKeyListener(keyboard);
+            frame.setFocusable(true);
         }
         
         else if(e.getSource() == twoPbutton)
@@ -106,6 +111,9 @@ public class MenuGUI
             cardGame2P.add(twoPgamePanel);
             card.add("Two-Player Mode", cardGame2P);
             cardLayout.show(card, "Two-Player Mode");
+            //allow keyboard input
+            frame.addKeyListener(keyboard);
+            frame.setFocusable(true);
         }
         
         else if(e.getSource() == leaderBoardButton)
