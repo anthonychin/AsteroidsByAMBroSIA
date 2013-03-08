@@ -1,3 +1,5 @@
+package game;
+
 
 import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
@@ -26,12 +28,31 @@ public class GraphicsEngine {
   */
  public void updateGraphics()
  {
-     updatePlayerShip();
-     updateAsteroids();
-     updateAlien();
-     updateProjectiles();
-     updateBonusDrops();
-     updateExplosions();
+     if (memory.getPlayerShip() != null)
+     {
+         updatePlayerShip();
+     }
+     if (memory.getAsteroids().isEmpty() == false)
+     {
+         updateAsteroids();
+     }
+     if (memory.getAlienShip() != null)
+     {
+         updateAlien();
+     }
+     if (memory.getProjectiles().isEmpty() == false)
+     {
+         updateProjectiles();
+     }
+     if (memory.getBonusDrops().isEmpty() == false)
+     {
+         updateBonusDrops();
+     }
+     if (memory.getExplosions().isEmpty() == false)
+     {
+         updateExplosions();
+     }
+     
  }
  
  /*

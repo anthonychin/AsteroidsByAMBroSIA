@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import game.GameState;
 
 /**
  *
@@ -24,11 +25,11 @@ public class MenuGUI
     static JPanel card = new JPanel();
     
     // menu buttons
-    static JButton singlePbutton = new JButton("SINGLE-PLAYER MODE");
-    static JButton twoPbutton = new JButton("TWO-PLAYER MODE");
-    static JButton leaderBoardButton = new JButton("LEADERBOARD");
-    static JButton tutorialButton = new JButton("TUTORIAL");
-    static JButton quitButton = new JButton("QUIT");
+    public static JButton singlePbutton = new JButton("SINGLE-PLAYER MODE");
+    public static JButton twoPbutton = new JButton("TWO-PLAYER MODE");
+    public static JButton leaderBoardButton = new JButton("LEADERBOARD");
+    public static JButton tutorialButton = new JButton("TUTORIAL");
+    public static JButton quitButton = new JButton("QUIT");
     
     // leaderBoard back button
     static JButton backButtonL = new JButton("BACK");
@@ -36,14 +37,15 @@ public class MenuGUI
     // tutorial back button
     static JButton backButtonT = new JButton("BACK");
     
-    private GameState gs;
+    //action listener
+    ActionListener buttonClick;
     
     /**
      * Starts the GUI Menu.
      * @param AL
      * @param keyb
      */
-    public MenuGUI(ActionListener AL, KeyListener keyb, GameState gamestate)
+    public MenuGUI(ActionListener AL, KeyListener keyb)
     {
         // create and initialize frame
         JFrame frame = new JFrame("Asteroids");
@@ -54,6 +56,9 @@ public class MenuGUI
         //allow keyboard input to frame
         frame.addKeyListener(keyb);
         
+        //allow global access to actionlistener
+        buttonClick = AL;
+        
         // create menu page with 5 options
         JPanel cardMenu = new JPanel();
         cardMenu.setLayout(new GridLayout(2,1));
@@ -63,42 +68,11 @@ public class MenuGUI
         JPanel buttonPanelMenu = new JPanel();
         buttonPanelMenu.setLayout(new GridLayout(5,1));
         buttonPanelMenu.add(singlePbutton); buttonPanelMenu.add(twoPbutton); buttonPanelMenu.add(leaderBoardButton); buttonPanelMenu.add(tutorialButton); buttonPanelMenu.add(quitButton);
-        singlePbutton.addActionListener(AL); twoPbutton.addActionListener(AL); leaderBoardButton.addActionListener(AL); tutorialButton.addActionListener(AL); quitButton.addActionListener(AL);
+        singlePbutton.addActionListener(buttonClick); twoPbutton.addActionListener(buttonClick); leaderBoardButton.addActionListener(buttonClick); tutorialButton.addActionListener(buttonClick); quitButton.addActionListener(buttonClick);
         cardMenu.add(buttonPanelMenu);
         
-        // create single player mode game page
-        JPanel cardGame1P = new JPanel();
-        this.gs = gamestate;
-        JPanel singlePgamePanel = new SinglePgamePanel(gs);
-        cardGame1P.add(singlePgamePanel);
         
-        // create single player mode game page
-        JPanel cardGame2P = new JPanel();
-        //cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
-        JPanel twoPgamePanel = new TwoPgamePanel();
-        cardGame2P.add(twoPgamePanel);
-        
-        // create tutorial page
-        JPanel cardTutorial = new JPanel();
-        cardTutorial.setLayout(new GridLayout(5,1));
-        JPanel tutorialPanel = new TutorialPanel();
-        cardTutorial.add(tutorialPanel);
-        //initialize a back button
-        JPanel buttonPanelTutorial = new JPanel();
-        buttonPanelTutorial.add(backButtonT); backButtonT.addActionListener(AL);
-        cardTutorial.add(buttonPanelTutorial);
-        
-        // create leaderboard page
-        JPanel cardLeaderBoard = new JPanel();
-        cardLeaderBoard.setLayout(new GridLayout(5,1));
-        JPanel leaderBoardPanel = new LeaderBoardPanel();
-        cardLeaderBoard.add(leaderBoardPanel);
-        //initialize a back button
-        JPanel buttonPanelLeaderBoard = new JPanel();
-        buttonPanelLeaderBoard.add(backButtonL); backButtonL.addActionListener(AL);
-        cardLeaderBoard.add(buttonPanelLeaderBoard);
-        
-        card.add("Menu", cardMenu); card.add("Single-Player Mode", cardGame1P); card.add("Two-Player Mode", cardGame2P); card.add("Tutorial", cardTutorial); card.add("LeaderBoard", cardLeaderBoard);
+        card.add("Menu", cardMenu);
         cardLayout.show(card, "Menu");
         
         contentPane.add(card);
@@ -111,39 +85,70 @@ public class MenuGUI
         
     }
     
-    public void reactToButton(ActionEvent e)
+    //NOTE: code below is a bit redundant with logic.  Can we do some form of code reuse?
+    public void reactToButton(ActionEvent e, GameState gs)
     {
         if(e.getSource() == singlePbutton)
         {
+            // create single player mode game page
+            JPanel cardGame1P = new JPanel();
+            cardGame1P.add(new SinglePgamePanel(gs));
+            card.add("Single-Player Mode", cardGame1P);
             cardLayout.show(card, "Single-Player Mode");
         }
         
-        if(e.getSource() == twoPbutton)
+        else if(e.getSource() == twoPbutton)
         {
+            // create single player mode game page (two player)
+            JPanel cardGame2P = new JPanel();
+            //cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
+            JPanel twoPgamePanel = new TwoPgamePanel();
+            cardGame2P.add(twoPgamePanel);
+            card.add("Two-Player Mode", cardGame2P);
             cardLayout.show(card, "Two-Player Mode");
         }
         
-        if(e.getSource() == leaderBoardButton)
+        else if(e.getSource() == leaderBoardButton)
         {
+              // create leaderboard page
+            JPanel cardLeaderBoard = new JPanel();
+            cardLeaderBoard.setLayout(new GridLayout(5,1));
+            JPanel leaderBoardPanel = new LeaderBoardPanel();
+            cardLeaderBoard.add(leaderBoardPanel);
+            //initialize a back button
+            JPanel buttonPanelLeaderBoard = new JPanel();
+            buttonPanelLeaderBoard.add(backButtonL); backButtonL.addActionListener(buttonClick);
+            cardLeaderBoard.add(buttonPanelLeaderBoard);
+            card.add("LeaderBoard", cardLeaderBoard);
             cardLayout.show(card, "LeaderBoard");
         }
         
-        if(e.getSource() == tutorialButton)
+        else if(e.getSource() == tutorialButton)
         {
+            // create tutorial page
+            JPanel cardTutorial = new JPanel();
+            cardTutorial.setLayout(new GridLayout(5,1));
+            JPanel tutorialPanel = new TutorialPanel();
+            cardTutorial.add(tutorialPanel);
+            //initialize a back button
+            JPanel buttonPanelTutorial = new JPanel();
+            buttonPanelTutorial.add(backButtonT); backButtonT.addActionListener(buttonClick);
+            cardTutorial.add(buttonPanelTutorial);
+            card.add("Tutorial", cardTutorial);
             cardLayout.show(card, "Tutorial");
         }
         
-        if(e.getSource() == quitButton)
+        else if(e.getSource() == quitButton)
         {
             System.exit(0);
         }
         
-        if(e.getSource() == backButtonL)
+        else if(e.getSource() == backButtonL)
         {
             cardLayout.show(card, "Menu");
         }
         
-        if(e.getSource() == backButtonT)
+        else if(e.getSource() == backButtonT)
         {
             cardLayout.show(card, "Menu");
         }

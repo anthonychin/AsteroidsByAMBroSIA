@@ -1,3 +1,5 @@
+package game;
+
 
 import gui.MenuGUI;
 import java.awt.event.ActionEvent;
@@ -21,9 +23,16 @@ public class Logic implements KeyListener, ActionListener{
     
     private static GameState gameState;
     
-    static ActionListener buttonPress = new Logic();
-    static KeyListener keyboard = new Logic();
-    static MenuGUI gui;
+    private static ActionListener buttonPress = new Logic();
+    private static KeyListener keyboard = new Logic();
+    private static MenuGUI gui;
+    
+    //booleans for the key commands.  These need to be checked by the timer
+    private boolean accelerate = false;
+    private boolean turnLeft = false;
+    private boolean turnRight = false;
+    private boolean shoot = false;
+    private boolean paused = false;
     
     public static void main(String args[])
     {
@@ -107,7 +116,7 @@ public class Logic implements KeyListener, ActionListener{
     
     public boolean isPaused()
     {
-        return false;
+        return paused;
     }
     
     public static void displayWinner()
@@ -244,23 +253,96 @@ public class Logic implements KeyListener, ActionListener{
     @Override
     public void keyPressed(KeyEvent e)
     {
-        
+        //handles most basic key commands.  Should activate a boolean stating that the key has been pressed
+        if (e.getKeyCode() == KeyEvent.VK_UP)
+        {
+            //accelerate
+            accelerate = true;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        {
+            turnLeft = true;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        {
+            turnRight = true;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        {
+            gameState.getPlayerShip().useBomb();
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        {
+            shoot = true;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+        {
+            gameState.getPlayerShip().activateShield();
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_P)
+        {
+            paused = !paused;
+        }
     }
     
     @Override
     public void keyTyped(KeyEvent e) 
     {
+        ;//not needed
     }
 
     @Override
     public void keyReleased(KeyEvent e)
     {
-        
+        //stops doing whatever that keypress was doing
+        if (e.getKeyCode() == KeyEvent.VK_UP)
+        {
+            //accelerate
+            accelerate = false;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        {
+            turnLeft = false;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        {
+            turnRight = false;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        {
+            shoot = false;
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gui.reactToButton(e);
+        if(e.getSource() == MenuGUI.singlePbutton)
+        {
+            //TEMPORARY: this code should be in something like setUpLevel or startSinglePlayer
+            gameState = new GameState(1, 0);
+            gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
+        }
+        
+        else if(e.getSource() == MenuGUI.twoPbutton)
+        {
+
+        }
+        
+        else if(e.getSource() == MenuGUI.leaderBoardButton)
+        {
+
+        }
+        
+        else if(e.getSource() == MenuGUI.tutorialButton)
+        {
+
+        }
+        
+        else if(e.getSource() == MenuGUI.quitButton)
+        {
+            System.exit(0);
+        }
+        gui.reactToButton(e,gameState);
     }
     
 }
