@@ -10,22 +10,6 @@ public class Physics {
     
     private GameState gameState;
     
-    public void main(String[] args)
-    {
-//        ArrayList<Asteroid> aList = new ArrayList<>(0);
-//        ArrayList<Projectile> pList = new ArrayList<>(0);
-//        
-//        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {100, 100}, null, Asteroid.LARGE_ASTEROID_SIZE));
-//        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {200, 200}, null, Asteroid.MEDIUM_ASTEROID_SIZE));
-//        aList.add(new Asteroid(new int[] {0,0}, 0, new int[] {300, 300}, null, Asteroid.SMALL_ASTEROID_SIZE));
-//        
-//        AlienShip as = new AlienShip(new int[] {0, 0}, 0, new int[] {5,5}, null, 0, 0);
-//        
-//        ArrayList<MapObject> listCollisions = getCollisions(null, as, aList, pList, null);
-//        System.out.println(listCollisions.size());
-        
-    }
-    
     Physics(GameState gameState)
     {
         this.gameState = gameState;
@@ -78,8 +62,6 @@ public class Physics {
         ArrayList<MapObject> listOfCollisions = new ArrayList<>(0);
         Polygon shipShape;
         
-        if(playerShip != null)
-        {
         shipShape = playerShip.getShape();
         
         //Checking for collisions between PlayerShip and Asteroids
@@ -97,7 +79,7 @@ public class Physics {
         {
             if(projectile.getOwner() != Projectile.ALIEN_OWNER && detectCollision(shipShape, projectile.getShape()))
             {
-                    listOfCollisions.add(alienShip);
+                    listOfCollisions.add(playerShip);
                     listOfCollisions.add(projectile);
             }
         }
@@ -107,15 +89,20 @@ public class Physics {
         {
             if(detectCollision(shipShape, bonusDrop.getShape()))
             {
-                    listOfCollisions.add(alienShip);
+                    listOfCollisions.add(playerShip);
                     listOfCollisions.add(bonusDrop);
             }
-        }
         }
         
         if(alienShip != null)
         {
             shipShape = alienShip.getShape();
+            
+            if(detectCollision(playerShip.getShape(), shipShape))
+            {
+                listOfCollisions.add(playerShip);
+                listOfCollisions.add(alienShip);
+            }
             
             //Checking collisions between AlienShip and Asteroids
             for(Asteroid asteroid : asteroidList)
