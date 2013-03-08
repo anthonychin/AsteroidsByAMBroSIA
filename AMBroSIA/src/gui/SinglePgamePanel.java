@@ -57,8 +57,10 @@ public class SinglePgamePanel extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        super.setBounds(0,0,700,500);
+        super.setBounds(0,0,800,600);
         
+        g.setColor(Color.red);
+        g.drawString("Hello World", 220, 200);
         this.setBackground(Color.WHITE);
     }
 }

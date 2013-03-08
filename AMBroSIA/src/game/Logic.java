@@ -36,7 +36,7 @@ public class Logic implements KeyListener, ActionListener{
     
     public static void main(String args[])
     {
-	
+        
         gui = new MenuGUI(buttonPress,keyboard);
     }
     
@@ -150,7 +150,7 @@ public class Logic implements KeyListener, ActionListener{
             }
             else{
                 playerShip.setLives(playerShip.getLives() - 1);
-            }       
+            }
         }
         else if(asteroid.getSize() == Asteroid.MEDIUM_ASTEROID_SIZE){
             if(playerShip.getShieldPoints() >= MEDIUM_ASTEROID_SHIELD_DAMAGE){
@@ -161,7 +161,7 @@ public class Logic implements KeyListener, ActionListener{
             }
             else{
                 playerShip.setLives(playerShip.getLives() - 1);
-            }                   
+            }
         }
         else if(asteroid.getSize() == Asteroid.SMALL_ASTEROID_SIZE){
             if(playerShip.getShieldPoints() >= SMALL_ASTEROID_SHIELD_DAMAGE){
@@ -172,7 +172,7 @@ public class Logic implements KeyListener, ActionListener{
             }
             else{
                 playerShip.setLives(playerShip.getLives() - 1);
-            }                   
+            }
         }
         
         return gameState.getPlayerShip() == null;
@@ -196,7 +196,7 @@ public class Logic implements KeyListener, ActionListener{
             playerShip.setShieldPoints(playerShip.getShieldPoints() + 3);
         }
         
-        bonusDrop.destroy();   
+        bonusDrop.destroy();
     }
     
     private static boolean collisionLogic(PlayerShip playerShip, AlienShip alienShip)
@@ -230,13 +230,13 @@ public class Logic implements KeyListener, ActionListener{
         
         projectile.destroy();
         
-        return gameState.getPlayerShip() == null;       
+        return gameState.getPlayerShip() == null;
     }
     
     private static void collisionLogic(AlienShip alienShip, Asteroid asteroid)
     {
         alienShip.destroy();
-        asteroid.destroy();       
+        asteroid.destroy();
     }
     
     private static void collisionLogic(AlienShip alienShip, Projectile projectile)
@@ -249,7 +249,7 @@ public class Logic implements KeyListener, ActionListener{
     {
         
     }
-
+    
     @Override
     public void keyPressed(KeyEvent e)
     {
@@ -286,11 +286,11 @@ public class Logic implements KeyListener, ActionListener{
     }
     
     @Override
-    public void keyTyped(KeyEvent e) 
+    public void keyTyped(KeyEvent e)
     {
         ;//not needed
     }
-
+    
     @Override
     public void keyReleased(KeyEvent e)
     {
@@ -313,7 +313,7 @@ public class Logic implements KeyListener, ActionListener{
             shoot = false;
         }
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == MenuGUI.singlePbutton)
@@ -325,17 +325,17 @@ public class Logic implements KeyListener, ActionListener{
         
         else if(e.getSource() == MenuGUI.twoPbutton)
         {
-
+            
         }
         
         else if(e.getSource() == MenuGUI.leaderBoardButton)
         {
-
+            
         }
         
         else if(e.getSource() == MenuGUI.tutorialButton)
         {
-
+            
         }
         
         else if(e.getSource() == MenuGUI.quitButton)

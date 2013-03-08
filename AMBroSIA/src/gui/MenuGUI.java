@@ -78,8 +78,8 @@ public class MenuGUI
         contentPane.add(card);
         
         frame.setVisible(true);
-        frame.setResizable(true);
-        frame.setSize(500, 500);
+        frame.setResizable(false);
+        frame.setSize(800, 600);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
