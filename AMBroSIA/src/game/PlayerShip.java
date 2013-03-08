@@ -14,6 +14,8 @@ public class PlayerShip extends Ship{
     private int bomb;
     private int shieldPoints;
     private boolean isAccelerating = false;
+    private boolean isTurningLeft = false;
+    private boolean isTurningRight = false;
     private boolean isShieldOn = false;
     
     public PlayerShip(int[] velocity, int heading, int[] coordinates, int acceleration, GameState gameState, int lives, int bomb, int shieldPoints){
@@ -68,6 +70,22 @@ public class PlayerShip extends Ship{
     
     public void accelerate(){
         this.isAccelerating = true;
+    }
+    public void turnLeft()
+    {
+        this.isTurningLeft = true;
+    }
+    public boolean getTurnLeft()
+    {
+        return this.isTurningLeft;
+    }
+    public void turnRight()
+    {
+        this.isTurningRight = true;
+    }
+    public boolean getTurnRight()
+    {
+        return this.isTurningRight;
     }
     
     public boolean getAccelerate(){
