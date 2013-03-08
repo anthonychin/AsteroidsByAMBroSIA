@@ -1,14 +1,12 @@
 package gui;
 
 import java.awt.CardLayout;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -60,13 +58,13 @@ public class MenuGUI implements ActionListener
 		
 		// create single player mode game page
 		JPanel cardGame1P = new JPanel();
-		//cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
-		JPanel singlePgamePanel = new SinglePgamePanel();
+		
+		// random highscore, current level and current life fed into SinglePgamePanel 
+		JPanel singlePgamePanel = new SinglePgamePanel(1,2,3);
 		cardGame1P.add(singlePgamePanel); 
 		
-		// create single player mode game page
+		// create two-player mode game page
 		JPanel cardGame2P = new JPanel();
-		//cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
 		JPanel twoPgamePanel = new TwoPgamePanel();
 		cardGame2P.add(twoPgamePanel); 
 		
@@ -96,12 +94,12 @@ public class MenuGUI implements ActionListener
 		contentPane.add(card);
 		
 		frame.setVisible(true);
-		frame.setResizable(true);
-		frame.setSize(500, 500);
+		frame.setResizable(false);
+		frame.setSize(700, 500);
 		frame.setLocation(100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-        }
+    }
         
 	@Override
 	public void actionPerformed(ActionEvent e) 
