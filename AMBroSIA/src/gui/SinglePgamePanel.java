@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import game.GameState;
 
 /**
  *
@@ -16,7 +17,7 @@ import javax.swing.JPanel;
 
 public class SinglePgamePanel extends JPanel
 {
-    private GameSate gameState;
+    private GameState gameState;
     
     // initialize side panel showing the player's current score, lives and current level
     JPanel sidePanel;
@@ -26,15 +27,16 @@ public class SinglePgamePanel extends JPanel
     // constructor
     public SinglePgamePanel(GameState gs)
     {
-        makeComponents(gs);
+        gameState = gs;
+        makeComponents();
         makeLayout();
     }
     
     // create Single Player Mode panel's internal components
     // the label components takes as input the current score, current level, and current lifestock
-    private void makeComponents(GameState gs)
+    private void makeComponents()
     {
-        String score = String.valueOf(gs.getHighScore()); String lvl = String.valueOf(gs.getLevel()); String life = String.valueOf(gs.get);
+        String score = String.valueOf(gameState.getHighScore()); String lvl = String.valueOf(gameState.getLevel()); String life = String.valueOf(gameState.getPlayerShip().getLives());
         sidePanel = new JPanel();
         highscore = new JLabel("Current Score: " + score);
         lives = new JLabel("Life Stock: " + life);

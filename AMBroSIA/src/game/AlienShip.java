@@ -1,3 +1,5 @@
+package game;
+
 /**
  *
  * @author Nikolaos, Anthony

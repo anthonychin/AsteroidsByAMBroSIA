@@ -1,3 +1,5 @@
+package game;
+
 /**
  * The <code>GameState</code> class contains all the variables and object references that are required to keep the state of the game in memory.
  * It provides all the methods to add and remove objects from the game and get an ArrayList of the objects of the same type.

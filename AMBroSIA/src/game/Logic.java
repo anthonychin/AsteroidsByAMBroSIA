@@ -1,3 +1,5 @@
+package game;
+
 
 import gui.MenuGUI;
 import java.awt.event.ActionEvent;
@@ -260,7 +262,33 @@ public class Logic implements KeyListener, ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gui.reactToButton(e);
+        if(e.getSource() == MenuGUI.singlePbutton)
+        {
+            //TEMPORARY: this code should be in something like setUpLevel or startSinglePlayer
+            gameState = new GameState(1, 0);
+            gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
+        }
+        
+        else if(e.getSource() == MenuGUI.twoPbutton)
+        {
+
+        }
+        
+        else if(e.getSource() == MenuGUI.leaderBoardButton)
+        {
+
+        }
+        
+        else if(e.getSource() == MenuGUI.tutorialButton)
+        {
+
+        }
+        
+        else if(e.getSource() == MenuGUI.quitButton)
+        {
+            System.exit(0);
+        }
+        gui.reactToButton(e,gameState);
     }
     
 }
