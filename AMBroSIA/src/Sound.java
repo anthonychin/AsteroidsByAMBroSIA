@@ -40,5 +40,6 @@ public class Sound {
     //  Plays the clip in continuously. e.g. BGM
     public void playLoop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
+//        Thread.sleep(10000);
     }
 }
