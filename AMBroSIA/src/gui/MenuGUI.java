@@ -82,7 +82,6 @@ public class MenuGUI
         frame.setSize(800, 600);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
     
     //NOTE: code below is a bit redundant with logic.  Can we do some form of code reuse?
