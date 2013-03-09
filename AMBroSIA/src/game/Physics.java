@@ -8,7 +8,7 @@ package game;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
-public class Physics {
+public class Physics implements Runnable{
     
     private GameState gameState;
     
@@ -183,5 +183,10 @@ public class Physics {
         displacement[1] = (int) (velocity[1] * time + 0.5 * acceleration[1] * Math.pow(time, 2));
         
         return displacement;
+    }
+
+    @Override
+    public void run() {
+        update();
     }
 }
