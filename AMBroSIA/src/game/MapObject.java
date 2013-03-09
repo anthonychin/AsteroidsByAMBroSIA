@@ -27,6 +27,7 @@ public class MapObject {
         this.coordinates = coordinates;
         this.acceleration = acceleration;
         this.gameState = gameState;
+        this.shape = new Polygon(new int[] {0}, new int[] {0}, 1);
     }
     
     public int[] getVelocity()
