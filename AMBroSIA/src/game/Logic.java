@@ -7,7 +7,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -28,6 +34,12 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static KeyListener keyboard = new Logic();
     private static MenuGUI gui;
     
+    private static GraphicsEngine graphicsEngine;
+    private static Physics physicsEngine;
+    
+    //the service used to execute all update functions
+    private static ScheduledExecutorService timer = Executors.newScheduledThreadPool(4);
+    
     //booleans for the key commands.  These need to be checked by the timer
     private boolean accelerate = false;
     private boolean turnLeft = false;
@@ -35,64 +47,83 @@ public class Logic extends KeyAdapter implements ActionListener{
     private boolean shoot = false;
     private boolean paused = false;
     
-    public static void main(String args[])
+    public static void main(String args[]) throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
         
         gui = new MenuGUI(buttonPress,keyboard);
+        
     }
     
-    public static void startSinglePlayer()
+    public static void startTimer()
     {
-        gameState = new GameState(1, 0);
-        GraphicsEngine graphicsEngine = new GraphicsEngine(gameState);
-        Physics physicsEngine = new Physics(gameState);
+        timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
+        //        timer.scheduleAtFixedRate(MenuGUI, 0, 17, TimeUnit.MILLISECONDS);
+    }
+    public static void stopTimer()
+    {
+        timer.shutdown();
+    }
+    
+    
+    public static Runnable collisionCheck() {
         
-        gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
-        setUpLevel(gameState, gameState.getLevel());
-        
-        while(gameState.getPlayerShip() != null || gameState.getLevel() <= MAX_LEVEL){
-            physicsEngine.update();
-            graphicsEngine.updateGraphics();
-            ArrayList<MapObject> collisionList = physicsEngine.getCollisions();
-            
-            if(collisionList.size() != 0){
-                for(int i = 0; i < collisionList.size(); i =+ 2){
-                    MapObject collisionOne = collisionList.get(i);
-                    MapObject collisionTwo = collisionList.get(i + 1);
-                    
-                    if(collisionOne instanceof PlayerShip){
-                        if(collisionTwo instanceof AlienShip){
-                            // PlayerShip collided with AlienShip
-                            if(collisionLogic((PlayerShip) collisionOne, (AlienShip) collisionTwo))
-                                break;
+        final Runnable collision = new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<MapObject> collisionList = physicsEngine.getCollisions();
+                
+                if(!collisionList.isEmpty()){
+                    for(int i = 0; i < collisionList.size(); i =+ 2){
+                        MapObject collisionOne = collisionList.get(i);
+                        MapObject collisionTwo = collisionList.get(i + 1);
+                        
+                        if(collisionOne instanceof PlayerShip){
+                            if(collisionTwo instanceof AlienShip){
+                                // PlayerShip collided with AlienShip
+                                if(collisionLogic((PlayerShip) collisionOne, (AlienShip) collisionTwo))
+                                    break;
+                            }
+                            else if(collisionTwo instanceof Asteroid){
+                                // PlayerShip collided with an Asteroid
+                                if(collisionLogic((PlayerShip) collisionOne, (Asteroid) collisionTwo))
+                                    break;
+                            }
+                            else if(collisionTwo instanceof Projectile){
+                                // PlayerShip collided with a Projectile
+                                if(collisionLogic((PlayerShip) collisionOne, (Projectile) collisionTwo))
+                                    break;
+                            }
+                            else if(collisionTwo instanceof BonusDrop){
+                                // PlayerShip collided with a BonusDrop
+                                collisionLogic((PlayerShip) collisionOne, (BonusDrop) collisionTwo);
+                            }
                         }
-                        else if(collisionTwo instanceof Asteroid){
-                            // PlayerShip collided with an Asteroid
-                            if(collisionLogic((PlayerShip) collisionOne, (Asteroid) collisionTwo))
-                                break;
-                        }
-                        else if(collisionTwo instanceof Projectile){
-                            // PlayerShip collided with a Projectile
-                            if(collisionLogic((PlayerShip) collisionOne, (Projectile) collisionTwo))
-                                break;
-                        }
-                        else if(collisionTwo instanceof BonusDrop){
-                            // PlayerShip collided with a BonusDrop
-                            collisionLogic((PlayerShip) collisionOne, (BonusDrop) collisionTwo);
-                        }
-                    }
-                    else{
-                        if(collisionTwo instanceof Asteroid){
-                            // AlienShip collided with an Asteroid
-                            collisionLogic((AlienShip) collisionOne, (Asteroid) collisionTwo);
-                        }
-                        else if(collisionTwo instanceof Projectile){
-                            // AlienShip collided with a Projectile
-                            collisionLogic((AlienShip) collisionOne, (Projectile) collisionTwo);
+                        else{
+                            if(collisionTwo instanceof Asteroid){
+                                // AlienShip collided with an Asteroid
+                                collisionLogic((AlienShip) collisionOne, (Asteroid) collisionTwo);
+                            }
+                            else if(collisionTwo instanceof Projectile){
+                                // AlienShip collided with a Projectile
+                                collisionLogic((AlienShip) collisionOne, (Projectile) collisionTwo);
+                            }
                         }
                     }
                 }
             }
+        };
+        return collision;
+    }
+    
+    public static void startSinglePlayer()
+    {
+        
+        setUpLevel();
+        startTimer();
+        while(gameState.getPlayerShip() != null || gameState.getLevel() <= MAX_LEVEL){
+            
             
             // Enter whatever GUI stuff updating...
         }
@@ -246,9 +277,12 @@ public class Logic extends KeyAdapter implements ActionListener{
         projectile.destroy();
     }
     
-    private static void setUpLevel(GameState gameState, int level)
+    private static void setUpLevel()
     {
-        
+        gameState = new GameState(1, 0);
+        gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
+        graphicsEngine = new GraphicsEngine(gameState);
+        physicsEngine = new Physics(gameState);
     }
     
     @Override

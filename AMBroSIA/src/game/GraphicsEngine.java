@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * 
  * @author Michael Smith
  */
-public class GraphicsEngine {
+public class GraphicsEngine implements Runnable{
     
  private GameState memory;
  private final int WIDTH = 800;
@@ -196,4 +196,9 @@ public class GraphicsEngine {
      }
      gameobject.setShape(shape);
  }
+
+    @Override
+    public void run() {
+        updateGraphics();
+    }
 }
