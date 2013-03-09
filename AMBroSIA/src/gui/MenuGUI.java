@@ -82,11 +82,15 @@ public class MenuGUI
         frame.setSize(800, 600);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
     
     //NOTE: code below is a bit redundant with logic.  Can we do some form of code reuse?
     public void reactToButton(ActionEvent e, GameState gs)
     {
+        frame.addKeyListener(keyboard);
+        frame.setFocusable(true);
+        
         if(e.getSource() == singlePbutton)
         {
             // create single player mode game page
@@ -94,6 +98,7 @@ public class MenuGUI
             cardGame1P.add(new SinglePgamePanel(gs));
             card.add("Single-Player Mode", cardGame1P);
             cardLayout.show(card, "Single-Player Mode");
+            
             //allow keyboard input
         }
         
@@ -106,9 +111,8 @@ public class MenuGUI
             cardGame2P.add(twoPgamePanel);
             card.add("Two-Player Mode", cardGame2P);
             cardLayout.show(card, "Two-Player Mode");
+            
             //allow keyboard input
-            frame.addKeyListener(keyboard);
-            frame.setFocusable(true);
         }
         
         else if(e.getSource() == leaderBoardButton)
@@ -124,6 +128,9 @@ public class MenuGUI
             cardLeaderBoard.add(buttonPanelLeaderBoard);
             card.add("LeaderBoard", cardLeaderBoard);
             cardLayout.show(card, "LeaderBoard");
+            
+            // Leaderboard should not take keyboard input
+            frame.setFocusable(false);
         }
         
         else if(e.getSource() == tutorialButton)
@@ -139,6 +146,9 @@ public class MenuGUI
             cardTutorial.add(buttonPanelTutorial);
             card.add("Tutorial", cardTutorial);
             cardLayout.show(card, "Tutorial");
+            
+            // Tutorial should not take keyboard input
+            frame.setFocusable(false);
         }
         
         else if(e.getSource() == quitButton)
@@ -149,11 +159,15 @@ public class MenuGUI
         else if(e.getSource() == backButtonL)
         {
             cardLayout.show(card, "Menu");
+            // Menu should not take keyboard input
+            frame.setFocusable(false);
         }
         
         else if(e.getSource() == backButtonT)
         {
             cardLayout.show(card, "Menu");
+            // Menu should not take keyboard input
+            frame.setFocusable(false);
         }
     }
 }
