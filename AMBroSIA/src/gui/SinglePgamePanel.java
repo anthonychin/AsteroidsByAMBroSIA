@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import game.GameState;
+import java.awt.event.KeyListener;
 
 /**
  *
@@ -24,12 +25,16 @@ public class SinglePgamePanel extends JPanel
     JLabel highscore, lives, level;
     JButton pause;
     
+    KeyListener keyboard;
+    
     // constructor
     public SinglePgamePanel(GameState gs)
     {
-        gameState = gs;
+        this.gameState = gs;
         makeComponents();
         makeLayout();
+        addKeyListener(keyboard);
+        setFocusable(true);
     }
     
     // create Single Player Mode panel's internal components

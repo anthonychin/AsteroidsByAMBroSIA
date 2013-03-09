@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.CardLayout;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +8,6 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import game.GameState;
 
@@ -84,7 +82,6 @@ public class MenuGUI
         frame.setSize(800, 600);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
     }
     
     //NOTE: code below is a bit redundant with logic.  Can we do some form of code reuse?
@@ -98,8 +95,6 @@ public class MenuGUI
             card.add("Single-Player Mode", cardGame1P);
             cardLayout.show(card, "Single-Player Mode");
             //allow keyboard input
-            frame.addKeyListener(keyboard);
-            frame.setFocusable(true);
         }
         
         else if(e.getSource() == twoPbutton)
