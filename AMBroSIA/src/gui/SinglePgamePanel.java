@@ -27,7 +27,7 @@ public class SinglePgamePanel extends JPanel
     // constructor
     public SinglePgamePanel(GameState gs)
     {
-        gameState = gs;
+        this.gameState = gs;
         makeComponents();
         makeLayout();
     }
