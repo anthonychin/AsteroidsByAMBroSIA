@@ -288,38 +288,34 @@ public class Logic extends KeyAdapter implements ActionListener{
     @Override
     public void keyPressed(KeyEvent e)
     {
-        System.out.println(e.getKeyCode());
+        int keyCode = e.getKeyCode();
         //handles most basic key commands.  Should activate a boolean stating that the key has been pressed
-        if (e.getKeyCode() == KeyEvent.VK_UP)
+        if (keyCode == KeyEvent.VK_UP)
         {
             //accelerate
             accelerate = true;
-            System.out.println("accelerate");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        else if (keyCode == KeyEvent.VK_LEFT)
         {
             turnLeft = true;
-            System.out.println("left");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        else if (keyCode == KeyEvent.VK_RIGHT)
         {
             turnRight = true;
-            System.out.println("right");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        else if (keyCode == KeyEvent.VK_DOWN)
         {
             gameState.getPlayerShip().useBomb();
         }
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        else if (keyCode == KeyEvent.VK_SPACE)
         {
             shoot = true;
-            System.out.println("shoot");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+        else if (keyCode == KeyEvent.VK_BACK_SPACE)
         {
             gameState.getPlayerShip().activateShield();
         }
-        else if (e.getKeyCode() == KeyEvent.VK_P)
+        else if (keyCode == KeyEvent.VK_P)
         {
             paused = !paused;
         }
