@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class GraphicsEngine implements Runnable{
     
  private GameState memory;
- private final int WIDTH = 800;
- private final int HEIGHT = 600;
+ private final int WIDTH = gui.MenuGUI.WIDTH;
+ private final int HEIGHT = gui.MenuGUI.HEIGHT;
     
  public GraphicsEngine(GameState gamestate)
  {
