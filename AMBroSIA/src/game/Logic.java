@@ -348,9 +348,12 @@ public class Logic extends KeyAdapter implements ActionListener{
         }
     }
     
+    
+    //This section needs a LOT of work....half of it is crude hacked together placeholder.
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == gui.singlePbutton)
+        Object action = e.getSource();
+        if(action == gui.singlePbutton)
         {
             /*
              * TESTING CODE - WILL NOT BE IN actionPerformed() in final version
@@ -359,29 +362,38 @@ public class Logic extends KeyAdapter implements ActionListener{
             gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, -60, new int[] {200, 150}, 0, gameState, 3, 1, 3));
             
             graphicsEngine = new GraphicsEngine(gameState);
+            gui.reactToButton(e,gameState);
             startTimer();
         }
         
-        else if(e.getSource() == gui.twoPbutton)
+        else if(action == gui.twoPbutton)
         {
-            
+            gui.reactToButton(e,gameState);
         }
         
-        else if(e.getSource() == gui.leaderBoardButton)
+        else if(action == gui.leaderBoardButton)
         {
-            
+            gui.reactToButton(e,gameState);
         }
         
-        else if(e.getSource() == gui.tutorialButton)
+        else if(action == gui.tutorialButton)
         {
-            
+            gui.reactToButton(e,gameState);
+        }
+        
+        else if(action == gui.backButtonL)
+        {
+            gui.reactToButton(e,gameState);
+        }
+        
+        else if(action == gui.backButtonT)
+        {
+            gui.reactToButton(e,gameState);
         }
         
         else if(e.getSource() == gui.quitButton)
         {
             System.exit(0);
         }
-        gui.reactToButton(e,gameState);
     }
-    
 }

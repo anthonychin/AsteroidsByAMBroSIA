@@ -32,10 +32,10 @@ public class MenuGUI implements Runnable
     public JButton quitButton = new JButton("QUIT");
     
     // leaderBoard back button
-    private JButton backButtonL = new JButton("BACK");
+    public JButton backButtonL = new JButton("BACK");
     
     // tutorial back button
-    private JButton backButtonT = new JButton("BACK");
+    public JButton backButtonT = new JButton("BACK");
     
     //main window
     private JFrame frame;
@@ -192,6 +192,5 @@ public class MenuGUI implements Runnable
     @Override
     public void run() {
         updateDraw();
-        System.out.println("I am being called; current time is " + System.currentTimeMillis());
     }
 }
