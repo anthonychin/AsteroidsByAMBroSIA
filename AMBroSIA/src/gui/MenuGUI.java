@@ -16,11 +16,13 @@ import game.GameState;
  * @author Haisin Yip
  */
 
-public class MenuGUI
+public class MenuGUI implements Runnable
 {
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
     
-    CardLayout cardLayout;
-    JPanel card = new JPanel();
+    private CardLayout cardLayout;
+    private JPanel card = new JPanel();
     
     // menu buttons
     public JButton singlePbutton = new JButton("SINGLE-PLAYER MODE");
@@ -30,17 +32,23 @@ public class MenuGUI
     public JButton quitButton = new JButton("QUIT");
     
     // leaderBoard back button
-    JButton backButtonL = new JButton("BACK");
+    private JButton backButtonL = new JButton("BACK");
     
     // tutorial back button
-    JButton backButtonT = new JButton("BACK");
+    private JButton backButtonT = new JButton("BACK");
     
     //main window
-    JFrame frame;
+    private JFrame frame;
     
+    private ActionListener buttonClick;
+    private KeyListener keyboard;
     
-    ActionListener buttonClick;
-    KeyListener keyboard;
+    //whether or not we are in single player mode
+    private boolean singleP = false;
+    
+    //Panels for single and 2 player modes
+    private SinglePgamePanel onePPanel;
+    private TwoPgamePanel twoPPanel;
     /**
      * Starts the GUI Menu.
      * @param AL
@@ -54,16 +62,14 @@ public class MenuGUI
         cardLayout = new CardLayout();
         card.setLayout(cardLayout);
         
-        keyboard = keyb;
-        
-        //allow global access to actionlistener
+        //allow global access to actionlistener,keyboard listener
         buttonClick = AL;
+        keyboard = keyb;
         
         // create menu page with 5 options
         JPanel cardMenu = new JPanel();
         cardMenu.setLayout(new GridLayout(2,1));
-        JPanel menuPanel = new MenuPanel();
-        cardMenu.add(menuPanel);
+        cardMenu.add(new MenuPanel());
         // initialize the 5 buttons that shall be in the menu page
         JPanel buttonPanelMenu = new JPanel();
         buttonPanelMenu.setLayout(new GridLayout(5,1));
@@ -75,17 +81,18 @@ public class MenuGUI
         card.add("Menu", cardMenu);
         cardLayout.show(card, "Menu");
         
+        //show menu
         contentPane.add(card);
         
         frame.setVisible(true);
         frame.setResizable(false);
-        frame.setSize(800, 600);
+        frame.setSize(WIDTH, HEIGHT);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
     
-    //NOTE: code below is a bit redundant with logic.  Can we do some form of code reuse?
+    //TODO: reduce code redudancy from logic
     public void reactToButton(ActionEvent e, GameState gs)
     {
         frame.addKeyListener(keyboard);
@@ -94,25 +101,24 @@ public class MenuGUI
         if(e.getSource() == singlePbutton)
         {
             // create single player mode game page
+            onePPanel = new SinglePgamePanel(gs);
             JPanel cardGame1P = new JPanel();
-            cardGame1P.add(new SinglePgamePanel(gs));
+            cardGame1P.add(onePPanel);
             card.add("Single-Player Mode", cardGame1P);
             cardLayout.show(card, "Single-Player Mode");
-            
-            //allow keyboard input
+            //let other methods know we are in single P mode
+            singleP = true;
         }
         
         else if(e.getSource() == twoPbutton)
         {
             // create single player mode game page (two player)
+            twoPPanel = new TwoPgamePanel();
             JPanel cardGame2P = new JPanel();
             //cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
-            JPanel twoPgamePanel = new TwoPgamePanel();
-            cardGame2P.add(twoPgamePanel);
+            cardGame2P.add(twoPPanel);
             card.add("Two-Player Mode", cardGame2P);
             cardLayout.show(card, "Two-Player Mode");
-            
-            //allow keyboard input
         }
         
         else if(e.getSource() == leaderBoardButton)
@@ -169,5 +175,22 @@ public class MenuGUI
             // Menu should not take keyboard input
             frame.setFocusable(false);
         }
+    }
+    
+    public void updateDraw()
+    {
+        if (singleP)
+        {
+            onePPanel.updatePanel();
+        }
+        else
+        {
+            twoPPanel.updatePanel();
+        }
+    }
+
+    @Override
+    public void run() {
+        updateDraw();
     }
 }

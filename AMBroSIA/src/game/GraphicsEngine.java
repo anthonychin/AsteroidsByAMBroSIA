@@ -32,7 +32,7 @@ public class GraphicsEngine implements Runnable{
      {
          updatePlayerShip();
      }
-     if (memory.getAsteroids().isEmpty() == false)
+     if (!memory.getAsteroids().isEmpty())
      {
          updateAsteroids();
      }
@@ -40,15 +40,15 @@ public class GraphicsEngine implements Runnable{
      {
          updateAlien();
      }
-     if (memory.getProjectiles().isEmpty() == false)
+     if (!memory.getProjectiles().isEmpty())
      {
          updateProjectiles();
      }
-     if (memory.getBonusDrops().isEmpty() == false)
+     if (!memory.getBonusDrops().isEmpty())
      {
          updateBonusDrops();
      }
-     if (memory.getExplosions().isEmpty() == false)
+     if (!memory.getExplosions().isEmpty())
      {
          updateExplosions();
      }

@@ -59,7 +59,7 @@ public class Logic extends KeyAdapter implements ActionListener{
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
-        //        timer.scheduleAtFixedRate(MenuGUI, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
     }
     public static void stopTimer()
     {
@@ -325,21 +325,22 @@ public class Logic extends KeyAdapter implements ActionListener{
     @Override
     public void keyReleased(KeyEvent e)
     {
+        int keyCode = e.getKeyCode();
         //stops doing whatever that keypress was doing
-        if (e.getKeyCode() == KeyEvent.VK_UP)
+        if (keyCode == KeyEvent.VK_UP)
         {
             //accelerate
             accelerate = false;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        else if (keyCode == KeyEvent.VK_LEFT)
         {
             turnLeft = false;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        else if (keyCode == KeyEvent.VK_RIGHT)
         {
             turnRight = false;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        else if (keyCode == KeyEvent.VK_SPACE)
         {
             shoot = false;
         }
@@ -351,7 +352,9 @@ public class Logic extends KeyAdapter implements ActionListener{
         {
             //TEMPORARY: this code should be in something like setUpLevel or startSinglePlayer
             gameState = new GameState(1, 0);
-            gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
+            gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {400, 400}, 0, gameState, 3, 1, 3));
+            graphicsEngine = new GraphicsEngine(gameState);
+            graphicsEngine.updateGraphics();
         }
         
         else if(e.getSource() == gui.twoPbutton)
