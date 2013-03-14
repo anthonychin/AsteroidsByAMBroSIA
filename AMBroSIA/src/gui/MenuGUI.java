@@ -192,5 +192,6 @@ public class MenuGUI implements Runnable
     @Override
     public void run() {
         updateDraw();
+        System.out.println("I am being called; current time is " + System.currentTimeMillis());
     }
 }

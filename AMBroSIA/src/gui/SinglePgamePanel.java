@@ -58,13 +58,13 @@ public class SinglePgamePanel extends JPanel
     // paints content onto the Single-Player mode panel
     
     @Override
-    public void paintComponents(Graphics g)
+    public void paint(Graphics g)
     {
-        super.paintComponents(g);
         super.setBounds(0,0,MenuGUI.WIDTH,MenuGUI.HEIGHT);
+        super.paint(g);
         
         Graphics2D g2 = (Graphics2D) g;
-        this.setBackground(Color.RED);
+        this.setBackground(Color.WHITE);
         
 //        g.setColor(Color.red);
 //        g.drawString("Hello World", 220, 200);

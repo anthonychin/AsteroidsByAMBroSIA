@@ -173,13 +173,13 @@ public class GraphicsEngine implements Runnable{
  private void setPosition(Polygon shape, MapObject gameobject)
  {
      AffineTransform transAndRot = new AffineTransform();
-     //+ve theta -> points on +ve x axis go towards +ve y axis
-     transAndRot.setToRotation(gameobject.getHeading());
      
-     //add translation
-     transAndRot.translate(WIDTH/2 + gameobject.getCoord()[0], HEIGHT/2 + gameobject.getCoord()[1]);
+     //translate from std. math coordinate system used in shape definitons to proper location on map
+     transAndRot.setToTranslation(gameobject.getX(), gameobject.getY());
+     //rotate polygon by appropriate amount depending on polygon
+     transAndRot.rotate(Math.toRadians(gameobject.getHeading()));
     
-     //flip y axis
+     //flip y axis (b/c of std. math convention used in shape definition)
      for (int i = 0 ; i < shape.ypoints.length ; i++)
      {
          shape.ypoints[i] = -shape.ypoints[i];
