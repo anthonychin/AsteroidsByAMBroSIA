@@ -19,25 +19,47 @@ public class Physics implements Runnable{
     
     public void update()
     {
-        updateObject(gameState.getPlayerShip());
+        if (gameState.getPlayerShip() != null)
+        {
+            updateObject(gameState.getPlayerShip());
+        }
+        
         if(gameState.getAlienShip() != null)
         {
             updateObject(gameState.getAlienShip());
         }
         
-        for(Asteroid asteroid : gameState.getAsteroids())
+        if (!gameState.getAsteroids().isEmpty())
         {
-            updateObject(asteroid);
+            for(Asteroid asteroid : gameState.getAsteroids())
+            {
+                updateObject(asteroid);
+            }
         }
         
-        for(Projectile projectile : gameState.getProjectiles())
+        
+        if (!gameState.getProjectiles().isEmpty())
         {
-            updateObject(projectile);
+            for(Projectile projectile : gameState.getProjectiles())
+            {
+                updateObject(projectile);
+            }
         }
         
+        if (!gameState.getBonusDrops().isEmpty())
+        {
         for(BonusDrop bonusDrop : gameState.getBonusDrops())
+            {
+                updateObject(bonusDrop);
+            }
+        }
+        
+        if (!gameState.getExplosions().isEmpty())
         {
-            updateObject(bonusDrop);
+            for(MapObject explosion : gameState.getExplosions())
+            {
+                updateObject(explosion);
+            }
         }
     }
     
