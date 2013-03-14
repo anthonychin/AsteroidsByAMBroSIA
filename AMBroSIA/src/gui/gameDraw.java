@@ -19,56 +19,66 @@ public class gameDraw {
     public static void drawObjects(Graphics2D g2d, GameState memory)
     {
         //draw asteroids
-        ArrayList<Asteroid> asteroidList = memory.getAsteroids();
-        for (Asteroid asteroid : asteroidList)
+        if (!memory.getAsteroids().isEmpty())
         {
-            try{
+            ArrayList<Asteroid> asteroidList = memory.getAsteroids();
+            for (Asteroid asteroid : asteroidList)
+            {
                 g2d.draw(asteroid.getShape());
-            }
-            catch (NullPointerException e){}
+            } 
         }
         
+        
         //draw player
-        try{
+        if (memory.getPlayerShip() != null)
+        {
             g2d.draw(memory.getPlayerShip().getShape());
         }
-        catch (NullPointerException e){}
         
         
         //draw aliens
-        try{
+        if (memory.getAlienShip() != null)
+        {
             g2d.draw(memory.getAlienShip().getShape());
         }
-        catch (NullPointerException e){}
         
         //draw projectiles
-        ArrayList<Projectile> projectileList = memory.getProjectiles();
-        for (Projectile projectile : projectileList)
+        if (!memory.getProjectiles().isEmpty())
         {
-            try{
-                g2d.draw(projectile.getShape());
+            ArrayList<Projectile> projectileList = memory.getProjectiles();
+            for (Projectile projectile : projectileList)
+            {
+                try{
+                    g2d.draw(projectile.getShape());
+                }
+                catch (NullPointerException e){}
             }
-            catch (NullPointerException e){}
         }
         
         //draw bonus drops
-        ArrayList<BonusDrop> bonusList = memory.getBonusDrops();
-        for (BonusDrop drop : bonusList)
+        if (!memory.getBonusDrops().isEmpty())
         {
-            try{
-                g2d.draw(drop.getShape());
+            ArrayList<BonusDrop> bonusList = memory.getBonusDrops();
+            for (BonusDrop drop : bonusList)
+            {
+                try{
+                    g2d.draw(drop.getShape());
+                }
+                catch (NullPointerException e){}
             }
-            catch (NullPointerException e){}
         }
         
         //draw explosions
-        ArrayList<MapObject> explosionList = memory.getExplosions();
-        for (MapObject explosion : explosionList)
+        if (!memory.getExplosions().isEmpty())
         {
-            try{
-                g2d.draw(explosion.getShape());
+            ArrayList<MapObject> explosionList = memory.getExplosions();
+            for (MapObject explosion : explosionList)
+            {
+                try{
+                    g2d.draw(explosion.getShape());
+                }
+                catch (NullPointerException e){}
             }
-            catch (NullPointerException e){}
         }
     }
 }
