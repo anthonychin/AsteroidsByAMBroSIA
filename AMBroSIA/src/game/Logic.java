@@ -59,8 +59,8 @@ public class Logic extends KeyAdapter implements ActionListener{
     public static void startTimer()
     {
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
     }
     public static void stopTimer()
@@ -121,21 +121,7 @@ public class Logic extends KeyAdapter implements ActionListener{
     
     public static void startSinglePlayer()
     {
-        
         setUpLevel();
-        startTimer();
-        while(gameState.getPlayerShip() != null || gameState.getLevel() <= MAX_LEVEL){
-            
-            
-            // Enter whatever GUI stuff updating...
-        }
-        
-        if(gameState.getPlayerShip() == null){
-            // GUI to show Game Over
-        }
-        else{
-            // GUI to show Player beat the game
-        }
     }
     
     public static void startTwoPlayer()
@@ -282,7 +268,8 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static void setUpLevel()
     {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {200, 100}, 0, gameState, 3, 1, 3));
+        gameState.addPlayerShip(new PlayerShip(new int[] {1, 1}, -60, new int[] {250, 150}, 0, gameState, 3, 1, 3));
+        gameState.addAsteroid(new Asteroid(new int[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
     }
@@ -349,46 +336,40 @@ public class Logic extends KeyAdapter implements ActionListener{
     }
     
     
-    //This section needs a LOT of work....half of it is crude hacked together placeholder.
+    //This section needs a LOT of work....
     @Override
     public void actionPerformed(ActionEvent e) {
         Object action = e.getSource();
         if(action == gui.singlePbutton)
         {
-            /*
-             * TESTING CODE - WILL NOT BE IN actionPerformed() in final version
-             */
-            gameState = new GameState(1, 0);
-            gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, -60, new int[] {200, 150}, 0, gameState, 3, 1, 3));
-            
-            graphicsEngine = new GraphicsEngine(gameState);
-            gui.reactToButton(e,gameState);
+            startSinglePlayer();
+            gui.displaySingleP(gameState);
             startTimer();
         }
         
         else if(action == gui.twoPbutton)
         {
-            gui.reactToButton(e,gameState);
+            gui.displayTwoP(gameState);
         }
         
         else if(action == gui.leaderBoardButton)
         {
-            gui.reactToButton(e,gameState);
+            gui.displayLeaderBoard();
         }
         
         else if(action == gui.tutorialButton)
         {
-            gui.reactToButton(e,gameState);
+            gui.displayTutorial();
         }
         
         else if(action == gui.backButtonL)
         {
-            gui.reactToButton(e,gameState);
+            gui.goBack();
         }
         
         else if(action == gui.backButtonT)
         {
-            gui.reactToButton(e,gameState);
+            gui.goBack();
         }
         
         else if(e.getSource() == gui.quitButton)

@@ -89,104 +89,79 @@ public class MenuGUI implements Runnable
         frame.setSize(WIDTH, HEIGHT);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    }
-    
-    //TODO: reduce code redudancy from logic
-    public void reactToButton(ActionEvent e, GameState gs)
-    {
+        
+        //allow for keyboard input (but not for the menu)
         frame.addKeyListener(keyboard);
-        frame.setFocusable(true);
-        
-        if(e.getSource() == singlePbutton)
-        {
-            // create single player mode game page
-            onePPanel = new SinglePgamePanel(gs);
-            JPanel cardGame1P = new JPanel();
-            cardGame1P.add(onePPanel);
-            card.add("Single-Player Mode", cardGame1P);
-            cardLayout.show(card, "Single-Player Mode");
-            //let other methods know we are in single P mode
-            singleP = true;
-        }
-        
-        else if(e.getSource() == twoPbutton)
-        {
-            // create single player mode game page (two player)
-            twoPPanel = new TwoPgamePanel();
-            JPanel cardGame2P = new JPanel();
-            //cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
-            cardGame2P.add(twoPPanel);
-            card.add("Two-Player Mode", cardGame2P);
-            cardLayout.show(card, "Two-Player Mode");
-        }
-        
-        else if(e.getSource() == leaderBoardButton)
-        {
-              // create leaderboard page
-            JPanel cardLeaderBoard = new JPanel();
-            cardLeaderBoard.setLayout(new GridLayout(5,1));
-            JPanel leaderBoardPanel = new LeaderBoardPanel();
-            cardLeaderBoard.add(leaderBoardPanel);
-            //initialize a back button
-            JPanel buttonPanelLeaderBoard = new JPanel();
-            buttonPanelLeaderBoard.add(backButtonL); backButtonL.addActionListener(buttonClick);
-            cardLeaderBoard.add(buttonPanelLeaderBoard);
-            card.add("LeaderBoard", cardLeaderBoard);
-            cardLayout.show(card, "LeaderBoard");
-            
-            // Leaderboard should not take keyboard input
-            frame.setFocusable(false);
-        }
-        
-        else if(e.getSource() == tutorialButton)
-        {
-            // create tutorial page
-            JPanel cardTutorial = new JPanel();
-            cardTutorial.setLayout(new GridLayout(5,1));
-            JPanel tutorialPanel = new TutorialPanel();
-            cardTutorial.add(tutorialPanel);
-            //initialize a back button
-            JPanel buttonPanelTutorial = new JPanel();
-            buttonPanelTutorial.add(backButtonT); backButtonT.addActionListener(buttonClick);
-            cardTutorial.add(buttonPanelTutorial);
-            card.add("Tutorial", cardTutorial);
-            cardLayout.show(card, "Tutorial");
-            
-            // Tutorial should not take keyboard input
-            frame.setFocusable(false);
-        }
-        
-        else if(e.getSource() == quitButton)
-        {
-            System.exit(0);
-        }
-        
-        else if(e.getSource() == backButtonL)
-        {
-            cardLayout.show(card, "Menu");
-            // Menu should not take keyboard input
-            frame.setFocusable(false);
-        }
-        
-        else if(e.getSource() == backButtonT)
-        {
-            cardLayout.show(card, "Menu");
-            // Menu should not take keyboard input
-            frame.setFocusable(false);
-        }
+        frame.setFocusable(false);
     }
-    
+ 
+    public void displaySingleP(GameState gs) {
+        frame.setFocusable(true);
+        // create single player mode game page
+        onePPanel = new SinglePgamePanel(gs);
+        JPanel cardGame1P = new JPanel();
+        cardGame1P.add(onePPanel);
+        card.add("Single-Player Mode", cardGame1P);
+        cardLayout.show(card, "Single-Player Mode");
+        //let other methods know we are in single P mode
+        singleP = true;
+    }
+
+    public void displayTwoP(GameState gs) {
+        frame.setFocusable(true);
+        // create single player mode game page (two player)
+        twoPPanel = new TwoPgamePanel();
+        JPanel cardGame2P = new JPanel();
+        //cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
+        cardGame2P.add(twoPPanel);
+        card.add("Two-Player Mode", cardGame2P);
+    }
+       
+    public void displayLeaderBoard() {
+        // create leaderboard page
+        JPanel cardLeaderBoard = new JPanel();
+        cardLeaderBoard.setLayout(new GridLayout(5, 1));
+        JPanel leaderBoardPanel = new LeaderBoardPanel();
+        cardLeaderBoard.add(leaderBoardPanel);
+        //initialize a back button
+        JPanel buttonPanelLeaderBoard = new JPanel();
+        buttonPanelLeaderBoard.add(backButtonL);
+        backButtonL.addActionListener(buttonClick);
+        cardLeaderBoard.add(buttonPanelLeaderBoard);
+        card.add("LeaderBoard", cardLeaderBoard);
+        cardLayout.show(card, "LeaderBoard");
+        // Leaderboard should not take keyboard input
+    }
+
+    public void displayTutorial() {
+        JPanel cardTutorial = new JPanel();
+        cardTutorial.setLayout(new GridLayout(5, 1));
+        JPanel tutorialPanel = new TutorialPanel();
+        cardTutorial.add(tutorialPanel);
+        //initialize a back button
+        JPanel buttonPanelTutorial = new JPanel();
+        buttonPanelTutorial.add(backButtonT);
+        backButtonT.addActionListener(buttonClick);
+        cardTutorial.add(buttonPanelTutorial);
+        card.add("Tutorial", cardTutorial);
+        cardLayout.show(card, "Tutorial");
+    }
+        
+    public void goBack() {
+        cardLayout.show(card, "Menu");
+    }
+
     public void updateDraw()
     {
-        if (singleP)
-        {
+//     PLACEHOLDER IF STATEMENT
+//        if (singleP)
+//        {
             onePPanel.updatePanel();
-        }
-        else
-        {
-            twoPPanel.updatePanel();
-        }
+//        }
+//        else
+//        {
+//            twoPPanel.updatePanel();
+//        }
     }
 
     @Override

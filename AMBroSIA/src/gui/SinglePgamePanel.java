@@ -39,7 +39,9 @@ public class SinglePgamePanel extends JPanel
     // the label components takes as input the current score, current level, and current lifestock
     private void makeComponents()
     {
-        String score = String.valueOf(gameState.getHighScore()); String lvl = String.valueOf(gameState.getLevel()); String life = String.valueOf(gameState.getPlayerShip().getLives());
+        String score = String.valueOf(gameState.getHighScore()); 
+        String lvl = String.valueOf(gameState.getLevel()); 
+        String life = String.valueOf(gameState.getPlayerShip().getLives());
         sidePanel = new JPanel();
         highscore = new JLabel("Current Score: " + score);
         lives = new JLabel("Life Stock: " + life);
