@@ -24,4 +24,9 @@ public class TwoPgamePanel extends JPanel
     {
         
     }
+    
+    public void updatePanel()
+    {
+        
+    }
 }

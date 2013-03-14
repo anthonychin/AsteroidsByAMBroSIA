@@ -2,6 +2,7 @@ package game;
 
 
 import gui.MenuGUI;
+import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -9,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -57,9 +59,9 @@ public class Logic extends KeyAdapter implements ActionListener{
     public static void startTimer()
     {
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
-        //        timer.scheduleAtFixedRate(MenuGUI, 0, 17, TimeUnit.MILLISECONDS);
+//        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+//        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
     }
     public static void stopTimer()
     {
@@ -280,7 +282,7 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static void setUpLevel()
     {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
+        gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {200, 100}, 0, gameState, 3, 1, 3));
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
     }
@@ -288,38 +290,34 @@ public class Logic extends KeyAdapter implements ActionListener{
     @Override
     public void keyPressed(KeyEvent e)
     {
-        System.out.println(e.getKeyCode());
+        int keyCode = e.getKeyCode();
         //handles most basic key commands.  Should activate a boolean stating that the key has been pressed
-        if (e.getKeyCode() == KeyEvent.VK_UP)
+        if (keyCode == KeyEvent.VK_UP)
         {
             //accelerate
             accelerate = true;
-            System.out.println("accelerate");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        else if (keyCode == KeyEvent.VK_LEFT)
         {
             turnLeft = true;
-            System.out.println("left");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        else if (keyCode == KeyEvent.VK_RIGHT)
         {
             turnRight = true;
-            System.out.println("right");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        else if (keyCode == KeyEvent.VK_DOWN)
         {
             gameState.getPlayerShip().useBomb();
         }
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        else if (keyCode == KeyEvent.VK_SPACE)
         {
             shoot = true;
-            System.out.println("shoot");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+        else if (keyCode == KeyEvent.VK_BACK_SPACE)
         {
             gameState.getPlayerShip().activateShield();
         }
-        else if (e.getKeyCode() == KeyEvent.VK_P)
+        else if (keyCode == KeyEvent.VK_P)
         {
             paused = !paused;
         }
@@ -329,21 +327,22 @@ public class Logic extends KeyAdapter implements ActionListener{
     @Override
     public void keyReleased(KeyEvent e)
     {
+        int keyCode = e.getKeyCode();
         //stops doing whatever that keypress was doing
-        if (e.getKeyCode() == KeyEvent.VK_UP)
+        if (keyCode == KeyEvent.VK_UP)
         {
             //accelerate
             accelerate = false;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        else if (keyCode == KeyEvent.VK_LEFT)
         {
             turnLeft = false;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        else if (keyCode == KeyEvent.VK_RIGHT)
         {
             turnRight = false;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        else if (keyCode == KeyEvent.VK_SPACE)
         {
             shoot = false;
         }
@@ -353,9 +352,14 @@ public class Logic extends KeyAdapter implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == gui.singlePbutton)
         {
-            //TEMPORARY: this code should be in something like setUpLevel or startSinglePlayer
+            /*
+             * TESTING CODE - WILL NOT BE IN actionPerformed() in final version
+             */
             gameState = new GameState(1, 0);
-            gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
+            gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, -60, new int[] {200, 150}, 0, gameState, 3, 1, 3));
+            
+            graphicsEngine = new GraphicsEngine(gameState);
+            startTimer();
         }
         
         else if(e.getSource() == gui.twoPbutton)
