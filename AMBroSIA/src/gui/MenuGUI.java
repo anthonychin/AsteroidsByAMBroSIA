@@ -17,8 +17,11 @@ import game.GameState;
 
 public class MenuGUI implements Runnable
 {
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 600;
+    private static final int DEFAULT_WIDTH = 800;
+    private static final int DEFAULT_HEIGHT = 600;
+    
+    public static int WIDTH = DEFAULT_WIDTH;
+    public static int HEIGHT = DEFAULT_HEIGHT;
     
    
     //main window, associated elements
@@ -64,8 +67,7 @@ public class MenuGUI implements Runnable
         
         //set important parameters
         frame.setVisible(true);
-        frame.setResizable(false);
-        frame.setSize(WIDTH, HEIGHT);
+        frame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -172,6 +174,12 @@ public class MenuGUI implements Runnable
 
     @Override
     public void run() {
+        updateSize();
         updateDraw();
+    }
+    
+    private void updateSize() {
+        MenuGUI.WIDTH = frame.getWidth();
+        MenuGUI.HEIGHT = frame.getHeight();
     }
 }
