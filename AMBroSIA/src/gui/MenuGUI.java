@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import game.GameState;
+import java.awt.Dimension;
 
 /**
  *
@@ -70,6 +71,7 @@ public class MenuGUI implements Runnable
         frame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT));
         
         //set up (but do not yet allow) keyboard input
         frame.addKeyListener(keyboard);
@@ -99,6 +101,8 @@ public class MenuGUI implements Runnable
         cardMenu.add(buttonPanelMenu);
         card.add("Menu", cardMenu);
         cardLayout.show(card, "Menu");
+        
+        frame.setResizable(true);
     }
     
     public void displaySingleP(GameState gs) {
@@ -114,6 +118,9 @@ public class MenuGUI implements Runnable
         card.remove(card.getComponent(0));
         //let other methods know we are in single P mode
         singleP = true;
+        
+        //do not allow resizing at this point, as it can disrupt gameplay
+        frame.setResizable(false);
     }
 
     public void displayTwoP(GameState gs) {
