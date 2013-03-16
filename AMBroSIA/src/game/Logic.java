@@ -53,7 +53,7 @@ public class Logic extends KeyAdapter implements ActionListener{
     {
         
         gui = new MenuGUI(buttonPress,keyboard);
-        
+        gui.showMenu();
     }
     
     public static void startTimer()
@@ -362,12 +362,7 @@ public class Logic extends KeyAdapter implements ActionListener{
             gui.displayTutorial();
         }
         
-        else if(action == gui.backButtonL)
-        {
-            gui.goBack();
-        }
-        
-        else if(action == gui.backButtonT)
+        else if(action == gui.backButton)
         {
             gui.goBack();
         }

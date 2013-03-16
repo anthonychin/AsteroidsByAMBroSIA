@@ -1,7 +1,6 @@
 package gui;
 
 
-import game.Asteroid;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -11,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import game.GameState;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 
 /**
  *

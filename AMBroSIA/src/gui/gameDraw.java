@@ -6,11 +6,9 @@ import game.BonusDrop;
 import game.GameState;
 import game.MapObject;
 import game.Projectile;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  *
