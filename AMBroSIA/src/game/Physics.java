@@ -5,12 +5,14 @@ package game;
  * @author Nikolaos Bukas
  */
 
+import gui.MenuGUI;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
 public class Physics implements Runnable{
     
     private GameState gameState;
+    private static int height, width;
     
     Physics(GameState gameState)
     {
@@ -19,6 +21,8 @@ public class Physics implements Runnable{
     
     public void update()
     {
+        height = MenuGUI.HEIGHT;
+        width = MenuGUI.WIDTH;
         if (gameState.getPlayerShip() != null)
         {
             updateObject(gameState.getPlayerShip());
@@ -71,6 +75,8 @@ public class Physics implements Runnable{
         int[] displacement = calculateDisplacement(velocity, acceleration, 1);
         gameObject.setX(gameObject.getX() + displacement[0]);
         gameObject.setY(gameObject.getY() + displacement[1]);
+        
+        wrapAround(gameObject);
         
         gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
     }
@@ -172,8 +178,8 @@ public class Physics implements Runnable{
     {
         int[] acceleration2D = {0, 0};
         
-        acceleration2D[0] = (int) (acceleration * Math.cos(heading));
-        acceleration2D[1] = (int) (acceleration * Math.sin(heading));
+        acceleration2D[0] = (int) (acceleration * Math.cos(Math.toRadians(heading)));
+        acceleration2D[1] = (int) (acceleration * Math.sin(Math.toRadians(heading)));
        
         return acceleration2D;
     }
@@ -182,14 +188,14 @@ public class Physics implements Runnable{
     {
         velocity[0] = velocity[0] + acceleration[0] * time;
         
-        if(gameObject instanceof PlayerShip && velocity[0] > PlayerShip.MAX_VELOCITY)
+        if((gameObject instanceof PlayerShip) && (velocity[0] > PlayerShip.MAX_VELOCITY))
         {
             velocity[0] = PlayerShip.MAX_VELOCITY;
         }
         
         velocity[1] = velocity[1] + acceleration[1] * time;
         
-        if(gameObject instanceof PlayerShip && velocity[1] > PlayerShip.MAX_VELOCITY)
+        if((gameObject instanceof PlayerShip) && velocity[1] > (PlayerShip.MAX_VELOCITY))
         {
             velocity[1] = PlayerShip.MAX_VELOCITY;
         }
@@ -205,6 +211,27 @@ public class Physics implements Runnable{
         displacement[1] = (int) (velocity[1] * time + 0.5 * acceleration[1] * Math.pow(time, 2));
         
         return displacement;
+    }
+    
+    private static void wrapAround(MapObject gameObject)
+    {
+        if(gameObject.getX() > width)
+        {
+            gameObject.setX(0);
+        }
+        else if(gameObject.getX() < 0)
+        {
+            gameObject.setX(width);
+        }
+        
+        if(gameObject.getY() > height)
+        {
+            gameObject.setY(0);
+        }
+        else if(gameObject.getY() < 0)
+        {
+            gameObject.setY(height);
+        }
     }
 
     @Override
