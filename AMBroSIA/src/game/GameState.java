@@ -108,6 +108,11 @@ public class GameState {
         this.playerShip = playerShip;
     }
     
+    public void removePlayerShip()
+    {
+        this.playerShip = null;
+    }
+    
     public PlayerShip getPlayerShip()
     {
         return this.playerShip;

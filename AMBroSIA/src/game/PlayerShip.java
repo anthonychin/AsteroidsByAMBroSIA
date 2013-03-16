@@ -91,4 +91,9 @@ public class PlayerShip extends Ship{
     public boolean getAccelerate(){
         return this.isAccelerating;
     }
+    
+    public void destroy()
+    {
+        getGameState().removePlayerShip();
+    }
 }
