@@ -10,7 +10,7 @@ import java.awt.Polygon;
 public class AlienShip extends Ship{
     final public static int FIRE_RATE = 8;
     
-    public AlienShip(int[] velocity, int heading, int[] coordinates, GameState gameState, int lives){
+    public AlienShip(float[] velocity, int heading, int[] coordinates, GameState gameState, int lives){
         super(velocity, heading, coordinates, 0, gameState, FIRE_RATE, lives);
     }
     

@@ -69,8 +69,8 @@ public class Physics implements Runnable{
     
     private static void updateObject(MapObject gameObject)
     {
-        int[] velocity = gameObject.getVelocity();
-        int[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
+        float[] velocity = gameObject.getVelocity();
+        float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
         
         gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
         acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
@@ -176,17 +176,17 @@ public class Physics implements Runnable{
         return false;
     }
     
-    private static int[] calculate2DAcceleration(int heading, int acceleration)
+    private static float[] calculate2DAcceleration(float heading, float acceleration)
     {
-        int[] acceleration2D = {0, 0};
+        float[] acceleration2D = {0, 0};
         
-        acceleration2D[0] = (int) (acceleration * Math.cos(Math.toRadians(heading)));
-        acceleration2D[1] = (int) (acceleration * Math.sin(Math.toRadians(heading)));
+        acceleration2D[0] =  (float) (acceleration * Math.cos(Math.toRadians(heading)));
+        acceleration2D[1] =  (float) (acceleration * Math.sin(Math.toRadians(heading)));
        
         return acceleration2D;
     }
     
-    private static int[] calculateNewVelocity(MapObject gameObject, int[] velocity, int[] acceleration, int time)
+    private static float[] calculateNewVelocity(MapObject gameObject, float[] velocity, float[] acceleration, float time)
     {
         velocity[0] = velocity[0] + acceleration[0] * time;
         
@@ -221,7 +221,7 @@ public class Physics implements Runnable{
         return velocity;
     }
     
-    private static int[] calculateDisplacement(int[] velocity, int[] acceleration, int time)
+    private static int[] calculateDisplacement(float[] velocity, float[] acceleration, float time)
     {
         int[] displacement = {0, 0};
         

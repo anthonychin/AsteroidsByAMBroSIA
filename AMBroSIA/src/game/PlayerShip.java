@@ -5,8 +5,8 @@ package game;
  * @author Anthony
  */
 public class PlayerShip extends Ship{
-    final public static int MAX_VELOCITY = 10;
-    final public static int ACCELERATION = 1;
+    final public static int MAX_VELOCITY = 12;
+    final public static float ACCELERATION = 0.09f;
     final public static int DEACCELERATION = -2;
     final public static int FIRE_RATE = 5;
     final public static int ANGULAR_SPEED = 10;
@@ -18,7 +18,7 @@ public class PlayerShip extends Ship{
     private boolean isTurningRight = false;
     private boolean isShieldOn = false;
     
-    public PlayerShip(int[] velocity, int heading, int[] coordinates, GameState gameState, int lives, int bomb, int shieldPoints){
+    public PlayerShip(float[] velocity, float heading, int[] coordinates, GameState gameState, int lives, int bomb, int shieldPoints){
         super(velocity, heading, coordinates, ACCELERATION, gameState, FIRE_RATE, lives);
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
