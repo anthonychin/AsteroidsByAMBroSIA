@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -270,180 +271,14 @@ public class Logic extends KeyAdapter implements ActionListener{
         gameState = new GameState(1, 0);
         gameState.addPlayerShip(new PlayerShip(new float[] {0, 0}, 45, new int[] {250, 150}, gameState, 3, 3, 3));
         gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+        Random randu = new Random();
+        for(int i = 0; i < 1000; i++)
+        {
+            gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+            //gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+        }
         
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,-1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,-2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,-3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,-4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,-5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {-1,1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,-2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,-3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,-4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,-5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,-1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,-2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,-3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,-4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,-5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,-2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,-3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,-4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,-5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        
-        gameState.addAsteroid(new Asteroid(new float[] {-1,1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-2,2}, -40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-3,3}, -50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-4,4}, -60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {-5,5}, -70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {1,1}, 30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {2,2}, 40, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {3,3}, 50, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {4,4}, 60, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        gameState.addAsteroid(new Asteroid(new float[] {5,5}, 70, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
     }
