@@ -268,8 +268,8 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static void setUpLevel()
     {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new int[] {10, 10}, -60, new int[] {250, 150}, gameState, 3, 3, 3));
-        gameState.addAsteroid(new Asteroid(new int[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+        gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 45, new int[] {250, 150}, gameState, 3, 3, 3));
+        //gameState.addAsteroid(new Asteroid(new int[] {-1,-1}, -30, new int[] {700,580},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
     }

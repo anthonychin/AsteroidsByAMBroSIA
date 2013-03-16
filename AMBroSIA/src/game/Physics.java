@@ -72,13 +72,15 @@ public class Physics implements Runnable{
         int[] velocity = gameObject.getVelocity();
         int[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
         
+        gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
+        acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
+        
         int[] displacement = calculateDisplacement(velocity, acceleration, 1);
+        //int[] displacement = calculateDisplacement(velocity, gameObject.getVelocity(), 1);
         gameObject.setX(gameObject.getX() + displacement[0]);
         gameObject.setY(gameObject.getY() + displacement[1]);
         
         wrapAround(gameObject);
-        
-        gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
     }
     
     public ArrayList<MapObject> getCollisions()
@@ -188,16 +190,32 @@ public class Physics implements Runnable{
     {
         velocity[0] = velocity[0] + acceleration[0] * time;
         
-        if((gameObject instanceof PlayerShip) && (velocity[0] > PlayerShip.MAX_VELOCITY))
+        if(gameObject instanceof PlayerShip)
         {
-            velocity[0] = PlayerShip.MAX_VELOCITY;
+            if(velocity[0] > PlayerShip.MAX_VELOCITY)
+            {
+                velocity[0] = PlayerShip.MAX_VELOCITY;
+                gameObject.setAcceleration(0);
+            }
+            if(velocity[0] < (-1) * PlayerShip.MAX_VELOCITY)
+            {
+                velocity[0] = (-1) * PlayerShip.MAX_VELOCITY;
+                gameObject.setAcceleration(0);
+            }
         }
         
         velocity[1] = velocity[1] + acceleration[1] * time;
         
-        if((gameObject instanceof PlayerShip) && velocity[1] > (PlayerShip.MAX_VELOCITY))
+        if(gameObject instanceof PlayerShip)
         {
-            velocity[1] = PlayerShip.MAX_VELOCITY;
+            if(velocity[1] > PlayerShip.MAX_VELOCITY)
+            {
+                velocity[1] = PlayerShip.MAX_VELOCITY;
+            }
+            if(velocity[1] < (-1) * PlayerShip.MAX_VELOCITY)
+            {
+                velocity[1] = (-1) * PlayerShip.MAX_VELOCITY;
+            }
         }
         
         return velocity;
@@ -209,6 +227,16 @@ public class Physics implements Runnable{
         
         displacement[0] = (int) (velocity[0] * time + 0.5 * acceleration[0] * Math.pow(time, 2));
         displacement[1] = (int) (velocity[1] * time + 0.5 * acceleration[1] * Math.pow(time, 2));
+        
+        return displacement;
+    }
+    
+    private static int[] calculateDisplacement2(int[] originalVelocity, int[] newVelocity, int time)
+    {
+        int[] displacement = {0, 0};
+        
+        displacement[0] = (int) ((originalVelocity[0] + newVelocity[0]) * time);
+        displacement[1] = (int) ((originalVelocity[1] + newVelocity[1]) * time);
         
         return displacement;
     }

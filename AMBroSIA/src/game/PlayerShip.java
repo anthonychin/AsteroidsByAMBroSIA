@@ -5,8 +5,8 @@ package game;
  * @author Anthony
  */
 public class PlayerShip extends Ship{
-    final public static int MAX_VELOCITY = 0;
-    final public static int ACCELERATION = 2;
+    final public static int MAX_VELOCITY = 10;
+    final public static int ACCELERATION = 1;
     final public static int DEACCELERATION = -2;
     final public static int FIRE_RATE = 5;
     final public static int ANGULAR_SPEED = 10;
