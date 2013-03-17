@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Random;
+
 /**
  *
  * @author Anthony
@@ -10,6 +12,7 @@ public class PlayerShip extends Ship{
     final public static int DEACCELERATION = -2;
     final public static int FIRE_RATE = 5;
     final public static int ANGULAR_SPEED = 10;
+    final public static int NUM_DEBRIS = 5;
     
     private int bomb;
     private int shieldPoints;
@@ -94,6 +97,15 @@ public class PlayerShip extends Ship{
     
     public void destroy()
     {
+        createExplosionEffect();
         getGameState().removePlayerShip();
+    }
+    
+    private void createExplosionEffect()
+    {
+        for (int i = 0 ; i < NUM_DEBRIS; i++)
+        {
+            getGameState().addExplosion(new MapObject(new float[] {Logic.randVel()*2,Logic.randVel()*2}, Logic.randHead(), this.getCoord(), 0, getGameState()));
+        }
     }
 }
