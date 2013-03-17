@@ -1,15 +1,18 @@
 package game;
 
+import java.util.Random;
+
 /**
  *
  * @author Anthony
  */
 public class PlayerShip extends Ship{
-    final public static int MAX_VELOCITY = 50;
-    final public static int ACCELERATION = 3;
+    final public static int MAX_VELOCITY = 12;
+    final public static float ACCELERATION = 0.09f;
     final public static int DEACCELERATION = -2;
     final public static int FIRE_RATE = 5;
     final public static int ANGULAR_SPEED = 10;
+    final public static int NUM_DEBRIS = 5;
     
     private int bomb;
     private int shieldPoints;
@@ -18,8 +21,8 @@ public class PlayerShip extends Ship{
     private boolean isTurningRight = false;
     private boolean isShieldOn = false;
     
-    public PlayerShip(int[] velocity, int heading, int[] coordinates, int acceleration, GameState gameState, int lives, int bomb, int shieldPoints){
-        super(velocity, heading, coordinates, 0, gameState, FIRE_RATE, lives);
+    public PlayerShip(float[] velocity, float heading, int[] coordinates, GameState gameState, int lives, int bomb, int shieldPoints){
+        super(velocity, heading, coordinates, ACCELERATION, gameState, FIRE_RATE, lives);
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
     }
@@ -90,5 +93,19 @@ public class PlayerShip extends Ship{
     
     public boolean getAccelerate(){
         return this.isAccelerating;
+    }
+    
+    public void destroy()
+    {
+        createExplosionEffect();
+        getGameState().removePlayerShip();
+    }
+    
+    private void createExplosionEffect()
+    {
+        for (int i = 0 ; i < NUM_DEBRIS; i++)
+        {
+            getGameState().addExplosion(new MapObject(new float[] {Logic.randVel()*2,Logic.randVel()*2}, Logic.randHead(), this.getCoord(), 0, getGameState()));
+        }
     }
 }

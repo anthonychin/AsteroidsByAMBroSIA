@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import game.GameState;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -36,7 +37,9 @@ public class SinglePgamePanel extends JPanel
     // the label components takes as input the current score, current level, and current lifestock
     private void makeComponents()
     {
-        String score = String.valueOf(gameState.getHighScore()); String lvl = String.valueOf(gameState.getLevel()); String life = String.valueOf(gameState.getPlayerShip().getLives());
+        String score = String.valueOf(gameState.getHighScore()); 
+        String lvl = String.valueOf(gameState.getLevel()); 
+        String life = String.valueOf(gameState.getPlayerShip().getLives());
         sidePanel = new JPanel();
         highscore = new JLabel("Current Score: " + score);
         lives = new JLabel("Life Stock: " + life);
@@ -53,14 +56,25 @@ public class SinglePgamePanel extends JPanel
     }
     
     // paints content onto the Single-Player mode panel
+    
     @Override
-    public void paintComponent(Graphics g)
+    public void paint(Graphics g)
     {
-        super.paintComponent(g);
-        super.setBounds(0,0,800,600);
+        super.setBounds(0,0,MenuGUI.WIDTH,MenuGUI.HEIGHT);
+        super.paint(g);
         
-        g.setColor(Color.red);
-        g.drawString("Hello World", 220, 200);
+        Graphics2D g2 = (Graphics2D) g;
         this.setBackground(Color.WHITE);
+        
+//        g.setColor(Color.red);
+//        g.drawString("Hello World", 220, 200);
+        
+        gameDraw.drawObjects(g2, gameState);
+    }
+    
+    
+    public void updatePanel()
+    {
+        repaint();
     }
 }

@@ -13,14 +13,14 @@ import java.awt.Polygon;
 import javax.swing.ImageIcon;
 
 public class MapObject {
-    private int[] velocity;
+    private float[] velocity;
     private int[] coordinates;
-    private int heading;
-    private int acceleration;
+    private float heading;
+    private float acceleration;
     private GameState gameState;
     private Polygon shape;
     
-    public MapObject(int[] velocity, int heading, int[] coordinates, int acceleration, GameState gameState)
+    public MapObject(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState)
     {
         this.velocity = velocity;
         this.heading = heading;
@@ -30,32 +30,32 @@ public class MapObject {
         this.shape = new Polygon(new int[] {0}, new int[] {0}, 1);
     }
     
-    public int[] getVelocity()
+    public float[] getVelocity()
     {
         return this.velocity;
     }
     
-    public void setVelocity(int[] velocity)
+    public void setVelocity(float[] velocity)
     {
         this.velocity = velocity;
     }
     
-    public int getAcceleration()
+    public float getAcceleration()
     {
         return this.acceleration;
     }
     
-    public void setAcceleration(int acceleration)
+    public void setAcceleration(float acceleration)
     {
         this.acceleration = acceleration;
     }
     
-    public int getHeading()
+    public float getHeading()
     {
         return this.heading;
     }
     
-    public void setHeading(int heading)
+    public void setHeading(float heading)
     {
         this.heading = heading;
     }
@@ -70,7 +70,7 @@ public class MapObject {
         this.coordinates = coordinates;
     }
     
-        public int getX()
+    public int getX()
     {
         return coordinates[0];
     }

@@ -16,7 +16,7 @@ public class Projectile extends MapObject {
     private int owner;
     
     
-    public Projectile(Ship ship, int[] velocity, int heading, int[] coordinates, GameState gameState){     
+    public Projectile(Ship ship, float[] velocity, int heading, int[] coordinates, GameState gameState){     
         super(velocity, heading, coordinates, 0, gameState);
         this.ttl = TIME_TO_LIVE;
         

@@ -2,6 +2,7 @@ package game;
 
 
 import gui.MenuGUI;
+import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -9,6 +10,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -47,11 +50,14 @@ public class Logic extends KeyAdapter implements ActionListener{
     private boolean shoot = false;
     private boolean paused = false;
     
+    //used creating collision debris
+    private static Random rand = new Random();
+    
     public static void main(String args[]) throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
         
         gui = new MenuGUI(buttonPress,keyboard);
-        
+        gui.showMenu();
     }
     
     public static void startTimer()
@@ -59,7 +65,7 @@ public class Logic extends KeyAdapter implements ActionListener{
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
-        //        timer.scheduleAtFixedRate(MenuGUI, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
     }
     public static void stopTimer()
     {
@@ -119,21 +125,7 @@ public class Logic extends KeyAdapter implements ActionListener{
     
     public static void startSinglePlayer()
     {
-        
         setUpLevel();
-        startTimer();
-        while(gameState.getPlayerShip() != null || gameState.getLevel() <= MAX_LEVEL){
-            
-            
-            // Enter whatever GUI stuff updating...
-        }
-        
-        if(gameState.getPlayerShip() == null){
-            // GUI to show Game Over
-        }
-        else{
-            // GUI to show Player beat the game
-        }
     }
     
     public static void startTwoPlayer()
@@ -280,7 +272,15 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static void setUpLevel()
     {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
+        gameState.addPlayerShip(new PlayerShip(new float[] {0, 0}, 45, new int[] {250, 150}, gameState, 1, 0, 0));
+//        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {650,500},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+        Random randu = new Random();
+        for(int i = 0; i < 10; i++)
+        {
+            gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+        }
+        
+        
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
     }
@@ -288,38 +288,34 @@ public class Logic extends KeyAdapter implements ActionListener{
     @Override
     public void keyPressed(KeyEvent e)
     {
-        System.out.println(e.getKeyCode());
+        int keyCode = e.getKeyCode();
         //handles most basic key commands.  Should activate a boolean stating that the key has been pressed
-        if (e.getKeyCode() == KeyEvent.VK_UP)
+        if (keyCode == KeyEvent.VK_UP)
         {
             //accelerate
             accelerate = true;
-            System.out.println("accelerate");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        else if (keyCode == KeyEvent.VK_LEFT) 
         {
             turnLeft = true;
-            System.out.println("left");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        else if (keyCode == KeyEvent.VK_RIGHT)
         {
             turnRight = true;
-            System.out.println("right");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        else if (keyCode == KeyEvent.VK_DOWN)
         {
             gameState.getPlayerShip().useBomb();
         }
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        else if (keyCode == KeyEvent.VK_SPACE)
         {
             shoot = true;
-            System.out.println("shoot");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+        else if (keyCode == KeyEvent.VK_BACK_SPACE)
         {
             gameState.getPlayerShip().activateShield();
         }
-        else if (e.getKeyCode() == KeyEvent.VK_P)
+        else if (keyCode == KeyEvent.VK_P)
         {
             paused = !paused;
         }
@@ -329,55 +325,72 @@ public class Logic extends KeyAdapter implements ActionListener{
     @Override
     public void keyReleased(KeyEvent e)
     {
+        int keyCode = e.getKeyCode();
         //stops doing whatever that keypress was doing
-        if (e.getKeyCode() == KeyEvent.VK_UP)
+        if (keyCode == KeyEvent.VK_UP)
         {
             //accelerate
             accelerate = false;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        else if (keyCode == KeyEvent.VK_LEFT)
         {
             turnLeft = false;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        else if (keyCode == KeyEvent.VK_RIGHT)
         {
             turnRight = false;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        else if (keyCode == KeyEvent.VK_SPACE)
         {
             shoot = false;
         }
     }
     
+    
+    //This section needs a LOT of work....
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == gui.singlePbutton)
+        Object action = e.getSource();
+        if(action == gui.singlePbutton)
         {
-            //TEMPORARY: this code should be in something like setUpLevel or startSinglePlayer
-            gameState = new GameState(1, 0);
-            gameState.addPlayerShip(new PlayerShip(new int[] {0, 0}, 90, new int[] {0, 0}, 0, gameState, 3, 1, 3));
+            startSinglePlayer();
+            gui.displaySingleP(gameState);
+            startTimer();
         }
         
-        else if(e.getSource() == gui.twoPbutton)
+        else if(action == gui.twoPbutton)
         {
-            
+            gui.displayTwoP(gameState);
         }
         
-        else if(e.getSource() == gui.leaderBoardButton)
+        else if(action == gui.leaderBoardButton)
         {
-            
+            gui.displayLeaderBoard();
         }
         
-        else if(e.getSource() == gui.tutorialButton)
+        else if(action == gui.tutorialButton)
         {
-            
+            gui.displayTutorial();
+        }
+        
+        else if(action == gui.backButton)
+        {
+            gui.goBack();
         }
         
         else if(e.getSource() == gui.quitButton)
         {
             System.exit(0);
         }
-        gui.reactToButton(e,gameState);
     }
     
+    public static float randVel()
+    {
+        return rand.nextInt(5)*(rand.nextFloat() - rand.nextFloat());
+    }
+    
+    public static int randHead()
+    {
+        return rand.nextInt(360);
+    }
 }

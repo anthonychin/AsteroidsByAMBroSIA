@@ -9,7 +9,7 @@ public class Ship extends MapObject{
     private int lives;
     private int fireRate;
     // Contructor
-    public Ship(int[] velocity, int heading, int[] coordinates, int acceleration, GameState gameState, int fireRate, int lives){
+    public Ship(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState, int fireRate, int lives){
         super(velocity, heading, coordinates, acceleration, gameState);
         this.lives = lives;
         this.fireRate = fireRate;
@@ -37,7 +37,7 @@ public class Ship extends MapObject{
     
     public void shoot()
     {
-        this.getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), this.getGameState()));   
+        //this.getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), this.getGameState()));   
     }
  
     private int[] calculateCoordinate(int[] shipCoord){

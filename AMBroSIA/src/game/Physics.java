@@ -5,12 +5,14 @@ package game;
  * @author Nikolaos Bukas
  */
 
+import gui.MenuGUI;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
 public class Physics implements Runnable{
     
     private GameState gameState;
+    private static int height, width;
     
     Physics(GameState gameState)
     {
@@ -19,38 +21,66 @@ public class Physics implements Runnable{
     
     public void update()
     {
-        updateObject(gameState.getPlayerShip());
+        height = MenuGUI.HEIGHT;
+        width = MenuGUI.WIDTH;
+        if (gameState.getPlayerShip() != null)
+        {
+            updateObject(gameState.getPlayerShip());
+        }
+        
         if(gameState.getAlienShip() != null)
         {
             updateObject(gameState.getAlienShip());
         }
         
-        for(Asteroid asteroid : gameState.getAsteroids())
+        if (!gameState.getAsteroids().isEmpty())
         {
-            updateObject(asteroid);
+            for(Asteroid asteroid : gameState.getAsteroids())
+            {
+                updateObject(asteroid);
+            }
         }
         
-        for(Projectile projectile : gameState.getProjectiles())
+        
+        if (!gameState.getProjectiles().isEmpty())
         {
-            updateObject(projectile);
+            for(Projectile projectile : gameState.getProjectiles())
+            {
+                updateObject(projectile);
+            }
         }
         
+        if (!gameState.getBonusDrops().isEmpty())
+        {
         for(BonusDrop bonusDrop : gameState.getBonusDrops())
+            {
+                updateObject(bonusDrop);
+            }
+        }
+        
+        if (!gameState.getExplosions().isEmpty())
         {
-            updateObject(bonusDrop);
+            for(MapObject explosion : gameState.getExplosions())
+            {
+                updateObject(explosion);
+            }
         }
     }
     
     private static void updateObject(MapObject gameObject)
     {
-        int[] velocity = gameObject.getVelocity();
-        int[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
+        float[] velocity = gameObject.getVelocity();
+        float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
+        
+        gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
+        acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
         
         int[] displacement = calculateDisplacement(velocity, acceleration, 1);
+        //int[] displacement = calculateDisplacement(velocity, gameObject.getVelocity(), 1);
         gameObject.setX(gameObject.getX() + displacement[0]);
         gameObject.setY(gameObject.getY() + displacement[1]);
         
-        gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
+        wrapAround(gameObject);
     }
     
     public ArrayList<MapObject> getCollisions()
@@ -61,7 +91,7 @@ public class Physics implements Runnable{
         ArrayList<Projectile> projectileList = gameState.getProjectiles();
         ArrayList<BonusDrop> bonusList = gameState.getBonusDrops();
         
-        ArrayList<MapObject> listOfCollisions = new ArrayList<>(0);
+        ArrayList<MapObject> listOfCollisions = new ArrayList<MapObject>();
         Polygon shipShape;
         
         shipShape = playerShip.getShape();
@@ -146,36 +176,52 @@ public class Physics implements Runnable{
         return false;
     }
     
-    private static int[] calculate2DAcceleration(int heading, int acceleration)
+    private static float[] calculate2DAcceleration(float heading, float acceleration)
     {
-        int[] acceleration2D = {0, 0};
+        float[] acceleration2D = {0, 0};
         
-        acceleration2D[0] = (int) (acceleration * Math.cos(heading));
-        acceleration2D[1] = (int) (acceleration * Math.sin(heading));
+        acceleration2D[0] =  (float) (acceleration * Math.cos(Math.toRadians(heading)));
+        acceleration2D[1] =  (float) (acceleration * Math.sin(Math.toRadians(heading)));
        
         return acceleration2D;
     }
     
-    private static int[] calculateNewVelocity(MapObject gameObject, int[] velocity, int[] acceleration, int time)
+    private static float[] calculateNewVelocity(MapObject gameObject, float[] velocity, float[] acceleration, float time)
     {
         velocity[0] = velocity[0] + acceleration[0] * time;
         
-        if(gameObject instanceof PlayerShip && velocity[0] > PlayerShip.MAX_VELOCITY)
+        if(gameObject instanceof PlayerShip)
         {
-            velocity[0] = PlayerShip.MAX_VELOCITY;
+            if(velocity[0] > PlayerShip.MAX_VELOCITY)
+            {
+                velocity[0] = PlayerShip.MAX_VELOCITY;
+                gameObject.setAcceleration(0);
+            }
+            if(velocity[0] < (-1) * PlayerShip.MAX_VELOCITY)
+            {
+                velocity[0] = (-1) * PlayerShip.MAX_VELOCITY;
+                gameObject.setAcceleration(0);
+            }
         }
         
         velocity[1] = velocity[1] + acceleration[1] * time;
         
-        if(gameObject instanceof PlayerShip && velocity[1] > PlayerShip.MAX_VELOCITY)
+        if(gameObject instanceof PlayerShip)
         {
-            velocity[1] = PlayerShip.MAX_VELOCITY;
+            if(velocity[1] > PlayerShip.MAX_VELOCITY)
+            {
+                velocity[1] = PlayerShip.MAX_VELOCITY;
+            }
+            if(velocity[1] < (-1) * PlayerShip.MAX_VELOCITY)
+            {
+                velocity[1] = (-1) * PlayerShip.MAX_VELOCITY;
+            }
         }
         
         return velocity;
     }
     
-    private static int[] calculateDisplacement(int[] velocity, int[] acceleration, int time)
+    private static int[] calculateDisplacement(float[] velocity, float[] acceleration, float time)
     {
         int[] displacement = {0, 0};
         
@@ -183,6 +229,37 @@ public class Physics implements Runnable{
         displacement[1] = (int) (velocity[1] * time + 0.5 * acceleration[1] * Math.pow(time, 2));
         
         return displacement;
+    }
+    
+    private static int[] calculateDisplacement2(int[] originalVelocity, int[] newVelocity, int time)
+    {
+        int[] displacement = {0, 0};
+        
+        displacement[0] = (int) ((originalVelocity[0] + newVelocity[0]) * time);
+        displacement[1] = (int) ((originalVelocity[1] + newVelocity[1]) * time);
+        
+        return displacement;
+    }
+    
+    private static void wrapAround(MapObject gameObject)
+    {
+        if(gameObject.getX() > width)
+        {
+            gameObject.setX(0);
+        }
+        else if(gameObject.getX() < 0)
+        {
+            gameObject.setX(width);
+        }
+        
+        if(gameObject.getY() > height)
+        {
+            gameObject.setY(0);
+        }
+        else if(gameObject.getY() < 0)
+        {
+            gameObject.setY(height);
+        }
     }
 
     @Override

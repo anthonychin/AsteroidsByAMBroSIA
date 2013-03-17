@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.CardLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
@@ -10,17 +9,28 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import game.GameState;
+import java.awt.Dimension;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 /**
  *
  * @author Haisin Yip
  */
 
-public class MenuGUI
+public class MenuGUI implements Runnable
 {
+    private static final int DEFAULT_WIDTH = 800;
+    private static final int DEFAULT_HEIGHT = 600;
     
-    CardLayout cardLayout;
-    JPanel card = new JPanel();
+    public static int WIDTH = DEFAULT_WIDTH;
+    public static int HEIGHT = DEFAULT_HEIGHT;
+    
+   
+    //main window, associated elements
+    private JFrame frame;
+    private CardLayout cardLayout;
+    private JPanel card = new JPanel();
     
     // menu buttons
     public JButton singlePbutton = new JButton("SINGLE-PLAYER MODE");
@@ -29,18 +39,18 @@ public class MenuGUI
     public JButton tutorialButton = new JButton("TUTORIAL");
     public JButton quitButton = new JButton("QUIT");
     
-    // leaderBoard back button
-    JButton backButtonL = new JButton("BACK");
+    //back button for both leaderboard and tutorial
+    public JButton backButton = new JButton("BACK");
     
-    // tutorial back button
-    JButton backButtonT = new JButton("BACK");
+    private ActionListener buttonClick;
+    private KeyListener keyboard;
     
-    //main window
-    JFrame frame;
+    //whether or not we are in single player mode
+    private boolean singleP = false;
     
-    
-    ActionListener buttonClick;
-    KeyListener keyboard;
+    //Panels for single and 2 player modes
+    private SinglePgamePanel onePPanel;
+    private TwoPgamePanel twoPPanel;
     /**
      * Starts the GUI Menu.
      * @param AL
@@ -48,125 +58,148 @@ public class MenuGUI
      */
     public MenuGUI(ActionListener AL, KeyListener keyb)
     {
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
+        
         // create and initialize frame
-        frame = new JFrame("Asteroids");
-        JPanel contentPane = (JPanel)frame.getContentPane();
+        frame = new JFrame("AMBroSIA");
         cardLayout = new CardLayout();
         card.setLayout(cardLayout);
+        frame.getContentPane().add(card);
         
+        //allow global access to actionlistener,keyboard listener
+        buttonClick = AL;
         keyboard = keyb;
         
-        //allow global access to actionlistener
-        buttonClick = AL;
+        //set important parameters
+        frame.setVisible(true);
+        frame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        frame.setLocation(100, 100);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT));
         
-        // create menu page with 5 options
-        JPanel cardMenu = new JPanel();
-        cardMenu.setLayout(new GridLayout(2,1));
-        JPanel menuPanel = new MenuPanel();
-        cardMenu.add(menuPanel);
+        //set up (but do not yet allow) keyboard input
+        frame.addKeyListener(keyboard);
+        frame.setFocusable(false);
+    }
+ 
+    public void showMenu() {
+        //disable keyboard input
+        frame.setFocusable(false);
+        // create menu page panel, set it up, show it
+        JPanel cardMenu = new JPanel(new GridLayout(2, 1));
+        cardMenu.add(new MenuPanel());
         // initialize the 5 buttons that shall be in the menu page
-        JPanel buttonPanelMenu = new JPanel();
-        buttonPanelMenu.setLayout(new GridLayout(5,1));
-        buttonPanelMenu.add(singlePbutton); buttonPanelMenu.add(twoPbutton); buttonPanelMenu.add(leaderBoardButton); buttonPanelMenu.add(tutorialButton); buttonPanelMenu.add(quitButton);
-        singlePbutton.addActionListener(buttonClick); twoPbutton.addActionListener(buttonClick); leaderBoardButton.addActionListener(buttonClick); tutorialButton.addActionListener(buttonClick); quitButton.addActionListener(buttonClick);
+        JPanel buttonPanelMenu = new JPanel(new GridLayout(5, 1));
+        buttonPanelMenu.add(singlePbutton);
+        buttonPanelMenu.add(twoPbutton);
+        buttonPanelMenu.add(leaderBoardButton);
+        buttonPanelMenu.add(tutorialButton);
+        buttonPanelMenu.add(quitButton);
+        
+        singlePbutton.addActionListener(buttonClick);
+        twoPbutton.addActionListener(buttonClick);
+        leaderBoardButton.addActionListener(buttonClick);
+        tutorialButton.addActionListener(buttonClick);
+        quitButton.addActionListener(buttonClick);
+        
         cardMenu.add(buttonPanelMenu);
-        
-        
         card.add("Menu", cardMenu);
         cardLayout.show(card, "Menu");
         
-        contentPane.add(card);
-        
-        frame.setVisible(true);
-        frame.setResizable(false);
-        frame.setSize(800, 600);
-        frame.setLocation(100, 100);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(true);
     }
     
-    //NOTE: code below is a bit redundant with logic.  Can we do some form of code reuse?
-    public void reactToButton(ActionEvent e, GameState gs)
-    {
-        frame.addKeyListener(keyboard);
+    public void displaySingleP(GameState gs) {
+        //allow keyboard input
         frame.setFocusable(true);
+       //create panel, show it
+        onePPanel = new SinglePgamePanel(gs);
+        JPanel cardGame1P = new JPanel();
+        cardGame1P.add(onePPanel);
+        card.add("Single-Player Mode", cardGame1P);
+        cardLayout.show(card, "Single-Player Mode");
+        //remove menu component for efficiency
+        card.remove(card.getComponent(0));
+        //let other methods know we are in single P mode
+        singleP = true;
         
-        if(e.getSource() == singlePbutton)
-        {
-            // create single player mode game page
-            JPanel cardGame1P = new JPanel();
-            cardGame1P.add(new SinglePgamePanel(gs));
-            card.add("Single-Player Mode", cardGame1P);
-            cardLayout.show(card, "Single-Player Mode");
-            
-            //allow keyboard input
-        }
+        //do not allow resizing at this point, as it can disrupt gameplay
+        frame.setResizable(false);
+    }
+
+    public void displayTwoP(GameState gs) {
+        frame.setFocusable(true);
+        // create single player mode game page (two player)
+        twoPPanel = new TwoPgamePanel();
+        JPanel cardGame2P = new JPanel();
+        //cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
+        cardGame2P.add(twoPPanel);
+        card.add("Two-Player Mode", cardGame2P);
+    }
+       
+    public void displayLeaderBoard() {
+        // create leaderboard page
+        JPanel cardLeaderBoard = new JPanel();
+        cardLeaderBoard.setLayout(new GridLayout(5, 1));
+        JPanel leaderBoardPanel = new LeaderBoardPanel();
+        cardLeaderBoard.add(leaderBoardPanel);
+        //initialize a back button
+        JPanel buttonPanelLeaderBoard = new JPanel();
+        buttonPanelLeaderBoard.add(backButton);
+        backButton.addActionListener(buttonClick);
+        cardLeaderBoard.add(buttonPanelLeaderBoard);
+        card.add("LeaderBoard", cardLeaderBoard);
+        cardLayout.show(card, "LeaderBoard");
+    }
+
+    public void displayTutorial() {
+        JPanel cardTutorial = new JPanel();
+        cardTutorial.setLayout(new GridLayout(5, 1));
+        JPanel tutorialPanel = new TutorialPanel();
+        cardTutorial.add(tutorialPanel);
+        //initialize a back button
+        JPanel buttonPanelTutorial = new JPanel();
+        buttonPanelTutorial.add(backButton);
+        backButton.addActionListener(buttonClick);
+        cardTutorial.add(buttonPanelTutorial);
+        card.add("Tutorial", cardTutorial);
+        cardLayout.show(card, "Tutorial");
+    }
         
-        else if(e.getSource() == twoPbutton)
-        {
-            // create single player mode game page (two player)
-            JPanel cardGame2P = new JPanel();
-            //cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
-            JPanel twoPgamePanel = new TwoPgamePanel();
-            cardGame2P.add(twoPgamePanel);
-            card.add("Two-Player Mode", cardGame2P);
-            cardLayout.show(card, "Two-Player Mode");
-            
-            //allow keyboard input
-        }
-        
-        else if(e.getSource() == leaderBoardButton)
-        {
-              // create leaderboard page
-            JPanel cardLeaderBoard = new JPanel();
-            cardLeaderBoard.setLayout(new GridLayout(5,1));
-            JPanel leaderBoardPanel = new LeaderBoardPanel();
-            cardLeaderBoard.add(leaderBoardPanel);
-            //initialize a back button
-            JPanel buttonPanelLeaderBoard = new JPanel();
-            buttonPanelLeaderBoard.add(backButtonL); backButtonL.addActionListener(buttonClick);
-            cardLeaderBoard.add(buttonPanelLeaderBoard);
-            card.add("LeaderBoard", cardLeaderBoard);
-            cardLayout.show(card, "LeaderBoard");
-            
-            // Leaderboard should not take keyboard input
-            frame.setFocusable(false);
-        }
-        
-        else if(e.getSource() == tutorialButton)
-        {
-            // create tutorial page
-            JPanel cardTutorial = new JPanel();
-            cardTutorial.setLayout(new GridLayout(5,1));
-            JPanel tutorialPanel = new TutorialPanel();
-            cardTutorial.add(tutorialPanel);
-            //initialize a back button
-            JPanel buttonPanelTutorial = new JPanel();
-            buttonPanelTutorial.add(backButtonT); backButtonT.addActionListener(buttonClick);
-            cardTutorial.add(buttonPanelTutorial);
-            card.add("Tutorial", cardTutorial);
-            cardLayout.show(card, "Tutorial");
-            
-            // Tutorial should not take keyboard input
-            frame.setFocusable(false);
-        }
-        
-        else if(e.getSource() == quitButton)
-        {
-            System.exit(0);
-        }
-        
-        else if(e.getSource() == backButtonL)
-        {
-            cardLayout.show(card, "Menu");
-            // Menu should not take keyboard input
-            frame.setFocusable(false);
-        }
-        
-        else if(e.getSource() == backButtonT)
-        {
-            cardLayout.show(card, "Menu");
-            // Menu should not take keyboard input
-            frame.setFocusable(false);
-        }
+    public void goBack() {
+        cardLayout.show(card, "Menu");
+    }
+
+    public void updateDraw()
+    {
+//     PLACEHOLDER IF STATEMENT
+//        if (singleP)
+//        {
+            onePPanel.updatePanel();
+//        }
+//        else
+//        {
+//            twoPPanel.updatePanel();
+//        }
+    }
+
+    @Override
+    public void run() {
+        updateSize();
+        updateDraw();
+    }
+    
+    private void updateSize() {
+        MenuGUI.WIDTH = frame.getWidth();
+        MenuGUI.HEIGHT = frame.getHeight();
     }
 }
