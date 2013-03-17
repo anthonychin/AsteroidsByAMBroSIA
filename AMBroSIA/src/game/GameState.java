@@ -31,10 +31,10 @@ public class GameState {
         this.level = level;
         this.highScore = highScore;
         
-        this.asteroidList= new ArrayList<>(0);
-        this.projectileList = new ArrayList<>(0);
-        this.bonusList = new ArrayList<>(0);
-        this.explosionList = new ArrayList<>(0);
+        this.asteroidList= new ArrayList<Asteroid>();
+        this.projectileList = new ArrayList<Projectile>();
+        this.bonusList = new ArrayList<BonusDrop>();
+        this.explosionList = new ArrayList<MapObject>();
     }
     
     public void addAsteroid(Asteroid asteroid) { this.asteroidList.add(asteroid); }
