@@ -7,8 +7,21 @@ import game.GameState;
 import game.MapObject;
 import game.Projectile;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Paint;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.TexturePaint;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -30,13 +43,22 @@ public class gameDraw
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_LCD_CONTRAST, 100);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
+        //get textures
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("./src/textures/asteroid_small.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(gameDraw.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //draw asteroids
         if (!memory.getAsteroids().isEmpty()) 
         {
             ArrayList<Asteroid> asteroidList = memory.getAsteroids();
             for (Asteroid asteroid : asteroidList)
             {
-                g2d.draw(asteroid.getShape());
+                Polygon shape = asteroid.getShape();
+                g2d.fillPolygon(shape);
+                g2d.draw(shape);
             } 
         }
         
