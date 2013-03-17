@@ -66,12 +66,8 @@ public class SinglePgamePanel extends JPanel
         Graphics2D g2 = (Graphics2D) g;
         this.setBackground(Color.WHITE);
         
-//        g.setColor(Color.red);
-//        g.drawString("Hello World", 220, 200);
-        
         gameDraw.drawObjects(g2, gameState);
     }
-    
     
     public void updatePanel()
     {
