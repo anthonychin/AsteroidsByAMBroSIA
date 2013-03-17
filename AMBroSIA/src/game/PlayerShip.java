@@ -193,7 +193,7 @@ public class PlayerShip extends Ship{
     
     public void shoot()
     {
-        getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), new int[] {this.getX(), this.getY()}, getGameState()));
+        getGameState().addProjectile(new Projectile(this, this.getHeading(), new int[] {this.getX(), this.getY()}, getGameState()));
     }
     
     /**

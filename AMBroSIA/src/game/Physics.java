@@ -137,7 +137,7 @@ public class Physics implements Runnable{
                     listOfCollisions.add(bonusDrop);
             }
         }
-        
+
         if(alienShip != null)
         {
             shipShape = alienShip.getShape();

@@ -268,6 +268,12 @@ public class Logic extends KeyAdapter implements ActionListener{
         projectile.destroy();
     }
     
+    private static void collisionLogic(Projectile projectile, Asteroid asteroid)
+    {
+        projectile.destroy();
+        asteroid.destroy();
+    }
+    
     private static void setUpLevel()
     {
         gameState = new GameState(1, 0);

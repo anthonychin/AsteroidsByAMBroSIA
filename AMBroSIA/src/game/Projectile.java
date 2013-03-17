@@ -9,7 +9,7 @@ public class Projectile extends MapObject {
     /**
      * The velocity of Projectile. The default is 10.
      */
-    public final static float[] PROJECTILE_VELOCITY = {10, 10};
+    public final static float PROJECTILE_SPEED = 5.0f;
     /**
      * The length of time that Projectile lasts. The default is 5.
      */
@@ -36,8 +36,13 @@ public class Projectile extends MapObject {
      * @param coordinates   
      * @param gameState     
      */
-    public Projectile(Ship ship, float[] velocity, float heading, int[] coordinates, GameState gameState){     
-        super(velocity, heading, coordinates, 0, gameState);
+    public Projectile(Ship ship, float heading, int[] coordinates, GameState gameState){     
+        super(new float[] {0,0}, heading, coordinates, 0, gameState);
+        float[] velocity = {0, 0};
+        velocity[0] = (float) (PROJECTILE_SPEED * Math.cos(Math.toRadians(heading - 90)));
+        velocity[1] = (float) (PROJECTILE_SPEED * Math.sin(Math.toRadians(heading - 90)));
+        
+        this.setVelocity(new float[] {velocity[0], velocity[1]});
         this.ttl = TIME_TO_LIVE;
         
         if(ship instanceof PlayerShip)
