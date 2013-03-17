@@ -59,8 +59,10 @@ public class MenuGUI implements Runnable
     public MenuGUI(ActionListener AL, KeyListener keyb)
     {
         try {
-            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) 
+            {
+                if ("Nimbus".equals(info.getName())) 
+                {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -91,7 +93,8 @@ public class MenuGUI implements Runnable
         frame.setFocusable(false);
     }
  
-    public void showMenu() {
+    public void showMenu() 
+    {
         //disable keyboard input
         frame.setFocusable(false);
         // create menu page panel, set it up, show it
@@ -118,7 +121,8 @@ public class MenuGUI implements Runnable
         frame.setResizable(true);
     }
     
-    public void displaySingleP(GameState gs) {
+    public void displaySingleP(GameState gs) 
+    {
         //allow keyboard input
         frame.setFocusable(true);
        //create panel, show it
@@ -136,7 +140,8 @@ public class MenuGUI implements Runnable
         frame.setResizable(false);
     }
 
-    public void displayTwoP(GameState gs) {
+    public void displayTwoP(GameState gs) 
+    {
         frame.setFocusable(true);
         // create single player mode game page (two player)
         twoPPanel = new TwoPgamePanel();
@@ -146,7 +151,8 @@ public class MenuGUI implements Runnable
         card.add("Two-Player Mode", cardGame2P);
     }
        
-    public void displayLeaderBoard() {
+    public void displayLeaderBoard() 
+    {
         // create leaderboard page
         JPanel cardLeaderBoard = new JPanel();
         cardLeaderBoard.setLayout(new GridLayout(5, 1));
@@ -161,7 +167,8 @@ public class MenuGUI implements Runnable
         cardLayout.show(card, "LeaderBoard");
     }
 
-    public void displayTutorial() {
+    public void displayTutorial() 
+    {
         JPanel cardTutorial = new JPanel();
         cardTutorial.setLayout(new GridLayout(5, 1));
         JPanel tutorialPanel = new TutorialPanel();
@@ -175,9 +182,7 @@ public class MenuGUI implements Runnable
         cardLayout.show(card, "Tutorial");
     }
         
-    public void goBack() {
-        cardLayout.show(card, "Menu");
-    }
+    public void goBack() { cardLayout.show(card, "Menu");}
 
     public void updateDraw()
     {
@@ -193,12 +198,14 @@ public class MenuGUI implements Runnable
     }
 
     @Override
-    public void run() {
+    public void run() 
+    {
         updateSize();
         updateDraw();
     }
     
-    private void updateSize() {
+    private void updateSize() 
+    {
         MenuGUI.WIDTH = frame.getWidth();
         MenuGUI.HEIGHT = frame.getHeight();
     }

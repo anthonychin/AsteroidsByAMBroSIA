@@ -14,7 +14,8 @@ import java.util.ArrayList;
  *
  * @author Michael
  */
-public class gameDraw {
+public class gameDraw 
+{
     
     public static void drawObjects(Graphics2D g2d, GameState memory)
     {
@@ -30,7 +31,8 @@ public class gameDraw {
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
         //draw asteroids
-        if (!memory.getAsteroids().isEmpty()) {
+        if (!memory.getAsteroids().isEmpty()) 
+        {
             ArrayList<Asteroid> asteroidList = memory.getAsteroids();
             for (Asteroid asteroid : asteroidList)
             {
@@ -58,10 +60,7 @@ public class gameDraw {
             ArrayList<Projectile> projectileList = memory.getProjectiles();
             for (Projectile projectile : projectileList)
             {
-                try{
-                    g2d.draw(projectile.getShape());
-                }
-                catch (NullPointerException e){}
+                g2d.draw(projectile.getShape());
             }
         }
         
@@ -71,10 +70,7 @@ public class gameDraw {
             ArrayList<BonusDrop> bonusList = memory.getBonusDrops();
             for (BonusDrop drop : bonusList)
             {
-                try{
-                    g2d.draw(drop.getShape());
-                }
-                catch (NullPointerException e){}
+                g2d.draw(drop.getShape());
             }
         }
         
@@ -84,10 +80,7 @@ public class gameDraw {
             ArrayList<MapObject> explosionList = memory.getExplosions();
             for (MapObject explosion : explosionList)
             {
-                try{
-                    g2d.draw(explosion.getShape());
-                }
-                catch (NullPointerException e){}
+                g2d.draw(explosion.getShape());
             }
         }
     }
