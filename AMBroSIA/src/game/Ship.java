@@ -10,13 +10,13 @@ public class Ship extends MapObject{
     private int fireRate;
     /**
      * Constructs <i>Ship</i> with the given parameters.
-     * @param velocity
-     * @param heading
-     * @param coordinates
-     * @param acceleration
-     * @param gameState
-     * @param fireRate
-     * @param lives
+     * @param velocity      speed of the ship
+     * @param heading       
+     * @param coordinates   
+     * @param acceleration  
+     * @param gameState     
+     * @param fireRate      
+     * @param lives         
      */
     public Ship(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState, int fireRate, int lives){
         super(velocity, heading, coordinates, acceleration, gameState);
@@ -26,7 +26,7 @@ public class Ship extends MapObject{
     
     /**
      * Returns the value of the ship's fire rate.
-     * @return fireRate
+     * @return fire rate of the ship
      */
     public int getFireRate()
     {
@@ -44,7 +44,7 @@ public class Ship extends MapObject{
     
     /**
      * Returns the value of the ship's lives.
-     * @return lives
+     * @return lives of the ship
      */
     public int getLives()
     {
@@ -53,7 +53,7 @@ public class Ship extends MapObject{
     
     /**
      * Sets the lives of the current ship to specified lives.
-     * @param lives
+     * @param lives 
      */
     public void setLives(int lives)
     {

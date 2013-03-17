@@ -1,14 +1,13 @@
 package game;
 
-/**
- *
- * @author Nikolaos Bukas
- */
-
 import gui.MenuGUI;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
+/**
+ * The purpose of the <code>Physics</code> class is to provide the game physics. It calculates velocities and displacements and is able to detect collisions.
+ * @author Nikolaos Bukas
+ */
 public class Physics implements Runnable{
     
     private GameState gameState;
@@ -19,6 +18,9 @@ public class Physics implements Runnable{
         this.gameState = gameState;
     }
     
+    /**
+     *
+     */
     public void update()
     {
         height = MenuGUI.HEIGHT;
@@ -83,6 +85,10 @@ public class Physics implements Runnable{
         wrapAround(gameObject);
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<MapObject> getCollisions()
     {
         PlayerShip playerShip = gameState.getPlayerShip();
@@ -257,6 +263,9 @@ public class Physics implements Runnable{
         //gameObject.setY(gameObject.getY() % (height + 100));
     }
 
+    /**
+     *
+     */
     @Override
     public void run() {
         update();
