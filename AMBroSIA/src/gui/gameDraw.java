@@ -7,6 +7,7 @@ import game.GameState;
 import game.MapObject;
 import game.Projectile;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 
@@ -36,7 +37,9 @@ public class gameDraw
             ArrayList<Asteroid> asteroidList = memory.getAsteroids();
             for (Asteroid asteroid : asteroidList)
             {
-                g2d.draw(asteroid.getShape());
+                Polygon shape = asteroid.getShape();
+                g2d.fillPolygon(shape);
+                g2d.draw(shape);
             } 
         }
         
