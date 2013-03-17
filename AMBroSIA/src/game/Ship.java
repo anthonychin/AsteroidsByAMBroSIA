@@ -1,40 +1,68 @@
 package game;
 
 /**
- *
+ * The <code>Ship</code> class is used as a generic representation of a ship, either player or alien.
  * @author Anthony
  */
 
 public class Ship extends MapObject{
     private int lives;
     private int fireRate;
-    // Contructor
+    /**
+     * Constructs <i>Ship</i> with the given parameters.
+     * @param velocity
+     * @param heading
+     * @param coordinates
+     * @param acceleration
+     * @param gameState
+     * @param fireRate
+     * @param lives
+     */
     public Ship(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState, int fireRate, int lives){
         super(velocity, heading, coordinates, acceleration, gameState);
         this.lives = lives;
         this.fireRate = fireRate;
     }
     
+    /**
+     * Returns the value of the ship's fire rate.
+     * @return fireRate
+     */
     public int getFireRate()
     {
         return this.fireRate;
     }
     
+    /**
+     * Sets the fire rate of the current ship to specified fireRate.
+     * @param fireRate
+     */
     public void setFireRate(int fireRate)
     {
         this.fireRate = fireRate;
     }
     
+    /**
+     * Returns the value of the ship's lives.
+     * @return lives
+     */
     public int getLives()
     {
         return this.lives;
     }
     
+    /**
+     * Sets the lives of the current ship to specified lives.
+     * @param lives
+     */
     public void setLives(int lives)
     {
         this.lives = lives;
     }
     
+    /**
+     * Creates a projectile.
+     */
     public void shoot()
     {
         //this.getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), this.getGameState()));   
