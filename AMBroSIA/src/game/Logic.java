@@ -61,6 +61,7 @@ public class Logic extends KeyAdapter implements ActionListener{
         
         gui = new MenuGUI(buttonPress,keyboard);
         gui.showMenu();
+        
     }
     
     public static void startTimer()

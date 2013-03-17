@@ -22,8 +22,8 @@ public class Sound {
     
     //  The string inputFile should contain the Path of the sound file.
     /**
-     *
-     * @param inputFile
+     * Creates <i>Sound</i> using given inputFile. If the file is not found or the given file is not supported, it throws an exception.
+     * @param inputFile name of the sound file
      * @throws UnsupportedAudioFileException
      * @throws IOException
      * @throws LineUnavailableException
@@ -36,26 +36,23 @@ public class Sound {
         clip.open(sound);
     }
     
-    //  Plays the clip only once.
     /**
-     *
+     * Plays the clip once.
      */
     public void play() {
         clip.setFramePosition(0);
         clip.start();
     }
     
-    //  Stops the currently playing clip.
     /**
-     *
+     * Stops the currently playing clip.
      */
     public void stop() {
         clip.stop();
     }
     
-    //  Plays the clip in continuously. e.g. BGM
     /**
-     *
+     * Plays the clip continously.
      */
     public void playLoop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
