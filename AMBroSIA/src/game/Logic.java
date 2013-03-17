@@ -40,6 +40,9 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static GraphicsEngine graphicsEngine;
     private static Physics physicsEngine;
     
+    private static PlayerShip p1;
+    private static PlayerShip p2;
+    
     //the service used to execute all update functions
     private static ScheduledExecutorService timer = Executors.newScheduledThreadPool(4);
     
@@ -276,17 +279,18 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static void setUpLevel()
     {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new float[] {0, 0}, 45, new int[] {250, 150}, gameState, 1, 0, 0));
-        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {650,500},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+        p1 = new PlayerShip(new float[] {0, 0}, 180, new int[] {400, 300}, gameState, 1, 0, 0);
+        gameState.addPlayerShip(p1);
+        //gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {650,500},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         //Random randu = new Random();
         //(int i = 0; i < 10; i++)
         //{
         //    gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        //}
-        
-        
+        //}        
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
+        
+        p1.accelerate();
     }
     
     @Override
@@ -297,14 +301,17 @@ public class Logic extends KeyAdapter implements ActionListener{
         if (keyCode == KeyEvent.VK_UP)
         {
             //accelerate
+            p1.accelerate();
             accelerate = true;
         }
         else if (keyCode == KeyEvent.VK_LEFT) 
         {
+            p1.turnLeft();
             turnLeft = true;
         }
         else if (keyCode == KeyEvent.VK_RIGHT)
         {
+            p1.turnRight();
             turnRight = true;
         }
         else if (keyCode == KeyEvent.VK_DOWN)

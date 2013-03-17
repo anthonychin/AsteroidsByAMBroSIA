@@ -72,10 +72,16 @@ public class PlayerShip extends Ship{
     }
     
     public void accelerate(){
-        this.isAccelerating = true;
+        //this.getCoord()[0] = this.getCoord()[0] + 1;
+        //this.getCoord()[1] = this.getCoord()[1] + 1;
+        
+        //this.setCoord(this.getCoord());
+        //this.setCoord(Physics.calculateShipCoordinate(this.getHeading(), this.getCoord()));
+        this.isAccelerating = true;              
     }
     public void turnLeft()
     {
+        this.setHeading(this.getHeading() - 5);
         this.isTurningLeft = true;
     }
     public boolean getTurnLeft()
@@ -84,6 +90,7 @@ public class PlayerShip extends Ship{
     }
     public void turnRight()
     {
+        this.setHeading(this.getHeading() + 5);        
         this.isTurningRight = true;
     }
     public boolean getTurnRight()
@@ -108,4 +115,14 @@ public class PlayerShip extends Ship{
             getGameState().addExplosion(new MapObject(new float[] {Difficulty.randExplosionVelocity() * 2, Difficulty.randExplosionVelocity() * 2}, Difficulty.randomHeading(), new int[] {this.getX(), this.getY()}, 0, getGameState()));
         }
     }
+    
+    public static int[] calculateShipCoordinate(float heading, int[] curCoordinates)
+    {
+        int[] newCoordinates = {0, 0};
+        
+        newCoordinates[0] =  (int)(curCoordinates[0] * Math.cos(Math.toRadians(heading) + 1));
+        newCoordinates[1] =  (int)(curCoordinates[1] * Math.sin(Math.toRadians(heading) + 1));
+       
+        return newCoordinates;
+    }       
 }
