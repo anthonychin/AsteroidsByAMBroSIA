@@ -59,14 +59,9 @@ public class MenuGUI implements Runnable
     public MenuGUI(ActionListener AL, KeyListener keyb)
     {
         try {
-            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            //use system theme: windows/mac/linux: looks better
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
         }
         
         // create and initialize frame
