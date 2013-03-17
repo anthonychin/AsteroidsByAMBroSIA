@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package game;
 
 import gui.MenuGUI;
@@ -13,7 +9,7 @@ import java.util.Random;
  */
 public class Difficulty {
     private static int level;
-    private static Random rand= new Random();
+    private static Random rand = new Random();
     
     public void setLevel(int level)
     {
@@ -54,7 +50,6 @@ public class Difficulty {
     {
         return (rand.nextInt(5) + 1)*(rand.nextFloat() - rand.nextFloat());
     }
-    
     
     private static float randomFloat()
     {

@@ -1,7 +1,6 @@
 package game;
 
 import java.io.IOException;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
@@ -17,7 +16,7 @@ public class PlayerShip extends Ship{
     final public static int DEACCELERATION = -2;
     final public static int FIRE_RATE = 5;
     final public static int ANGULAR_SPEED = 10;
-    final public static int NUM_DEBRIS = 20;
+    final public static int NUM_DEBRIS = 2;
     
     private int bomb;
     private int shieldPoints;
@@ -105,7 +104,7 @@ public class PlayerShip extends Ship{
         createExplosionEffect();
         getGameState().removePlayerShip();
         try {
-            Sound sound = new Sound("explosion.wav");
+            Sound sound = new Sound("missle.wav");
             sound.play();
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,7 +120,9 @@ public class PlayerShip extends Ship{
     {
         for (int i = 0 ; i < NUM_DEBRIS; i++)
         {
-            getGameState().addExplosion(new MapObject(new float[] {Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[] {this.getX(), this.getY()}, 0, getGameState()));
+            int x = getX();
+            int y = getY();
+            getGameState().addExplosion(new MapObject(new float[] {Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[] {x, y}, 0, getGameState()));
         }
     }
 }
