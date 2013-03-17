@@ -91,7 +91,7 @@ public class Physics implements Runnable{
         ArrayList<Projectile> projectileList = gameState.getProjectiles();
         ArrayList<BonusDrop> bonusList = gameState.getBonusDrops();
         
-        ArrayList<MapObject> listOfCollisions = new ArrayList<>(0);
+        ArrayList<MapObject> listOfCollisions = new ArrayList<MapObject>();
         Polygon shipShape;
         
         shipShape = playerShip.getShape();
