@@ -16,10 +16,12 @@ import javax.swing.UIManager.LookAndFeelInfo;
 /**
  *
  * @author Haisin Yip
+ * @author Michael Smith
  */
 
 public class MenuGUI implements Runnable
 {
+    
     private static final int DEFAULT_WIDTH = 800;
     private static final int DEFAULT_HEIGHT = 600;
     
@@ -51,10 +53,12 @@ public class MenuGUI implements Runnable
     //Panels for single and 2 player modes
     private SinglePgamePanel onePPanel;
     private TwoPgamePanel twoPPanel;
+    
+    
     /**
      * Starts the GUI Menu.
      * @param AL
-     * @param keyb
+     * @param keyb 
      */
     public MenuGUI(ActionListener AL, KeyListener keyb)
     {
@@ -147,7 +151,7 @@ public class MenuGUI implements Runnable
     {
         // create leaderboard page
         JPanel cardLeaderBoard = new JPanel();
-        cardLeaderBoard.setLayout(new GridLayout(5, 1));
+        cardLeaderBoard.setLayout(new GridLayout(2,1));
         JPanel leaderBoardPanel = new LeaderBoardPanel();
         cardLeaderBoard.add(leaderBoardPanel);
         //initialize a back button

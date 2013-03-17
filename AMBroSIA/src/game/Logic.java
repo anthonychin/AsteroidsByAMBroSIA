@@ -76,7 +76,6 @@ public class Logic extends KeyAdapter implements ActionListener{
         timer.shutdown();
     }
     
-    
     public static Runnable collisionCheck() {
         
         final Runnable collision = new Runnable() {
