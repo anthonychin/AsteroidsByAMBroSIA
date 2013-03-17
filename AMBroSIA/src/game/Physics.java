@@ -236,23 +236,8 @@ public class Physics implements Runnable{
     
     private static void wrapAround(MapObject gameObject)
     {
-        if(gameObject.getX() > width)
-        {
-            gameObject.setX(0);
-        }
-        else if(gameObject.getX() < 0)
-        {
-            gameObject.setX(width);
-        }
-        
-        if(gameObject.getY() > height)
-        {
-            gameObject.setY(0);
-        }
-        else if(gameObject.getY() < 0)
-        {
-            gameObject.setY(height);
-        }
+        gameObject.setX(gameObject.getX() % (width + 100));
+        gameObject.setY(gameObject.getY() % (height + 100));
     }
 
     @Override
