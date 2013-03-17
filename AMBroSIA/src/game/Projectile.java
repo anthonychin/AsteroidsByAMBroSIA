@@ -1,14 +1,26 @@
 package game;
 
 /**
- *
+ * The <code>Projectile</code> class provides the representation for the projectile objects.
  * @author Anthony
  */
 
 public class Projectile extends MapObject {
+    /**
+     * The velocity of Projectile. The default is 10.
+     */
     public final static int[] PROJECTILE_VELOCITY = {10, 10};
+    /**
+     * The length of time that Projectile lasts. The default is 5.
+     */
     public final static int TIME_TO_LIVE = 5; //5 seconds
+    /**
+     * Value of the owner when the player owns the projectile.
+     */
     public final static int PLAYER_OWNER = 1;
+    /**
+     * Value of the owner when the alien owns the projectile.
+     */
     public final static int ALIEN_OWNER = 2;
     
     private int velocity; // to be fixed
@@ -16,6 +28,14 @@ public class Projectile extends MapObject {
     private int owner;
     
     
+    /**
+     * Creates <i>Projectile</i> with the given parameters.
+     * @param ship          
+     * @param velocity      
+     * @param heading       
+     * @param coordinates   
+     * @param gameState     
+     */
     public Projectile(Ship ship, float[] velocity, int heading, int[] coordinates, GameState gameState){     
         super(velocity, heading, coordinates, 0, gameState);
         this.ttl = TIME_TO_LIVE;
@@ -26,14 +46,27 @@ public class Projectile extends MapObject {
             this.owner = ALIEN_OWNER;
     }
     
+    /**
+     * Returns the value of the Time to Live property.
+     * @return value of the time to live
+     */
     public int getTTL(){
         return this.ttl;
     }
     
+    /**
+     * Sets the Time to Live property.
+     * @param ttl
+     */
     public void setTTL(int ttl){
         this.ttl = ttl;
     }
     
+    /**
+     * Returns the integer value that represents the owner of the <i>Projectile.</i>
+     * The owner is the one who created and fired the projectile.
+     * @return owner of the projectile
+     */
     public int getOwner(){
         return this.owner;
     }
