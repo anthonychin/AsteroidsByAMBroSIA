@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import game.GameState;
 import java.awt.Dimension;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 /**
  *
@@ -56,6 +58,17 @@ public class MenuGUI implements Runnable
      */
     public MenuGUI(ActionListener AL, KeyListener keyb)
     {
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
+        
         // create and initialize frame
         frame = new JFrame("AMBroSIA");
         cardLayout = new CardLayout();
