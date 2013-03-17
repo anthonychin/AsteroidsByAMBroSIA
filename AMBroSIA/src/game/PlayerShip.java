@@ -60,7 +60,7 @@ public class PlayerShip extends Ship{
      * @param shieldPoints
      */
     public PlayerShip(float[] velocity, float heading, int[] coordinates, GameState gameState, int lives, int bomb, int shieldPoints){
-        super(velocity, heading, coordinates, ACCELERATION, gameState, FIRE_RATE, lives);
+        super(velocity, heading, coordinates, 0, gameState, FIRE_RATE, lives);
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
     }
@@ -142,15 +142,22 @@ public class PlayerShip extends Ship{
     /**
      * Sets the <i>PlayerShip</i> to accelerate.
      */
-    public void accelerate(){
-        this.isAccelerating = true;
+    public void accelerate(boolean isAccelerating){
+        if(isAccelerating)
+        {
+            this.setAcceleration(ACCELERATION);
+        }
+        else
+        {
+            this.setAcceleration(0);
+        }
     }
     /**
      * Sets the <i>PlayerShip</i> to turn left.
      */
     public void turnLeft()
     {
-        this.isTurningLeft = true;
+        this.setHeading(this.getHeading() - 5);
     }
     /**
      * Checks if <i>PlayerShip</i> is turning left.
@@ -165,7 +172,7 @@ public class PlayerShip extends Ship{
      */
     public void turnRight()
     {
-        this.isTurningRight = true;
+        this.setHeading(this.getHeading() + 5);
     }
     /**
      * Checks if <i>PlayerShip</i> is turning right.
@@ -182,6 +189,11 @@ public class PlayerShip extends Ship{
      */
     public boolean getAccelerate(){
         return this.isAccelerating;
+    }
+    
+    public void shoot()
+    {
+        getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), new int[] {this.getX(), this.getY()}, getGameState()));
     }
     
     /**

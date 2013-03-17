@@ -74,7 +74,7 @@ public class Physics implements Runnable{
         float[] velocity = gameObject.getVelocity();
         float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
         
-        gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
+        
         acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
         
         int[] displacement = calculateDisplacement(velocity, acceleration, 1);
@@ -82,6 +82,7 @@ public class Physics implements Runnable{
         gameObject.setX(gameObject.getX() + displacement[0]);
         gameObject.setY(gameObject.getY() + displacement[1]);
         
+        gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
         wrapAround(gameObject);
     }
     
@@ -115,7 +116,7 @@ public class Physics implements Runnable{
         //Checking collisions between PlayerShip and Projectiles
         for(Projectile projectile : projectileList)
         {
-            if(projectile.getOwner() != Projectile.ALIEN_OWNER && detectCollision(shipShape, projectile.getShape()))
+            if(projectile.getOwner() == Projectile.ALIEN_OWNER && detectCollision(shipShape, projectile.getShape()))
             {
                     listOfCollisions.add(playerShip);
                     listOfCollisions.add(projectile);
@@ -186,8 +187,8 @@ public class Physics implements Runnable{
     {
         float[] acceleration2D = {0, 0};
         
-        acceleration2D[0] =  (float) (acceleration * Math.cos(Math.toRadians(heading)));
-        acceleration2D[1] =  (float) (acceleration * Math.sin(Math.toRadians(heading)));
+        acceleration2D[0] =  (float) (acceleration * Math.cos(Math.toRadians(heading - 90)));
+        acceleration2D[1] =  (float) (acceleration * Math.sin(Math.toRadians(heading - 90)));
        
         return acceleration2D;
     }
