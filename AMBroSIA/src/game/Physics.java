@@ -71,9 +71,14 @@ public class Physics implements Runnable{
     
     private static void updateObject(MapObject gameObject)
     {
+        if(gameObject instanceof PlayerShip)
+        {
+            PlayerShip ship = (PlayerShip) gameObject;
+            ship.setHeading(ship.getHeading() + calculateHeadingDisplacement(ship.isTurningRight(), ship.isTurningLeft()));
+        }
+        
         float[] velocity = gameObject.getVelocity();
         float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
-        
         
         acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
         
@@ -239,6 +244,22 @@ public class Physics implements Runnable{
         displacement[1] = (int) Math.ceil((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
         
         return displacement;
+    }
+    
+    private static float calculateHeadingDisplacement(boolean turningRight, boolean turningLeft)
+    {
+        if(turningRight && !turningLeft)
+        {
+            return 5;
+        }
+        else if(!turningRight && turningLeft)
+        {
+            return -5;
+        }
+        else
+        {
+            return 0;
+        }
     }
     
     private static void wrapAround(MapObject gameObject)

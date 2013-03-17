@@ -44,10 +44,6 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static ScheduledExecutorService timer = Executors.newScheduledThreadPool(4);
     
     //booleans for the key commands.  These need to be checked by the timer
-    private boolean accelerate = false;
-    private boolean turnLeft = false;
-    private boolean turnRight = false;
-    private boolean shoot = false;
     private boolean paused = false;
     
     
@@ -301,11 +297,11 @@ public class Logic extends KeyAdapter implements ActionListener{
         }
         else if (keyCode == KeyEvent.VK_LEFT) 
         {
-            gameState.getPlayerShip().turnLeft();
+            gameState.getPlayerShip().turnLeft(true);
         }
         else if (keyCode == KeyEvent.VK_RIGHT)
         {
-            gameState.getPlayerShip().turnRight();
+            gameState.getPlayerShip().turnRight(true);
         }
         else if (keyCode == KeyEvent.VK_DOWN)
         {
@@ -338,15 +334,15 @@ public class Logic extends KeyAdapter implements ActionListener{
         }
         else if (keyCode == KeyEvent.VK_LEFT)
         {
-            gameState.getPlayerShip().turnLeft();
+            gameState.getPlayerShip().turnLeft(false);
         }
         else if (keyCode == KeyEvent.VK_RIGHT)
         {
-            gameState.getPlayerShip().turnRight();
+            gameState.getPlayerShip().turnRight(false);
         }
         else if (keyCode == KeyEvent.VK_SPACE)
         {
-            gameState.getPlayerShip().shoot();
+            // nothing for now
         }
     }
     

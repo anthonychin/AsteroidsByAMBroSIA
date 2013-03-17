@@ -155,30 +155,30 @@ public class PlayerShip extends Ship{
     /**
      * Sets the <i>PlayerShip</i> to turn left.
      */
-    public void turnLeft()
+    public void turnLeft(boolean turning)
     {
-        this.setHeading(this.getHeading() - 5);
+        this.isTurningLeft = turning;
     }
     /**
      * Checks if <i>PlayerShip</i> is turning left.
      * @return true if the ship is turning left, false otherwise
      */
-    public boolean getTurnLeft()
+    public boolean isTurningLeft()
     {
         return this.isTurningLeft;
     }
     /**
      * Sets the <i>PlayerShip</i> to turn right.
      */
-    public void turnRight()
+    public void turnRight(boolean turning)
     {
-        this.setHeading(this.getHeading() + 5);
+        this.isTurningRight = turning;
     }
     /**
      * Checks if <i>PlayerShip</i> is turning right.
      * @return true if the ship is turning right, false otherwise.
      */
-    public boolean getTurnRight()
+    public boolean isTurningRight()
     {
         return this.isTurningRight;
     }
