@@ -277,7 +277,7 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static void setUpLevel()
     {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new float[] {0, 0}, 45, new int[] {250, 150}, gameState, 1, 0, 0));
+        gameState.addPlayerShip(new PlayerShip(new float[] {0, 0}, 90, new int[] {250, 150}, gameState, 1, 0, 0));
         gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {650,500},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         //Random randu = new Random();
         //(int i = 0; i < 10; i++)
@@ -298,15 +298,15 @@ public class Logic extends KeyAdapter implements ActionListener{
         if (keyCode == KeyEvent.VK_UP)
         {
             //accelerate
-            accelerate = true;
+            gameState.getPlayerShip().accelerate(true);
         }
         else if (keyCode == KeyEvent.VK_LEFT) 
         {
-            turnLeft = true;
+            gameState.getPlayerShip().turnLeft();
         }
         else if (keyCode == KeyEvent.VK_RIGHT)
         {
-            turnRight = true;
+            gameState.getPlayerShip().turnRight();
         }
         else if (keyCode == KeyEvent.VK_DOWN)
         {
@@ -314,7 +314,7 @@ public class Logic extends KeyAdapter implements ActionListener{
         }
         else if (keyCode == KeyEvent.VK_SPACE)
         {
-            shoot = true;
+             gameState.getPlayerShip().shoot();
         }
         else if (keyCode == KeyEvent.VK_BACK_SPACE)
         {
@@ -335,19 +335,19 @@ public class Logic extends KeyAdapter implements ActionListener{
         if (keyCode == KeyEvent.VK_UP)
         {
             //accelerate
-            accelerate = false;
+            gameState.getPlayerShip().accelerate(false);
         }
         else if (keyCode == KeyEvent.VK_LEFT)
         {
-            turnLeft = false;
+            gameState.getPlayerShip().turnLeft();
         }
         else if (keyCode == KeyEvent.VK_RIGHT)
         {
-            turnRight = false;
+            gameState.getPlayerShip().turnRight();
         }
         else if (keyCode == KeyEvent.VK_SPACE)
         {
-            shoot = false;
+            gameState.getPlayerShip().shoot();
         }
     }
     
