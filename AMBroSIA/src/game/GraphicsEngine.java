@@ -60,26 +60,23 @@ public class GraphicsEngine implements Runnable{
   */
  private static Polygon playerShape()
  {
-     //TODO: see if player shape size OK
      return new Polygon(new int[] {0,8,-8}, new int[] {10,-10,-10}, 3);
  }
  
- //TODO: Check all asteroid shapes. OK? Strange? Too many points?
  private static Polygon smallAsteroidShape()
  {
-     return new Polygon(new int[] {15,-14,0,-3}, new int[] {-10,9,20,-20}, 4);
+     return new Polygon(new int[] {-15,-7,4,19,7,2,-8},new int[] {4,12,20,3,-9,-11,-5},7);
  }
  
  private static Polygon mediumAsteroidShape()
  {
-     return new Polygon(new int[] {-24,-21,-7,2,16,21,11,3,-13}, new int[] {7,20,7,14,4,-2,-17,-14,2}, 9);
+     return new Polygon(new int[] {-30,-15,-10,-5,10,21,32,25,10,-20},new int[] {2,20,25,31,29,13,4,-20,-25,-24},10);
  }
  
  private static Polygon largeAsteroidShape()
- {
-     return new Polygon(new int[] {-40,-37,-35,-19,-11,-7,2,8,18,24,21,25,19,13,6,-1,-9,-20},
-             new int[] {3,9,14,20,27,34,30,33,22,9,-2,-7,-18,-27,-33,-24,-16,2},18);
- }
+    {
+        return new Polygon(new int[]{-50, -41, -33, -7, 19, 32, 46, 49, 64, 62, 47, 43, 36, -15, -14, -47, -50}, new int[]{53, 62, 65, 60, 63, 66, 57, 43, 39, 12, -8, -29, -45, -28, -15, 15, 42}, 17);
+    }
  
  private static Polygon alienShape()
  {
@@ -95,7 +92,6 @@ public class GraphicsEngine implements Runnable{
  
  public static Polygon explosionShape()
  {
-     //TODO: Explosion shape OK?
      return new Polygon(new int[] {-5,5}, new int[] {0,0}, 2);
  }
  

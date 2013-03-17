@@ -50,8 +50,11 @@ public class Logic extends KeyAdapter implements ActionListener{
     private boolean shoot = false;
     private boolean paused = false;
     
+    
+    
     //used creating collision debris
     private static Random rand = new Random();
+    //Sound 
     
     public static void main(String args[]) throws UnsupportedAudioFileException, IOException, LineUnavailableException
     {
@@ -198,6 +201,7 @@ public class Logic extends KeyAdapter implements ActionListener{
             }
         }
         
+        asteroid.destroy(false);
         return gameState.getPlayerShip() == null;
     }
     
@@ -272,12 +276,12 @@ public class Logic extends KeyAdapter implements ActionListener{
     {
         gameState = new GameState(1, 0);
         gameState.addPlayerShip(new PlayerShip(new float[] {0, 0}, 45, new int[] {250, 150}, gameState, 1, 0, 0));
-//        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {650,500},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        Random randu = new Random();
-        for(int i = 0; i < 10; i++)
-        {
-            gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        }
+        gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {650,500},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+        //Random randu = new Random();
+        //(int i = 0; i < 10; i++)
+        //{
+        //    gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+        //}
         
         
         graphicsEngine = new GraphicsEngine(gameState);
@@ -381,15 +385,5 @@ public class Logic extends KeyAdapter implements ActionListener{
         {
             System.exit(0);
         }
-    }
-    
-    public static float randVel()
-    {
-        return rand.nextInt(5)*(rand.nextFloat() - rand.nextFloat());
-    }
-    
-    public static int randHead()
-    {
-        return rand.nextInt(360);
     }
 }

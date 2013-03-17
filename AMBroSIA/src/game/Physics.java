@@ -220,23 +220,16 @@ public class Physics implements Runnable{
         
         return velocity;
     }
-    
+   
     private static int[] calculateDisplacement(float[] velocity, float[] acceleration, float time)
     {
         int[] displacement = {0, 0};
         
-        displacement[0] = (int) (velocity[0] * time + 0.5 * acceleration[0] * Math.pow(time, 2));
-        displacement[1] = (int) (velocity[1] * time + 0.5 * acceleration[1] * Math.pow(time, 2));
+        //displacement[0] = Math.round((velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2)));
+        //displacement[1] = Math.round((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
         
-        return displacement;
-    }
-    
-    private static int[] calculateDisplacement2(int[] originalVelocity, int[] newVelocity, int time)
-    {
-        int[] displacement = {0, 0};
-        
-        displacement[0] = (int) ((originalVelocity[0] + newVelocity[0]) * time);
-        displacement[1] = (int) ((originalVelocity[1] + newVelocity[1]) * time);
+        displacement[0] = (int) Math.ceil((velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2)));
+        displacement[1] = (int) Math.ceil((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
         
         return displacement;
     }

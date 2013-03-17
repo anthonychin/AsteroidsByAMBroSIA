@@ -105,8 +105,7 @@ public class PlayerShip extends Ship{
     {
         for (int i = 0 ; i < NUM_DEBRIS; i++)
         {
-            getGameState().addExplosion(new MapObject(new float[] {Logic.randVel()*2,Logic.randVel()*2}, Logic.randHead(), this.getCoord(), 0, getGameState()));
-            System.out.println(this.getCoord());
+            getGameState().addExplosion(new MapObject(new float[] {Difficulty.randExplosionVelocity() * 2, Difficulty.randExplosionVelocity() * 2}, Difficulty.randomHeading(), new int[] {this.getX(), this.getY()}, 0, getGameState()));
         }
     }
 }
