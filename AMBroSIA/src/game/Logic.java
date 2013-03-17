@@ -40,13 +40,11 @@ public class Logic extends KeyAdapter implements ActionListener{
     private static GraphicsEngine graphicsEngine;
     private static Physics physicsEngine;
     
-    //the service used to execute all update functions
-    private static ScheduledExecutorService timer = Executors.newScheduledThreadPool(4);
-    
     //booleans for the key commands.  These need to be checked by the timer
     private boolean paused = false;
     
-    
+    //the service used to execute all update functions
+    private static ScheduledExecutorService timer;
     
     //used creating collision debris
     private static Random rand = new Random();
@@ -62,6 +60,7 @@ public class Logic extends KeyAdapter implements ActionListener{
     
     public static void startTimer()
     {
+        timer = Executors.newScheduledThreadPool(4);
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
@@ -317,7 +316,16 @@ public class Logic extends KeyAdapter implements ActionListener{
         }
         else if (keyCode == KeyEvent.VK_P)
         {
-            paused = !paused;
+            if (!paused)
+            {
+                stopTimer();
+                paused = true;
+            }
+            else
+            {
+                startTimer();
+                paused = false;
+            }
         }
     }
     

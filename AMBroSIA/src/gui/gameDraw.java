@@ -6,9 +6,13 @@ import game.BonusDrop;
 import game.GameState;
 import game.MapObject;
 import game.Projectile;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
+import java.awt.Stroke;
 import java.util.ArrayList;
 
 /**
@@ -31,18 +35,27 @@ public class gameDraw
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_LCD_CONTRAST, 100);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
+        Paint defaultPaint = g2d.getPaint();
+        Stroke defaultStroke = g2d.getStroke();
         //draw asteroids
         if (!memory.getAsteroids().isEmpty()) 
         {
             ArrayList<Asteroid> asteroidList = memory.getAsteroids();
             for (Asteroid asteroid : asteroidList)
             {
+                //make asteroid border a little thicker
                 Polygon shape = asteroid.getShape();
+                g2d.setStroke(new BasicStroke(10,BasicStroke.CAP_ROUND,BasicStroke.JOIN_BEVEL));
+                g2d.setPaint(Color.GRAY);
+                g2d.drawPolygon(shape);
+                g2d.setPaint(defaultPaint);
                 g2d.fillPolygon(shape);
-                g2d.draw(shape);
+//                g2d.drawPolygon(shape);
             } 
         }
-        
+        //reset to default width for other objects for now
+        g2d.setStroke(defaultStroke);
+        g2d.setPaint(defaultPaint);
         
         //draw player
         if (memory.getPlayerShip() != null)
