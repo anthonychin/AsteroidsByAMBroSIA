@@ -23,10 +23,10 @@ public class Physics implements Runnable{
     {
         height = MenuGUI.HEIGHT;
         width = MenuGUI.WIDTH;
-        if (gameState.getPlayerShip() != null)
-        {
-            updateObject(gameState.getPlayerShip());
-        }
+//        if (gameState.getPlayerShip() != null)
+//        {
+//            updateObject(gameState.getPlayerShip());
+//        }
         
         if(gameState.getAlienShip() != null)
         {
@@ -67,7 +67,12 @@ public class Physics implements Runnable{
         }
     }
     
-    private static void updateObject(MapObject gameObject)
+    public static void updateObject2(MapObject gameObject){
+        float[] velocity = gameObject.getVelocity();
+        float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
+    }
+    
+    public static void updateObject(MapObject gameObject)
     {
         float[] velocity = gameObject.getVelocity();
         float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
@@ -180,8 +185,8 @@ public class Physics implements Runnable{
     {
         float[] acceleration2D = {0, 0};
         
-        acceleration2D[0] =  (float) (acceleration * Math.cos(Math.toRadians(heading)));
-        acceleration2D[1] =  (float) (acceleration * Math.sin(Math.toRadians(heading)));
+        acceleration2D[0] =  (float) (acceleration * Math.cos(Math.toRadians(heading - 90)));
+        acceleration2D[1] =  (float) (acceleration * Math.sin(Math.toRadians(heading - 90)));
        
         return acceleration2D;
     }

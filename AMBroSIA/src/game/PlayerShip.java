@@ -72,11 +72,7 @@ public class PlayerShip extends Ship{
     }
     
     public void accelerate(){
-        //this.getCoord()[0] = this.getCoord()[0] + 1;
-        //this.getCoord()[1] = this.getCoord()[1] + 1;
-        
-        //this.setCoord(this.getCoord());
-        //this.setCoord(Physics.calculateShipCoordinate(this.getHeading(), this.getCoord()));
+        this.setCoord(calculateShipCoordinate(this.getHeading(),this.getCoord()));
         this.isAccelerating = true;              
     }
     public void turnLeft()
@@ -118,11 +114,23 @@ public class PlayerShip extends Ship{
     
     public static int[] calculateShipCoordinate(float heading, int[] curCoordinates)
     {
-        int[] newCoordinates = {0, 0};
-        
-        newCoordinates[0] =  (int)(curCoordinates[0] * Math.cos(Math.toRadians(heading) + 1));
-        newCoordinates[1] =  (int)(curCoordinates[1] * Math.sin(Math.toRadians(heading) + 1));
-       
+        int[] newCoordinates = new int[2];
+                        
+            newCoordinates[0] =  (int)(curCoordinates[0] + Math.cos(Math.toRadians(heading - 90))*5);
+            newCoordinates[1] =  (int)(curCoordinates[1] + Math.sin(Math.toRadians(heading - 90))*5);
+            
+            if(newCoordinates[0] < 0){
+                newCoordinates[0] = 790;
+            }
+            else if(newCoordinates[0] > 790){
+                newCoordinates[0] = 10;
+            }
+            if(newCoordinates[1] < 0){
+                newCoordinates[1] = 590;
+            }
+            else if(newCoordinates[1] > 590){
+                newCoordinates[1] = 10;
+            }         
         return newCoordinates;
-    }       
+    }         
 }

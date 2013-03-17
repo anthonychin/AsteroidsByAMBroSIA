@@ -6,7 +6,7 @@ package game;
  */
 
 public class Projectile extends MapObject {
-    public final static int[] PROJECTILE_VELOCITY = {10, 10};
+    public final static float PROJECTILE_SPEED = 2;
     public final static int TIME_TO_LIVE = 5; //5 seconds
     public final static int PLAYER_OWNER = 1;
     public final static int ALIEN_OWNER = 2;
@@ -16,7 +16,7 @@ public class Projectile extends MapObject {
     private int owner;
     
     
-    public Projectile(Ship ship, float[] velocity, int heading, int[] coordinates, GameState gameState){     
+    public Projectile(Ship ship, float[] velocity, float heading, int[] coordinates, GameState gameState){     
         super(velocity, heading, coordinates, 0, gameState);
         this.ttl = TIME_TO_LIVE;
         

@@ -20,7 +20,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
- * @author Nikolaos, Michael
+ * @author Nikolaos, Michael, Anthony
  */
 public class Logic extends KeyAdapter implements ActionListener{
     
@@ -281,16 +281,16 @@ public class Logic extends KeyAdapter implements ActionListener{
         gameState = new GameState(1, 0);
         p1 = new PlayerShip(new float[] {0, 0}, 180, new int[] {400, 300}, gameState, 1, 0, 0);
         gameState.addPlayerShip(p1);
+
         //gameState.addAsteroid(new Asteroid(new float[] {-1,-1}, -30, new int[] {650,500},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         //Random randu = new Random();
         //(int i = 0; i < 10; i++)
         //{
         //    gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        //}        
+        //}
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
         
-        p1.accelerate();
     }
     
     @Override
@@ -302,6 +302,7 @@ public class Logic extends KeyAdapter implements ActionListener{
         {
             //accelerate
             p1.accelerate();
+            //Physics.updateObject(p1);
             accelerate = true;
         }
         else if (keyCode == KeyEvent.VK_LEFT) 
@@ -320,6 +321,7 @@ public class Logic extends KeyAdapter implements ActionListener{
         }
         else if (keyCode == KeyEvent.VK_SPACE)
         {
+            p1.shoot();
             shoot = true;
         }
         else if (keyCode == KeyEvent.VK_BACK_SPACE)

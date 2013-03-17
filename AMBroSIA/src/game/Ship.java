@@ -37,15 +37,30 @@ public class Ship extends MapObject{
     
     public void shoot()
     {
+        //this.getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord())), this.getGameState()));
         //this.getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), this.getGameState()));   
+            //gameState.addProjectile(new Projectile(p1, Projectile.PROJECTILE_VELOCITY, 180, new int[] {405, 305}, gameState));   
+        this.getGameState().addProjectile(new Projectile(this, new float[] {Projectile.PROJECTILE_SPEED, this.getHeading()}, this.getHeading(),calculateProjectileCoordinate(this.getHeading(), this.getCoord()), this.getGameState()));
     }
  
-    private int[] calculateCoordinate(int[] shipCoord){
-        shipCoord = this.getCoord();
-        int i = 0;
-        while(i < shipCoord.length){
-            shipCoord[i] = shipCoord[i] + 1;
-        }     
-        return shipCoord;
-    }    
+    private static int[] calculateProjectileCoordinate(float heading, int[] curCoordinates){
+        int[] newCoordinates = new int[2];
+                        
+            newCoordinates[0] =  (int)(curCoordinates[0] + Math.cos(Math.toRadians(heading - 90))*15);
+            newCoordinates[1] =  (int)(curCoordinates[1] + Math.sin(Math.toRadians(heading - 90))*15);
+            
+            if(newCoordinates[0] < 0){
+                newCoordinates[0] = 790;
+            }
+            else if(newCoordinates[0] > 790){
+                newCoordinates[0] = 10;
+            }
+            if(newCoordinates[1] < 0){
+                newCoordinates[1] = 590;
+            }
+            else if(newCoordinates[1] > 590){
+                newCoordinates[1] = 10;
+            }         
+        return newCoordinates;
+    }      
 }
