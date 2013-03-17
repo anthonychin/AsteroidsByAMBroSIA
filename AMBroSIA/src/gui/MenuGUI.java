@@ -125,7 +125,6 @@ public class MenuGUI implements Runnable
         card.add("Single-Player Mode", cardGame1P);
         cardLayout.show(card, "Single-Player Mode");
         //remove menu component for efficiency
-        card.remove(card.getComponent(0));
         //let other methods know we are in single P mode
         singleP = true;
         

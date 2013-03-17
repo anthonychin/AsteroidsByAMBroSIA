@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  *
- * @author Nikolaos
+ * @author Nikolaos Bukas
  */
 public class Difficulty {
     private static int level;
@@ -52,7 +52,7 @@ public class Difficulty {
     
     public static float randExplosionVelocity()
     {
-        return rand.nextInt(5)*(rand.nextFloat() - rand.nextFloat());
+        return (rand.nextInt(5) + 1)*(rand.nextFloat() - rand.nextFloat());
     }
     
     
