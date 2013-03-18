@@ -3,8 +3,8 @@ package gui;
 
 import game.Asteroid;
 import game.BonusDrop;
+import game.MapObjectTTL;
 import game.GameState;
-import game.MapObject;
 import game.Projectile;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -93,8 +93,8 @@ public class gameDraw
         //draw explosions
         if (!memory.getExplosions().isEmpty())
         {
-            ArrayList<MapObject> explosionList = memory.getExplosions();
-            for (MapObject explosion : explosionList)
+            ArrayList<MapObjectTTL> explosionList = memory.getExplosions();
+            for (MapObjectTTL explosion : explosionList)
             {
                 g2d.draw(explosion.getShape());
             }

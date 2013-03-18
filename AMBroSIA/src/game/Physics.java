@@ -62,7 +62,7 @@ public class Physics implements Runnable{
         
         if (!gameState.getExplosions().isEmpty())
         {
-            for(MapObject explosion : gameState.getExplosions())
+            for(MapObjectTTL explosion : gameState.getExplosions())
             {
                 updateObject(explosion);
             }

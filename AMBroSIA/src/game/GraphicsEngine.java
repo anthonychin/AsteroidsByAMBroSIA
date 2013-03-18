@@ -127,9 +127,9 @@ public class GraphicsEngine implements Runnable{
  
  private void updateExplosions()
  {
-     ArrayList<MapObject> explosionList = memory.getExplosions();
+     ArrayList<MapObjectTTL> explosionList = memory.getExplosions();
      //for all explosions
-     for (MapObject explosion : explosionList)
+     for (MapObjectTTL explosion : explosionList)
      {
          setPosition(explosionShape(),explosion);
      }

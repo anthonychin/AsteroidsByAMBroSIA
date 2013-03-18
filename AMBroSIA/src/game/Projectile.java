@@ -5,15 +5,11 @@ package game;
  * @author Anthony
  */
 
-public class Projectile extends MapObject {
+public class Projectile extends MapObjectTTL {
     /**
      * The velocity of Projectile. The default is 10.
      */
     public final static float PROJECTILE_SPEED = 5.0f;
-    /**
-     * The length of time that Projectile lasts. The default is 5.
-     */
-    public final static int TIME_TO_LIVE = 5; //5 seconds
     /**
      * Value of the owner when the player owns the projectile.
      */
@@ -24,9 +20,7 @@ public class Projectile extends MapObject {
     public final static int ALIEN_OWNER = 2;
     
     private int velocity; // to be fixed
-    private int ttl;
     private int owner;
-    
     
     /**
      * Creates <i>Projectile</i> with the given parameters.
@@ -43,28 +37,11 @@ public class Projectile extends MapObject {
         velocity[1] = (float) (PROJECTILE_SPEED * Math.sin(Math.toRadians(heading - 90)));
         
         this.setVelocity(new float[] {velocity[0], velocity[1]});
-        this.ttl = TIME_TO_LIVE;
         
         if(ship instanceof PlayerShip)
             this.owner = PLAYER_OWNER;
         else
             this.owner = ALIEN_OWNER;
-    }
-    
-    /**
-     * Returns the value of the Time to Live property.
-     * @return value of the time to live
-     */
-    public int getTTL(){
-        return this.ttl;
-    }
-    
-    /**
-     * Sets the Time to Live property.
-     * @param ttl
-     */
-    public void setTTL(int ttl){
-        this.ttl = ttl;
     }
     
     /**
@@ -74,5 +51,11 @@ public class Projectile extends MapObject {
      */
     public int getOwner(){
         return this.owner;
+    }
+    
+    @Override
+    public void destroy()
+    {
+        getGameState().removeProjectile(this);
     }
 }

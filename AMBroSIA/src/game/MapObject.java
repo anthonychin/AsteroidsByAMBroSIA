@@ -105,6 +105,7 @@ public class MapObject {
         return this.gameState;
     }
     
+    //unimplemented.  All implementing classes should override.
     public void destroy()
     {
         

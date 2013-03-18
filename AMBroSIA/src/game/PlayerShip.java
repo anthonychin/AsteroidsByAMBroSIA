@@ -191,6 +191,7 @@ public class PlayerShip extends Ship{
         return this.isAccelerating;
     }
     
+    @Override
     public void shoot()
     {
         getGameState().addProjectile(new Projectile(this, this.getHeading(), new int[] {this.getX(), this.getY()}, getGameState()));
@@ -199,6 +200,7 @@ public class PlayerShip extends Ship{
     /**
      * Destroys the <i>PlayerShip</i>.
      */
+    @Override
     public void destroy()
     {
         createExplosionEffect();
@@ -222,7 +224,7 @@ public class PlayerShip extends Ship{
         {
             int x = getX();
             int y = getY();
-            getGameState().addExplosion(new MapObject(new float[] {Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[] {x, y}, 0, getGameState()));
+            getGameState().addExplosion(new MapObjectTTL(new float[] {Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[] {x, y}, 0, getGameState()));
         }
     }
 }

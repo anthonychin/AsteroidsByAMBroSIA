@@ -39,6 +39,7 @@ public class Logic extends KeyAdapter implements ActionListener{
     
     private static GraphicsEngine graphicsEngine;
     private static Physics physicsEngine;
+    private static timeToLive ttlLogic;
     
     //booleans for the key commands.  These need to be checked by the timer
     private boolean paused = false;
@@ -65,6 +66,7 @@ public class Logic extends KeyAdapter implements ActionListener{
         timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(ttlLogic, 0, 1, TimeUnit.SECONDS);
     }
     public static void stopTimer()
     {
@@ -288,6 +290,8 @@ public class Logic extends KeyAdapter implements ActionListener{
         
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
+        ttlLogic = new timeToLive(gameState);
+        
     }
     
     @Override

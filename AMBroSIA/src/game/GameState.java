@@ -18,7 +18,7 @@ public class GameState {
     private ArrayList<Asteroid> asteroidList;
     private ArrayList<Projectile> projectileList;
     private ArrayList<BonusDrop> bonusList;
-    private ArrayList<MapObject> explosionList;
+    private ArrayList<MapObjectTTL> explosionList;
     private PlayerShip playerShip;
     private AlienShip alienShip;
     private int highScore;
@@ -34,106 +34,106 @@ public class GameState {
         this.asteroidList= new ArrayList<Asteroid>();
         this.projectileList = new ArrayList<Projectile>();
         this.bonusList = new ArrayList<BonusDrop>();
-        this.explosionList = new ArrayList<MapObject>();
+        this.explosionList = new ArrayList<MapObjectTTL>();
     }
     
-    public void addAsteroid(Asteroid asteroid) { this.asteroidList.add(asteroid); }
+    public synchronized void addAsteroid(Asteroid asteroid) { this.asteroidList.add(asteroid); }
     
-    public void removeAsteroid(Asteroid asteroid) { this.asteroidList.remove(asteroid); }
+    public synchronized void removeAsteroid(Asteroid asteroid) { this.asteroidList.remove(asteroid); }
     
-    public ArrayList<Asteroid> getAsteroids() { return this.asteroidList; }
+    public synchronized ArrayList<Asteroid> getAsteroids() { return this.asteroidList; }
     
-    public void addProjectile(Projectile projectile)
+    public synchronized void addProjectile(Projectile projectile)
     {
         this.projectileList.add(projectile);
     }
     
-    public void removeProjectile(Projectile projectile)
+    public synchronized void removeProjectile(Projectile projectile)
     {
         this.projectileList.remove(projectile);
     }
     
-    public ArrayList<Projectile> getProjectiles()
+    public synchronized ArrayList<Projectile> getProjectiles()
     {
         return this.projectileList;
     }
     
-    public void addExplosion(MapObject explosion)
+    public synchronized void addExplosion(MapObjectTTL explosion)
     {
         this.explosionList.add(explosion);
     }
     
-    public void removeExplosion(MapObject explosion)
+    public synchronized void removeExplosion(MapObjectTTL explosion)
     {
         this.explosionList.remove(explosion);
     }
     
-    public ArrayList<MapObject> getExplosions()
+    public synchronized ArrayList<MapObjectTTL> getExplosions()
     {
         return this.explosionList;
     }
     
-    public void addBonusDrop(BonusDrop bonusDrop)
+    public synchronized void addBonusDrop(BonusDrop bonusDrop)
     {
         this.bonusList.add(bonusDrop);
     }
     
-    public void removeBonusDrop(BonusDrop bonusDrop)
+    public synchronized void removeBonusDrop(BonusDrop bonusDrop)
     {
         this.bonusList.remove(bonusDrop);
     }
     
-    public ArrayList<BonusDrop> getBonusDrops()
+    public synchronized ArrayList<BonusDrop> getBonusDrops()
     {
         return this.bonusList;
     }
     
-    public void addAlienShip(AlienShip alienShip)
+    public synchronized void addAlienShip(AlienShip alienShip)
     {
         this.alienShip = alienShip;
     }
     
-    public AlienShip getAlienShip()
+    public synchronized AlienShip getAlienShip()
     {
         return this.alienShip;
     }
     
-    public void removeAlienShip()
+    public synchronized void removeAlienShip()
     {
         this.alienShip = null;
     }
     
-    public void addPlayerShip(PlayerShip playerShip)
+    public synchronized void addPlayerShip(PlayerShip playerShip)
     {
         this.playerShip = playerShip;
     }
     
-    public void removePlayerShip()
+    public synchronized void removePlayerShip()
     {
         this.playerShip = null;
     }
     
-    public PlayerShip getPlayerShip()
+    public synchronized PlayerShip getPlayerShip()
     {
         return this.playerShip;
     }
     
-    public int getLevel()
+    public synchronized int getLevel()
     {
         return this.level;
     }
     
-    public boolean isLevelComplete()
+    public synchronized boolean isLevelComplete()
     {
         return true;
     }
     
-    public int getHighScore()
+    public synchronized int getHighScore()
     {
         return this.highScore;
     }
     
-    public void addToHighScore(int score)
+    public synchronized void addToHighScore(int score)
     {
         this.highScore += score;
     }
