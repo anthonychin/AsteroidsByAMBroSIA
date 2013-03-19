@@ -30,83 +30,83 @@ public class MapObject {
         this.shape = new Polygon(new int[] {0}, new int[] {0}, 1);
     }
     
-    public float[] getVelocity()
+    public synchronized float[] getVelocity()
     {
         return this.velocity;
     }
     
-    public void setVelocity(float[] velocity)
+    public synchronized void setVelocity(float[] velocity)
     {
         this.velocity = velocity;
     }
     
-    public float getAcceleration()
+    public synchronized float getAcceleration()
     {
         return this.acceleration;
     }
     
-    public void setAcceleration(float acceleration)
+    public synchronized void setAcceleration(float acceleration)
     {
         this.acceleration = acceleration;
     }
     
-    public float getHeading()
+    public synchronized float getHeading()
     {
         return this.heading;
     }
     
-    public void setHeading(float heading)
+    public synchronized void setHeading(float heading)
     {
         this.heading = heading;
     }
     
-    public int[] getCoord()
+    public synchronized int[] getCoord()
     {
         return this.coordinates;
     }
     
-    public void setCoord(int[] coordinates)
+    public synchronized void setCoord(int[] coordinates)
     {
         this.coordinates = coordinates;
     }
     
-    public int getX()
+    public synchronized int getX()
     {
         return coordinates[0];
     }
     
-    public void setX(int x)
+    public synchronized void setX(int x)
     {
         this.coordinates[0] = x;
     }
     
-    public int getY()
+    public synchronized int getY()
     {
         return coordinates[1];
     }
     
-    public void setY(int y)
+    public synchronized void setY(int y)
     {
         this.coordinates[1] = y;
     }
     
-    public Polygon getShape()
+    public synchronized Polygon getShape()
     {
         return this.shape;
     }
     
-    public void setShape(Polygon shape)
+    public synchronized void setShape(Polygon shape)
     {
         this.shape = shape;
     }
     
-    public GameState getGameState()
+    public synchronized GameState getGameState()
     {
         return this.gameState;
     }
     
     //unimplemented.  All implementing classes should override.
-    public void destroy()
+    public synchronized void destroy()
     {
         
     }

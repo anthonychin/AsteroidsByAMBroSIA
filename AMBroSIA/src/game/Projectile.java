@@ -49,12 +49,12 @@ public class Projectile extends MapObjectTTL {
      * The owner is the one who created and fired the projectile.
      * @return owner of the projectile
      */
-    public int getOwner(){
+    public synchronized int getOwner(){
         return this.owner;
     }
     
     @Override
-    public void destroy()
+    public synchronized void destroy()
     {
         getGameState().removeProjectile(this);
     }

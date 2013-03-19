@@ -19,7 +19,7 @@ public class MapObjectTTL extends MapObject {
      * Returns the value of the Time to Live property.
      * @return value of the time to live
      */
-    public int getTTL()
+    public synchronized int getTTL()
     {
         return this.ttl;
     }
@@ -28,13 +28,13 @@ public class MapObjectTTL extends MapObject {
      * Sets the Time to Live property.
      * @param ttl
      */
-    public void setTTL(int ttl)
+    public synchronized void setTTL(int ttl)
     {
         this.ttl = ttl;
     }
     
     @Override
-    public void destroy()
+    public synchronized void destroy()
     {
         getGameState().removeExplosion(this);
     }

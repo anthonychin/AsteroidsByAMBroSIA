@@ -22,12 +22,12 @@ public class Asteroid extends MapObject{
         this.size = size;
     }
     
-    public int getSize()
+    public synchronized int getSize()
     {
         return this.size;
     }
     
-    public void destroy(boolean bombUsed)
+    public synchronized void destroy(boolean bombUsed)
     {
         getGameState().removeAsteroid(this);
         

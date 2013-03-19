@@ -20,13 +20,13 @@ public class BonusDrop extends MapObjectTTL {
         this.type = type;
     }
     
-    public int getType()
+    public synchronized int getType()
     {
         return this.type;
     }
     
     @Override
-    public void destroy()
+    public synchronized void destroy()
     {
         getGameState().removeBonusDrop(this);
     }

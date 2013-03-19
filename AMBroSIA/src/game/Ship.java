@@ -28,7 +28,7 @@ public class Ship extends MapObject{
      * Returns the value of the ship's fire rate.
      * @return fire rate of the ship
      */
-    public int getFireRate()
+    public synchronized int getFireRate()
     {
         return this.fireRate;
     }
@@ -37,7 +37,7 @@ public class Ship extends MapObject{
      * Sets the fire rate of the current ship to specified fireRate.
      * @param fireRate
      */
-    public void setFireRate(int fireRate)
+    public synchronized void setFireRate(int fireRate)
     {
         this.fireRate = fireRate;
     }
@@ -46,7 +46,7 @@ public class Ship extends MapObject{
      * Returns the value of the ship's lives.
      * @return lives of the ship
      */
-    public int getLives()
+    public synchronized int getLives()
     {
         return this.lives;
     }
@@ -55,7 +55,7 @@ public class Ship extends MapObject{
      * Sets the lives of the current ship to specified lives.
      * @param lives 
      */
-    public void setLives(int lives)
+    public synchronized void setLives(int lives)
     {
         this.lives = lives;
     }
@@ -63,12 +63,12 @@ public class Ship extends MapObject{
     /**
      * Creates a projectile.
      */
-    public void shoot()
+    public synchronized void shoot()
     {
         //this.getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), this.getGameState()));   
     }
  
-    private int[] calculateCoordinate(int[] shipCoord){
+    private synchronized int[] calculateCoordinate(int[] shipCoord){
         shipCoord = this.getCoord();
         int i = 0;
         while(i < shipCoord.length){

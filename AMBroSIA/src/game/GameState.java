@@ -41,7 +41,7 @@ public class GameState {
     
     public synchronized void removeAsteroid(Asteroid asteroid) { this.asteroidList.remove(asteroid); }
     
-    public synchronized ArrayList<Asteroid> getAsteroids() { return this.asteroidList; }
+    public ArrayList<Asteroid> getAsteroids() { return this.asteroidList; }
     
     public synchronized void addProjectile(Projectile projectile)
     {
@@ -53,7 +53,7 @@ public class GameState {
         this.projectileList.remove(projectile);
     }
     
-    public synchronized ArrayList<Projectile> getProjectiles()
+    public ArrayList<Projectile> getProjectiles()
     {
         return this.projectileList;
     }
@@ -68,7 +68,7 @@ public class GameState {
         this.explosionList.remove(explosion);
     }
     
-    public synchronized ArrayList<MapObjectTTL> getExplosions()
+    public ArrayList<MapObjectTTL> getExplosions()
     {
         return this.explosionList;
     }
@@ -83,47 +83,47 @@ public class GameState {
         this.bonusList.remove(bonusDrop);
     }
     
-    public synchronized ArrayList<BonusDrop> getBonusDrops()
+    public ArrayList<BonusDrop> getBonusDrops()
     {
         return this.bonusList;
     }
     
-    public synchronized void addAlienShip(AlienShip alienShip)
+    public void addAlienShip(AlienShip alienShip)
     {
         this.alienShip = alienShip;
     }
     
-    public synchronized AlienShip getAlienShip()
+    public AlienShip getAlienShip()
     {
         return this.alienShip;
     }
     
-    public synchronized void removeAlienShip()
+    public void removeAlienShip()
     {
         this.alienShip = null;
     }
     
-    public synchronized void addPlayerShip(PlayerShip playerShip)
+    public void addPlayerShip(PlayerShip playerShip)
     {
         this.playerShip = playerShip;
     }
     
-    public synchronized void removePlayerShip()
+    public void removePlayerShip()
     {
         this.playerShip = null;
     }
     
-    public synchronized PlayerShip getPlayerShip()
+    public PlayerShip getPlayerShip()
     {
         return this.playerShip;
     }
     
-    public synchronized int getLevel()
+    public int getLevel()
     {
         return this.level;
     }
     
-    public synchronized boolean isLevelComplete()
+    public boolean isLevelComplete()
     {
         return true;
     }

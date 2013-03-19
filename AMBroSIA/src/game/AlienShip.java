@@ -14,7 +14,7 @@ public class AlienShip extends Ship{
         super(velocity, heading, coordinates, 0, gameState, FIRE_RATE, lives);
     }
     
-    public void destroy(boolean bombUsed){
+    public synchronized void destroy(boolean bombUsed){
         getGameState().removeAlienShip();
         
         if(!bombUsed) { getGameState().addToHighScore(GameState.ALIEN_SCORE); }

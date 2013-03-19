@@ -69,7 +69,7 @@ public class PlayerShip extends Ship{
      * Returns the amount of bombs.
      * @return number of bombs
      */
-    public int getBomb(){
+    public synchronized int getBomb(){
        return this.bomb;
     }
     
@@ -77,14 +77,14 @@ public class PlayerShip extends Ship{
      * Increase the amount of bombs by 1. 
      * @return number of bombs after the increment
      */
-    public int addBomb(){
+    public synchronized int addBomb(){
         return this.bomb + 1;
     }
     
     /**
      * Detonates the bomb.
      */
-    public void useBomb(){
+    public synchronized void useBomb(){
         if(bomb > 0)
         {
             bomb = bomb-1;
@@ -100,7 +100,7 @@ public class PlayerShip extends Ship{
      * Returns the value of the shield points.
      * @return value of the shield points
      */
-    public int getShieldPoints(){
+    public synchronized int getShieldPoints(){
         return this.shieldPoints;
     }
     
@@ -108,14 +108,14 @@ public class PlayerShip extends Ship{
      * Sets the amount of shield points using the parameter.
      * @param shieldpoints
      */
-    public void setShieldPoints(int shieldpoints){
+    public synchronized void setShieldPoints(int shieldpoints){
         this.shieldPoints = shieldpoints;
     }
     
     /**
      * Activates the shield for the <i>PlayerShip</i>.
      */
-    public void activateShield(){
+    public synchronized void activateShield(){
         if (this.shieldPoints > 0){
             isShieldOn = true;
         }
@@ -125,14 +125,14 @@ public class PlayerShip extends Ship{
      * Checks if the shield is activated.
      * @return true if shield is activated, false otherwise
      */
-    public boolean getShieldStatus(){
+    public synchronized boolean getShieldStatus(){
         return isShieldOn; 
     }
     /**
      * Checks if the <i>PlayerShip</i> is dead.
      * @return true if player ship is dead, false otherwise
      */
-    public boolean isDead(){
+    public synchronized boolean isDead(){
         if(this.getLives() == 0){
             return true;
         }
@@ -142,7 +142,7 @@ public class PlayerShip extends Ship{
     /**
      * Sets the <i>PlayerShip</i> to accelerate.
      */
-    public void accelerate(boolean isAccelerating){
+    public synchronized void accelerate(boolean isAccelerating){
         if(isAccelerating)
         {
             this.setAcceleration(ACCELERATION);
@@ -155,7 +155,7 @@ public class PlayerShip extends Ship{
     /**
      * Sets the <i>PlayerShip</i> to turn left.
      */
-    public void turnLeft(boolean turning)
+    public synchronized void turnLeft(boolean turning)
     {
         this.isTurningLeft = turning;
     }
@@ -163,14 +163,14 @@ public class PlayerShip extends Ship{
      * Checks if <i>PlayerShip</i> is turning left.
      * @return true if the ship is turning left, false otherwise
      */
-    public boolean isTurningLeft()
+    public synchronized boolean isTurningLeft()
     {
         return this.isTurningLeft;
     }
     /**
      * Sets the <i>PlayerShip</i> to turn right.
      */
-    public void turnRight(boolean turning)
+    public synchronized void turnRight(boolean turning)
     {
         this.isTurningRight = turning;
     }
@@ -178,7 +178,7 @@ public class PlayerShip extends Ship{
      * Checks if <i>PlayerShip</i> is turning right.
      * @return true if the ship is turning right, false otherwise.
      */
-    public boolean isTurningRight()
+    public synchronized boolean isTurningRight()
     {
         return this.isTurningRight;
     }
@@ -187,12 +187,12 @@ public class PlayerShip extends Ship{
      * Checks if <i>PlayerShip</i> is accelerating.
      * @return ture if ship is accelerating, false otherwise.
      */
-    public boolean getAccelerate(){
+    public synchronized boolean getAccelerate(){
         return this.isAccelerating;
     }
     
     @Override
-    public void shoot()
+    public synchronized void shoot()
     {
         getGameState().addProjectile(new Projectile(this, this.getHeading(), new int[] {this.getX(), this.getY()}, getGameState()));
     }
@@ -201,7 +201,7 @@ public class PlayerShip extends Ship{
      * Destroys the <i>PlayerShip</i>.
      */
     @Override
-    public void destroy()
+    public synchronized void destroy()
     {
         createExplosionEffect();
         getGameState().removePlayerShip();
@@ -218,7 +218,7 @@ public class PlayerShip extends Ship{
         
     }
     
-    private void createExplosionEffect()
+    private synchronized void createExplosionEffect()
     {
         for (int i = 0 ; i < NUM_DEBRIS; i++)
         {
