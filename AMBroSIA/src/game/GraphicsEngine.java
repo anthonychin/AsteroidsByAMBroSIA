@@ -187,8 +187,8 @@ public class GraphicsEngine implements Runnable{
          Point2D.Float origPoint = new Point2D.Float(shape.xpoints[j],shape.ypoints[j]);
          Point2D.Float transPoint = new Point2D.Float();
          transAndRot.transform(origPoint, transPoint);
-         shape.xpoints[j] = (int) transPoint.x;
-         shape.ypoints[j] = (int) transPoint.y;
+         shape.xpoints[j] = Math.round(transPoint.x) ;
+         shape.ypoints[j] = Math.round(transPoint.y);
      }
      gameobject.setShape(shape);
  }
