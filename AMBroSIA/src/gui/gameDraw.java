@@ -99,5 +99,8 @@ public class gameDraw
                 g2d.draw(explosion.getShape());
             }
         }
+        
+        //See http://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#dispose%28%29
+        g2d.dispose();
     }
 }
