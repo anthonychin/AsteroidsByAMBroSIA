@@ -1,22 +1,17 @@
 package game;
 
 import gui.MenuGUI;
-import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Nikolaos, Michael
@@ -40,15 +35,19 @@ public class Logic extends KeyAdapter implements ActionListener {
     private boolean paused = false;
     //the service used to execute all update functions
     private static ScheduledExecutorService timer;
-    //used creating collision debris
-    private static Random rand = new Random();
-    //Sound 
+    
+    private final static Logger log = Logger.getLogger(Logic.class.getName()); 
 
-    public static void main(String args[]) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
+    public static void main(String args[]) {
+        
         gui = new MenuGUI(buttonPress, keyboard);
         gui.showMenu();
 
+        log.setLevel(Level.ALL);
+        log.info("GUI has been started");
+        //background music
+//        Sound backgroundMusic = new Sound("menu.wav");
+//        backgroundMusic.playLoop();
     }
 
     public static void startTimer() {

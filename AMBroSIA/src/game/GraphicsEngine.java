@@ -5,6 +5,7 @@ import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * The Graphics class is responsible for defining the shape of all in-game objects, and placing said shapes at the appropriate locations based on the position of the object.
@@ -18,6 +19,8 @@ public class GraphicsEngine implements Runnable{
  private final int WIDTH = gui.MenuGUI.WIDTH;
  private final int HEIGHT = gui.MenuGUI.HEIGHT;
     
+ private final static Logger log = Logger.getLogger(GraphicsEngine.class.getName()); 
+ 
  public GraphicsEngine(GameState gamestate)
  {
     memory = gamestate;
@@ -28,6 +31,7 @@ public class GraphicsEngine implements Runnable{
   */
  public void updateGraphics()
  {
+     log.info("Graphics update start");
      if (memory.getPlayerShip() != null)
      {
          updatePlayerShip();
@@ -52,7 +56,6 @@ public class GraphicsEngine implements Runnable{
      {
          updateExplosions();
      }
-     
  }
  
  /*

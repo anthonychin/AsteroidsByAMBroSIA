@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 /**
@@ -14,6 +15,7 @@ import javax.swing.SwingUtilities;
 public class timeToLive implements Runnable {
 
     private GameState gameState;
+    private final static Logger log = Logger.getLogger(timeToLive.class.getName());
 
     public timeToLive(GameState gs) {
         gameState = gs;
@@ -45,6 +47,7 @@ public class timeToLive implements Runnable {
                 
                 else {
                     iter.remove();
+                    log.warning("Object " + object.toString() + " removed");
                 }
             }
         }

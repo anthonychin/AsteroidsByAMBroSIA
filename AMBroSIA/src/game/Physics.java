@@ -3,6 +3,7 @@ package game;
 import gui.MenuGUI;
 import java.awt.Polygon;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * The purpose of the
@@ -15,6 +16,7 @@ public class Physics implements Runnable {
 
     private GameState gameState;
     private static int height, width;
+    private final static Logger log = Logger.getLogger(Physics.class.getName());
 
     Physics(GameState gameState) {
         this.gameState = gameState;
@@ -24,6 +26,7 @@ public class Physics implements Runnable {
      *
      */
     public void update() {
+        log.info("Physics update start");
         height = MenuGUI.HEIGHT;
         width = MenuGUI.WIDTH;
         if (gameState.getPlayerShip() != null) {

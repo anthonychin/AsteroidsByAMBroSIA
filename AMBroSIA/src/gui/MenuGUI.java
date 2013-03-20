@@ -9,7 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import game.GameState;
+import game.GraphicsEngine;
 import java.awt.Dimension;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -54,6 +56,7 @@ public class MenuGUI implements Runnable
     private SinglePgamePanel onePPanel;
     private TwoPgamePanel twoPPanel;
     
+    private final static Logger log = Logger.getLogger(MenuGUI.class.getName());
     
     /**
      * Starts the GUI Menu.
@@ -196,6 +199,7 @@ public class MenuGUI implements Runnable
     @Override
     public void run() 
     {
+        log.info("GUI updating");
         updateSize();
         updateDraw();
     }
