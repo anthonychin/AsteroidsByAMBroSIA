@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import game.GameState;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 
 /**
  *
@@ -67,6 +68,9 @@ public class SinglePgamePanel extends JPanel
         this.setBackground(Color.WHITE);
         
         gameDraw.drawObjects(g2, gameState);
+        
+        //seems to reduce stuttering a bit. See http://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html#sync%28%29
+        Toolkit.getDefaultToolkit().sync();
     }
     
     public void updatePanel()
