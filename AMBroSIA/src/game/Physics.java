@@ -4,8 +4,7 @@ import gui.MenuGUI;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  * The purpose of the
@@ -33,19 +32,19 @@ public class Physics implements Runnable {
         height = MenuGUI.HEIGHT;
         width = MenuGUI.WIDTH;
         if (gameState.getPlayerShip() != null) {
-            log.info("updating player ship");
+            log.debug("updating player ship");
             updateObject(gameState.getPlayerShip());
         }
 
         if (gameState.getAlienShip() != null) {
-            log.info("updating alien");
+            log.debug("updating alien");
             updateObject(gameState.getAlienShip());
         }
 
         if (!gameState.getAsteroids().isEmpty()) {
             CopyOnWriteArrayList<Asteroid> asteroidList = new CopyOnWriteArrayList(gameState.getAsteroids());
             for (Asteroid asteroid : asteroidList) {
-                log.log(Level.INFO, "updating asteroid {0}", asteroid.toString());
+               log.debug("updating asteroid " + asteroid.toString());
                 updateObject(asteroid);
             }
         }
@@ -54,7 +53,7 @@ public class Physics implements Runnable {
         if (!gameState.getProjectiles().isEmpty()) {
             CopyOnWriteArrayList<Projectile> projectileList = new CopyOnWriteArrayList(gameState.getProjectiles());
             for (Projectile projectile : projectileList) {
-                log.log(Level.INFO, "updating projectile {0}", projectile.toString());
+                log.debug("updating projectile " + projectile.toString());
                 updateObject(projectile);
             }
         }
@@ -62,7 +61,7 @@ public class Physics implements Runnable {
         if (!gameState.getBonusDrops().isEmpty()) {
             CopyOnWriteArrayList<BonusDrop> bonusList = new CopyOnWriteArrayList(gameState.getBonusDrops());
             for (BonusDrop bonusDrop : bonusList) {
-                log.log(Level.INFO, "updating bonus drop {0}", bonusDrop.toString());
+                log.debug("updating bonus " + bonusDrop.toString());
                 updateObject(bonusDrop);
             }
         }
@@ -70,15 +69,14 @@ public class Physics implements Runnable {
         if (!gameState.getExplosions().isEmpty()) {
             CopyOnWriteArrayList<BonusDrop> explosionList = new CopyOnWriteArrayList(gameState.getExplosions());
             for (MapObjectTTL explosion : explosionList) {
-                log.log(Level.INFO, "updating explosion {0}", explosion.toString());
+                log.debug("updating explosion " + explosion.toString());
                 updateObject(explosion);
             }
         }
-        log.info("update run complete");
+        log.debug("update run complete");
     }
 
     private static void updateObject(MapObject gameObject) {
-        log.info("updating object");
         if (gameObject instanceof PlayerShip) {
             PlayerShip ship = (PlayerShip) gameObject;
             ship.setHeading(ship.getHeading() + calculateHeadingDisplacement(ship.isTurningRight(), ship.isTurningLeft()));
@@ -94,7 +92,6 @@ public class Physics implements Runnable {
 
         gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
         wrapAround(gameObject);
-        log.info("update object complete");
     }
 
     private static void updateObject(PlayerShip gameObject) {
@@ -231,18 +228,15 @@ public class Physics implements Runnable {
     }
 
     private static float[] calculate2DAcceleration(float heading, float acceleration) {
-        log.info("calcuating acceleration");
         float[] acceleration2D = {0, 0};
 
         acceleration2D[0] = (float) (acceleration * Math.cos(Math.toRadians(heading - 90)));
         acceleration2D[1] = (float) (acceleration * Math.sin(Math.toRadians(heading - 90)));
 
-        log.info("acceleration calc complete");
         return acceleration2D;
     }
 
     private static float[] calculateNewVelocity(MapObject gameObject, float[] velocity, float[] acceleration, float time) {
-        log.info("calc velocity");
         velocity[0] = velocity[0] + acceleration[0] * time;
 
         if (gameObject instanceof PlayerShip) {
@@ -266,12 +260,10 @@ public class Physics implements Runnable {
                 velocity[1] = (-1) * PlayerShip.MAX_VELOCITY;
             }
         }
-        log.info("calc velocity complete");
         return velocity;
     }
 
     private static int[] calculateDisplacement(float[] velocity, float[] acceleration, float time) {
-        log.info("calculating displacement");
         int[] displacement = {0, 0};
 
         //displacement[0] = Math.round((velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2)));
@@ -280,12 +272,10 @@ public class Physics implements Runnable {
         displacement[0] = (int) Math.ceil((velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2)));
         displacement[1] = (int) Math.ceil((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
 
-        log.info("finished calculating displacement");
         return displacement;
     }
 
     private static float calculateHeadingDisplacement(boolean turningRight, boolean turningLeft) {
-        log.info("calculating heading & disp");
         if (turningRight && !turningLeft) {
             return 2;
         } else if (!turningRight && turningLeft) {
@@ -296,7 +286,6 @@ public class Physics implements Runnable {
     }
 
     private static void wrapAround(MapObject gameObject) {
-        log.info("calculating wrap around");
         if (gameObject.getX() > width + 100) {
             gameObject.setX(0);
         } else if (gameObject.getX() < -100) {
