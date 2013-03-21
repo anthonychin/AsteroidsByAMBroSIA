@@ -177,7 +177,6 @@ public class GraphicsEngine implements Runnable{
  //performs rotation and translation on the shape of objects based on location and heading, and attaches the shape to the object in question once complete.
  private void setPosition(Polygon shape, MapObject gameobject)
  {
-     log.debug("Executing set position");
      AffineTransform transAndRot = new AffineTransform();
      
      //translate from std. math coordinate system used in shape definitons to proper location on map
@@ -201,7 +200,6 @@ public class GraphicsEngine implements Runnable{
          shape.ypoints[j] = Math.round(transPoint.y);
      }
      gameobject.setShape(shape);
-     log.debug("finished set position");
  }
 
     @Override

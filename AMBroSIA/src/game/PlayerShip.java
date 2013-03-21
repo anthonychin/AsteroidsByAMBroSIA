@@ -48,6 +48,8 @@ public class PlayerShip extends Ship {
     private boolean isTurningLeft = false;
     private boolean isTurningRight = false;
     private boolean isShieldOn = false;
+    
+    private final static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PlayerShip.class.getName());
 
     /**
      * Creates <i>PlayerShip</i> with the given parameters.
@@ -64,6 +66,7 @@ public class PlayerShip extends Ship {
         super(velocity, heading, coordinates, 0, gameState, FIRE_RATE, lives);
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
+        log.setLevel(Logic.LOG_LEVEL);
     }
 
     /**
@@ -199,6 +202,7 @@ public class PlayerShip extends Ship {
     @Override
     public void shoot() {
         getGameState().addProjectile(new Projectile(this, this.getHeading(), new int[]{this.getX(), this.getY()}, getGameState()));
+        log.debug("Projectile added");
     }
 
     /**

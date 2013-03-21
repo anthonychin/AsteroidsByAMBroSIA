@@ -10,6 +10,7 @@ package game;
  * @author Nikolaos Bukas
  */
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class GameState {
 
@@ -25,6 +26,11 @@ public class GameState {
     private AlienShip alienShip;
     private int highScore;
     private int level;
+    
+    private static final Object asteroidSync = new Object();
+    private static final Object projectileSync = new Object();
+    private static final Object explosionSync = new Object();
+    private static final Object bonusSync = new Object();
 
     public GameState(int level, int highScore) {
         this.playerShip = null;
@@ -38,11 +44,15 @@ public class GameState {
     }
 
     public void addAsteroid(Asteroid asteroid) {
-        this.asteroidList.add(asteroid);
+        synchronized (asteroidSync) {
+            this.asteroidList.add(asteroid);
+        }
     }
 
     public void removeAsteroid(Asteroid asteroid) {
-        this.asteroidList.remove(asteroid);
+        synchronized (asteroidSync) {
+            this.asteroidList.remove(asteroid);
+        }
     }
 
     public ArrayList<Asteroid> getAsteroids() {
@@ -50,11 +60,21 @@ public class GameState {
     }
 
     public void addProjectile(Projectile projectile) {
-        this.projectileList.add(projectile);
+        synchronized (projectileSync) {
+            this.projectileList.add(projectile);
+        }
     }
 
     public void removeProjectile(Projectile projectile) {
-        this.projectileList.remove(projectile);
+        synchronized (projectileSync) {
+            this.projectileList.remove(projectile);
+        }
+    }
+    
+    public void removeListOfProjectiles(Collection<?> list) {
+        synchronized (projectileSync) {
+            this.projectileList.removeAll(list);
+        }
     }
 
     public ArrayList<Projectile> getProjectiles() {
@@ -62,11 +82,15 @@ public class GameState {
     }
 
     public void addExplosion(MapObjectTTL explosion) {
-        this.explosionList.add(explosion);
+        synchronized (explosionSync) {
+            this.explosionList.add(explosion);
+        }
     }
 
     public void removeExplosion(MapObjectTTL explosion) {
-        this.explosionList.remove(explosion);
+        synchronized (explosionSync) {
+            this.explosionList.remove(explosion);
+        }
     }
 
     public ArrayList<MapObjectTTL> getExplosions() {
@@ -74,11 +98,15 @@ public class GameState {
     }
 
     public void addBonusDrop(BonusDrop bonusDrop) {
-        this.bonusList.add(bonusDrop);
+        synchronized (bonusSync) {
+            this.bonusList.add(bonusDrop);
+        }
     }
 
     public void removeBonusDrop(BonusDrop bonusDrop) {
-        this.bonusList.remove(bonusDrop);
+        synchronized (bonusSync) {
+            this.bonusList.remove(bonusDrop);
+        }
     }
 
     public ArrayList<BonusDrop> getBonusDrops() {

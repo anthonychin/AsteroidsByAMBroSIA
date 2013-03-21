@@ -43,7 +43,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static ScheduledExecutorService timer;
     private final static Logger log = Logger.getLogger(Logic.class.getName());
     
-    public final static Level LOG_LEVEL = Level.INFO;
+    public final static Level LOG_LEVEL = Level.OFF;
 
     public static void main(String args[]) {
         BasicConfigurator.configure();
@@ -63,9 +63,9 @@ public class Logic extends KeyAdapter implements ActionListener {
         timer = Executors.newScheduledThreadPool(4);
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
+//        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(ttlLogic, 0, 1, TimeUnit.SECONDS);
+        timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
 //        timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
         
         

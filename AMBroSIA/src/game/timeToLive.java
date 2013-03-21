@@ -2,8 +2,8 @@ package game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
+import java.util.concurrent.CopyOnWriteArrayList;
+import org.apache.log4j.Logger;
 
 /**
  * The Time to live class contains code that checks the time to live of certain
@@ -19,6 +19,7 @@ public class timeToLive implements Runnable {
 
     public timeToLive(GameState gs) {
         gameState = gs;
+        log.setLevel(Logic.LOG_LEVEL);
     }
 
     @Override
@@ -35,21 +36,21 @@ public class timeToLive implements Runnable {
 
     private void TTLLogic(ArrayList<? extends MapObjectTTL> list) {
         if (!list.isEmpty()) {
-            //iterator needed because only the iterator.remove() can remove an object while in the loop.  Anything else will run into issues.
-            Iterator<? extends MapObjectTTL> iter = list.iterator();
-            while (iter.hasNext()) {
-                MapObjectTTL object = iter.next();
-                
+            
+            ArrayList<Object> toRemove = new ArrayList();
+            CopyOnWriteArrayList<? extends MapObjectTTL> objectList = new CopyOnWriteArrayList(list);
+            for (MapObjectTTL object : objectList) {             
                 //TTL is in seconds : if it still has life left we simply set it for the next one, else, it's gone
                 if (object.getTTL() > 0) {
                     object.setTTL(object.getTTL() - 1);
                 } 
-                
                 else {
-                    iter.remove();
-                    log.warning("Object " + object.toString() + " removed");
+                    toRemove.add(object);
                 }
             }
+            
+            //now that we have a list of objects, we remove them
+            gameState.removeListOfProjectiles(toRemove);
         }
     }
 }
