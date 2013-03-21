@@ -37,6 +37,9 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static GraphicsEngine graphicsEngine;
     private static Physics physicsEngine;
     private static timeToLive ttlLogic;
+    private static long initialShootTime;
+    private static long currentShootTime;
+    private static boolean shootKeyReleased = true;
     //booleans for the key commands.  These need to be checked by the timer
     private boolean paused = false;
     //the service used to execute all update functions
@@ -67,8 +70,8 @@ public class Logic extends KeyAdapter implements ActionListener {
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
 //        timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
-        
-        
+
+
     }
 
     public static void stopTimer() {
@@ -264,17 +267,35 @@ public class Logic extends KeyAdapter implements ActionListener {
         //handles most basic key commands.  Should activate a boolean stating that the key has been pressed
         if (keyCode == KeyEvent.VK_UP) {
             //accelerate
-            gameState.getPlayerShip().accelerate(true);
+            if (!paused && gameState.getPlayerShip() != null) {
+                gameState.getPlayerShip().accelerate(true);
+            }
         } else if (keyCode == KeyEvent.VK_LEFT) {
-            gameState.getPlayerShip().turnLeft(true);
+            if (!paused && gameState.getPlayerShip() != null) {
+                gameState.getPlayerShip().turnLeft(true);
+            }
         } else if (keyCode == KeyEvent.VK_RIGHT) {
-            gameState.getPlayerShip().turnRight(true);
+            if (!paused && gameState.getPlayerShip() != null) {
+                gameState.getPlayerShip().turnRight(true);
+            }
         } else if (keyCode == KeyEvent.VK_DOWN) {
-            gameState.getPlayerShip().useBomb();
+            if (!paused && gameState.getPlayerShip() != null) {
+                gameState.getPlayerShip().useBomb();
+            }
         } else if (keyCode == KeyEvent.VK_SPACE) {
-            gameState.getPlayerShip().shoot();
-        } else if (keyCode == KeyEvent.VK_BACK_SPACE) {
-            gameState.getPlayerShip().activateShield();
+            if (!paused && gameState.getPlayerShip() != null) {
+                if (shootKeyReleased) {
+                    initialShootTime = System.currentTimeMillis();
+                    shootKeyReleased = false;
+                    gameState.getPlayerShip().shoot();
+                } else if (!shootKeyReleased) {
+                    currentShootTime = System.currentTimeMillis();
+                    if ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1000) {
+                        gameState.getPlayerShip().shoot();
+                        initialShootTime = currentShootTime;
+                    }
+                }
+            }
         } else if (keyCode == KeyEvent.VK_P) {
             if (!paused) {
                 stopTimer();
@@ -292,13 +313,19 @@ public class Logic extends KeyAdapter implements ActionListener {
         //stops doing whatever that keypress was doing
         if (keyCode == KeyEvent.VK_UP) {
             //accelerate
-            gameState.getPlayerShip().accelerate(false);
+            if (gameState.getPlayerShip() != null) {
+                gameState.getPlayerShip().accelerate(false);
+            }
         } else if (keyCode == KeyEvent.VK_LEFT) {
-            gameState.getPlayerShip().turnLeft(false);
+            if (gameState.getPlayerShip() != null) {
+                gameState.getPlayerShip().turnLeft(false);
+            }
         } else if (keyCode == KeyEvent.VK_RIGHT) {
-            gameState.getPlayerShip().turnRight(false);
+            if (gameState.getPlayerShip() != null) {
+                gameState.getPlayerShip().turnRight(false);
+            }
         } else if (keyCode == KeyEvent.VK_SPACE) {
-            // nothing for now
+            shootKeyReleased = true;
         }
     }
 

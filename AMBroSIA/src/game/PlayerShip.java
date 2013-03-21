@@ -32,7 +32,7 @@ public class PlayerShip extends Ship {
     /**
      * Value of the fire rate of the player ship. The default is set to 5.
      */
-    final public static int FIRE_RATE = 5;
+    final public static float FIRE_RATE = 0.2f;
     /**
      * Value of the angular speed of the player ship. The default is set to 10.
      */
@@ -63,7 +63,7 @@ public class PlayerShip extends Ship {
      * @param shieldPoints
      */
     public PlayerShip(float[] velocity, float heading, int[] coordinates, GameState gameState, int lives, int bomb, int shieldPoints) {
-        super(velocity, heading, coordinates, 0, gameState, FIRE_RATE, lives);
+        super(velocity, heading, coordinates, 0, gameState, lives);
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
         log.setLevel(Logic.LOG_LEVEL);
