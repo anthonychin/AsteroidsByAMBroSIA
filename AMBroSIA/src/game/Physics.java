@@ -11,8 +11,8 @@ import java.util.logging.Logger;
  * The purpose of the
  * <code>Physics</code> class is to provide the game physics. It calculates
  * velocities and displacements and is able to detect collisions.
- *
- * @author Nikolaos Bukas
+ * 
+* @author Nikolaos Bukas
  */
 public class Physics implements Runnable {
 
@@ -45,7 +45,7 @@ public class Physics implements Runnable {
         if (!gameState.getAsteroids().isEmpty()) {
             CopyOnWriteArrayList<Asteroid> asteroidList = new CopyOnWriteArrayList(gameState.getAsteroids());
             for (Asteroid asteroid : asteroidList) {
-               log.log(Level.INFO, "updating asteroid {0}", asteroid.toString());
+                log.log(Level.INFO, "updating asteroid {0}", asteroid.toString());
                 updateObject(asteroid);
             }
         }
@@ -97,6 +97,45 @@ public class Physics implements Runnable {
         log.info("update object complete");
     }
 
+    private static void updateObject(PlayerShip gameObject) {
+        log.info("updating object");
+        PlayerShip ship = (PlayerShip) gameObject;
+        ship.setHeading(ship.getHeading() + calculateHeadingDisplacement(ship.isTurningRight(), ship.isTurningLeft()));
+
+        float[] velocity = gameObject.getVelocity();
+        float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
+
+        int[] displacement = calculateDisplacement(velocity, acceleration, 1);
+        //int[] displacement = calculateDisplacement(velocity, gameObject.getVelocity(), 1);
+        gameObject.setX(gameObject.getX() + displacement[0]);
+        gameObject.setY(gameObject.getY() + displacement[1]);
+
+        gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
+        wrapAround(gameObject);
+        log.info("update object complete");
+    }
+
+    private static void updateObject(Projectile gameObject) {
+        log.info("updating object");
+        float[] velocity = gameObject.getVelocity();
+        float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
+
+        int[] displacement = calculateDisplacement(velocity, acceleration, 1);
+        //int[] displacement = calculateDisplacement(velocity, gameObject.getVelocity(), 1);
+        gameObject.setX(gameObject.getX() + displacement[0]);
+        gameObject.setY(gameObject.getY() + displacement[1]);
+
+        gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
+
+        if (gameObject.getX() > width || gameObject.getX() < 0) {
+            gameObject.destroy();
+        } else if (gameObject.getY() > height || gameObject.getY() < 0) {
+            gameObject.destroy();
+        }
+
+        log.info("update object complete");
+    }
+
     /**
      *
      * @return
@@ -104,9 +143,9 @@ public class Physics implements Runnable {
     public ArrayList<MapObject> getCollisions() {
         PlayerShip playerShip = gameState.getPlayerShip();
         AlienShip alienShip = gameState.getAlienShip();
-        ArrayList<Asteroid> asteroidList = gameState.getAsteroids();
-        ArrayList<Projectile> projectileList = gameState.getProjectiles();
-        ArrayList<BonusDrop> bonusList = gameState.getBonusDrops();
+        CopyOnWriteArrayList<Asteroid> asteroidList = new CopyOnWriteArrayList(gameState.getAsteroids());
+        CopyOnWriteArrayList<Projectile> projectileList = new CopyOnWriteArrayList(gameState.getProjectiles());
+        CopyOnWriteArrayList<BonusDrop> bonusList = new CopyOnWriteArrayList(gameState.getBonusDrops());
 
         ArrayList<MapObject> listOfCollisions = new ArrayList<MapObject>();
         Polygon shipShape;
@@ -248,9 +287,9 @@ public class Physics implements Runnable {
     private static float calculateHeadingDisplacement(boolean turningRight, boolean turningLeft) {
         log.info("calculating heading & disp");
         if (turningRight && !turningLeft) {
-            return 5;
+            return 2;
         } else if (!turningRight && turningLeft) {
-            return -5;
+            return -2;
         } else {
             return 0;
         }
