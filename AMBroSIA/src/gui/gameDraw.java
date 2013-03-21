@@ -14,6 +14,7 @@ import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
@@ -40,7 +41,7 @@ public class gameDraw
         //draw asteroids
         if (!memory.getAsteroids().isEmpty()) 
         {
-            ArrayList<Asteroid> asteroidList = memory.getAsteroids();
+            CopyOnWriteArrayList<Asteroid> asteroidList = new CopyOnWriteArrayList(memory.getAsteroids());
             for (Asteroid asteroid : asteroidList)
             {
                 //make asteroid border a little thicker
@@ -64,7 +65,7 @@ public class gameDraw
         }
         
         
-        //draw aliens
+        //draw alien
         if (memory.getAlienShip() != null)
         {
             g2d.draw(memory.getAlienShip().getShape());
@@ -73,7 +74,7 @@ public class gameDraw
         //draw projectiles
         if (!memory.getProjectiles().isEmpty())
         {
-            ArrayList<Projectile> projectileList = memory.getProjectiles();
+            CopyOnWriteArrayList<Projectile> projectileList = new CopyOnWriteArrayList(memory.getProjectiles());
             for (Projectile projectile : projectileList)
             {
                 g2d.draw(projectile.getShape());
@@ -83,7 +84,7 @@ public class gameDraw
         //draw bonus drops
         if (!memory.getBonusDrops().isEmpty())
         {
-            ArrayList<BonusDrop> bonusList = memory.getBonusDrops();
+            CopyOnWriteArrayList<BonusDrop> bonusList = new CopyOnWriteArrayList(memory.getBonusDrops());
             for (BonusDrop drop : bonusList)
             {
                 g2d.draw(drop.getShape());
@@ -93,7 +94,7 @@ public class gameDraw
         //draw explosions
         if (!memory.getExplosions().isEmpty())
         {
-            ArrayList<MapObjectTTL> explosionList = memory.getExplosions();
+            CopyOnWriteArrayList<MapObjectTTL> explosionList  = new CopyOnWriteArrayList(memory.getExplosions());
             for (MapObjectTTL explosion : explosionList)
             {
                 g2d.draw(explosion.getShape());

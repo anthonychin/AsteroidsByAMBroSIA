@@ -4,7 +4,7 @@ package game;
 import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Logger;
 
 /**
@@ -24,6 +24,7 @@ public class GraphicsEngine implements Runnable{
  public GraphicsEngine(GameState gamestate)
  {
     memory = gamestate;
+    log.setLevel(Logic.LOG_LEVEL);
  }
         
  /**
@@ -106,6 +107,7 @@ public class GraphicsEngine implements Runnable{
  
  private void updatePlayerShip()
  {
+     log.info("Updating PS");
      MapObject player = memory.getPlayerShip();
      //move to appropriate position, rotate, set shape
      setPosition(playerShape(), player);
@@ -113,6 +115,7 @@ public class GraphicsEngine implements Runnable{
  
  private void updateAlien()
  {
+     log.info("updating alien");
      AlienShip alien = memory.getAlienShip();
      //translate and rotate, set shape
      setPosition(alienShape(),alien);
@@ -120,8 +123,8 @@ public class GraphicsEngine implements Runnable{
  
  private void updateProjectiles()
  {
-     ArrayList<Projectile> projectileList = memory.getProjectiles();
-     //for all projectiles
+     log.info("updating projectiles");
+     CopyOnWriteArrayList<Projectile> projectileList = new CopyOnWriteArrayList(memory.getProjectiles());
      for (Projectile aProjectile : projectileList)
      {
          setPosition(projectileShape(),aProjectile);
@@ -130,7 +133,8 @@ public class GraphicsEngine implements Runnable{
  
  private void updateExplosions()
  {
-     ArrayList<MapObjectTTL> explosionList = memory.getExplosions();
+     log.info("updating explosions");
+     CopyOnWriteArrayList<MapObjectTTL> explosionList = new CopyOnWriteArrayList(memory.getExplosions());
      //for all explosions
      for (MapObjectTTL explosion : explosionList)
      {
@@ -140,7 +144,8 @@ public class GraphicsEngine implements Runnable{
  
  private void updateBonusDrops()
  {
-     ArrayList<BonusDrop> bonusDropList = memory.getBonusDrops();
+     log.info("updating bonus drops");
+     CopyOnWriteArrayList<BonusDrop> bonusDropList = new CopyOnWriteArrayList(memory.getBonusDrops());
      //for all drops
      for (MapObject aBonusDrop : bonusDropList)
      {
@@ -150,7 +155,8 @@ public class GraphicsEngine implements Runnable{
  
  private void updateAsteroids()
  {
-     ArrayList<Asteroid> asteroidList = memory.getAsteroids();
+     log.info("updating asteroids");
+     CopyOnWriteArrayList<Asteroid> asteroidList = new CopyOnWriteArrayList(memory.getAsteroids());
      //do for every asteroid in the game
      for (Asteroid anAsteroid : asteroidList)
      {
@@ -171,6 +177,7 @@ public class GraphicsEngine implements Runnable{
  //performs rotation and translation on the shape of objects based on location and heading, and attaches the shape to the object in question once complete.
  private void setPosition(Polygon shape, MapObject gameobject)
  {
+     log.info("Executing set position");
      AffineTransform transAndRot = new AffineTransform();
      
      //translate from std. math coordinate system used in shape definitons to proper location on map
@@ -194,6 +201,7 @@ public class GraphicsEngine implements Runnable{
          shape.ypoints[j] = Math.round(transPoint.y);
      }
      gameobject.setShape(shape);
+     log.info("finished set position");
  }
 
     @Override

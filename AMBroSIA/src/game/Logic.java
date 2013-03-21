@@ -6,12 +6,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 /**
  *
  * @author Nikolaos, Michael
@@ -35,28 +40,41 @@ public class Logic extends KeyAdapter implements ActionListener {
     private boolean paused = false;
     //the service used to execute all update functions
     private static ScheduledExecutorService timer;
+    private final static Logger log = Logger.getLogger(Logic.class.getName());
     
-    private final static Logger log = Logger.getLogger(Logic.class.getName()); 
+    public final static Level LOG_LEVEL = Level.OFF;
 
     public static void main(String args[]) {
-        
-        gui = new MenuGUI(buttonPress, keyboard);
-        gui.showMenu();
+//        try {
+            //        try {
+                    gui = new MenuGUI(buttonPress, keyboard);
+                    gui.showMenu();
 
-        log.setLevel(Level.ALL);
-        log.info("GUI has been started");
-        //background music
-//        Sound backgroundMusic = new Sound("menu.wav");
-//        backgroundMusic.playLoop();
+                    log.setLevel(LOG_LEVEL);
+                    log.info("GUI has been started");
+            //        background music
+//                        Sound backgroundMusic = new Sound("menu.wav");
+//                        backgroundMusic.playLoop();
+//        } catch (UnsupportedAudioFileException ex) {
+//            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (LineUnavailableException ex) {
+//            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public static void startTimer() {
+//        testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui);
         timer = Executors.newScheduledThreadPool(4);
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(ttlLogic, 0, 1, TimeUnit.SECONDS);
+//        timer.scheduleAtFixedRate(ttlLogic, 0, 1, TimeUnit.SECONDS);
+//        timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
+        
+        
     }
 
     public static void stopTimer() {
@@ -233,11 +251,11 @@ public class Logic extends KeyAdapter implements ActionListener {
         gameState = new GameState(1, 0);
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 1, 0, 0));
         gameState.addAsteroid(new Asteroid(new float[]{-1, -1}, -30, new int[]{650, 500}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        //Random randu = new Random();
-        //(int i = 0; i < 10; i++)
-        //{
-        //    gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        //}
+//        Random randu = new Random();
+//        for (int i = 0; i < 200; i++)
+//        {
+//            gameState.addProjectile(new Projectile(null, randu.nextFloat(), new int[] {randu.nextInt(800),randu.nextInt(600)},gameState));
+//        }
 
 
         graphicsEngine = new GraphicsEngine(gameState);

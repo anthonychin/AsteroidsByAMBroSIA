@@ -10,7 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import game.GameState;
 import game.GraphicsEngine;
+import game.Logic;
 import java.awt.Dimension;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -70,6 +72,8 @@ public class MenuGUI implements Runnable
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
         }
+        
+        log.setLevel(Logic.LOG_LEVEL);
         
         // create and initialize frame
         frame = new JFrame("AMBroSIA");
