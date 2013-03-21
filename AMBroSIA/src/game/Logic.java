@@ -8,7 +8,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -62,14 +64,14 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     public static void startTimer() {
-//        testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui);
-        timer = Executors.newScheduledThreadPool(4);
-        timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
+        testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
+        timer = Executors.newSingleThreadScheduledExecutor();
+//        timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+//        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+//        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
+//        timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
+//        timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
 
 
     }
@@ -83,10 +85,12 @@ public class Logic extends KeyAdapter implements ActionListener {
         final Runnable collision = new Runnable() {
             @Override
             public void run() {
+                log.debug("Collision start");
                 ArrayList<MapObject> collisionList = physicsEngine.getCollisions();
-
+                log.debug("SIZE OF THE COLLISION LIST = " + collisionList.size());
+                log.debug("COLLISION LIST = " + Arrays.toString(collisionList.toArray()));
                 if (!collisionList.isEmpty()) {
-                    for (int i = 0; i < collisionList.size(); i = +2) {
+                    for (int i = 0; i < collisionList.size(); i = i+2) {
                         MapObject collisionOne = collisionList.get(i);
                         MapObject collisionTwo = collisionList.get(i + 1);
 
@@ -94,17 +98,17 @@ public class Logic extends KeyAdapter implements ActionListener {
                             if (collisionTwo instanceof AlienShip) {
                                 // PlayerShip collided with AlienShip
                                 if (collisionLogic((PlayerShip) collisionOne, (AlienShip) collisionTwo)) {
-                                    break;
+                                    //break;
                                 }
                             } else if (collisionTwo instanceof Asteroid) {
                                 // PlayerShip collided with an Asteroid
                                 if (collisionLogic((PlayerShip) collisionOne, (Asteroid) collisionTwo)) {
-                                    break;
+                                    //break;
                                 }
                             } else if (collisionTwo instanceof Projectile) {
                                 // PlayerShip collided with a Projectile
                                 if (collisionLogic((PlayerShip) collisionOne, (Projectile) collisionTwo)) {
-                                    break;
+                                    //break;
                                 }
                             } else if (collisionTwo instanceof BonusDrop) {
                                 // PlayerShip collided with a BonusDrop
@@ -113,6 +117,7 @@ public class Logic extends KeyAdapter implements ActionListener {
                         } else if (collisionOne instanceof AlienShip) {
                             if (collisionTwo instanceof Asteroid) {
                                 // AlienShip collided with an Asteroid
+
                                 collisionLogic((AlienShip) collisionOne, (Asteroid) collisionTwo);
                             } else if (collisionTwo instanceof Projectile) {
                                 // AlienShip collided with a Projectile
@@ -155,6 +160,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     private static boolean collisionLogic(PlayerShip playerShip, Asteroid asteroid) {
+        log.debug("Collision between Player and Asteroid");
         if (asteroid.getSize() == Asteroid.LARGE_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= LARGE_ASTEROID_SHIELD_DAMAGE) {
                 playerShip.setShieldPoints(playerShip.getShieldPoints() - LARGE_ASTEROID_SHIELD_DAMAGE);
@@ -186,6 +192,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     private static void collisionLogic(PlayerShip playerShip, BonusDrop bonusDrop) {
+        log.debug("Collision between Player and Bonus");
         if (bonusDrop.getType() == BonusDrop.BOMB_BONUS_DROP) {
             playerShip.addBomb();
         } else if (bonusDrop.getType() == BonusDrop.LIFE_BONUS_DROP) {
@@ -202,6 +209,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     private static boolean collisionLogic(PlayerShip playerShip, AlienShip alienShip) {
+        log.debug("Collision between Player and Alien");
         if (playerShip.getShieldPoints() >= ALIEN_SHIELD_DAMAGE) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() - ALIEN_SHIELD_DAMAGE);
         } else if (playerShip.getLives() == 1) {
@@ -216,6 +224,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     private static boolean collisionLogic(PlayerShip playerShip, Projectile projectile) {
+        log.debug("Collision between Player and Projectile");
         if (playerShip.getShieldPoints() >= PROJECTILE_SHIELD_DAMAGE) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() - PROJECTILE_SHIELD_DAMAGE);
         } else if (playerShip.getLives() == 1) {
@@ -230,18 +239,31 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     private static void collisionLogic(AlienShip alienShip, Asteroid asteroid) {
+        log.debug("Collision between Alien and Asteroid");
         alienShip.destroy();
         asteroid.destroy();
     }
 
     private static void collisionLogic(AlienShip alienShip, Projectile projectile) {
+        log.debug("Collision between Alien and Projectile");
         alienShip.destroy();
         projectile.destroy();
     }
 
     private static void collisionLogic(Projectile projectile, Asteroid asteroid) {
+        log.debug("Collision between Projectile and Asteroid");
+        CopyOnWriteArrayList<Projectile> list = new CopyOnWriteArrayList<Projectile>(gameState.getProjectiles());
+        if(list.contains(projectile))
+        {
+        log.debug("DESTROYING PROJECTILE " + projectile.toString());
         projectile.destroy();
+        }
+        CopyOnWriteArrayList<Asteroid> list2 = new CopyOnWriteArrayList<Asteroid>(gameState.getAsteroids());
+        if(list2.contains(asteroid))
+        {
+        log.debug("DESTROYING ASTEROID " + asteroid.toString());
         asteroid.destroy(false);
+        }
     }
 
     private static void setUpLevel() {
@@ -283,20 +305,21 @@ public class Logic extends KeyAdapter implements ActionListener {
                 gameState.getPlayerShip().useBomb();
             }
         } else if (keyCode == KeyEvent.VK_SPACE) {
-            if (!paused && gameState.getPlayerShip() != null) {
-                if (shootKeyReleased) {
-                    initialShootTime = System.currentTimeMillis();
-                    shootKeyReleased = false;
+//            if (!paused && gameState.getPlayerShip() != null) {
+//                if (shootKeyReleased) {
+//                    initialShootTime = System.currentTimeMillis();
+//                    shootKeyReleased = false;
                     gameState.getPlayerShip().shoot();
-                } else if (!shootKeyReleased) {
-                    currentShootTime = System.currentTimeMillis();
-                    if ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1000) {
-                        gameState.getPlayerShip().shoot();
-                        initialShootTime = currentShootTime;
-                    }
-                }
+//                } else if (!shootKeyReleased) {
+//                    currentShootTime = System.currentTimeMillis();
+////                    if ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1000) {
+////                        gameState.getPlayerShip().shoot();
+////                        initialShootTime = currentShootTime;
+////                    }
+//                }
             }
-        } else if (keyCode == KeyEvent.VK_P) {
+//    }
+        else if (keyCode == KeyEvent.VK_P) {
             if (!paused) {
                 stopTimer();
                 paused = true;

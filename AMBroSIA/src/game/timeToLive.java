@@ -36,7 +36,7 @@ public class timeToLive implements Runnable {
 
     private void TTLLogic(ArrayList<? extends MapObjectTTL> list) {
         if (!list.isEmpty()) {
-            
+            log.debug("Starting TTL Check");
             ArrayList<Object> toRemove = new ArrayList();
             CopyOnWriteArrayList<? extends MapObjectTTL> objectList = new CopyOnWriteArrayList(list);
             for (MapObjectTTL object : objectList) {             

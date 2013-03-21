@@ -113,7 +113,6 @@ public class Physics implements Runnable {
     }
 
     private static void updateObject(Projectile gameObject) {
-        log.info("updating object");
         float[] velocity = gameObject.getVelocity();
         float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
 
@@ -124,13 +123,7 @@ public class Physics implements Runnable {
 
         gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
 
-        if (gameObject.getX() > width || gameObject.getX() < 0) {
-            gameObject.destroy();
-        } else if (gameObject.getY() > height || gameObject.getY() < 0) {
-            gameObject.destroy();
-        }
-
-        log.info("update object complete");
+        wrapAround(gameObject);
     }
 
     /**
