@@ -12,10 +12,11 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -42,26 +43,19 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static ScheduledExecutorService timer;
     private final static Logger log = Logger.getLogger(Logic.class.getName());
     
-    public final static Level LOG_LEVEL = Level.OFF;
+    public final static Level LOG_LEVEL = Level.INFO;
 
     public static void main(String args[]) {
-//        try {
-            //        try {
-                    gui = new MenuGUI(buttonPress, keyboard);
-                    gui.showMenu();
+        BasicConfigurator.configure();
 
-                    log.setLevel(LOG_LEVEL);
-                    log.info("GUI has been started");
-            //        background music
-//                        Sound backgroundMusic = new Sound("menu.wav");
-//                        backgroundMusic.playLoop();
-//        } catch (UnsupportedAudioFileException ex) {
-//            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (LineUnavailableException ex) {
-//            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        gui = new MenuGUI(buttonPress, keyboard);
+        gui.showMenu();
+
+        log.setLevel(LOG_LEVEL);
+        log.info("GUI has been started");
+        //background music
+        //Sound backgroundMusic = new Sound("menu.wav");
+        //backgroundMusic.playLoop();
     }
 
     public static void startTimer() {
