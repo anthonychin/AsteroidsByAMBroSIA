@@ -66,7 +66,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         timer = Executors.newScheduledThreadPool(4);
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
 //        timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);

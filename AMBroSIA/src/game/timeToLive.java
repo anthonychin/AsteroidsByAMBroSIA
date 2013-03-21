@@ -50,7 +50,21 @@ public class timeToLive implements Runnable {
             }
             
             //now that we have a list of objects, we remove them
-            gameState.removeListOfProjectiles(toRemove);
+            //deal with types as appropriate.  OK to pull first entry always because we make sure befor that the list is not empty
+            if (objectList.get(0) instanceof Projectile)
+            {
+               gameState.removeListOfProjectiles(toRemove); 
+            }
+            else if (objectList.get(0) instanceof MapObjectTTL)
+            {
+                gameState.removeListOfExplosions(toRemove);
+            }
+            //last possibility
+            else
+            {
+                gameState.removeListOfBonusDrops(toRemove);
+            }
+            
         }
     }
 }

@@ -92,6 +92,12 @@ public class GameState {
             this.explosionList.remove(explosion);
         }
     }
+    
+    public void removeListOfExplosions(Collection<?> list) {
+        synchronized (explosionSync) {
+            this.explosionList.removeAll(list);
+        }
+    }
 
     public ArrayList<MapObjectTTL> getExplosions() {
         return this.explosionList;
@@ -106,6 +112,12 @@ public class GameState {
     public void removeBonusDrop(BonusDrop bonusDrop) {
         synchronized (bonusSync) {
             this.bonusList.remove(bonusDrop);
+        }
+    }
+    
+    public void removeListOfBonusDrops(Collection<?> list) {
+        synchronized (bonusSync) {
+            this.bonusList.removeAll(list);
         }
     }
 
