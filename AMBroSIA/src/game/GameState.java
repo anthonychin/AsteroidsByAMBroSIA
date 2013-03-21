@@ -11,6 +11,7 @@ package game;
  */
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GameState {
 
@@ -18,10 +19,13 @@ public class GameState {
     final public static int MEDIUM_ASTEROID_SCORE = 50;
     final public static int SMALL_ASTEROID_SCORE = 100;
     final public static int ALIEN_SCORE = 200;
+    
     private ArrayList<Asteroid> asteroidList;
     private ArrayList<Projectile> projectileList;
     private ArrayList<BonusDrop> bonusList;
     private ArrayList<MapObjectTTL> explosionList;
+    
+    
     private PlayerShip playerShip;
     private AlienShip alienShip;
     private int highScore;
@@ -55,8 +59,8 @@ public class GameState {
         }
     }
 
-    public ArrayList<Asteroid> getAsteroids() {
-        return this.asteroidList;
+    public CopyOnWriteArrayList<Asteroid> getAsteroids() {
+        return new CopyOnWriteArrayList<Asteroid>(this.asteroidList);
     }
 
     public void addProjectile(Projectile projectile) {
@@ -77,8 +81,8 @@ public class GameState {
         }
     }
 
-    public ArrayList<Projectile> getProjectiles() {
-        return this.projectileList;
+    public CopyOnWriteArrayList<Projectile> getProjectiles() {
+        return new CopyOnWriteArrayList<Projectile>(this.projectileList);
     }
 
     public void addExplosion(MapObjectTTL explosion) {
@@ -99,8 +103,8 @@ public class GameState {
         }
     }
 
-    public ArrayList<MapObjectTTL> getExplosions() {
-        return this.explosionList;
+    public CopyOnWriteArrayList<MapObjectTTL> getExplosions() {
+        return new CopyOnWriteArrayList<MapObjectTTL>(this.explosionList);
     }
 
     public void addBonusDrop(BonusDrop bonusDrop) {
@@ -121,8 +125,8 @@ public class GameState {
         }
     }
 
-    public ArrayList<BonusDrop> getBonusDrops() {
-        return this.bonusList;
+    public CopyOnWriteArrayList<BonusDrop> getBonusDrops() {
+        return new CopyOnWriteArrayList<BonusDrop>(this.bonusList);
     }
 
     public void addAlienShip(AlienShip alienShip) {

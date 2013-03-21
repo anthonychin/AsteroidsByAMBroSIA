@@ -48,30 +48,39 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static ScheduledExecutorService timer;
     private final static Logger log = Logger.getLogger(Logic.class.getName());
     
-    public final static Level LOG_LEVEL = Level.OFF;
+    public final static Level LOG_LEVEL = Level.ALL;
 
     public static void main(String args[]) {
-        BasicConfigurator.configure();
+        try {
+            BasicConfigurator.configure();
 
-        gui = new MenuGUI(buttonPress, keyboard);
-        gui.showMenu();
+            gui = new MenuGUI(buttonPress, keyboard);
+            gui.showMenu();
 
-        log.setLevel(LOG_LEVEL);
-        log.info("GUI has been started");
-        //background music
-        //Sound backgroundMusic = new Sound("menu.wav");
-        //backgroundMusic.playLoop();
+            log.setLevel(LOG_LEVEL);
+            log.info("GUI has been started");
+            //background music
+            Sound backgroundMusic = new Sound("menu.wav");
+            backgroundMusic.playLoop();
+        } catch (UnsupportedAudioFileException ex) {
+            java.util.logging.Logger.getLogger(Logic.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Logic.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            java.util.logging.Logger.getLogger(Logic.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
     }
 
     public static void startTimer() {
-        testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
-        timer = Executors.newSingleThreadScheduledExecutor();
-//        timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
+//        testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
+//        timer = Executors.newScheduledThreadPool(4);
+        timer = Executors.newScheduledThreadPool(4);
+        timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
+//        timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
 
 
     }
@@ -305,20 +314,20 @@ public class Logic extends KeyAdapter implements ActionListener {
                 gameState.getPlayerShip().useBomb();
             }
         } else if (keyCode == KeyEvent.VK_SPACE) {
-//            if (!paused && gameState.getPlayerShip() != null) {
-//                if (shootKeyReleased) {
-//                    initialShootTime = System.currentTimeMillis();
-//                    shootKeyReleased = false;
+            if (!paused && gameState.getPlayerShip() != null) {
+                if (shootKeyReleased) {
+                    initialShootTime = System.currentTimeMillis();
+                    shootKeyReleased = false;
                     gameState.getPlayerShip().shoot();
-//                } else if (!shootKeyReleased) {
-//                    currentShootTime = System.currentTimeMillis();
-////                    if ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1000) {
-////                        gameState.getPlayerShip().shoot();
-////                        initialShootTime = currentShootTime;
-////                    }
-//                }
+                } else if (!shootKeyReleased) {
+                    currentShootTime = System.currentTimeMillis();
+                    if ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1000) {
+                        gameState.getPlayerShip().shoot();
+                        initialShootTime = currentShootTime;
+                    }
+                }
             }
-//    }
+    }
         else if (keyCode == KeyEvent.VK_P) {
             if (!paused) {
                 stopTimer();

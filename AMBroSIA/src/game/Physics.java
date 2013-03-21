@@ -42,8 +42,7 @@ public class Physics implements Runnable {
         }
 
         if (!gameState.getAsteroids().isEmpty()) {
-            CopyOnWriteArrayList<Asteroid> asteroidList = new CopyOnWriteArrayList(gameState.getAsteroids());
-            for (Asteroid asteroid : asteroidList) {
+            for (Asteroid asteroid : gameState.getAsteroids()) {
                log.debug("updating asteroid " + asteroid.toString());
                 updateObject(asteroid);
             }
@@ -51,24 +50,22 @@ public class Physics implements Runnable {
 
 
         if (!gameState.getProjectiles().isEmpty()) {
-            CopyOnWriteArrayList<Projectile> projectileList = new CopyOnWriteArrayList(gameState.getProjectiles());
-            for (Projectile projectile : projectileList) {
+            for (Projectile projectile : gameState.getProjectiles()) {
                 log.debug("updating projectile " + projectile.toString());
                 updateObject(projectile);
+                log.debug("projectile updated");
             }
         }
 
         if (!gameState.getBonusDrops().isEmpty()) {
-            CopyOnWriteArrayList<BonusDrop> bonusList = new CopyOnWriteArrayList(gameState.getBonusDrops());
-            for (BonusDrop bonusDrop : bonusList) {
+            for (BonusDrop bonusDrop : gameState.getBonusDrops()) {
                 log.debug("updating bonus " + bonusDrop.toString());
                 updateObject(bonusDrop);
             }
         }
 
         if (!gameState.getExplosions().isEmpty()) {
-            CopyOnWriteArrayList<BonusDrop> explosionList = new CopyOnWriteArrayList(gameState.getExplosions());
-            for (MapObjectTTL explosion : explosionList) {
+            for (MapObjectTTL explosion : gameState.getExplosions()) {
                 log.debug("updating explosion " + explosion.toString());
                 updateObject(explosion);
             }

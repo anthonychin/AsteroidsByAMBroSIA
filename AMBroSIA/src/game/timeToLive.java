@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.log4j.Logger;
 
@@ -34,11 +35,10 @@ public class timeToLive implements Runnable {
         TTLLogic(gameState.getProjectiles());
     }
 
-    private void TTLLogic(ArrayList<? extends MapObjectTTL> list) {
-        if (!list.isEmpty()) {
+    private void TTLLogic(List<? extends MapObjectTTL> objectList) {
+        if (!objectList.isEmpty()) {
             log.debug("Starting TTL Check");
             ArrayList<Object> toRemove = new ArrayList();
-            CopyOnWriteArrayList<? extends MapObjectTTL> objectList = new CopyOnWriteArrayList(list);
             for (MapObjectTTL object : objectList) {             
                 //TTL is in seconds : if it still has life left we simply set it for the next one, else, it's gone
                 if (object.getTTL() > 0) {
@@ -64,7 +64,6 @@ public class timeToLive implements Runnable {
             {
                 gameState.removeListOfBonusDrops(toRemove);
             }
-            
         }
     }
 }
