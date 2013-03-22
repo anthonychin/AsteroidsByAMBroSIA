@@ -7,8 +7,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- * The
- * <code>PlayerShip</code> class defines all the properties and methods
+ * The <code>PlayerShip</code> class defines all the properties and methods
  * appropriate to the player ship that are not included in Ship.
  *
  * @author Anthony
@@ -149,6 +148,7 @@ public class PlayerShip extends Ship {
 
     /**
      * Sets the <i>PlayerShip</i> to accelerate.
+     * @param isAccelerating 
      */
     public void accelerate(boolean isAccelerating) {
         if (isAccelerating) {
@@ -160,6 +160,7 @@ public class PlayerShip extends Ship {
 
     /**
      * Sets the <i>PlayerShip</i> to turn left.
+     * @param turning 
      */
     public void turnLeft(boolean turning) {
         this.isTurningLeft = turning;
@@ -176,6 +177,7 @@ public class PlayerShip extends Ship {
 
     /**
      * Sets the <i>PlayerShip</i> to turn right.
+     * @param turning 
      */
     public void turnRight(boolean turning) {
         this.isTurningRight = turning;

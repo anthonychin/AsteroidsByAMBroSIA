@@ -19,7 +19,6 @@ public class Ship extends MapObject {
      * @param coordinates
      * @param acceleration
      * @param gameState
-     * @param fireRate
      * @param lives
      */
     public Ship(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState, int lives) {

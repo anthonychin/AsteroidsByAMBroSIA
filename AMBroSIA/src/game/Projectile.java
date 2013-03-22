@@ -1,8 +1,7 @@
 package game;
 
 /**
- * The
- * <code>Projectile</code> class provides the representation for the projectile
+ * The <code>Projectile</code> class provides the representation for the projectile
  * objects.
  *
  * @author Anthony
@@ -28,7 +27,6 @@ public class Projectile extends MapObjectTTL {
      * Creates <i>Projectile</i> with the given parameters.
      *
      * @param ship
-     * @param velocity
      * @param heading
      * @param coordinates
      * @param gameState
@@ -59,6 +57,9 @@ public class Projectile extends MapObjectTTL {
         return this.owner;
     }
 
+    /**
+     * Destroys projectile.
+     */
     @Override
     public void destroy() {
         getGameState().removeProjectile(this);
