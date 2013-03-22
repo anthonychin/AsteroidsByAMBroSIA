@@ -25,7 +25,7 @@ public class Physics implements Runnable {
     }
 
     /**
-     *
+     * Updates the physical properties (velocity, heading, x & y coordinates, and acceleration) of every in-game object.
      */
     public void update() {
         log.info("Physics update start");
@@ -127,8 +127,11 @@ public class Physics implements Runnable {
     }
 
     /**
-     *
-     * @return
+     * Returns list of <i>MapObject</i>s that have been detected in collision.
+     * The list will always have an even number of entries.
+     * Each sequential pair of <i>MapObject</i>s indicates that the two of them collided.
+     * 
+     * @return list of MapObject detected in collision
      */
     public ArrayList<MapObject> getCollisions() {
         PlayerShip playerShip = gameState.getPlayerShip();
@@ -295,7 +298,7 @@ public class Physics implements Runnable {
     }
 
     /**
-     *
+     * Calls the update method.
      */
     @Override
     public void run() {
