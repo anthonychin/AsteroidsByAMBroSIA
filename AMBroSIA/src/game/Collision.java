@@ -7,6 +7,7 @@ package game;
 import static game.Logic.LOG_LEVEL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -81,6 +82,9 @@ public class Collision implements Runnable {
 
     private boolean collisionLogic(PlayerShip playerShip, Asteroid asteroid) {
         log.debug("Collision between Player and Asteroid");
+        
+        asteroid.destroy(false);
+        
         if (asteroid.getSize() == Asteroid.LARGE_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= LARGE_ASTEROID_SHIELD_DAMAGE) {
                 playerShip.setShieldPoints(playerShip.getShieldPoints() - LARGE_ASTEROID_SHIELD_DAMAGE);
@@ -110,8 +114,7 @@ public class Collision implements Runnable {
                 playerShip.setLives(playerShip.getLives() - 1);
             }
         }
-
-        asteroid.destroy(false);
+            
         return gameState.getPlayerShip() == null;
     }
 
@@ -128,7 +131,7 @@ public class Collision implements Runnable {
         } else if (bonusDrop.getType() == BonusDrop.SHIELD_THREE_POINTS_DROP) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() + 3);
         }
-
+        
         bonusDrop.destroy();
     }
 
