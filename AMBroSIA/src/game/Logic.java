@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 /**
  *
  * @author Nikolaos, Michael
+ *
  */
 public class Logic extends KeyAdapter implements ActionListener {
 
