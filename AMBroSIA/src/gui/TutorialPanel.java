@@ -34,6 +34,6 @@ public class TutorialPanel extends JPanel
     }
     
     public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
     }
 }
