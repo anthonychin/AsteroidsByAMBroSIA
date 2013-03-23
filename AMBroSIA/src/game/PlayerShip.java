@@ -18,16 +18,16 @@ public class PlayerShip extends Ship {
      * Value of the maximum velocity of the player ship. The default is set to
      * 10.
      */
-    final public static int MAX_VELOCITY = 10;
+    final public static int MAX_VELOCITY = 8;
     /**
      * Value of the acceleration of the player ship. The default is set to
      * 0.09f.
      */
     final public static float ACCELERATION = 0.09f;
     /**
-     * Value of the deacceleration of the player ship. The default is set to -2.
+     * Value of the deceleration of the player ship. The default is set to -2.
      */
-    final public static int DEACCELERATION = -1;
+    final public static int DECELERATION = -2;
     /**
      * Value of the fire rate of the player ship. The default is set to 5.
      */
@@ -35,7 +35,7 @@ public class PlayerShip extends Ship {
     /**
      * Value of the angular speed of the player ship. The default is set to 10.
      */
-    final public static int ANGULAR_SPEED = 10;
+    final public static int ANGULAR_SPEED = 30;
     /**
      * Value of the number of debris when the player ship gets destroyed. The
      * default is set to 20.
@@ -223,7 +223,10 @@ public class PlayerShip extends Ship {
             getGameState().addPlayerShip(this);
             getGameState().getPlayerShip().setCoord(new int[]{400,300});
             getGameState().getPlayerShip().setVelocity(new float[]{0,0});
-            getGameState().getPlayerShip().setHeading(0);                             
+            getGameState().getPlayerShip().setHeading(0);      
+            getGameState().getPlayerShip().turnLeft(false);
+            getGameState().getPlayerShip().turnRight(false);
+            getGameState().getPlayerShip().accelerate(false);
         }
         else{
             getGameState().removePlayerShip();

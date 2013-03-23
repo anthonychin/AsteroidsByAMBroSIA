@@ -11,7 +11,7 @@ public class Projectile extends MapObjectTTL {
     /**
      * The velocity of Projectile. The default is 10.
      */
-    public final static float PROJECTILE_SPEED = 5.0f;
+    public final static float PROJECTILE_SPEED = 15.0f;
     /**
      * Value of the owner when the player owns the projectile.
      */
