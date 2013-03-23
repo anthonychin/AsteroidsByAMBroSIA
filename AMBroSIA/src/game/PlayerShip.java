@@ -27,7 +27,7 @@ public class PlayerShip extends Ship {
     /**
      * Value of the deacceleration of the player ship. The default is set to -2.
      */
-    final public static int DEACCELERATION = 0;
+    final public static int DEACCELERATION = -1;
     /**
      * Value of the fire rate of the player ship. The default is set to 5.
      */
@@ -213,11 +213,17 @@ public class PlayerShip extends Ship {
     @Override
     public void destroy() {
         createExplosionEffect();
-        //Check if ship still have lives
         if(getGameState().getPlayerShip().getLives() > 1){
+            getGameState().removePlayerShip();
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            getGameState().addPlayerShip(this);
             getGameState().getPlayerShip().setCoord(new int[]{400,300});
             getGameState().getPlayerShip().setVelocity(new float[]{0,0});
-            getGameState().getPlayerShip().setHeading(0);
+            getGameState().getPlayerShip().setHeading(0);                             
         }
         else{
             getGameState().removePlayerShip();
