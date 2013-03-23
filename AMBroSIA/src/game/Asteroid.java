@@ -11,7 +11,7 @@ public class Asteroid extends MapObject {
     final public static int MEDIUM_ASTEROID_SIZE = 2;
     final public static int SMALL_ASTEROID_SIZE = 1;
     final public static int ASTEROIDS_FROM_LARGE = 2;
-    final public static int ASTEROIDS_FROM_MEDIUM = 3;
+    final public static int ASTEROIDS_FROM_MEDIUM = 2;
     private int size;
 
     Asteroid(float[] velocity, float heading, int[] coordinates, GameState gameState, int size) {

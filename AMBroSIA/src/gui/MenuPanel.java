@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel
 {
-//    private Image img = new ImageIcon("./src/images/asteroids.jpg").getImage();
       private Image img = Toolkit.getDefaultToolkit().createImage("./src/images/asteroids.jpg");
   
     public MenuPanel() {
