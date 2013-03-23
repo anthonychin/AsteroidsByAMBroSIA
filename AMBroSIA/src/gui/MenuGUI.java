@@ -103,7 +103,7 @@ public class MenuGUI implements Runnable
         frame.setFocusable(false);
         // create menu page panel, set it up, show it
         JPanel cardMenu = new JPanel(new GridLayout(2, 1));
-        cardMenu.add(new MenuPanel("src/images/asteroids.jpg"));
+        cardMenu.add(new MenuPanel("./src/images/asteroids.jpg"));
         // initialize the 5 buttons that shall be in the menu page
         JPanel buttonPanelMenu = new JPanel(new GridLayout(5, 1));
         buttonPanelMenu.add(singlePbutton);
@@ -174,7 +174,7 @@ public class MenuGUI implements Runnable
     {
         JPanel cardTutorial = new JPanel();
         cardTutorial.setLayout(new BorderLayout());
-        JPanel tutorialPanel = new TutorialPanel(new ImageIcon("src/images/keyboard.png").getImage());
+        JPanel tutorialPanel = new TutorialPanel(new ImageIcon("./src/images/keyboard.jpg").getImage());
         cardTutorial.add(tutorialPanel, BorderLayout.NORTH);
         //initialize a back button
         JPanel buttonPanelTutorial = new JPanel();
