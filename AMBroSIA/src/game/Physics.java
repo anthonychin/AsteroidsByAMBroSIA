@@ -3,7 +3,6 @@ package game;
 import gui.MenuGUI;
 import java.awt.Polygon;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.log4j.Logger;
 
 /**
@@ -130,9 +129,9 @@ public class Physics implements Runnable {
     public ArrayList<MapObject> getCollisions() {
         PlayerShip playerShip = gameState.getPlayerShip();
         AlienShip alienShip = gameState.getAlienShip();
-        CopyOnWriteArrayList<Asteroid> asteroidList = new CopyOnWriteArrayList(gameState.getAsteroids());
-        CopyOnWriteArrayList<Projectile> projectileList = new CopyOnWriteArrayList(gameState.getProjectiles());
-        CopyOnWriteArrayList<BonusDrop> bonusList = new CopyOnWriteArrayList(gameState.getBonusDrops());
+        ArrayList<Asteroid> asteroidList = gameState.getAsteroids();
+        ArrayList<Projectile> projectileList = gameState.getProjectiles();
+        ArrayList<BonusDrop> bonusList = gameState.getBonusDrops();
 
         ArrayList<MapObject> listOfCollisions = new ArrayList<MapObject>();
         Polygon shipShape;

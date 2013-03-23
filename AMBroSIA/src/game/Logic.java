@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +47,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static ScheduledExecutorService timer;
     private final static Logger log = Logger.getLogger(Logic.class.getName());
     
-    public final static Level LOG_LEVEL = Level.ALL;
+    public final static Level LOG_LEVEL = Level.OFF;
 
     public static void main(String args[]) {
         try {
@@ -261,18 +260,10 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     private static void collisionLogic(Projectile projectile, Asteroid asteroid) {
         log.debug("Collision between Projectile and Asteroid");
-        CopyOnWriteArrayList<Projectile> list = new CopyOnWriteArrayList<Projectile>(gameState.getProjectiles());
-        if(list.contains(projectile))
-        {
         log.debug("DESTROYING PROJECTILE " + projectile.toString());
         projectile.destroy();
-        }
-        CopyOnWriteArrayList<Asteroid> list2 = new CopyOnWriteArrayList<Asteroid>(gameState.getAsteroids());
-        if(list2.contains(asteroid))
-        {
         log.debug("DESTROYING ASTEROID " + asteroid.toString());
         asteroid.destroy(false);
-        }
     }
 
     private static void setUpLevel() {

@@ -4,7 +4,6 @@ package game;
 import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.log4j.Logger;
 
 /**
@@ -16,8 +15,6 @@ import org.apache.log4j.Logger;
 public class GraphicsEngine implements Runnable{
     
  private GameState memory;
- private final int WIDTH = gui.MenuGUI.WIDTH;
- private final int HEIGHT = gui.MenuGUI.HEIGHT;
     
  private final static Logger log = Logger.getLogger(GraphicsEngine.class.getName()); 
  

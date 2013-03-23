@@ -11,7 +11,7 @@ package game;
  */
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Semaphore;
 
 public class GameState {
 
@@ -35,6 +35,11 @@ public class GameState {
     private static final Object projectileSync = new Object();
     private static final Object explosionSync = new Object();
     private static final Object bonusSync = new Object();
+    
+//    private final Semaphore asteroidSync = new Semaphore(1,true);
+//    private final Semaphore projectileSync = new Semaphore(1,true);
+//    private final Semaphore explosionSync = new Semaphore(1,true);
+//    private final Semaphore bonusSync = new Semaphore(1,true);
 
     public GameState(int level, int highScore) {
         this.playerShip = null;
@@ -49,18 +54,21 @@ public class GameState {
 
     public void addAsteroid(Asteroid asteroid) {
         synchronized (asteroidSync) {
-            this.asteroidList.add(asteroid);
+        this.asteroidList.add(asteroid);
         }
     }
+
 
     public void removeAsteroid(Asteroid asteroid) {
         synchronized (asteroidSync) {
-            this.asteroidList.remove(asteroid);
+        this.asteroidList.remove(asteroid);
         }
     }
 
-    public CopyOnWriteArrayList<Asteroid> getAsteroids() {
-        return new CopyOnWriteArrayList<Asteroid>(this.asteroidList);
+    public ArrayList<Asteroid> getAsteroids() {
+        synchronized (asteroidSync) {
+        return new ArrayList<Asteroid>(this.asteroidList);
+        }
     }
 
     public void addProjectile(Projectile projectile) {
@@ -81,8 +89,10 @@ public class GameState {
         }
     }
 
-    public CopyOnWriteArrayList<Projectile> getProjectiles() {
-        return new CopyOnWriteArrayList<Projectile>(this.projectileList);
+    public ArrayList<Projectile> getProjectiles() {
+        synchronized (projectileSync) {
+        return new ArrayList<Projectile>(this.projectileList);
+        }
     }
 
     public void addExplosion(MapObjectTTL explosion) {
@@ -103,8 +113,10 @@ public class GameState {
         }
     }
 
-    public CopyOnWriteArrayList<MapObjectTTL> getExplosions() {
-        return new CopyOnWriteArrayList<MapObjectTTL>(this.explosionList);
+    public ArrayList<MapObjectTTL> getExplosions() {
+        synchronized (explosionSync) {
+        return new ArrayList<MapObjectTTL>(this.explosionList);
+        }
     }
 
     public void addBonusDrop(BonusDrop bonusDrop) {
@@ -125,8 +137,10 @@ public class GameState {
         }
     }
 
-    public CopyOnWriteArrayList<BonusDrop> getBonusDrops() {
-        return new CopyOnWriteArrayList<BonusDrop>(this.bonusList);
+    public ArrayList<BonusDrop> getBonusDrops() {
+        synchronized (bonusSync) {
+        return new ArrayList<BonusDrop>(this.bonusList);
+        }
     }
 
     public void addAlienShip(AlienShip alienShip) {

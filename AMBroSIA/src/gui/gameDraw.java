@@ -14,7 +14,6 @@ import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
@@ -38,10 +37,11 @@ public class gameDraw
 
         Paint defaultPaint = g2d.getPaint();
         Stroke defaultStroke = g2d.getStroke();
+        
         //draw asteroids
-        if (!memory.getAsteroids().isEmpty()) 
+        ArrayList<Asteroid> asteroidList = memory.getAsteroids();
+        if (!asteroidList.isEmpty()) 
         {
-            CopyOnWriteArrayList<Asteroid> asteroidList = new CopyOnWriteArrayList(memory.getAsteroids());
             for (Asteroid asteroid : asteroidList)
             {
                 //make asteroid border a little thicker
@@ -51,7 +51,6 @@ public class gameDraw
                 g2d.drawPolygon(shape);
                 g2d.setPaint(defaultPaint);
                 g2d.fillPolygon(shape);
-//                g2d.drawPolygon(shape);
             } 
         }
         //reset to default width for other objects for now
@@ -71,10 +70,11 @@ public class gameDraw
             g2d.draw(memory.getAlienShip().getShape());
         }
         
+        
         //draw projectiles
-        if (!memory.getProjectiles().isEmpty())
+        ArrayList<Projectile> projectileList = memory.getProjectiles();
+        if (!projectileList.isEmpty())
         {
-            CopyOnWriteArrayList<Projectile> projectileList = new CopyOnWriteArrayList(memory.getProjectiles());
             for (Projectile projectile : projectileList)
             {
                 g2d.draw(projectile.getShape());
@@ -82,9 +82,9 @@ public class gameDraw
         }
         
         //draw bonus drops
-        if (!memory.getBonusDrops().isEmpty())
+        ArrayList<BonusDrop> bonusList = memory.getBonusDrops();
+        if (!bonusList.isEmpty())
         {
-            CopyOnWriteArrayList<BonusDrop> bonusList = new CopyOnWriteArrayList(memory.getBonusDrops());
             for (BonusDrop drop : bonusList)
             {
                 g2d.draw(drop.getShape());
@@ -92,9 +92,9 @@ public class gameDraw
         }
         
         //draw explosions
-        if (!memory.getExplosions().isEmpty())
+        ArrayList<MapObjectTTL> explosionList = memory.getExplosions();
+        if (!explosionList.isEmpty())
         {
-            CopyOnWriteArrayList<MapObjectTTL> explosionList  = new CopyOnWriteArrayList(memory.getExplosions());
             for (MapObjectTTL explosion : explosionList)
             {
                 g2d.draw(explosion.getShape());
