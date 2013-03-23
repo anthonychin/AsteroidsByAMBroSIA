@@ -23,12 +23,12 @@ public class Difficulty {
     
     public static float randomAsteroidVelocity()
     {
-        return randomFloat() * rand.nextInt(20);
+        return randomFloat() * rand.nextInt(10);
     }
     
     public static float randomAlienVelocity()
     {
-        return randomFloat() * rand.nextInt(20);
+        return randomFloat() * rand.nextInt(10);
     }
     
     public static int randomXPos()
