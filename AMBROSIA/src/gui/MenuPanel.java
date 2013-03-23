@@ -29,7 +29,7 @@ public class MenuPanel extends JPanel
         setSize(size);
         setLayout(null);
     }
-    
+    @Override
     public void paintComponent(Graphics g) {
         //g.drawImage(img, 0, 0, null);
         g.drawImage(img, 0, 0, 800, 600, this);
