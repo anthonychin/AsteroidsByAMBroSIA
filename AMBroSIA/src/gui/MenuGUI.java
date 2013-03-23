@@ -10,7 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import game.GameState;
 import game.Logic;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
@@ -155,14 +158,14 @@ public class MenuGUI implements Runnable
     {
         // create leaderboard page
         JPanel cardLeaderBoard = new JPanel();
-        cardLeaderBoard.setLayout(new GridLayout(2,1));
+        cardLeaderBoard.setLayout(new BorderLayout());
         JPanel leaderBoardPanel = new LeaderBoardPanel();
-        cardLeaderBoard.add(leaderBoardPanel);
+        cardLeaderBoard.add(leaderBoardPanel, BorderLayout.NORTH);
         //initialize a back button
         JPanel buttonPanelLeaderBoard = new JPanel();
         buttonPanelLeaderBoard.add(backButton);
         backButton.addActionListener(buttonClick);
-        cardLeaderBoard.add(buttonPanelLeaderBoard);
+        cardLeaderBoard.add(buttonPanelLeaderBoard, BorderLayout.SOUTH);
         card.add("LeaderBoard", cardLeaderBoard);
         cardLayout.show(card, "LeaderBoard");
     }
@@ -170,14 +173,14 @@ public class MenuGUI implements Runnable
     public void displayTutorial() 
     {
         JPanel cardTutorial = new JPanel();
-        cardTutorial.setLayout(new GridLayout(5, 1));
-        JPanel tutorialPanel = new TutorialPanel();
-        cardTutorial.add(tutorialPanel);
+        cardTutorial.setLayout(new BorderLayout());
+        JPanel tutorialPanel = new TutorialPanel(new ImageIcon("src/images/keyboard.png").getImage());
+        cardTutorial.add(tutorialPanel, BorderLayout.NORTH);
         //initialize a back button
         JPanel buttonPanelTutorial = new JPanel();
         buttonPanelTutorial.add(backButton);
         backButton.addActionListener(buttonClick);
-        cardTutorial.add(buttonPanelTutorial);
+        cardTutorial.add(buttonPanelTutorial, BorderLayout.SOUTH);
         card.add("Tutorial", cardTutorial);
         cardLayout.show(card, "Tutorial");
     }
