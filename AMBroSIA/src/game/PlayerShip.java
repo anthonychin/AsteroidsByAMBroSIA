@@ -16,9 +16,9 @@ public class PlayerShip extends Ship {
 
     /**
      * Value of the maximum velocity of the player ship. The default is set to
-     * 12.
+     * 10.
      */
-    final public static int MAX_VELOCITY = 12;
+    final public static int MAX_VELOCITY = 10;
     /**
      * Value of the acceleration of the player ship. The default is set to
      * 0.09f.
@@ -27,7 +27,7 @@ public class PlayerShip extends Ship {
     /**
      * Value of the deacceleration of the player ship. The default is set to -2.
      */
-    final public static int DEACCELERATION = -2;
+    final public static int DEACCELERATION = -1;
     /**
      * Value of the fire rate of the player ship. The default is set to 5.
      */
