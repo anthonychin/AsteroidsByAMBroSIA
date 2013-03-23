@@ -14,13 +14,19 @@ public class SidePanel extends JPanel {
     public SidePanel(GameState gs){
         this.gameState = gs;
     }
+   
+    // Method to print the highscore, lives and level
     @Override
     public void paint (Graphics g){
-        //super.setBounds(0, 0, 200, 20);
         super.paint(g);
         
         g.drawString("Highscore " + gameState.getHighScore(), 5, 10);
-        g.drawString("Lives " + gameState.getPlayerShip().getLives(), 75, 10);
-        g.drawString("Level " + gameState.getLevel(), 150, 10);
+        if(gameState.getPlayerShip() != null){
+            g.drawString("Lives " + gameState.getPlayerShip().getLives(), 75, 10);
+        }
+        else {
+            g.drawString("Lives " + 0, 75, 10);
+        }
+        g.drawString("Level " + gameState.getLevel(), 120, 10);
     }
 }

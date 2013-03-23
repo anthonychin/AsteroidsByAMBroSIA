@@ -107,7 +107,7 @@ public class GraphicsEngine implements Runnable{
      log.debug("Updating PS");
      MapObject player = memory.getPlayerShip();
      //move to appropriate position, rotate, set shape
-     setPosition(playerShape(), player);
+     setPosition(playerShape(), player); //shape and gameobj
  }
  
  private void updateAlien()

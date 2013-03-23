@@ -125,7 +125,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     //set up some game essentials
     private static void setUpLevel() {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 2, 0, 0));
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{400, 300}, gameState, 3, 0, 0));
         gameState.addAsteroid(new Asteroid(new float[]{-1, -1}, -30, new int[]{650, 500}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
 //        Random randu = new Random();
 //        for (int i = 0; i < 200; i++)

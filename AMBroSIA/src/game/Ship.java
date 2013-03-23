@@ -5,7 +5,7 @@ package game;
  * <code>Ship</code> class is used as a generic representation of a ship, either
  * player or alien.
  *
- * @author Anthony
+ * @author Anthony Chin
  */
 public class Ship extends MapObject {
 

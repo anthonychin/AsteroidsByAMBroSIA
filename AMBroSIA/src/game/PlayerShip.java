@@ -10,7 +10,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * The <code>PlayerShip</code> class defines all the properties and methods
  * appropriate to the player ship that are not included in Ship.
  *
- * @author Anthony
+ * @author Anthony Chin
  */
 public class PlayerShip extends Ship {
 
@@ -27,7 +27,7 @@ public class PlayerShip extends Ship {
     /**
      * Value of the deacceleration of the player ship. The default is set to -2.
      */
-    final public static int DEACCELERATION = -1;
+    final public static int DEACCELERATION = 0;
     /**
      * Value of the fire rate of the player ship. The default is set to 5.
      */
@@ -213,7 +213,15 @@ public class PlayerShip extends Ship {
     @Override
     public void destroy() {
         createExplosionEffect();
-        getGameState().removePlayerShip();
+        //Check if ship still have lives
+        if(getGameState().getPlayerShip().getLives() > 1){
+            getGameState().getPlayerShip().setCoord(new int[]{400,300});
+            getGameState().getPlayerShip().setVelocity(new float[]{0,0});
+            getGameState().getPlayerShip().setHeading(0);
+        }
+        else{
+            getGameState().removePlayerShip();
+        }    
         try {
             Sound sound = new Sound("missle.wav");
             sound.play();
