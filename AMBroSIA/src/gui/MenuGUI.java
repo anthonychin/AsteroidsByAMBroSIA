@@ -159,7 +159,7 @@ public class MenuGUI implements Runnable
         // create leaderboard page
         JPanel cardLeaderBoard = new JPanel();
         cardLeaderBoard.setLayout(new BorderLayout());
-        JPanel leaderBoardPanel = new LeaderBoardPanel();
+        JPanel leaderBoardPanel = new LeaderBoardPanel(WIDTH, HEIGHT);
         cardLeaderBoard.add(leaderBoardPanel, BorderLayout.NORTH);
         //initialize a back button
         JPanel buttonPanelLeaderBoard = new JPanel();

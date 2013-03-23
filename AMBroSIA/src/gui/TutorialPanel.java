@@ -30,7 +30,6 @@ public class TutorialPanel extends JPanel
         setMinimumSize(size);
         setMaximumSize(size);
         setSize(size);
-        setBackground(Color.white);
         setLayout(null);
     }
     
