@@ -4,7 +4,6 @@ package game;
 import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.log4j.Logger;
 
 /**
@@ -16,8 +15,6 @@ import org.apache.log4j.Logger;
 public class GraphicsEngine implements Runnable{
     
  private GameState memory;
- private final int WIDTH = gui.MenuGUI.WIDTH;
- private final int HEIGHT = gui.MenuGUI.HEIGHT;
     
  private final static Logger log = Logger.getLogger(GraphicsEngine.class.getName()); 
  
@@ -124,8 +121,7 @@ public class GraphicsEngine implements Runnable{
  private void updateProjectiles()
  {
      log.debug("updating projectiles");
-     CopyOnWriteArrayList<Projectile> projectileList = new CopyOnWriteArrayList(memory.getProjectiles());
-     for (Projectile aProjectile : projectileList)
+     for (Projectile aProjectile : memory.getProjectiles())
      {
          setPosition(projectileShape(),aProjectile);
      }
@@ -134,9 +130,8 @@ public class GraphicsEngine implements Runnable{
  private void updateExplosions()
  {
      log.debug("updating explosions");
-     CopyOnWriteArrayList<MapObjectTTL> explosionList = new CopyOnWriteArrayList(memory.getExplosions());
      //for all explosions
-     for (MapObjectTTL explosion : explosionList)
+     for (MapObjectTTL explosion : memory.getExplosions())
      {
          setPosition(explosionShape(),explosion);
      }
@@ -145,9 +140,8 @@ public class GraphicsEngine implements Runnable{
  private void updateBonusDrops()
  {
      log.debug("updating bonus drops");
-     CopyOnWriteArrayList<BonusDrop> bonusDropList = new CopyOnWriteArrayList(memory.getBonusDrops());
      //for all drops
-     for (MapObject aBonusDrop : bonusDropList)
+     for (MapObject aBonusDrop : memory.getBonusDrops())
      {
          setPosition(bonusDropShape(),aBonusDrop);
      }
@@ -156,9 +150,8 @@ public class GraphicsEngine implements Runnable{
  private void updateAsteroids()
  {
      log.debug("updating asteroids");
-     CopyOnWriteArrayList<Asteroid> asteroidList = new CopyOnWriteArrayList(memory.getAsteroids());
      //do for every asteroid in the game
-     for (Asteroid anAsteroid : asteroidList)
+     for (Asteroid anAsteroid : memory.getAsteroids())
      {
          //take care of different shapes for each size
          Polygon asteroidShape = smallAsteroidShape();
