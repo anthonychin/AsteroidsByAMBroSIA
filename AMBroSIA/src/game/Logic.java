@@ -9,7 +9,6 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -31,6 +30,8 @@ public class Logic extends KeyAdapter implements ActionListener {
     final public static int MEDIUM_ASTEROID_SHIELD_DAMAGE = 2;
     final public static int SMALL_ASTEROID_SHIELD_DAMAGE = 1;
     final public static int PROJECTILE_SHIELD_DAMAGE = 1;
+    
+    //various essential objects
     private static GameState gameState;
     private static ActionListener buttonPress = new Logic();
     private static KeyListener keyboard = new Logic();
@@ -38,48 +39,58 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static GraphicsEngine graphicsEngine;
     private static Physics physicsEngine;
     private static timeToLive ttlLogic;
+    
+    //fire rate limiter variables
     private static long initialShootTime;
     private static long currentShootTime;
     private static boolean shootKeyReleased = true;
-    //booleans for the key commands.  These need to be checked by the timer
+    
+    
+    //is game paused boolean
     private boolean paused = false;
     //the service used to execute all update functions
     private static ScheduledExecutorService timer;
-    private final static Logger log = Logger.getLogger(Logic.class.getName());
     
+    //logger, global logging level
+    private final static Logger log = Logger.getLogger(Logic.class.getName());
     public final static Level LOG_LEVEL = Level.OFF;
 
     public static void main(String args[]) {
         try {
+            //set log configuration to defaults
             BasicConfigurator.configure();
 
+            //create, display gui
             gui = new MenuGUI(buttonPress, keyboard);
             gui.showMenu();
 
             log.setLevel(LOG_LEVEL);
             log.info("GUI has been started");
-            //background music
+            
+            //background music - different exception handles for jdk6 compatibility
             Sound backgroundMusic = new Sound("menu.wav");
             backgroundMusic.playLoop();
         } catch (UnsupportedAudioFileException ex) {
-            java.util.logging.Logger.getLogger(Logic.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            log.trace("Unsupported audio format", ex);
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(Logic.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            log.trace("Audio I/O Exception",ex);
         } catch (LineUnavailableException ex) {
-            java.util.logging.Logger.getLogger(Logic.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            log.trace("Audio Line Unavailable",ex);
         }
     }
 
     public static void startTimer() {
-//        testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
-//        timer = Executors.newScheduledThreadPool(4);
+
         timer = Executors.newScheduledThreadPool(4);
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(collisionCheck(), 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
+        
+        //single threaded game loop testing thread
+        //testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
+        //timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
 
 
     }
@@ -88,6 +99,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         timer.shutdown();
     }
 
+    //collision logic; needs to be in seperate class
     public static Runnable collisionCheck() {
 
         final Runnable collision = new Runnable() {
@@ -266,6 +278,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         asteroid.destroy(false);
     }
 
+    //set up some game essentials
     private static void setUpLevel() {
         gameState = new GameState(1, 0);
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 1, 0, 0));
@@ -283,6 +296,7 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     }
 
+    //called whenever a key is pressed (thread seperate from timer)
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -330,6 +344,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         }
     }
 
+    //same as keyPressed, except when it is released
     @Override
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -353,6 +368,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     //This section needs a LOT of work....
+    //called when a gui button is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
         Object action = e.getSource();
