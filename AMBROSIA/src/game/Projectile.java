@@ -4,7 +4,7 @@ package game;
  * The <code>Projectile</code> class provides the representation for the projectile
  * objects.
  *
- * @author Anthony
+ * @author Anthony Chin
  */
 public class Projectile extends MapObjectTTL {
 

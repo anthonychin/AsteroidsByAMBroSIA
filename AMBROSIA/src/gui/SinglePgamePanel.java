@@ -14,7 +14,7 @@ import java.awt.Toolkit;
 
 /**
  *
- * @author Haisin Yip
+ * @author Haisin Yip, Anthony Chin
  */
 
 public class SinglePgamePanel extends JPanel
@@ -25,7 +25,9 @@ public class SinglePgamePanel extends JPanel
     JPanel sidePanel;
     JLabel highscore, lives, level;
     JButton pause;
+
     
+    static String score;
     // constructor
     public SinglePgamePanel(GameState gs)
     {
@@ -38,7 +40,7 @@ public class SinglePgamePanel extends JPanel
     // the label components takes as input the current score, current level, and current lifestock
     private void makeComponents()
     {
-        String score = String.valueOf(gameState.getHighScore()); 
+        score = String.valueOf(gameState.getHighScore()); 
         String lvl = String.valueOf(gameState.getLevel()); 
         String life = String.valueOf(gameState.getPlayerShip().getLives());
         sidePanel = new JPanel();
@@ -52,7 +54,9 @@ public class SinglePgamePanel extends JPanel
     {
         setLayout(new FlowLayout(0, 1, 1));
         sidePanel.setBackground(Color.GREEN);
-        sidePanel.add(highscore); sidePanel.add(lives); sidePanel.add(level);
+        sidePanel.add(highscore); 
+        sidePanel.add(lives); 
+        sidePanel.add(level);
         add(sidePanel);
     }
     
@@ -67,9 +71,13 @@ public class SinglePgamePanel extends JPanel
         Graphics2D g2 = (Graphics2D) g;
         this.setBackground(Color.WHITE);
         
-        gameDraw.drawObjects(g2, gameState);
+//        g.drawString("Highscore" + gameState.getHighScore(), 5, 10);
+//        g.drawString("Lives" + gameState.getPlayerShip().getLives(), 75, 10);
+//        g.drawString("Level" + gameState.getLevel(), 150, 10);
         
+        gameDraw.drawObjects(g2, gameState);
         //seems to reduce stuttering a bit. See http://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html#sync%28%29
+        
         Toolkit.getDefaultToolkit().sync();
     }
     

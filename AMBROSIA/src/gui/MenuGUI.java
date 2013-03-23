@@ -104,8 +104,11 @@ public class MenuGUI implements Runnable
         // create menu page panel, set it up, show it
         JPanel cardMenu = new JPanel(new GridLayout(2, 1));
         cardMenu.add(new MenuPanel());
+        
+ 
         // initialize the 5 buttons that shall be in the menu page
         JPanel buttonPanelMenu = new JPanel(new GridLayout(5, 1));
+        
         buttonPanelMenu.add(singlePbutton);
         buttonPanelMenu.add(twoPbutton);
         buttonPanelMenu.add(leaderBoardButton);

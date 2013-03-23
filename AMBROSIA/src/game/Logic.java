@@ -78,11 +78,11 @@ public class Logic extends KeyAdapter implements ActionListener {
     public static void startTimer() {
 
         timer = Executors.newScheduledThreadPool(4);
-        timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(collisionCheck, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(graphicsEngine, 2, 19, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(physicsEngine, 2, 19, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(collisionCheck, 2, 19, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(ttlLogic, 2, 202, TimeUnit.MILLISECONDS);
         
         //single threaded game loop testing thread
         //testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);

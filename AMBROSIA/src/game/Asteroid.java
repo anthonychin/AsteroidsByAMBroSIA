@@ -26,7 +26,6 @@ public class Asteroid extends MapObject {
     public void destroy(boolean bombUsed) {
         if (size == 3) 
         {
-            getGameState().addToHighScore(20);
             System.out.print(getGameState().getHighScore());
             for (int i = 0; i < ASTEROIDS_FROM_LARGE; i++) 
             {
