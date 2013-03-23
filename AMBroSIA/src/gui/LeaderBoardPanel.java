@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import game.GameState;
+
 /**
  *
  * @author Haisin Yip
@@ -19,9 +21,15 @@ import javax.swing.JTable;
 public class LeaderBoardPanel extends JPanel
 {
     JTable table;
+    
+    GameState gamestate;
+    
+    //String highscore = String.valueOf(gamestate.getHighScore());
+    //String lives = String.valueOf(gamestate.getLives());
+    
     //ArrayList<String> playerNames = new ArrayList<String>();
     String[] columns = {"Player", "HighScore", "Number of Lives", "Asteroid Destroyed", "Aliens destroyed", "Total deaths", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
-    String[][] rowdata = {{"p1", "highscore", "5", "3", "2", "3", "1.4", "3", "3", "3"}};
+    String[][] rowdata = {{"p1", "highscore", "lives", " ", "2", "3", "1.4", "3", "3", "3"}};
     
     JScrollPane scrollPane;
     public LeaderBoardPanel(int width, int height)

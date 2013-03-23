@@ -25,7 +25,10 @@ public class SidePanel extends JPanel {
             g.drawString("Lives " + gameState.getPlayerShip().getLives(), 75, 10);
         }
         else {
-            g.drawString("Lives " + 0, 75, 10);
+            g.drawString("Lives " + 0, 75, 10);    
+            //weird issue to fix
+            // when there is an if statement checking lives, the game freezes for 2 seconds and generates event erros
+            //g.drawString("GAME OVER", 360, 300);
         }
         g.drawString("Level " + gameState.getLevel(), 120, 10);
     }

@@ -227,6 +227,7 @@ public class PlayerShip extends Ship {
             getGameState().getPlayerShip().turnLeft(false);
             getGameState().getPlayerShip().turnRight(false);
             getGameState().getPlayerShip().accelerate(false);
+           
         }
         else{
             getGameState().removePlayerShip();
