@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
  * <code>Physics</code> class is to provide the game physics. It calculates
  * velocities and displacements and is able to detect collisions.
  * 
-* @author Nikolaos Bukas
+* @author Nikolaos Bukas, Anthony 
  */
 public class Physics implements Runnable {
 
@@ -261,8 +261,8 @@ public class Physics implements Runnable {
         //displacement[0] = Math.round((velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2)));
         //displacement[1] = Math.round((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
 
-        displacement[0] = (int) Math.ceil((velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2)));
-        displacement[1] = (int) Math.ceil((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
+        displacement[0] = (int) (velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2));
+        displacement[1] = (int) (velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
 
         return displacement;
     }

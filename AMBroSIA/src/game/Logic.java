@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author Nikolaos, Michael
+ * @author Nikolaos, Michael, Anthony
  *
  */
 public class Logic extends KeyAdapter implements ActionListener {
