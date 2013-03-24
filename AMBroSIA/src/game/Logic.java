@@ -91,9 +91,9 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     /**
-     * Start the global timer responsible for keeping all game
-     * elements up to date. The timer will use some form of multithreading to
-     * execute update tasks concurrently.
+     * Start the global timer responsible for keeping all game elements up to
+     * date. The timer will use some form of multithreading to execute update
+     * tasks concurrently.
      */
     public static void startTimer() {
 
@@ -120,7 +120,7 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     /**
      * ?
-     * 
+     *
      * @param command
      * @param delay
      * @param unit
@@ -170,6 +170,7 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     /**
      * Checks if the game is paused.
+     *
      * @return true if game is paused, false otherwise
      */
     public boolean isPaused() {
@@ -177,7 +178,8 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     /**
-     * Displays text that the player has won (as appropriate for single or 2 player mode).
+     * Displays text that the player has won (as appropriate for single or 2
+     * player mode).
      */
     public static void displayWinner() {
     }
@@ -222,6 +224,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     //called whenever a key is pressed (thread seperate from timer)
     /**
      * Handles event caused by user key presses.
+     *
      * @param e
      */
     @Override
@@ -277,6 +280,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     //same as keyPressed, except when it is released
     /**
      * Handle events caused by release of key.
+     *
      * @param e
      */
     @Override
@@ -305,6 +309,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     //called when a gui button is clicked
     /**
      * Handles events relating to the user clicking menu buttons.
+     *
      * @param e
      */
     @Override
