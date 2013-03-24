@@ -5,7 +5,7 @@ import java.util.Random;
 
 /**
  *
- * @author Nikolaos Bukas
+ * @author Nikolaos Bukas, Anthony Chin
  */
 public class Difficulty {
     private static int level;
@@ -22,8 +22,16 @@ public class Difficulty {
     }
     
     public static float randomAsteroidVelocity()
-    {
-        return randomFloat() * rand.nextInt(10);
+    {   
+        int holder = rand.nextInt(10);
+        while(holder == 0){
+            holder = rand.nextInt(10);
+        }
+        return randomFloat() * holder + 0.03f; // Minimum: 0.02 , Maximum: 11
+    }
+    
+    public static float randomAsteroidHeading(){   
+        return 2 + rand.nextInt(2) + randomFloat(); // Minumum: 1.02, Maximum: 5
     }
     
     public static float randomAlienVelocity()
@@ -53,6 +61,10 @@ public class Difficulty {
     
     private static float randomFloat()
     {
-        return rand.nextFloat() * 2 - 1;
+        float holder = rand.nextFloat();
+        while (holder < 0.01){
+            holder = rand.nextFloat();
+        }
+        return holder * 2 - 1;
     }
 }

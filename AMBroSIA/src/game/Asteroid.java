@@ -26,10 +26,10 @@ public class Asteroid extends MapObject {
     public void destroy(boolean bombUsed) {
         if (size == 3) 
         {
-            System.out.print(getGameState().getHighScore());
             for (int i = 0; i < ASTEROIDS_FROM_LARGE; i++) 
             {
-                getGameState().addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(), Difficulty.randomAsteroidVelocity()}, Difficulty.randomHeading(), new int[]{this.getX(), this.getY()}, this.getGameState(), MEDIUM_ASTEROID_SIZE));
+                getGameState().addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(), Difficulty.randomAsteroidHeading()}, Difficulty.randomHeading(), new int[]{this.getX(), this.getY()}, this.getGameState(), MEDIUM_ASTEROID_SIZE));
+                //getGameState().addAsteroid(new Asteroid(new float[]{2f,22f}, Difficulty.randomAsteroidHeading(), new int[]{this.getX(), this.getY()}, this.getGameState(), MEDIUM_ASTEROID_SIZE));                
             }
 
             if (!bombUsed) 
@@ -42,7 +42,8 @@ public class Asteroid extends MapObject {
         {
             for (int i = 0; i < ASTEROIDS_FROM_MEDIUM; i++) 
             {
-                getGameState().addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(), Difficulty.randomAsteroidVelocity()}, Difficulty.randomHeading(), new int[]{this.getX(), this.getY()}, this.getGameState(), SMALL_ASTEROID_SIZE));
+                //getGameState().addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(), Difficulty.randomAsteroidVelocity()}, Difficulty.randomAsteroidHeading(), new int[]{this.getX(), this.getY()}, this.getGameState(), SMALL_ASTEROID_SIZE));
+                getGameState().addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(), Difficulty.randomAsteroidHeading()}, Difficulty.randomHeading(), new int[]{this.getX(), this.getY()}, this.getGameState(), SMALL_ASTEROID_SIZE));                
             }
 
             if (!bombUsed) 

@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -149,13 +150,13 @@ public class Logic extends KeyAdapter implements ActionListener {
     //set up some game essentials
     private static void setUpLevel() {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 3, 0, 0));
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 99, 0, 0));
         gameState.addAsteroid(new Asteroid(new float[]{-1, -1}, -30, new int[]{650, 500}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
-//        Random randu = new Random();
-//        for (int i = 0; i < 200; i++)
-//        {
-//            gameState.addProjectile(new Projectile(null, randu.nextFloat(), new int[] {randu.nextInt(800),randu.nextInt(600)},gameState));
-//        }
+        //Random randu = new Random();
+        //for (int i = 0; i < 5; i++){
+            //gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
+            //gameState.addProjectile(new Projectile(null, randu.nextFloat(), new int[] {randu.nextInt(800),randu.nextInt(600)},gameState));
+        //}
 
 
         graphicsEngine = new GraphicsEngine(gameState);
@@ -210,6 +211,10 @@ public class Logic extends KeyAdapter implements ActionListener {
                 startTimer();
                 paused = false;
             }
+        }
+        if (keyCode == KeyEvent.VK_Z){
+            Random randu = new Random();
+            gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(5),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         }
     }
 
