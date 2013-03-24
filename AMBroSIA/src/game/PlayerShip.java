@@ -1,6 +1,7 @@
 package game;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
@@ -47,6 +48,7 @@ public class PlayerShip extends Ship {
     private boolean isTurningLeft = false;
     private boolean isTurningRight = false;
     private boolean isShieldOn = false;
+    
     
     private final static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PlayerShip.class.getName());
 
@@ -213,24 +215,12 @@ public class PlayerShip extends Ship {
     @Override
     public void destroy() {
         createExplosionEffect();
-        if(getGameState().getPlayerShip().getLives() > 1){
+        
+        if (getGameState().getPlayerShip().getLives() > 1) {
+            Logic.resetShip();
+        } else {
             getGameState().removePlayerShip();
-            try {
-                Thread.sleep(2500);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            getGameState().addPlayerShip(this);
-            getGameState().getPlayerShip().setCoord(new int[]{400,300});
-            getGameState().getPlayerShip().setVelocity(new float[]{0,0});
-            getGameState().getPlayerShip().setHeading(0);      
-            getGameState().getPlayerShip().turnLeft(false);
-            getGameState().getPlayerShip().turnRight(false);
-            getGameState().getPlayerShip().accelerate(false);
         }
-        else{
-            getGameState().removePlayerShip();
-        }    
         try {
             Sound sound = new Sound("missle.wav");
             sound.play();
@@ -251,4 +241,5 @@ public class PlayerShip extends Ship {
             getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{x, y}, 0, getGameState()));
         }
     }
+    
 }
