@@ -21,15 +21,13 @@ public class SidePanel extends JPanel {
         super.paint(g);
         
         g.drawString("Highscore " + gameState.getHighScore(), 5, 10);
-        if(gameState.getPlayerShip() != null){
-            g.drawString("Lives " + gameState.getPlayerShip().getLives(), 75, 10);
-            g.drawString("x " + gameState.getPlayerShip().getX(), 150, 10);
-            g.drawString("y " + gameState.getPlayerShip().getY(), 180, 10);
-            g.drawString("heading " + gameState.getPlayerShip().getY(), 210, 10);            
-        }
-        else {
-            g.drawString("Lives " + 0, 75, 10);    
-        }
         g.drawString("Level " + gameState.getLevel(), 120, 10);
+        
+        if(gameState.getPlayerShip() != null){
+            g.drawString("Lives " + gameState.getPlayerShip().getLives(), 85, 10);
+            g.drawString("x " + gameState.getPlayerShip().getX(), 160, 10);
+            g.drawString("y " + gameState.getPlayerShip().getY(), 190, 10);
+            g.drawString("heading " + gameState.getPlayerShip().getHeading(), 220, 10);            
+        }
     }
 }
