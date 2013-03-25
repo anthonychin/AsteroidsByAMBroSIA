@@ -2,7 +2,10 @@ package game;
 
 import gui.MenuGUI;
 import java.awt.Polygon;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import org.apache.log4j.Logger;
 
 /**
@@ -10,7 +13,7 @@ import org.apache.log4j.Logger;
  * <code>Physics</code> class is to provide the game physics. It calculates
  * velocities and displacements and is able to detect collisions.
  * 
-* @author Nikolaos Bukas, Anthony 
+* @author Nikolaos Bukas, Anthony
  */
 public class Physics implements Runnable {
 
@@ -24,7 +27,8 @@ public class Physics implements Runnable {
     }
 
     /**
-     * Updates the physical properties (velocity, heading, x & y coordinates, and acceleration) of every in-game object.
+     * Updates the physical properties (velocity, heading, x & y coordinates,
+     * and acceleration) of every in-game object.
      */
     public void update() {
         log.info("Physics update start");
@@ -42,7 +46,7 @@ public class Physics implements Runnable {
 
         if (!gameState.getAsteroids().isEmpty()) {
             for (Asteroid asteroid : gameState.getAsteroids()) {
-               log.debug("updating asteroid " + asteroid.toString());
+                log.debug("updating asteroid " + asteroid.toString());
                 updateObject(asteroid);
             }
         }
@@ -124,17 +128,20 @@ public class Physics implements Runnable {
 
     /**
      * Returns list of <i>MapObject</i>s that have been detected in collision.
-     * The list will always have an even number of entries.
-     * Each sequential pair of <i>MapObject</i>s indicates that the two of them collided.
-     * 
+     * The list will always have an even number of entries. Each sequential pair
+     * of <i>MapObject</i>s indicates that the two of them collided.
+     *
      * @return list of MapObject detected in collision
      */
-    public ArrayList<MapObject> getCollisions() {
+    public ArrayList<MapObject> getCollisions() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         PlayerShip playerShip = gameState.getPlayerShip();
         AlienShip alienShip = gameState.getAlienShip();
         ArrayList<Asteroid> asteroidList = gameState.getAsteroids();
         ArrayList<Projectile> projectileList = gameState.getProjectiles();
         ArrayList<BonusDrop> bonusList = gameState.getBonusDrops();
+
+        Sound explosion = new Sound("explosion.wav");
+
 
         ArrayList<MapObject> listOfCollisions = new ArrayList<MapObject>();
         Polygon shipShape;
@@ -147,6 +154,7 @@ public class Physics implements Runnable {
                 if (detectCollision(shipShape, asteroid.getShape())) {
                     listOfCollisions.add(playerShip);
                     listOfCollisions.add(asteroid);
+                    explosion.play();
                 }
             }
 
@@ -155,6 +163,7 @@ public class Physics implements Runnable {
                 if (projectile.getOwner() == Projectile.ALIEN_OWNER && detectCollision(shipShape, projectile.getShape())) {
                     listOfCollisions.add(playerShip);
                     listOfCollisions.add(projectile);
+                    explosion.play();
                 }
             }
 

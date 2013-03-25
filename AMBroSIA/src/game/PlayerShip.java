@@ -221,16 +221,16 @@ public class PlayerShip extends Ship {
         } else {
             getGameState().removePlayerShip();
         }
-        try {
-            Sound sound = new Sound("missle.wav");
-            sound.play();
-        } catch (UnsupportedAudioFileException ex) {
-            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (LineUnavailableException ex) {
-            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            Sound sound = new Sound("missle.wav");
+//            sound.play();
+//        } catch (UnsupportedAudioFileException ex) {
+//            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (LineUnavailableException ex) {
+//            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 

@@ -5,9 +5,12 @@
 package game;
 
 import static game.Logic.LOG_LEVEL;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import org.apache.log4j.Logger;
 
 /**
@@ -35,48 +38,56 @@ public class Collision implements Runnable {
 
     @Override
     public void run() {
-        log.debug("Collision start");
-        ArrayList<MapObject> collisionList = physicsEngine.getCollisions();
-        log.debug("SIZE OF THE COLLISION LIST = " + collisionList.size());
-        log.debug("COLLISION LIST = " + Arrays.toString(collisionList.toArray()));
-        if (!collisionList.isEmpty()) {
-            for (int i = 0; i < collisionList.size(); i = i + 2) {
-                MapObject collisionOne = collisionList.get(i);
-                MapObject collisionTwo = collisionList.get(i + 1);
+        try {
+            log.debug("Collision start");
+            ArrayList<MapObject> collisionList = physicsEngine.getCollisions();
+            log.debug("SIZE OF THE COLLISION LIST = " + collisionList.size());
+            log.debug("COLLISION LIST = " + Arrays.toString(collisionList.toArray()));
+            if (!collisionList.isEmpty()) {
+                for (int i = 0; i < collisionList.size(); i = i + 2) {
+                    MapObject collisionOne = collisionList.get(i);
+                    MapObject collisionTwo = collisionList.get(i + 1);
 
-                if (collisionOne instanceof PlayerShip) {
-                    if (collisionTwo instanceof AlienShip) {
-                        // PlayerShip collided with AlienShip
-                        if (collisionLogic((PlayerShip) collisionOne, (AlienShip) collisionTwo)) {
-                            //break;
+                    if (collisionOne instanceof PlayerShip) {
+                        if (collisionTwo instanceof AlienShip) {
+                            // PlayerShip collided with AlienShip
+                            if (collisionLogic((PlayerShip) collisionOne, (AlienShip) collisionTwo)) {
+                                //break;
+                            }
+                        } else if (collisionTwo instanceof Asteroid) {
+                            // PlayerShip collided with an Asteroid
+                            if (collisionLogic((PlayerShip) collisionOne, (Asteroid) collisionTwo)) {
+                                //break;
+                            }
+                        } else if (collisionTwo instanceof Projectile) {
+                            // PlayerShip collided with a Projectile
+                            if (collisionLogic((PlayerShip) collisionOne, (Projectile) collisionTwo)) {
+                                //break;
+                            }
+                        } else if (collisionTwo instanceof BonusDrop) {
+                            // PlayerShip collided with a BonusDrop
+                            collisionLogic((PlayerShip) collisionOne, (BonusDrop) collisionTwo);
                         }
-                    } else if (collisionTwo instanceof Asteroid) {
-                        // PlayerShip collided with an Asteroid
-                        if (collisionLogic((PlayerShip) collisionOne, (Asteroid) collisionTwo)) {
-                            //break;
-                        }
-                    } else if (collisionTwo instanceof Projectile) {
-                        // PlayerShip collided with a Projectile
-                        if (collisionLogic((PlayerShip) collisionOne, (Projectile) collisionTwo)) {
-                            //break;
-                        }
-                    } else if (collisionTwo instanceof BonusDrop) {
-                        // PlayerShip collided with a BonusDrop
-                        collisionLogic((PlayerShip) collisionOne, (BonusDrop) collisionTwo);
-                    }
-                } else if (collisionOne instanceof AlienShip) {
-                    if (collisionTwo instanceof Asteroid) {
-                        // AlienShip collided with an Asteroid
+                    } else if (collisionOne instanceof AlienShip) {
+                        if (collisionTwo instanceof Asteroid) {
+                            // AlienShip collided with an Asteroid
 
-                        collisionLogic((AlienShip) collisionOne, (Asteroid) collisionTwo);
-                    } else if (collisionTwo instanceof Projectile) {
-                        // AlienShip collided with a Projectile
-                        collisionLogic((AlienShip) collisionOne, (Projectile) collisionTwo);
+                            collisionLogic((AlienShip) collisionOne, (Asteroid) collisionTwo);
+                        } else if (collisionTwo instanceof Projectile) {
+                            // AlienShip collided with a Projectile
+                            collisionLogic((AlienShip) collisionOne, (Projectile) collisionTwo);
+                        }
+                    } else if (collisionOne instanceof Projectile) {
+                        collisionLogic((Projectile) collisionOne, (Asteroid) collisionTwo);
                     }
-                } else if (collisionOne instanceof Projectile) {
-                    collisionLogic((Projectile) collisionOne, (Asteroid) collisionTwo);
                 }
             }
+        } catch (UnsupportedAudioFileException ex) {
+            java.util.logging.Logger.getLogger(Collision.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Collision.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            java.util.logging.Logger.getLogger(Collision.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
