@@ -31,31 +31,27 @@ public class GameState {
      * Score the player receives when alien ship is destroyed.
      */
     final public static int ALIEN_SCORE = 200;
-    
     private ArrayList<Asteroid> asteroidList;
     private ArrayList<Projectile> projectileList;
     private ArrayList<BonusDrop> bonusList;
     private ArrayList<MapObjectTTL> explosionList;
-    
-    
     private PlayerShip playerShip;
     private AlienShip alienShip;
     private int highScore;
     private int level;
-    
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
     private static final Object explosionSync = new Object();
     private static final Object bonusSync = new Object();
-    
+
 //    private final Semaphore asteroidSync = new Semaphore(1,true);
 //    private final Semaphore projectileSync = new Semaphore(1,true);
 //    private final Semaphore explosionSync = new Semaphore(1,true);
 //    private final Semaphore bonusSync = new Semaphore(1,true);
-
     /**
-     * Creates <i>GameState</i> using given parameters. It also creates empty lists for asteroid, projectile, bonus, and explosions.
-     * 
+     * Creates <i>GameState</i> using given parameters. It also creates empty
+     * lists for asteroid, projectile, bonus, and explosions.
+     *
      * @param level
      * @param highScore
      */
@@ -76,10 +72,9 @@ public class GameState {
      */
     public void addAsteroid(Asteroid asteroid) {
         synchronized (asteroidSync) {
-        this.asteroidList.add(asteroid);
+            this.asteroidList.add(asteroid);
         }
     }
-
 
     /**
      * Removes asteroid from the asteroid list.
@@ -87,7 +82,7 @@ public class GameState {
      */
     public void removeAsteroid(Asteroid asteroid) {
         synchronized (asteroidSync) {
-        this.asteroidList.remove(asteroid);
+            this.asteroidList.remove(asteroid);
         }
     }
 
@@ -97,7 +92,7 @@ public class GameState {
      */
     public ArrayList<Asteroid> getAsteroids() {
         synchronized (asteroidSync) {
-        return new ArrayList<Asteroid>(this.asteroidList);
+            return new ArrayList<Asteroid>(this.asteroidList);
         }
     }
 
@@ -120,7 +115,7 @@ public class GameState {
             this.projectileList.remove(projectile);
         }
     }
-    
+
     /**
      * Removes all projectile from the projectile list.
      * @param list
@@ -137,7 +132,7 @@ public class GameState {
      */
     public ArrayList<Projectile> getProjectiles() {
         synchronized (projectileSync) {
-        return new ArrayList<Projectile>(this.projectileList);
+            return new ArrayList<Projectile>(this.projectileList);
         }
     }
 
@@ -160,7 +155,7 @@ public class GameState {
             this.explosionList.remove(explosion);
         }
     }
-    
+
     /**
      * Removes all explosion from the explosion list.
      * @param list
@@ -171,18 +166,14 @@ public class GameState {
         }
     }
 
-    /**
-     * 
-     * @return
-     */
     public ArrayList<MapObjectTTL> getExplosions() {
         synchronized (explosionSync) {
-        return new ArrayList<MapObjectTTL>(this.explosionList);
+            return new ArrayList<MapObjectTTL>(this.explosionList);
         }
     }
 
     /**
-     *
+     * Adds bonus drops to the bonus drop list.
      * @param bonusDrop
      */
     public void addBonusDrop(BonusDrop bonusDrop) {
@@ -192,7 +183,7 @@ public class GameState {
     }
 
     /**
-     *
+     * Removes a single bonus drops from the bonus drop list.
      * @param bonusDrop
      */
     public void removeBonusDrop(BonusDrop bonusDrop) {
@@ -200,9 +191,9 @@ public class GameState {
             this.bonusList.remove(bonusDrop);
         }
     }
-    
+
     /**
-     *
+     * Removes all bonus drops from list.
      * @param list
      */
     public void removeListOfBonusDrops(Collection<?> list) {
@@ -212,17 +203,17 @@ public class GameState {
     }
 
     /**
-     *
-     * @return
+     * Returns list of all bonus drops.
+     * @return list of all bonus drops
      */
     public ArrayList<BonusDrop> getBonusDrops() {
         synchronized (bonusSync) {
-        return new ArrayList<BonusDrop>(this.bonusList);
+            return new ArrayList<BonusDrop>(this.bonusList);
         }
     }
 
     /**
-     *
+     * Adds alien ship.
      * @param alienShip
      */
     public void addAlienShip(AlienShip alienShip) {
@@ -230,22 +221,22 @@ public class GameState {
     }
 
     /**
-     *
-     * @return
+     * Returns alien ship.
+     * @return alien ship
      */
     public AlienShip getAlienShip() {
         return this.alienShip;
     }
 
     /**
-     *
+     * Sets the variable <i>alienShip</i> to null.
      */
     public void removeAlienShip() {
         this.alienShip = null;
     }
 
     /**
-     *
+     * Adds player ship.
      * @param playerShip
      */
     public void addPlayerShip(PlayerShip playerShip) {
@@ -253,46 +244,46 @@ public class GameState {
     }
 
     /**
-     *
+     * Sets the variable <i>playerShip</i> to null.
      */
     public void removePlayerShip() {
         this.playerShip = null;
     }
 
     /**
-     *
-     * @return
+     * Returns player ship.
+     * @return player ship
      */
     public PlayerShip getPlayerShip() {
         return this.playerShip;
     }
 
     /**
-     *
-     * @return
+     * Returns current level.
+     * @return integer value representing level
      */
     public int getLevel() {
         return this.level;
     }
 
     /**
-     *
-     * @return
+     * Returns true if level is complete, false otherwise.
+     * @return boolean value (true if complete, false otherwise)
      */
     public boolean isLevelComplete() {
         return true;
     }
 
     /**
-     *
-     * @return
+     * Returns the high score.
+     * @return high score
      */
     public int getHighScore() {
         return this.highScore;
     }
 
     /**
-     *
+     * Add to high score the value of score.
      * @param score
      */
     public void addToHighScore(int score) {
