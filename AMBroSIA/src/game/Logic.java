@@ -137,26 +137,6 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     /**
-     * Resets the player ship after it gets destroyed.
-     */
-    public static void resetShip() {
-        final PlayerShip oldShip = gameState.getPlayerShip();
-        gameState.removePlayerShip();
-        Thread resetShip = new Thread() {
-            public void run() {
-                gameState.addPlayerShip(oldShip);
-                gameState.getPlayerShip().setCoord(new int[]{400, 300});
-                gameState.getPlayerShip().setVelocity(new float[]{0, 0});
-                gameState.getPlayerShip().setHeading(0);
-                gameState.getPlayerShip().turnLeft(false);
-                gameState.getPlayerShip().turnRight(false);
-                gameState.getPlayerShip().accelerate(false);
-            }
-        };
-        executeTask(resetShip, 2500, TimeUnit.MILLISECONDS);
-    }
-
-    /**
      * Starts the game in 2 player mode.
      */
     public static void startTwoPlayer() {

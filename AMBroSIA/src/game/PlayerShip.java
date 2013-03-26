@@ -1,5 +1,6 @@
 package game;
 
+import static game.Logic.executeTask;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -217,7 +218,7 @@ public class PlayerShip extends Ship {
         createExplosionEffect();
         
         if (getGameState().getPlayerShip().getLives() > 1) {
-            Logic.resetShip();
+            resetShip();
         } else {
             getGameState().removePlayerShip();
         }
@@ -232,6 +233,26 @@ public class PlayerShip extends Ship {
 //            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 
+    }
+    
+        /**
+     * Resets the player ship after it gets destroyed.
+     */
+    public void resetShip() {
+        final PlayerShip oldShip = getGameState().getPlayerShip();
+        getGameState().removePlayerShip();
+        Thread resetShip = new Thread() {
+            public void run() {
+                getGameState().addPlayerShip(oldShip);
+                getGameState().getPlayerShip().setCoord(new int[]{400, 300});
+                getGameState().getPlayerShip().setVelocity(new float[]{0, 0});
+                getGameState().getPlayerShip().setHeading(0);
+                getGameState().getPlayerShip().turnLeft(false);
+                getGameState().getPlayerShip().turnRight(false);
+                getGameState().getPlayerShip().accelerate(false);
+            }
+        };
+        executeTask(resetShip, 2500, TimeUnit.MILLISECONDS);
     }
 
     private void createExplosionEffect() {
