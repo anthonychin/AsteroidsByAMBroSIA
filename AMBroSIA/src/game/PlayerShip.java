@@ -8,7 +8,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- * The <code>PlayerShip</code> class defines all the properties and methods
+ * The
+ * <code>PlayerShip</code> class defines all the properties and methods
  * appropriate to the player ship that are not included in Ship.
  *
  * @author Anthony Chin
@@ -48,8 +49,6 @@ public class PlayerShip extends Ship {
     private boolean isTurningLeft = false;
     private boolean isTurningRight = false;
     private boolean isShieldOn = false;
-    
-    
     private final static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PlayerShip.class.getName());
 
     /**
@@ -94,9 +93,9 @@ public class PlayerShip extends Ship {
     public void useBomb() {
         if (bomb > 0) {
             bomb = bomb - 1;
-            // do something
+            GameAssets.bombUsed.play();
         } else {
-            // do nothing
+            GameAssets.noBombs.play();
         }
     }
 
@@ -116,6 +115,15 @@ public class PlayerShip extends Ship {
      */
     public void setShieldPoints(int shieldpoints) {
         this.shieldPoints = shieldpoints;
+        if (this.shieldPoints == 3) {
+            GameAssets.shields3.play();
+        } else if (this.shieldPoints == 2) {
+            GameAssets.shields2.play();
+        } else if (this.shieldPoints == 1) {
+            GameAssets.shields1.play();
+        } else {
+            GameAssets.shields0.play();
+        }
     }
 
     /**
@@ -150,7 +158,8 @@ public class PlayerShip extends Ship {
 
     /**
      * Sets the <i>PlayerShip</i> to accelerate.
-     * @param isAccelerating 
+     *
+     * @param isAccelerating
      */
     public void accelerate(boolean isAccelerating) {
         if (isAccelerating) {
@@ -162,7 +171,8 @@ public class PlayerShip extends Ship {
 
     /**
      * Sets the <i>PlayerShip</i> to turn left.
-     * @param turning 
+     *
+     * @param turning
      */
     public void turnLeft(boolean turning) {
         this.isTurningLeft = turning;
@@ -179,7 +189,8 @@ public class PlayerShip extends Ship {
 
     /**
      * Sets the <i>PlayerShip</i> to turn right.
-     * @param turning 
+     *
+     * @param turning
      */
     public void turnRight(boolean turning) {
         this.isTurningRight = turning;
@@ -215,23 +226,12 @@ public class PlayerShip extends Ship {
     @Override
     public void destroy() {
         createExplosionEffect();
-        
+
         if (getGameState().getPlayerShip().getLives() > 1) {
             Logic.resetShip();
         } else {
             getGameState().removePlayerShip();
         }
-//        try {
-//            Sound sound = new Sound("missle.wav");
-//            sound.play();
-//        } catch (UnsupportedAudioFileException ex) {
-//            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (LineUnavailableException ex) {
-//            Logger.getLogger(PlayerShip.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
     }
 
     private void createExplosionEffect() {
@@ -241,5 +241,4 @@ public class PlayerShip extends Ship {
             getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{x, y}, 0, getGameState()));
         }
     }
-    
 }
