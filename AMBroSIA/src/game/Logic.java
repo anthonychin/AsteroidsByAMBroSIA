@@ -246,7 +246,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         }
         if (keyCode == KeyEvent.VK_Z) {
             Random randu = new Random();
-            gameState.addAsteroid(new Asteroid(new float[]{randu.nextInt(5), randu.nextInt(10)}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
+            gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(), Difficulty.randomAsteroidHeading()}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
         }
     }
 
