@@ -145,6 +145,7 @@ public class Physics implements Runnable {
         ArrayList<MapObject> listOfCollisions = new ArrayList<MapObject>();
         Polygon shipShape;
 
+        log.debug("checking for playership collisions");
         if (playerShip != null) {
             shipShape = playerShip.getShape();
 
@@ -173,15 +174,19 @@ public class Physics implements Runnable {
             }
         }
 
+        log.debug("checking for alien collision");
         if (alienShip != null) {
             shipShape = alienShip.getShape();
 
-            if (detectCollision(playerShip.getShape(), shipShape)) {
+            log.debug("checking for collision b/w player & alien");
+            if ((playerShip != null) && detectCollision(playerShip.getShape(), shipShape)) {
+                log.debug("collision b/w player and alien detected, adding");
                 listOfCollisions.add(playerShip);
                 listOfCollisions.add(alienShip);
             }
 
             //Checking collisions between AlienShip and Asteroids
+            log.debug("checking for alien and asteroid collision");
             for (Asteroid asteroid : asteroidList) {
                 if (detectCollision(shipShape, asteroid.getShape())) {
                     listOfCollisions.add(alienShip);
@@ -190,6 +195,7 @@ public class Physics implements Runnable {
             }
 
             //Checkin collisions between AlienShip and Projectiles
+            log.debug("checking for alien and projectile collision");
             for (Projectile projectile : projectileList) {
                 if (projectile.getOwner() != Projectile.ALIEN_OWNER && detectCollision(shipShape, projectile.getShape())) {
                     listOfCollisions.add(alienShip);
@@ -198,6 +204,7 @@ public class Physics implements Runnable {
             }
         }
 
+        log.debug("checking for projectile & asteroid collision");
         for (Projectile projectile : projectileList) {
             for (Asteroid asteroid : asteroidList) {
                 if (detectCollision(projectile.getShape(), asteroid.getShape())) {
@@ -211,11 +218,14 @@ public class Physics implements Runnable {
     }
 
     private static boolean detectCollision(Polygon shapeOne, Polygon shapeTwo) {
+        log.debug("collision check 1");
         for (int i = 0; i < shapeTwo.npoints; i++) {
             if (shapeOne.contains(shapeTwo.xpoints[i], shapeTwo.ypoints[i])) {
                 return true;
             }
         }
+        
+        log.debug("collision check 2");
         for (int i = 0; i < shapeOne.npoints; i++) {
             if (shapeTwo.contains(shapeOne.xpoints[i], shapeOne.ypoints[i])) {
                 return true;

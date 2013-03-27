@@ -75,7 +75,18 @@ public class GraphicsEngine implements Runnable {
 
     private static Polygon alienShape() {
         //TODO: give shape to alien
-        return new Polygon(new int[]{-5, -5, 5, 5}, new int[]{5, -5, 5, -5}, 4);
+        return new Polygon(new int[]{-15,-4,-3,3,4,15,4,-4}, new int[]{0,3,6,6,3,0,-3,-3}, 8);
+        /*
+         * alien shape
+         * -10,0
+         * -4,3
+         * -1,5
+         * 1,5
+         * 4,3
+         * 10,0
+         * 0,-2
+         * 
+         */
     }
 
     private static Polygon projectileShape() {

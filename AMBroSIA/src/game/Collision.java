@@ -140,13 +140,11 @@ public class Collision implements Runnable {
         log.debug("Collision between Player and Alien");
         if (playerShip.getShieldPoints() >= ALIEN_SHIELD_DAMAGE) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() - ALIEN_SHIELD_DAMAGE);
-        } else if (playerShip.getLives() == 1) {
             playerShip.destroy();
         } else {
-            playerShip.setLives(playerShip.getLives() - 1);
+            playerShip.destroy();
         }
-
-        alienShip.destroy();
+        alienShip.destroy(false);
 
         return gameState.getPlayerShip() == null;
     }
@@ -168,13 +166,13 @@ public class Collision implements Runnable {
 
     private void collisionLogic(AlienShip alienShip, Asteroid asteroid) {
         log.debug("Collision between Alien and Asteroid");
-        alienShip.destroy();
+        alienShip.destroy(false);
         asteroid.destroy();
     }
 
     private void collisionLogic(AlienShip alienShip, Projectile projectile) {
         log.debug("Collision between Alien and Projectile");
-        alienShip.destroy();
+        alienShip.destroy(false);
         projectile.destroy();
     }
 

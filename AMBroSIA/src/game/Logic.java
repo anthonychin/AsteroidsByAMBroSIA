@@ -129,26 +129,6 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     /**
-     * Resets the player ship after it gets destroyed.
-     */
-    public static void resetShip() {
-        final PlayerShip oldShip = gameState.getPlayerShip();
-        gameState.removePlayerShip();
-        Thread resetShip = new Thread() {
-            public void run() {
-                gameState.addPlayerShip(oldShip);
-//                gameState.getPlayerShip().setCoord(new int[]{400, 300});
-                gameState.getPlayerShip().setVelocity(new float[]{0, 0});
-                gameState.getPlayerShip().setHeading(0);
-                gameState.getPlayerShip().turnLeft(false);
-                gameState.getPlayerShip().turnRight(false);
-                gameState.getPlayerShip().accelerate(false);
-            }
-        };
-        executeTask(resetShip, 2500, TimeUnit.MILLISECONDS);
-    }
-
-    /**
      * Starts the game in 2 player mode.
      */
     public static void startTwoPlayer() {
@@ -198,6 +178,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         //gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         //gameState.addProjectile(new Projectile(null, randu.nextFloat(), new int[] {randu.nextInt(800),randu.nextInt(600)},gameState));
         //}
+        gameState.addAlienShip(new AlienShip(new float[] {1,1},0,new int[] {100,100},gameState));
 
 
         graphicsEngine = new GraphicsEngine(gameState);
