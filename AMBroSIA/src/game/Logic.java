@@ -125,6 +125,7 @@ public class Logic extends KeyAdapter implements ActionListener {
      * Start the single player game.
      */
     public static void startSinglePlayer() {
+        GameAssets.theme.stop();
         setUpLevel();
     }
 
@@ -202,6 +203,7 @@ public class Logic extends KeyAdapter implements ActionListener {
             //accelerate
             if (!paused && gameState.getPlayerShip() != null) {
                 gameState.getPlayerShip().accelerate(true);
+                GameAssets.thrusters.playLoop();
             }
         } else if (keyCode == KeyEvent.VK_LEFT) {
             if (!paused && gameState.getPlayerShip() != null) {
@@ -262,6 +264,7 @@ public class Logic extends KeyAdapter implements ActionListener {
             //accelerate
             if (gameState.getPlayerShip() != null) {
                 gameState.getPlayerShip().accelerate(false);
+                GameAssets.thrusters.stop();
             }
         } else if (keyCode == KeyEvent.VK_LEFT) {
             if (gameState.getPlayerShip() != null) {

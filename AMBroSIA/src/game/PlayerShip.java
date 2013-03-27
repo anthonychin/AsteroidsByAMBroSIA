@@ -67,6 +67,7 @@ public class PlayerShip extends Ship {
         super(velocity, heading, coordinates, 0, gameState, lives);
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
+        GameAssets.warp.play();
         log.setLevel(Logic.LOG_LEVEL);
     }
 
@@ -124,15 +125,6 @@ public class PlayerShip extends Ship {
             GameAssets.shields1.play();
         } else {
             GameAssets.shields0.play();
-        }
-    }
-
-    /**
-     * Activates the shield for the <i>PlayerShip</i>.
-     */
-    public void activateShield() {
-        if (this.shieldPoints > 0) {
-            isShieldOn = true;
         }
     }
 
@@ -218,6 +210,7 @@ public class PlayerShip extends Ship {
     @Override
     public void shoot() {
         getGameState().addProjectile(new Projectile(this, this.getHeading(), new int[]{this.getX(), this.getY()}, getGameState()));
+        GameAssets.playerFire.play();
         log.debug("Projectile added");
     }
 
@@ -250,6 +243,7 @@ public class PlayerShip extends Ship {
                 getGameState().getPlayerShip().turnLeft(false);
                 getGameState().getPlayerShip().turnRight(false);
                 getGameState().getPlayerShip().accelerate(false);
+                GameAssets.warp.play();
             }
         };
         executeTask(resetShip, 2500, TimeUnit.MILLISECONDS);

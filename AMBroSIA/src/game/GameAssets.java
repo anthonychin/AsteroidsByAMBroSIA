@@ -26,7 +26,8 @@ public class GameAssets {
     public static Sound shields0;
     public static Sound crash;
     public static Sound explosion;
-    public static Sound fire;
+    public static Sound playerFire;
+    public static Sound alienFire;
     public static Sound theme;
     public static Sound missile;
     public static Sound alienSaucer;
@@ -46,13 +47,14 @@ public class GameAssets {
             shields0 = new Sound("ShieldsFailed.wav");
             crash = new Sound("crash.wav");
             explosion = new Sound("explosion.wav");
-            fire = new Sound("fire.wav");
+            playerFire = new Sound("Cardassian Cannon.wav");
+            alienFire = new Sound("fire.wav");
             theme = new Sound("menu.wav");
             missile = new Sound("missle.wav");
             alienSaucer = new Sound("saucer.wav");
             alienDetected = new Sound("Incoming1.wav");
-            thrusters = new Sound("thrusters.wav");
-            warp = new Sound("warp.wav");
+            thrusters = new Sound("engine1.wav");
+            warp = new Sound("enter warp.wav");
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(GameAssets.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
