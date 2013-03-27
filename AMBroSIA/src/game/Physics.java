@@ -13,12 +13,14 @@ import org.apache.log4j.Logger;
  * <code>Physics</code> class is to provide the game physics. It calculates
  * velocities and displacements and is able to detect collisions.
  * 
-* @author Nikolaos Bukas, Anthony
+* @author Nikolaos Bukas
  */
 public class Physics implements Runnable {
 
     private GameState gameState;
     private static int height, width;
+    private final static int WRAP_AROUND_BUFFER = 60;
+    private final static int ANGULAR_SPEED = 3;
     private final static Logger log = Logger.getLogger(Physics.class.getName());
 
     Physics(GameState gameState) {
@@ -133,15 +135,12 @@ public class Physics implements Runnable {
      *
      * @return list of MapObject detected in collision
      */
-    public ArrayList<MapObject> getCollisions() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public ArrayList<MapObject> getCollisions() {
         PlayerShip playerShip = gameState.getPlayerShip();
         AlienShip alienShip = gameState.getAlienShip();
         ArrayList<Asteroid> asteroidList = gameState.getAsteroids();
         ArrayList<Projectile> projectileList = gameState.getProjectiles();
         ArrayList<BonusDrop> bonusList = gameState.getBonusDrops();
-
-        Sound explosion = new Sound("explosion.wav");
-
 
         ArrayList<MapObject> listOfCollisions = new ArrayList<MapObject>();
         Polygon shipShape;
@@ -154,7 +153,6 @@ public class Physics implements Runnable {
                 if (detectCollision(shipShape, asteroid.getShape())) {
                     listOfCollisions.add(playerShip);
                     listOfCollisions.add(asteroid);
-                    explosion.play();
                 }
             }
 
@@ -163,7 +161,6 @@ public class Physics implements Runnable {
                 if (projectile.getOwner() == Projectile.ALIEN_OWNER && detectCollision(shipShape, projectile.getShape())) {
                     listOfCollisions.add(playerShip);
                     listOfCollisions.add(projectile);
-                    explosion.play();
                 }
             }
 
@@ -267,35 +264,34 @@ public class Physics implements Runnable {
     private static int[] calculateDisplacement(float[] velocity, float[] acceleration, float time) {
         int[] displacement = {0, 0};
 
-        //displacement[0] = Math.round((velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2)));
-        //displacement[1] = Math.round((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
-
-        displacement[0] = (int) (velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2));
-        displacement[1] = (int) (velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
-
+//        displacement[0] = Math.round((velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2)));
+//        displacement[1] = Math.round((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
+        displacement[0] = Math.round((velocity[0] * time + 0.5f * acceleration[0]));
+        displacement[1] = Math.round((float) velocity[1] * time + 0.5f * acceleration[1]);
+        
         return displacement;
     }
 
     private static float calculateHeadingDisplacement(boolean turningRight, boolean turningLeft) {
         if (turningRight && !turningLeft) {
-            return 2;
+            return ANGULAR_SPEED;
         } else if (!turningRight && turningLeft) {
-            return -2;
+            return -1 * ANGULAR_SPEED;
         } else {
             return 0;
         }
     }
 
     private static void wrapAround(MapObject gameObject) {
-        if (gameObject.getX() > width + 100) {
+        if (gameObject.getX() > width + WRAP_AROUND_BUFFER) {
             gameObject.setX(0);
-        } else if (gameObject.getX() < -100) {
+        } else if (gameObject.getX() < -1 * WRAP_AROUND_BUFFER) {
             gameObject.setX(width);
         }
 
-        if (gameObject.getY() > height + 100) {
+        if (gameObject.getY() > height + WRAP_AROUND_BUFFER) {
             gameObject.setY(0);
-        } else if (gameObject.getY() < -100) {
+        } else if (gameObject.getY() < -1 * WRAP_AROUND_BUFFER) {
             gameObject.setY(height);
         }
         //gameObject.setX(gameObject.getX() % (width + 100));

@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author Nikolaos
+ * @author Nikolaos Bukas
  */
 public class Collision implements Runnable {
 
@@ -24,10 +24,8 @@ public class Collision implements Runnable {
     final public static int MEDIUM_ASTEROID_SHIELD_DAMAGE = 2;
     final public static int SMALL_ASTEROID_SHIELD_DAMAGE = 1;
     final public static int PROJECTILE_SHIELD_DAMAGE = 1;
-    
     private Physics physicsEngine;
     private GameState gameState;
-    
     private final static Logger log = Logger.getLogger(Collision.class.getName());
 
     public Collision(GameState gs, Physics phys) {
@@ -38,64 +36,56 @@ public class Collision implements Runnable {
 
     @Override
     public void run() {
-        try {
-            log.debug("Collision start");
-            ArrayList<MapObject> collisionList = physicsEngine.getCollisions();
-            log.debug("SIZE OF THE COLLISION LIST = " + collisionList.size());
-            log.debug("COLLISION LIST = " + Arrays.toString(collisionList.toArray()));
-            if (!collisionList.isEmpty()) {
-                for (int i = 0; i < collisionList.size(); i = i + 2) {
-                    MapObject collisionOne = collisionList.get(i);
-                    MapObject collisionTwo = collisionList.get(i + 1);
+        log.debug("Collision start");
+        ArrayList<MapObject> collisionList = physicsEngine.getCollisions();
+        log.debug("SIZE OF THE COLLISION LIST = " + collisionList.size());
+        log.debug("COLLISION LIST = " + Arrays.toString(collisionList.toArray()));
+        if (!collisionList.isEmpty()) {
+            for (int i = 0; i < collisionList.size(); i = i + 2) {
+                MapObject collisionOne = collisionList.get(i);
+                MapObject collisionTwo = collisionList.get(i + 1);
 
-                    if (collisionOne instanceof PlayerShip) {
-                        if (collisionTwo instanceof AlienShip) {
-                            // PlayerShip collided with AlienShip
-                            if (collisionLogic((PlayerShip) collisionOne, (AlienShip) collisionTwo)) {
-                                //break;
-                            }
-                        } else if (collisionTwo instanceof Asteroid) {
-                            // PlayerShip collided with an Asteroid
-                            if (collisionLogic((PlayerShip) collisionOne, (Asteroid) collisionTwo)) {
-                                //break;
-                            }
-                        } else if (collisionTwo instanceof Projectile) {
-                            // PlayerShip collided with a Projectile
-                            if (collisionLogic((PlayerShip) collisionOne, (Projectile) collisionTwo)) {
-                                //break;
-                            }
-                        } else if (collisionTwo instanceof BonusDrop) {
-                            // PlayerShip collided with a BonusDrop
-                            collisionLogic((PlayerShip) collisionOne, (BonusDrop) collisionTwo);
+                if (collisionOne instanceof PlayerShip) {
+                    if (collisionTwo instanceof AlienShip) {
+                        // PlayerShip collided with AlienShip
+                        if (collisionLogic((PlayerShip) collisionOne, (AlienShip) collisionTwo)) {
+                            //break;
                         }
-                    } else if (collisionOne instanceof AlienShip) {
-                        if (collisionTwo instanceof Asteroid) {
-                            // AlienShip collided with an Asteroid
-
-                            collisionLogic((AlienShip) collisionOne, (Asteroid) collisionTwo);
-                        } else if (collisionTwo instanceof Projectile) {
-                            // AlienShip collided with a Projectile
-                            collisionLogic((AlienShip) collisionOne, (Projectile) collisionTwo);
+                    } else if (collisionTwo instanceof Asteroid) {
+                        // PlayerShip collided with an Asteroid
+                        if (collisionLogic((PlayerShip) collisionOne, (Asteroid) collisionTwo)) {
+                            //break;
                         }
-                    } else if (collisionOne instanceof Projectile) {
-                        collisionLogic((Projectile) collisionOne, (Asteroid) collisionTwo);
+                    } else if (collisionTwo instanceof Projectile) {
+                        // PlayerShip collided with a Projectile
+                        if (collisionLogic((PlayerShip) collisionOne, (Projectile) collisionTwo)) {
+                            //break;
+                        }
+                    } else if (collisionTwo instanceof BonusDrop) {
+                        // PlayerShip collided with a BonusDrop
+                        collisionLogic((PlayerShip) collisionOne, (BonusDrop) collisionTwo);
                     }
+                } else if (collisionOne instanceof AlienShip) {
+                    if (collisionTwo instanceof Asteroid) {
+                        // AlienShip collided with an Asteroid
+
+                        collisionLogic((AlienShip) collisionOne, (Asteroid) collisionTwo);
+                    } else if (collisionTwo instanceof Projectile) {
+                        // AlienShip collided with a Projectile
+                        collisionLogic((AlienShip) collisionOne, (Projectile) collisionTwo);
+                    }
+                } else if (collisionOne instanceof Projectile) {
+                    collisionLogic((Projectile) collisionOne, (Asteroid) collisionTwo);
                 }
             }
-        } catch (UnsupportedAudioFileException ex) {
-            java.util.logging.Logger.getLogger(Collision.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(Collision.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (LineUnavailableException ex) {
-            java.util.logging.Logger.getLogger(Collision.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private boolean collisionLogic(PlayerShip playerShip, Asteroid asteroid) {
         log.debug("Collision between Player and Asteroid");
-        
+
         asteroid.destroy(false);
-        
+
         if (asteroid.getSize() == Asteroid.LARGE_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= LARGE_ASTEROID_SHIELD_DAMAGE) {
                 playerShip.setShieldPoints(playerShip.getShieldPoints() - LARGE_ASTEROID_SHIELD_DAMAGE);
@@ -113,7 +103,7 @@ public class Collision implements Runnable {
             } else {
                 playerShip.destroy();
                 playerShip.setLives(playerShip.getLives() - 1);
-                
+
             }
         } else if (asteroid.getSize() == Asteroid.SMALL_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= SMALL_ASTEROID_SHIELD_DAMAGE) {
@@ -125,7 +115,7 @@ public class Collision implements Runnable {
                 playerShip.setLives(playerShip.getLives() - 1);
             }
         }
-            
+
         return gameState.getPlayerShip() == null;
     }
 
@@ -142,7 +132,7 @@ public class Collision implements Runnable {
         } else if (bonusDrop.getType() == BonusDrop.SHIELD_THREE_POINTS_DROP) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() + 3);
         }
-        
+
         bonusDrop.destroy();
     }
 
