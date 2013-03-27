@@ -67,27 +67,19 @@ public class Logic extends KeyAdapter implements ActionListener {
      * @param args
      */
     public static void main(String args[]) {
-        try {
-            //set log configuration to defaults
-            BasicConfigurator.configure();
+        GameAssets.loadSounds();
+        //set log configuration to defaults
+        BasicConfigurator.configure();
 
-            //create, display gui
-            gui = new MenuGUI(buttonPress, keyboard);
-            gui.showMenu();
+        //create, display gui
+        gui = new MenuGUI(buttonPress, keyboard);
+        gui.showMenu();
 
-            log.setLevel(LOG_LEVEL);
-            log.info("GUI has been started");
+        log.setLevel(LOG_LEVEL);
+        log.info("GUI has been started");
 
-            //background music - different exception handles for jdk6 compatibility
-            Sound backgroundMusic = new Sound("menu.wav");
-            backgroundMusic.playLoop();
-        } catch (UnsupportedAudioFileException ex) {
-            log.trace("Unsupported audio format", ex);
-        } catch (IOException ex) {
-            log.trace("Audio I/O Exception", ex);
-        } catch (LineUnavailableException ex) {
-            log.trace("Audio Line Unavailable", ex);
-        }
+        //background music - different exception handles for jdk6 compatibility
+        GameAssets.theme.playLoop();
     }
 
     /**
@@ -145,7 +137,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         Thread resetShip = new Thread() {
             public void run() {
                 gameState.addPlayerShip(oldShip);
-                gameState.getPlayerShip().setCoord(new int[]{400, 300});
+//                gameState.getPlayerShip().setCoord(new int[]{400, 300});
                 gameState.getPlayerShip().setVelocity(new float[]{0, 0});
                 gameState.getPlayerShip().setHeading(0);
                 gameState.getPlayerShip().turnLeft(false);
@@ -196,16 +188,10 @@ public class Logic extends KeyAdapter implements ActionListener {
     public static void displayPlayerTwoTurn() {
     }
 
-    /**
-     * Provides entire game flow.
-     */
-    public static void gameLogic() {
-    }
-
     //set up some game essentials
     private static void setUpLevel() {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 99, 0, 0));
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 3, 0, 3));
         gameState.addAsteroid(new Asteroid(new float[]{-1, -1}, -30, new int[]{650, 500}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
         //Random randu = new Random();
         //for (int i = 0; i < 5; i++){
@@ -269,6 +255,10 @@ public class Logic extends KeyAdapter implements ActionListener {
             } else {
                 startTimer();
                 paused = false;
+            }
+        } else if (keyCode == KeyEvent.VK_B) {
+            if (!paused && gameState.getPlayerShip() != null) {
+                gameState.getPlayerShip().useBomb();
             }
         }
         if (keyCode == KeyEvent.VK_Z) {
