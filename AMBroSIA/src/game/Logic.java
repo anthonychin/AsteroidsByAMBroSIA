@@ -192,6 +192,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         //gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
         //gameState.addProjectile(new Projectile(null, randu.nextFloat(), new int[] {randu.nextInt(800),randu.nextInt(600)},gameState));
         //}
+        gameState.addAlienShip(new AlienShip(new float[] {1,1},0,new int[] {100,100},gameState));
 
 
         graphicsEngine = new GraphicsEngine(gameState);
