@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import game.GameState;
 import game.Logic;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.ImageIcon;
@@ -182,8 +183,10 @@ public class MenuGUI implements Runnable
         //initialize a back button
         JPanel buttonPanelTutorial = new JPanel();
         buttonPanelTutorial.add(backButton);
+        buttonPanelTutorial.setBackground(Color.white);
         backButton.addActionListener(buttonClick);
         cardTutorial.add(buttonPanelTutorial, BorderLayout.SOUTH);
+        cardTutorial.setBackground(Color.white);
         card.add("Tutorial", cardTutorial);
         cardLayout.show(card, "Tutorial");
     }
