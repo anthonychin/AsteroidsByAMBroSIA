@@ -60,6 +60,7 @@ public class gameDraw
         //draw player
         if (memory.getPlayerShip() != null)
         {
+            g2d.setColor(Color.red);
             g2d.draw(memory.getPlayerShip().getShape());
         }
         
@@ -67,6 +68,7 @@ public class gameDraw
         //draw alien
         if (memory.getAlienShip() != null)
         {
+            g2d.setColor(Color.MAGENTA);
             g2d.draw(memory.getAlienShip().getShape());
         }
         
@@ -75,6 +77,7 @@ public class gameDraw
         ArrayList<Projectile> projectileList = memory.getProjectiles();
         if (!projectileList.isEmpty())
         {
+            g2d.setColor(Color.WHITE);
             for (Projectile projectile : projectileList)
             {
                 g2d.draw(projectile.getShape());
