@@ -61,10 +61,13 @@ public class gameDraw
         //draw player
         if (memory.getPlayerShip() != null)
         {
+            Polygon shape = memory.getPlayerShip().getShape();
             g2d.setColor(Color.red);
-            g2d.draw(memory.getPlayerShip().getShape());
+            g2d.fill(shape);
+            g2d.drawPolygon(shape);
         }
-        
+        //reset color
+        g2d.setColor(Color.BLACK);
         
         //draw alien
         if (memory.getAlienShip() != null)
@@ -73,6 +76,8 @@ public class gameDraw
             g2d.draw(memory.getAlienShip().getShape());
         }
         
+        //reset color
+        g2d.setColor(Color.BLACK);
         
         //draw projectiles
         ArrayList<Projectile> projectileList = memory.getProjectiles();
@@ -85,6 +90,9 @@ public class gameDraw
             }
         }
         
+        //reset color
+        g2d.setColor(Color.BLACK);
+        
         //draw bonus drops
         ArrayList<BonusDrop> bonusList = memory.getBonusDrops();
         if (!bonusList.isEmpty())
@@ -94,6 +102,9 @@ public class gameDraw
                 g2d.draw(drop.getShape());
             }
         }
+        
+        //set color for explosions
+        g2d.setColor(Color.WHITE);
         
         //draw explosions
         ArrayList<MapObjectTTL> explosionList = memory.getExplosions();
