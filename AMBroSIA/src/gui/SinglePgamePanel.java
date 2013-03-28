@@ -51,7 +51,6 @@ public class SinglePgamePanel extends SidePanel {
         super.paint(g);
 
         Graphics2D g2 = (Graphics2D) g;
-        this.setBackground(Color.WHITE);
 
         gameDraw.drawObjects(g2, gameState);
         //seems to reduce stuttering a bit. See http://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html#sync%28%29

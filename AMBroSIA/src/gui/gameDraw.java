@@ -42,6 +42,7 @@ public class gameDraw
         ArrayList<Asteroid> asteroidList = memory.getAsteroids();
         if (!asteroidList.isEmpty()) 
         {
+            g2d.setColor(Color.black);
             for (Asteroid asteroid : asteroidList)
             {
                 //make asteroid border a little thicker
