@@ -8,8 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import game.GameState;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,6 +20,7 @@ import java.awt.Toolkit;
  */
 public class SinglePgamePanel extends SidePanel {
 
+    private Image img;
     private GameState gameState;
     // initialize side panel showing the player's current score, lives and current level
     JPanel sidePanel;
@@ -25,9 +29,17 @@ public class SinglePgamePanel extends SidePanel {
     static String score;
     // constructor
 
-    public SinglePgamePanel(GameState gs) {
+    public SinglePgamePanel(GameState gs, Image img) {
         super(gs);
         this.gameState = gs;
+        
+        this.img = img;
+        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+        setPreferredSize(size);
+        setMinimumSize(size);
+        setMaximumSize(size);
+        setSize(size);
+        setLayout(null);
     }
 
     // create Single Player Mode panel's internal components
@@ -49,5 +61,10 @@ public class SinglePgamePanel extends SidePanel {
 
     public void updatePanel() {
         repaint();
+    }
+    
+   @Override
+    public void paintComponent(Graphics g) {
+        g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
     }
 }

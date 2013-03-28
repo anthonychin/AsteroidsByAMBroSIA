@@ -14,6 +14,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
@@ -133,7 +134,7 @@ public class MenuGUI implements Runnable
         //allow keyboard input
         frame.setFocusable(true);
        //create panel, show it
-        onePPanel = new SinglePgamePanel(gs);
+        onePPanel = new SinglePgamePanel(gs, new ImageIcon("./src/images/spaceBackground.jpg").getImage());
         JPanel cardGame1P = new JPanel();
         cardGame1P.add(onePPanel);
         card.add("Single-Player Mode", cardGame1P);
