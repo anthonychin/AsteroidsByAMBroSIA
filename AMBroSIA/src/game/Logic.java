@@ -56,9 +56,9 @@ public class Logic extends KeyAdapter implements ActionListener {
     //logger, global logging level
     private final static Logger log = Logger.getLogger(Logic.class.getName());
     /**
-     * DONT KNOW WHAT THIS IS
+     * Logging level control - from no logging output to full logging.
      */
-    public final static Level LOG_LEVEL = Level.ALL;
+    public final static Level LOG_LEVEL = Level.OFF;
 
     /**
      * Main method; creates the main menu and acts as appropriate depending on
