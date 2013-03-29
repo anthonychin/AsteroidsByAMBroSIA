@@ -58,7 +58,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     /**
      * DONT KNOW WHAT THIS IS
      */
-    public final static Level LOG_LEVEL = Level.OFF;
+    public final static Level LOG_LEVEL = Level.ALL;
 
     /**
      * Main method; creates the main menu and acts as appropriate depending on
@@ -90,11 +90,11 @@ public class Logic extends KeyAdapter implements ActionListener {
     public static void startTimer() {
 
         timer = Executors.newScheduledThreadPool(4);
-        timer.scheduleAtFixedRate(graphicsEngine, 2, 19, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(physicsEngine, 2, 19, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(collisionCheck, 2, 19, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(collisionCheck, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
-        timer.scheduleAtFixedRate(ttlLogic, 2, 202, TimeUnit.MILLISECONDS);
+        timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
 
         //single threaded game loop testing thread
         //testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
@@ -172,7 +172,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     //set up some game essentials
     private static void setUpLevel() {
         gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 3, 0, 3));
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 99, 0, 3));
         gameState.addAsteroid(new Asteroid(new float[]{-1, -1}, -30, new int[]{650, 500}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
         //Random randu = new Random();
         //for (int i = 0; i < 5; i++){

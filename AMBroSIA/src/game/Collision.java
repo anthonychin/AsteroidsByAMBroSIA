@@ -83,7 +83,7 @@ public class Collision implements Runnable {
 
     private boolean collisionLogic(PlayerShip playerShip, Asteroid asteroid) {
         log.debug("Collision between Player and Asteroid");
-
+        
         asteroid.destroy(false);
 
         if (asteroid.getSize() == Asteroid.LARGE_ASTEROID_SIZE) {

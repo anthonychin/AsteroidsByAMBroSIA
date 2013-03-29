@@ -218,14 +218,12 @@ public class Physics implements Runnable {
     }
 
     private static boolean detectCollision(Polygon shapeOne, Polygon shapeTwo) {
-        log.debug("collision check 1");
         for (int i = 0; i < shapeTwo.npoints; i++) {
             if (shapeOne.contains(shapeTwo.xpoints[i], shapeTwo.ypoints[i])) {
                 return true;
             }
         }
         
-        log.debug("collision check 2");
         for (int i = 0; i < shapeOne.npoints; i++) {
             if (shapeTwo.contains(shapeOne.xpoints[i], shapeOne.ypoints[i])) {
                 return true;
