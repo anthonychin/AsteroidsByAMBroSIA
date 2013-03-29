@@ -38,7 +38,7 @@ public class timeToLive implements Runnable {
     private void TTLLogic(List<? extends MapObjectTTL> objectList) {
         if (!objectList.isEmpty()) {
             log.debug("Starting TTL Check");
-            ArrayList<Object> toRemove = new ArrayList();
+            ArrayList<Object> toRemove = new ArrayList<Object>();
             for (MapObjectTTL object : objectList) {             
                 //TTL is in seconds : if it still has life left we simply set it for the next one, else, it's gone
                 if (object.getTTL() > 0) {
