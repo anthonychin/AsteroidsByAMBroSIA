@@ -36,14 +36,16 @@ public class Physics implements Runnable {
         log.info("Physics update start");
         height = MenuGUI.HEIGHT;
         width = MenuGUI.WIDTH;
-        if (gameState.getPlayerShip() != null) {
+        PlayerShip player = gameState.getPlayerShip();
+        if (player != null) {
             log.debug("updating player ship");
-            updateObject(gameState.getPlayerShip());
+            updateObject(player);
         }
 
-        if (gameState.getAlienShip() != null) {
+        AlienShip alien = gameState.getAlienShip();
+        if (alien != null) {
             log.debug("updating alien");
-            updateObject(gameState.getAlienShip());
+            updateObject(alien);
         }
 
         if (!gameState.getAsteroids().isEmpty()) {

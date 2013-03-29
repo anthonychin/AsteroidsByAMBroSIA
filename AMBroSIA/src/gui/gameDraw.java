@@ -1,10 +1,12 @@
 
 package gui;
 
+import game.AlienShip;
 import game.Asteroid;
 import game.BonusDrop;
 import game.MapObjectTTL;
 import game.GameState;
+import game.PlayerShip;
 import game.Projectile;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -59,9 +61,10 @@ public class gameDraw
         g2d.setPaint(defaultPaint);
         
         //draw player
-        if (memory.getPlayerShip() != null)
+        PlayerShip player = memory.getPlayerShip();
+        if (player != null)
         {
-            Polygon shape = memory.getPlayerShip().getShape();
+            Polygon shape = player.getShape();
             g2d.setColor(Color.red);
             g2d.fill(shape);
             g2d.drawPolygon(shape);
@@ -70,10 +73,11 @@ public class gameDraw
         g2d.setColor(Color.BLACK);
         
         //draw alien
-        if (memory.getAlienShip() != null)
+        AlienShip alien = memory.getAlienShip();
+        if (alien != null)
         {
             g2d.setColor(Color.MAGENTA);
-            g2d.draw(memory.getAlienShip().getShape());
+            g2d.draw(alien.getShape());
         }
         
         //reset color

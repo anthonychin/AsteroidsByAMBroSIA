@@ -232,8 +232,8 @@ public class PlayerShip extends Ship {
      * Resets the player ship after it gets destroyed.
      */
     public void resetShip() {
+        
         final PlayerShip oldShip = getGameState().getPlayerShip();
-        getGameState().removePlayerShip();
         Thread resetShip = new Thread() {
             public void run() {
                 getGameState().addPlayerShip(oldShip);
@@ -246,7 +246,12 @@ public class PlayerShip extends Ship {
                 GameAssets.warp.play();
             }
         };
-        executeTask(resetShip, 2500, TimeUnit.MILLISECONDS);
+
+        //check to see if it has already been set to null by an ongoing reset.
+        if (oldShip != null) {
+            getGameState().removePlayerShip();
+            executeTask(resetShip, 2500, TimeUnit.MILLISECONDS);
+        }
     }
 
     private void createExplosionEffect() {

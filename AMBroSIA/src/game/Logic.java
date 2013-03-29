@@ -198,35 +198,36 @@ public class Logic extends KeyAdapter implements ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
+        PlayerShip player = gameState.getPlayerShip();
         //handles most basic key commands.  Should activate a boolean stating that the key has been pressed
         if (keyCode == KeyEvent.VK_UP) {
             //accelerate
-            if (!paused && gameState.getPlayerShip() != null) {
-                gameState.getPlayerShip().accelerate(true);
+            if (!paused && player != null) {
+                player.accelerate(true);
                 GameAssets.thrusters.playLoop();
             }
         } else if (keyCode == KeyEvent.VK_LEFT) {
-            if (!paused && gameState.getPlayerShip() != null) {
-                gameState.getPlayerShip().turnLeft(true);
+            if (!paused && player != null) {
+                player.turnLeft(true);
             }
         } else if (keyCode == KeyEvent.VK_RIGHT) {
-            if (!paused && gameState.getPlayerShip() != null) {
-                gameState.getPlayerShip().turnRight(true);
+            if (!paused && player != null) {
+                player.turnRight(true);
             }
         } else if (keyCode == KeyEvent.VK_DOWN) {
-            if (!paused && gameState.getPlayerShip() != null) {
-                gameState.getPlayerShip().useBomb();
+            if (!paused && player != null) {
+                player.useBomb();
             }
         } else if (keyCode == KeyEvent.VK_SPACE) {
-            if (!paused && gameState.getPlayerShip() != null) {
+            if (!paused && player != null) {
                 if (shootKeyReleased) {
                     initialShootTime = System.currentTimeMillis();
                     shootKeyReleased = false;
-                    gameState.getPlayerShip().shoot();
+                    player.shoot();
                 } else if (!shootKeyReleased) {
                     currentShootTime = System.currentTimeMillis();
                     if ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1000) {
-                        gameState.getPlayerShip().shoot();
+                        player.shoot();
                         initialShootTime = currentShootTime;
                     }
                 }
@@ -240,8 +241,8 @@ public class Logic extends KeyAdapter implements ActionListener {
                 paused = false;
             }
         } else if (keyCode == KeyEvent.VK_B) {
-            if (!paused && gameState.getPlayerShip() != null) {
-                gameState.getPlayerShip().useBomb();
+            if (!paused && player != null) {
+                player.useBomb();
             }
         }
         if (keyCode == KeyEvent.VK_Z) {
@@ -259,20 +260,21 @@ public class Logic extends KeyAdapter implements ActionListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
+        PlayerShip player = gameState.getPlayerShip();
         //stops doing whatever that keypress was doing
         if (keyCode == KeyEvent.VK_UP) {
             //accelerate
-            if (gameState.getPlayerShip() != null) {
-                gameState.getPlayerShip().accelerate(false);
+            if (player != null) {
+                player.accelerate(false);
                 GameAssets.thrusters.stop();
             }
         } else if (keyCode == KeyEvent.VK_LEFT) {
-            if (gameState.getPlayerShip() != null) {
-                gameState.getPlayerShip().turnLeft(false);
+            if (player != null) {
+                player.turnLeft(false);
             }
         } else if (keyCode == KeyEvent.VK_RIGHT) {
-            if (gameState.getPlayerShip() != null) {
-                gameState.getPlayerShip().turnRight(false);
+            if (player != null) {
+                player.turnRight(false);
             }
         } else if (keyCode == KeyEvent.VK_SPACE) {
             shootKeyReleased = true;
