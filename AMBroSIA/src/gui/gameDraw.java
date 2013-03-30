@@ -37,7 +37,6 @@ public class gameDraw
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_LCD_CONTRAST, 100);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
-        Paint defaultPaint = g2d.getPaint();
         Stroke defaultStroke = g2d.getStroke();
         
         //draw asteroids
@@ -50,15 +49,14 @@ public class gameDraw
                 //make asteroid border a little thicker
                 Polygon shape = asteroid.getShape();
                 g2d.setStroke(new BasicStroke(10,BasicStroke.CAP_ROUND,BasicStroke.JOIN_BEVEL));
-                g2d.setPaint(Color.GRAY);
+                g2d.setColor(Color.GRAY);
                 g2d.drawPolygon(shape);
-                g2d.setPaint(defaultPaint);
+                g2d.setColor(Color.black);
                 g2d.fillPolygon(shape);
             } 
         }
         //reset to default width for other objects for now
         g2d.setStroke(defaultStroke);
-        g2d.setPaint(defaultPaint);
         
         //draw player
         PlayerShip player = memory.getPlayerShip();
@@ -66,11 +64,19 @@ public class gameDraw
         {
             Polygon shape = player.getShape();
             g2d.setColor(Color.red);
-            g2d.fill(shape);
+            g2d.fillPolygon(shape);
+            
+            //crude shield effect
+            if (player.getShieldStatus())
+            {
+                g2d.setColor(new Color(89, 165, 253)); //light blue
+                g2d.setStroke(new BasicStroke(1, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
+            }
             g2d.drawPolygon(shape);
         }
-        //reset color
+        //reset color, stroke
         g2d.setColor(Color.BLACK);
+        g2d.setStroke(defaultStroke);
         
         //draw alien
         AlienShip alien = memory.getAlienShip();
