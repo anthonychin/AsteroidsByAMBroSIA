@@ -130,7 +130,19 @@ public class PlayerShip extends Ship {
      * @return true if shield is activated, false otherwise
      */
     public boolean getShieldStatus() {
-        return isShieldOn;
+        return shieldPoints >= 1;
+    }
+
+    /**
+     * Checks if the <i>PlayerShip</i> is dead.
+     *
+     * @return true if player ship is dead, false otherwise
+     */
+    public boolean isDead() {
+        if (this.getLives() == 0) {
+            return true;
+        }
+        return false;
     }
 
     /**

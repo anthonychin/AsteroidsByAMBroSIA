@@ -18,17 +18,12 @@ import javax.swing.ImageIcon;
  *
  * @author Haisin Yip
  */
-public class SinglePgamePanel extends SidePanel {
+public class SinglePgamePanel extends DescriptionPanel {
 
     private Image img;
     private GameState gameState;
-    // initialize side panel showing the player's current score, lives and current level
-    JPanel sidePanel;
-    JLabel highscore, lives, level;
-    JButton pause;
-    static String score;
+    
     // constructor
-
     public SinglePgamePanel(GameState gs, Image img) {
         super(gs);
         this.gameState = gs;
@@ -42,8 +37,6 @@ public class SinglePgamePanel extends SidePanel {
         setLayout(null);
     }
 
-    // create Single Player Mode panel's internal components
-    // the label components takes as input the current score, current level, and current lifestock
     // paints content onto the Single-Player mode panel
     @Override
     public void paint(Graphics g) {

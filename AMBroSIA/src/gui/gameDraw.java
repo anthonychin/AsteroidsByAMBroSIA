@@ -70,7 +70,7 @@ public class gameDraw
             if (player.getShieldStatus())
             {
                 g2d.setColor(new Color(89, 165, 253)); //light blue
-                g2d.setStroke(new BasicStroke(1, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
+                g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
             }
             g2d.drawPolygon(shape);
         }

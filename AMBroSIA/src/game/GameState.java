@@ -36,8 +36,7 @@ public class GameState {
     private ArrayList<MapObjectTTL> explosionList;
     private PlayerShip playerShip;
     private AlienShip alienShip;
-    
-    private int highScore;
+    private int currentScore;
     private int level;
     private boolean isPlayerDead = false;
     
@@ -51,7 +50,7 @@ public class GameState {
      * lists for asteroid, projectile, bonus, and explosions.
      *
      * @param level
-     * @param highScore
+     * @param currentScore
      */
     public GameState() {
         resetToDefaults();
@@ -280,19 +279,19 @@ public class GameState {
     }
 
     /**
-     * Returns the high score.
-     * @return high score
+     * Returns the current score.
+     * @return current score
      */
-    public int getHighScore() {
-        return this.highScore;
+    public int getCurrentScore() {
+        return this.currentScore;
     }
 
     /**
      * Add to high score the value of score.
      * @param score
      */
-    public void addToHighScore(int score) {
-        this.highScore += score;
+    public void addToCurrentScore(int score) {
+        this.currentScore += score;
     }
     
     public void setPlayerDead(boolean isDead) {

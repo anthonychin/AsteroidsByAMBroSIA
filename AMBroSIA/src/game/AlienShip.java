@@ -17,7 +17,7 @@ public class AlienShip extends Ship {
         getGameState().removeAlienShip();
         GameAssets.crash.play();
         if (!bombUsed) {
-            getGameState().addToHighScore(GameState.ALIEN_SCORE);
+            getGameState().addToCurrentScore(GameState.ALIEN_SCORE);
         }
     }
 }
