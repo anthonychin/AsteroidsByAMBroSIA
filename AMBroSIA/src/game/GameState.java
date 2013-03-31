@@ -37,7 +37,7 @@ public class GameState {
     private ArrayList<MapObjectTTL> explosionList;
     private PlayerShip playerShip;
     private AlienShip alienShip;
-    private int highScore;
+    private int currentScore;
     private int level;
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
@@ -53,12 +53,12 @@ public class GameState {
      * lists for asteroid, projectile, bonus, and explosions.
      *
      * @param level
-     * @param highScore
+     * @param currentScore
      */
-    public GameState(int level, int highScore) {
+    public GameState(int level, int currentScore) {
         this.playerShip = null;
         this.level = level;
-        this.highScore = highScore;
+        this.currentScore = currentScore;
 
         this.asteroidList = new ArrayList<Asteroid>();
         this.projectileList = new ArrayList<Projectile>();
@@ -275,18 +275,18 @@ public class GameState {
     }
 
     /**
-     * Returns the high score.
-     * @return high score
+     * Returns the current score.
+     * @return current score
      */
-    public int getHighScore() {
-        return this.highScore;
+    public int getCurrentScore() {
+        return this.currentScore;
     }
 
     /**
      * Add to high score the value of score.
      * @param score
      */
-    public void addToHighScore(int score) {
-        this.highScore += score;
+    public void addToCurrentScore(int score) {
+        this.currentScore += score;
     }
 }

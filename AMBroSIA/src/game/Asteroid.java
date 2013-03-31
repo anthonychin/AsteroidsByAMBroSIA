@@ -41,7 +41,7 @@ public class Asteroid extends MapObject {
 
             if (!bombUsed) 
             {
-                getGameState().addToHighScore(GameState.LARGE_ASTEROID_SCORE);
+                getGameState().addToCurrentScore(GameState.LARGE_ASTEROID_SCORE);
             }
         } 
         
@@ -55,7 +55,7 @@ public class Asteroid extends MapObject {
 
             if (!bombUsed) 
             {
-                getGameState().addToHighScore(GameState.MEDIUM_ASTEROID_SCORE);
+                getGameState().addToCurrentScore(GameState.MEDIUM_ASTEROID_SCORE);
             }
         } 
         
@@ -63,7 +63,7 @@ public class Asteroid extends MapObject {
         {
             if (!bombUsed) 
             {
-                getGameState().addToHighScore(GameState.SMALL_ASTEROID_SCORE);
+                getGameState().addToCurrentScore(GameState.SMALL_ASTEROID_SCORE);
             }
         }
         log.debug("removing asteroid " + this.toString() + " from game");

@@ -92,7 +92,8 @@ public class MenuGUI implements Runnable
         frame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT));
+        //frame.setMinimumSize(new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT));
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         //set up (but do not yet allow) keyboard input
         frame.addKeyListener(keyboard);

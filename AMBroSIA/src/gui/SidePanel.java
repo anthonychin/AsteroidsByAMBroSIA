@@ -17,12 +17,12 @@ public class SidePanel extends JPanel {
         this.gameState = gs;
     }
    
-    // Method to print the highscore, lives and level
+    // Method to print the current score, lives and level
     @Override
     public void paint (Graphics g){
         super.paint(g);
         g.setColor(Color.red);
-        g.drawString("Current Score " + gameState.getHighScore(), 5, 10);
+        g.drawString("Current Score " + gameState.getCurrentScore(), 5, 10);
         g.drawString("Level " + gameState.getLevel(), 95, 10);
         
         PlayerShip player = gameState.getPlayerShip();
