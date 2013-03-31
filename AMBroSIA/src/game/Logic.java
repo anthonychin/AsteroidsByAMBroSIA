@@ -171,14 +171,18 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     //set up some game essentials
     private static void setUpLevel() {
-        gameState = new GameState(1, 0);
+        gameState = new GameState(10, 0);
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 99, 0, 3));
-        gameState.addAsteroid(new Asteroid(new float[]{-1, -1}, -30, new int[]{650, 500}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        //Random randu = new Random();
-        //for (int i = 0; i < 5; i++){
-        //gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        //gameState.addProjectile(new Projectile(null, randu.nextFloat(), new int[] {randu.nextInt(800),randu.nextInt(600)},gameState));
-        //}
+        int asteroids = Difficulty.spawnAsteroids(gameState.getLevel());
+        for(int i = 0; i < asteroids; i++) {
+            float xVel = Difficulty.randomAsteroidVelocity(gameState.getLevel());
+            float yVel = Difficulty.randomAsteroidVelocity(gameState.getLevel());
+            float heading = Difficulty.randomHeading();
+            int xCoord = Difficulty.randomXPos();
+            int yCoord = Difficulty.randomYPos();
+            int size = Difficulty.randomAsteroidSize();
+            gameState.addAsteroid(new Asteroid(new float[]{xVel, yVel}, heading, new int[]{xCoord, yCoord}, gameState, size));
+        }
         gameState.addAlienShip(new AlienShip(new float[] {1,1},0,new int[] {100,100},gameState));
 
 
@@ -247,7 +251,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         }
         if (keyCode == KeyEvent.VK_Z) {
             Random randu = new Random();
-            gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(), Difficulty.randomAsteroidHeading()}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
+            gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(gameState.getLevel()), Difficulty.randomAsteroidVelocity(gameState.getLevel())}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
         }
     }
 

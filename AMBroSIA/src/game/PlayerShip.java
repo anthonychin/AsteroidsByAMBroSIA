@@ -134,7 +134,7 @@ public class PlayerShip extends Ship {
      * @return true if shield is activated, false otherwise
      */
     public boolean getShieldStatus() {
-        return isShieldOn;
+        return shieldPoints >= 1;
     }
 
     /**
