@@ -63,7 +63,7 @@ public class Progression implements Runnable{
         return gameState.isPlayerDead();
     }
     
-    private void setupInitialLevel()
+    public void setupInitialLevel()
     {
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 99, 0, 3));
         addAsteroids(1);
@@ -73,7 +73,7 @@ public class Progression implements Runnable{
     {
         //save old level & score
         int oldLevel = gameState.getLevel();
-        int oldScore = gameState.getHighScore();
+        int oldScore = gameState.getCurrentScore();
         //player can't be null here
         int oldPlayerLives = gameState.getPlayerShip().getLives();
         
@@ -82,7 +82,7 @@ public class Progression implements Runnable{
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, oldPlayerLives, 0, 3));
         addAsteroids(levelNumber);
         gameState.setLevel(oldLevel);
-        gameState.addToHighScore(oldScore);
+        gameState.addToCurrentScore(oldScore);
     }
     
     private void addAsteroids(int levelNumber)

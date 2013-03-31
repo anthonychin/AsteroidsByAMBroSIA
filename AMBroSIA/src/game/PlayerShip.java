@@ -134,18 +134,6 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Checks if the <i>PlayerShip</i> is dead.
-     *
-     * @return true if player ship is dead, false otherwise
-     */
-    public boolean isDead() {
-        if (this.getLives() == 0) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Sets the <i>PlayerShip</i> to accelerate.
      *
      * @param isAccelerating

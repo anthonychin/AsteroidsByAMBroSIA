@@ -175,6 +175,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         ttlLogic = new timeToLive(gameState);
         collisionCheck = new Collision(gameState, physicsEngine);
         gameProgress = new Progression(gameState,twoPlayer);
+        gameProgress.setupInitialLevel();
 
     }
 

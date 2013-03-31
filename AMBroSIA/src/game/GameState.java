@@ -305,7 +305,7 @@ public class GameState {
     public void resetToDefaults() {
         this.playerShip = null;
         this.level = 1;
-        this.highScore = 0;
+        this.currentScore = 0;
         isPlayerDead = false;
         playerShip = null;
         alienShip = null;
