@@ -15,6 +15,7 @@ public class Progression implements Runnable{
     
     private GameState gameState;
     private boolean istwoPlayer = false;
+    private boolean playerTwoTurn = false;
     
     public Progression(GameState gs, boolean twoPlayer){
         gameState = gs;
@@ -29,18 +30,19 @@ public class Progression implements Runnable{
 
     private void spawnAlien() {
         if (isAlienDestroyed() && Difficulty.spawnAlien()) {
-            gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, Difficulty.randomHeading(), new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
+            gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, 0, new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
         }
     }
     
     private void checkGameProgress()
     {
+        //game over
         if (isPlayerDead())
         {
             Logic.stopTimer();
             Logic.displayGameOver();
         }
-        
+        //if the player is not dead, check for level completion and move to next level
         else if (allAsteroidsDestroyed() && isAlienDestroyed())
         {
             setupLevel(gameState.getLevel()+1);
@@ -65,6 +67,8 @@ public class Progression implements Runnable{
     
     public void setupInitialLevel()
     {
+        //for when the game begins, to level 1
+        gameState.resetToDefaults();
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 99, 0, 3));
         addAsteroids(1);
     }
@@ -81,7 +85,7 @@ public class Progression implements Runnable{
         gameState.resetToDefaults();
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, oldPlayerLives, 0, 3));
         addAsteroids(levelNumber);
-        gameState.setLevel(oldLevel);
+        gameState.setLevel(oldLevel+1);
         gameState.addToCurrentScore(oldScore);
     }
     
