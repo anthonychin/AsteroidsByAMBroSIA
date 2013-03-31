@@ -26,11 +26,11 @@ public class Progression implements Runnable{
         checkGameProgress();
         spawnAlien();
     }
-    
-    private void spawnAlien()
-    {
-        
-//        gameState.addAlienShip(Difficulty.spawnAlien());
+
+    private void spawnAlien() {
+        if (isAlienDestroyed() && Difficulty.spawnAlien()) {
+            gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, Difficulty.randomHeading(), new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
+        }
     }
     
     private void checkGameProgress()
@@ -43,7 +43,7 @@ public class Progression implements Runnable{
         
         else if (allAsteroidsDestroyed() && isAlienDestroyed())
         {
-            //go to next level
+            setupLevel(gameState.getLevel()+1);
         }
     }
     
@@ -87,17 +87,17 @@ public class Progression implements Runnable{
     
     private void addAsteroids(int levelNumber)
     {
-//        int NumberOfAsteroids = spawnAsteroids(1);
-//
-//        for (int i = 0; i < NumberOfAsteroids; i++) {
-//            float xVel = randomAsteroidVelocity();
-//            float yVel = randomAsteroidVelocity();
-//            float heading = randomHeading();
-//            int xCoord = randomXPos();
-//            int yCoord = randomYPos();
-//            int size = andomAsteroidSize();
-//            gameState.addAsteroid(new Asteroid(new float[]{xVel, yVel}, heading, new int[]{xCoord, yCoord}, gameState, size));
-//        }
+        int NumberOfAsteroids = Difficulty.spawnAsteroids(1);
+
+        for (int i = 0; i < NumberOfAsteroids; i++) {
+            float xVel = Difficulty.randomAsteroidVelocity(levelNumber);
+            float yVel = Difficulty.randomAsteroidVelocity(levelNumber);
+            float heading = Difficulty.randomHeading();
+            int xCoord = Difficulty.randomXPos();
+            int yCoord = Difficulty.randomYPos();
+            int size = Difficulty.randomAsteroidSize();
+            gameState.addAsteroid(new Asteroid(new float[]{xVel, yVel}, heading, new int[]{xCoord, yCoord}, gameState, size));
+        }
     }
 
 }

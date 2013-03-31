@@ -91,7 +91,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         timer.scheduleAtFixedRate(collisionCheck, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
-//        timer.scheduleAtFixedRate(gameProgress, 0, 1, TimeUnit.SECONDS);
+        timer.scheduleAtFixedRate(gameProgress, 0, 1, TimeUnit.SECONDS);
 
         //single threaded game loop testing thread
         //testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
@@ -123,7 +123,7 @@ public class Logic extends KeyAdapter implements ActionListener {
      */
     public static void startSinglePlayer() {
         GameAssets.theme.stop();
-        setUpLevel();
+        setUpLevel(false);
     }
 
     /**
@@ -167,13 +167,13 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     //set up some game essentials
-    private static void setUpLevel() {
+    private static void setUpLevel(boolean twoPlayer) {
         gameState = new GameState();
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
         ttlLogic = new timeToLive(gameState);
         collisionCheck = new Collision(gameState, physicsEngine);
-//        gameProgress = new Progression(gameState);
+        gameProgress = new Progression(gameState,twoPlayer);
 
     }
 
@@ -235,7 +235,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         }
         if (keyCode == KeyEvent.VK_Z) {
             Random randu = new Random();
-            gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(), Difficulty.randomAsteroidHeading()}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
+            gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(1), Difficulty.randomHeading()}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
         }
     }
 
