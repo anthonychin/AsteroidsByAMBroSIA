@@ -24,12 +24,12 @@ public class LeaderBoardPanel extends JPanel
     
     GameState gamestate;
     
-    String highscore = String.valueOf(gamestate.getCurrentScore());
-    String lives = String.valueOf(gamestate.getPlayerShip().getLives());
+    //String highscore = String.valueOf(gamestate.getCurrentScore());
+    //String lives = String.valueOf(gamestate.getPlayerShip().getLives());
     
     //ArrayList<String> playerNames = new ArrayList<String>();
     String[] columns = {"Player", "Highscore", "Number of Lives", "Asteroid Destroyed", "Aliens destroyed", "Total deaths", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
-    String[][] rowdata = {{"p1", highscore, "lives", " ", "2", "3", "1.4", "3", "3", "3"}};
+    String[][] rowdata = {{"p1", "highscore", "lives", " ", "2", "3", "1.4", "3", "3", "3"}};
     
     JScrollPane scrollPane;
     public LeaderBoardPanel(int width, int height)

@@ -8,12 +8,13 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 /**
  *
+ * @author Haisin Yip
  * @author Anthony Chin
  * 
  */
-public class SidePanel extends JPanel {
+public class DescriptionPanel extends JPanel {
     private GameState gameState;
-    public SidePanel(GameState gs){
+    public DescriptionPanel(GameState gs){
         this.gameState = gs;
     }
    
@@ -26,7 +27,8 @@ public class SidePanel extends JPanel {
         g.drawString("Level " + gameState.getLevel(), 95, 10);
         
         PlayerShip player = gameState.getPlayerShip();
-        if(player != null){
+        if(player != null)
+        {
             g.drawString("Lives " + player.getLives(), 140, 10);
             g.drawString("x " + player.getX(), 180, 10);
             g.drawString("y " + player.getY(), 210, 10);

@@ -60,6 +60,8 @@ public class MenuGUI implements Runnable
     private SinglePgamePanel onePPanel;
     private TwoPgamePanel twoPPanel;
     
+    private GameOverPanel gameOverPanel;
+    
     private final static Logger log = Logger.getLogger(MenuGUI.class.getName());
     
     /**
@@ -190,6 +192,20 @@ public class MenuGUI implements Runnable
         cardTutorial.setBackground(Color.white);
         card.add("Tutorial", cardTutorial);
         cardLayout.show(card, "Tutorial");
+    }
+    
+    public void displayGameOver(GameState gs)
+    {
+        frame.setFocusable(true);
+       //create panel, show it
+        gameOverPanel = new GameOverPanel(DEFAULT_WIDTH, DEFAULT_HEIGHT, gs);
+        JPanel cardGameOver= new JPanel();
+        cardGameOver.add(gameOverPanel);
+        card.add("Game Over", gameOverPanel);
+        cardLayout.show(card, "GameOver");
+        
+        //do not allow resizing at this point, as it can disrupt gameplay
+        frame.setResizable(false);
     }
         
     public void goBack() { cardLayout.show(card, "Menu");}
