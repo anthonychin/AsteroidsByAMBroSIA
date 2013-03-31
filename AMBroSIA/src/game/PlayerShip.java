@@ -1,12 +1,7 @@
 package game;
 
 import static game.Logic.executeTask;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * The
@@ -68,6 +63,7 @@ public class PlayerShip extends Ship {
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
         GameAssets.warp.play();
+        getGameState().setPlayerDead(false);
         log.setLevel(Logic.LOG_LEVEL);
     }
 
@@ -135,18 +131,6 @@ public class PlayerShip extends Ship {
      */
     public boolean getShieldStatus() {
         return isShieldOn;
-    }
-
-    /**
-     * Checks if the <i>PlayerShip</i> is dead.
-     *
-     * @return true if player ship is dead, false otherwise
-     */
-    public boolean isDead() {
-        if (this.getLives() == 0) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -225,6 +209,7 @@ public class PlayerShip extends Ship {
             resetShip();
         } else {
             getGameState().removePlayerShip();
+            getGameState().setPlayerDead(true);
         }
     }
     

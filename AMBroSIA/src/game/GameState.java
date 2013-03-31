@@ -2,7 +2,6 @@ package game;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.Semaphore;
 
 /**
  * The
@@ -37,17 +36,16 @@ public class GameState {
     private ArrayList<MapObjectTTL> explosionList;
     private PlayerShip playerShip;
     private AlienShip alienShip;
+    
     private int highScore;
     private int level;
+    private boolean isPlayerDead = false;
+    
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
     private static final Object explosionSync = new Object();
     private static final Object bonusSync = new Object();
-
-//    private final Semaphore asteroidSync = new Semaphore(1,true);
-//    private final Semaphore projectileSync = new Semaphore(1,true);
-//    private final Semaphore explosionSync = new Semaphore(1,true);
-//    private final Semaphore bonusSync = new Semaphore(1,true);
+    
     /**
      * Creates <i>GameState</i> using given parameters. It also creates empty
      * lists for asteroid, projectile, bonus, and explosions.
@@ -55,15 +53,8 @@ public class GameState {
      * @param level
      * @param highScore
      */
-    public GameState(int level, int highScore) {
-        this.playerShip = null;
-        this.level = level;
-        this.highScore = highScore;
-
-        this.asteroidList = new ArrayList<Asteroid>();
-        this.projectileList = new ArrayList<Projectile>();
-        this.bonusList = new ArrayList<BonusDrop>();
-        this.explosionList = new ArrayList<MapObjectTTL>();
+    public GameState() {
+        resetToDefaults();
     }
 
     /**
@@ -93,6 +84,12 @@ public class GameState {
     public ArrayList<Asteroid> getAsteroids() {
         synchronized (asteroidSync) {
             return new ArrayList<Asteroid>(this.asteroidList);
+        }
+    }
+    
+    public void addAsteroidsList(ArrayList<Asteroid> list) {
+        synchronized (asteroidList) {
+            this.asteroidList.addAll(list);
         }
     }
 
@@ -265,7 +262,15 @@ public class GameState {
     public int getLevel() {
         return this.level;
     }
+    
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
+    public void increaseLevel() {
+        this.level++;
+    }
+    
     /**
      * Returns true if level is complete, false otherwise.
      * @return boolean value (true if complete, false otherwise)
@@ -288,5 +293,35 @@ public class GameState {
      */
     public void addToHighScore(int score) {
         this.highScore += score;
+    }
+    
+    public void setPlayerDead(boolean isDead) {
+        isPlayerDead = isDead;
+    }
+
+    public boolean isPlayerDead() {
+        return isPlayerDead;
+    }
+    
+    public void resetToDefaults() {
+        this.playerShip = null;
+        this.level = 1;
+        this.highScore = 0;
+        isPlayerDead = false;
+        playerShip = null;
+        alienShip = null;
+
+        synchronized (asteroidSync) {
+            this.asteroidList = new ArrayList<Asteroid>();
+        }
+        synchronized (projectileSync) {
+            this.projectileList = new ArrayList<Projectile>();
+        }
+        synchronized (bonusSync) {
+            this.bonusList = new ArrayList<BonusDrop>();
+        }
+        synchronized (explosionSync) {
+            this.explosionList = new ArrayList<MapObjectTTL>();
+        }
     }
 }

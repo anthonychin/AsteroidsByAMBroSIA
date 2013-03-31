@@ -11,9 +11,9 @@ public class Difficulty {
     private static int level;
     private static Random rand = new Random();
     
-    public void setLevel(int level)
+    public static void setLevel(int lvl)
     {
-        this.level = level;
+        level = lvl;
     }
     
     public static float randomHeading()

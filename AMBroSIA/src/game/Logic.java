@@ -6,15 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -45,6 +40,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static Physics physicsEngine;
     private static timeToLive ttlLogic;
     private static Collision collisionCheck;
+    private static Progression gameProgress;
     //fire rate limiter variables
     private static long initialShootTime;
     private static long currentShootTime;
@@ -95,6 +91,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         timer.scheduleAtFixedRate(collisionCheck, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
+//        timer.scheduleAtFixedRate(gameProgress, 0, 1, TimeUnit.SECONDS);
 
         //single threaded game loop testing thread
         //testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
@@ -171,21 +168,12 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     //set up some game essentials
     private static void setUpLevel() {
-        gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 99, 0, 3));
-        gameState.addAsteroid(new Asteroid(new float[]{-1, -1}, -30, new int[]{650, 500}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        //Random randu = new Random();
-        //for (int i = 0; i < 5; i++){
-        //gameState.addAsteroid(new Asteroid(new float[] {randu.nextInt(10),randu.nextInt(10)}, randu.nextInt(360), new int[] {randu.nextInt(700),randu.nextInt(500)},gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        //gameState.addProjectile(new Projectile(null, randu.nextFloat(), new int[] {randu.nextInt(800),randu.nextInt(600)},gameState));
-        //}
-        gameState.addAlienShip(new AlienShip(new float[] {1,1},0,new int[] {100,100},gameState));
-
-
+        gameState = new GameState();
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
         ttlLogic = new timeToLive(gameState);
         collisionCheck = new Collision(gameState, physicsEngine);
+//        gameProgress = new Progression(gameState);
 
     }
 
