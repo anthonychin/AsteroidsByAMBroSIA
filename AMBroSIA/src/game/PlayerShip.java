@@ -3,6 +3,8 @@ package game;
 import static game.Logic.executeTask;
 import gui.MenuGUI;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The
@@ -44,7 +46,7 @@ public class PlayerShip extends Ship {
     final private static int RESPAWN_DELAY = 2500;
     //number of debris pieces to spawn
     final public static int NUM_DEBRIS = 20;
-    
+    final public static int BOMB_BARRIER = 30;
     
     private int bomb;
     private int shieldPoints;
@@ -98,8 +100,15 @@ public class PlayerShip extends Ship {
     public void useBomb() {
         if (bomb > 0) {
             bomb = bomb - 1;
-            getGameState().bombUsed();
             GameAssets.bombUsed.play();
+            createBombEffect();
+            
+            Thread explode = new Thread(){
+            public void run(){
+                getGameState().bombUsed();
+            }
+            };
+            executeTask(explode,1000,TimeUnit.MILLISECONDS);
         } else {
             GameAssets.noBombs.play();
         }
@@ -266,6 +275,14 @@ public class PlayerShip extends Ship {
             int x = getX();
             int y = getY();
             getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{x, y}, 0, getGameState()));
+        }
+    }
+    
+    private void createBombEffect() {
+        for (int i = 0; i < BOMB_BARRIER; i++) { 
+            int x = getX();
+            int y = getY();
+            getGameState().addExplosion(new MapObjectTTL(new float[]{i*360, i*-360}, i, new int[]{x, y}, 0, getGameState()));
         }
     }
 }

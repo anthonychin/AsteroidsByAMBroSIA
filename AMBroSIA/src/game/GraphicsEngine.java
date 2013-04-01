@@ -75,8 +75,12 @@ public class GraphicsEngine implements Runnable {
 
     private static Polygon alienShape() {
         //TODO: give shape to alien
-        return new Polygon(new int[]{-15,-4,-3,3,4,15,4,-4}, new int[]{0,3,6,6,3,0,-3,-3}, 8);
+        // return new Polygon(new int[]{-15,-4,-3,3,4,15,4,-4}, new int[]{0,3,6,6,3,0,-3,-3}, 8);
+        //return new Polygon(new int[]{-20,-15,-10,10,15,20,10,-10}, new int[]{0,3,9,9,3,0,-4,-4}, 8);
+        return new Polygon(new int[]{-20,-15,-10, -5, 5, 10,15,20,10, -10}, new int[]{0,3,9, 11, 11, 9,3,0,-3,-3}, 10);        
+        
         /*
+         * 0,3,9,9,3,0,-4,-4
          * alien shape
          * -10,0
          * -4,3
