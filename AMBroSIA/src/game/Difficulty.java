@@ -32,7 +32,7 @@ public class Difficulty {
     public static float randomAsteroidVelocity(int level) {
         float ratio = (float) level / MAX_LEVEL;
         int maxVal = (int) (ratio * INITIAL_ASTEROID_SPEED);
-        return randomFloat() * (randomInt(1, maxVal));
+        return randomFloat() * (randomInt(1, 5));
     }
 
     public static int randomAsteroidSize() {

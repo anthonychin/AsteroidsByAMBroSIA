@@ -15,7 +15,7 @@ public class Progression implements Runnable{
     
     private GameState gameState;
     private boolean istwoPlayer = false;
-    private boolean playerOneTurn = true;
+    public static boolean playerOneTurn = true;
     
     private int player1Score = 0;
     private int player2Score = 0;
@@ -46,7 +46,8 @@ public class Progression implements Runnable{
             //game over
             if (isPlayerDead()) {
                 gameState.setPlayer1Score(gameState.getCurrentScore());
-                Logic.stopTimer();
+                // Freezes when not stopped
+                //Logic.stopTimer();
                 Logic.displayGameOver();
             } //if the player is not dead, check for level completion and move to next level
             else if (allAsteroidsDestroyed() && isAlienDestroyed()) {
@@ -66,6 +67,7 @@ public class Progression implements Runnable{
                     Logic.displayPlayerTwoTurn();
                     setupInitialLevel();
                     gameState.setPlayer1Score(player1Score);
+                    playerOneTurn = false;
                 }
                 else
                 {
@@ -73,7 +75,7 @@ public class Progression implements Runnable{
                     player2Score = gameState.getCurrentScore();
                     gameState.setPlayer1Score(player1Score);
                     gameState.setPlayer2Score(player2Score);
-                    Logic.stopTimer();
+                    //Logic.stopTimer();
                     Logic.displayWinner();
                 }
             }
@@ -104,9 +106,9 @@ public class Progression implements Runnable{
     {
         //for when the game begins, clear everything and start off at level 1.
         gameState.resetToDefaults();
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 99, 0, 3));
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 1, 0, 3));
         //addAsteroids(1);
-        setupLevel(100);
+        setupLevel(0);
         //gameState.addAsteroid(new Asteroid(new float[]{1.2f, 1.5f}, 0, new int[]{800, 10}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
 
     }

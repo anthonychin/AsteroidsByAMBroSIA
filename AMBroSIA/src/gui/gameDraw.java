@@ -8,6 +8,8 @@ import game.MapObjectTTL;
 import game.GameState;
 import game.PlayerShip;
 import game.Projectile;
+import game.Progression;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -23,7 +25,6 @@ import java.util.ArrayList;
  */
 public class gameDraw 
 {
-    
     public static void drawObjects(Graphics2D g2d, GameState memory)
     {
         //some nice settings that improve visual quality.  Some do not appear to have an effect however...
@@ -60,7 +61,7 @@ public class gameDraw
         
         //draw player
         PlayerShip player = memory.getPlayerShip();
-        if (player != null)
+        if (player != null && Progression.playerOneTurn)
         {
             Polygon shape = player.getShape();
             g2d.setColor(Color.red);
@@ -73,6 +74,19 @@ public class gameDraw
                 g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
             }
             g2d.drawPolygon(shape);
+        }
+        else if(player != null && !Progression.playerOneTurn){
+            Polygon shape = player.getShape();
+            g2d.setColor(Color.blue);
+            g2d.fillPolygon(shape);
+            
+            //crude shield effect
+            if (player.getShieldStatus())
+            {
+                g2d.setColor(new Color(255, 0, 51)); //light red
+                g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
+            }
+            g2d.drawPolygon(shape);        
         }
         //reset color, stroke
         g2d.setColor(Color.BLACK);
@@ -114,7 +128,12 @@ public class gameDraw
         }
         
         //set color for explosions
-        g2d.setColor(Color.WHITE);
+        if(Progression.playerOneTurn){
+            g2d.setColor(Color.RED);
+        }
+        else{
+            g2d.setColor(Color.BLUE);
+        }
         
         //draw explosions
         ArrayList<MapObjectTTL> explosionList = memory.getExplosions();
