@@ -37,6 +37,8 @@ public class GameState {
     private PlayerShip playerShip;
     private AlienShip alienShip;
     private int currentScore;
+    private int player1Score;
+    private int player2Score;
     private int level;
     private boolean isPlayerDead = false;
     
@@ -293,7 +295,23 @@ public class GameState {
     public void addToCurrentScore(int score) {
         this.currentScore += score;
     }
-    
+
+    public void setPlayer1Score(int score) {
+        player1Score = score;
+    }
+
+    public int getPlayer1Score() {
+        return player1Score;
+    }
+
+    public void setPlayer2Score(int score) {
+        player2Score = score;
+    }
+
+    public int getPlayer2Score() {
+        return player2Score;
+    }
+
     public void setPlayerDead(boolean isDead) {
         isPlayerDead = isDead;
     }
@@ -302,6 +320,7 @@ public class GameState {
         return isPlayerDead;
     }
     
+    //resets everything to defaults
     public void resetToDefaults() {
         this.playerShip = null;
         this.level = 1;
@@ -309,6 +328,8 @@ public class GameState {
         isPlayerDead = false;
         playerShip = null;
         alienShip = null;
+        player1Score = 0;
+        player2Score = 0;
 
         synchronized (asteroidSync) {
             this.asteroidList = new ArrayList<Asteroid>();

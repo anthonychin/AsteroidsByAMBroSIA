@@ -15,6 +15,10 @@ public class Progression implements Runnable{
     
     private GameState gameState;
     private boolean istwoPlayer = false;
+    private boolean playerOneTurn = true;
+    
+    private int player1Score = 0;
+    private int player2Score = 0;
     
     public Progression(GameState gs, boolean twoPlayer){
         gameState = gs;
@@ -28,22 +32,55 @@ public class Progression implements Runnable{
     }
 
     private void spawnAlien() {
+        //check if alien does not already exist and difficulty says to spawn one
+        //Note: asteroid heading != 0 looks really strange, so always set to 0.
         if (isAlienDestroyed() && Difficulty.spawnAlien()) {
-            gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, Difficulty.randomHeading(), new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
+            gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, 0, 
+                    new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
         }
     }
     
-    private void checkGameProgress()
-    {
-        if (isPlayerDead())
-        {
-            Logic.stopTimer();
-            Logic.displayGameOver();
+    private void checkGameProgress() {
+        //single player
+        if (!istwoPlayer) {
+            //game over
+            if (isPlayerDead()) {
+                gameState.setPlayer1Score(gameState.getCurrentScore());
+                Logic.stopTimer();
+                Logic.displayGameOver();
+            } //if the player is not dead, check for level completion and move to next level
+            else if (allAsteroidsDestroyed() && isAlienDestroyed()) {
+                setupLevel(gameState.getLevel() + 1);
+            }
         }
-        
-        else if (allAsteroidsDestroyed() && isAlienDestroyed())
+        //two player
+        else
         {
-            setupLevel(gameState.getLevel()+1);
+           //if a player dies, need to find out if first or second player.
+            if (isPlayerDead())
+            {
+                if (playerOneTurn)
+                {
+                    //restart game for player 2, save player 1 score
+                    player1Score = gameState.getCurrentScore();
+                    Logic.displayPlayerTwoTurn();
+                    setupInitialLevel();
+                    gameState.setPlayer1Score(player1Score);
+                }
+                else
+                {
+                    //game over: save player 2 score, put it in the game state, and stop updating
+                    player2Score = gameState.getCurrentScore();
+                    gameState.setPlayer1Score(player1Score);
+                    gameState.setPlayer2Score(player2Score);
+                    Logic.stopTimer();
+                    Logic.displayWinner();
+                }
+            }
+            //same as 1 player
+            else if (allAsteroidsDestroyed() && isAlienDestroyed()) {
+                 setupLevel(gameState.getLevel() + 1);
+            }
         }
     }
     
@@ -65,6 +102,8 @@ public class Progression implements Runnable{
     
     public void setupInitialLevel()
     {
+        //for when the game begins, clear everything and start off at level 1.
+        gameState.resetToDefaults();
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 99, 0, 3));
         //addAsteroids(1);
         setupLevel(100);
@@ -84,13 +123,13 @@ public class Progression implements Runnable{
         gameState.resetToDefaults();
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, oldPlayerLives, 0, 3));
         addAsteroids(levelNumber);
-        gameState.setLevel(oldLevel);
+        gameState.setLevel(oldLevel+1);
         gameState.addToCurrentScore(oldScore);
     }
     
     private void addAsteroids(int levelNumber)
     {
-        int NumberOfAsteroids = Difficulty.spawnAsteroids(1);
+        int NumberOfAsteroids = Difficulty.spawnAsteroids(levelNumber);
 
         for (int i = 0; i < NumberOfAsteroids; i++) {
             float xVel = Difficulty.randomAsteroidVelocity(levelNumber);

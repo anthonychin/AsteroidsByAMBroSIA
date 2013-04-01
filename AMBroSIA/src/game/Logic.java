@@ -92,12 +92,6 @@ public class Logic extends KeyAdapter implements ActionListener {
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gameProgress, 0, 1, TimeUnit.SECONDS);
-
-        //single threaded game loop testing thread
-        //testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
-        //timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
-
-
     }
 
     /**
@@ -131,7 +125,7 @@ public class Logic extends KeyAdapter implements ActionListener {
      */
     public static void startTwoPlayer() {
         GameAssets.theme.stop();
-        setUpLevel(false);
+        setUpLevel(true);
     }
 
     /**

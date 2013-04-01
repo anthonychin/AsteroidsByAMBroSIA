@@ -1,6 +1,7 @@
 package game;
 
 import static game.Logic.executeTask;
+import gui.MenuGUI;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -38,7 +39,13 @@ public class PlayerShip extends Ship {
      * Value of the number of debris when the player ship gets destroyed. The
      * default is set to 20.
      */
+    
+    //in milliseconds
+    final private static int RESPAWN_DELAY = 2500;
+    //number of debris pieces to spawn
     final public static int NUM_DEBRIS = 20;
+    
+    
     private int bomb;
     private int shieldPoints;
     private boolean isAccelerating = false;
@@ -222,8 +229,10 @@ public class PlayerShip extends Ship {
         Thread resetShip = new Thread() {
             public void run() {
                 getGameState().addPlayerShip(oldShip);
-                getGameState().getPlayerShip().setCoord(new int[]{400, 300});
+                //to center of screen
+                getGameState().getPlayerShip().setCoord(new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2});
                 getGameState().getPlayerShip().setVelocity(new float[]{0, 0});
+                getGameState().getPlayerShip().setShieldPoints(3);
                 getGameState().getPlayerShip().setHeading(0);
                 getGameState().getPlayerShip().turnLeft(false);
                 getGameState().getPlayerShip().turnRight(false);
@@ -235,7 +244,7 @@ public class PlayerShip extends Ship {
         //check to see if it has already been set to null by an ongoing reset.
         if (oldShip != null) {
             getGameState().removePlayerShip();
-            executeTask(resetShip, 2500, TimeUnit.MILLISECONDS);
+            executeTask(resetShip, RESPAWN_DELAY, TimeUnit.MILLISECONDS);
         }
     }
 
