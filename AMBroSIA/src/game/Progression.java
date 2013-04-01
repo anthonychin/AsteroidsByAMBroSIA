@@ -43,7 +43,6 @@ public class Progression implements Runnable{
     private void checkGameProgress() {
         //single player
         if (!istwoPlayer) {
-            //game over
             if (isPlayerDead()) {
                 gameState.setPlayer1Score(gameState.getCurrentScore());
                 // Freezes when not stopped
@@ -107,7 +106,7 @@ public class Progression implements Runnable{
     {
         //for when the game begins, clear everything and start off at level 1.
         gameState.resetToDefaults();
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 3, 1, 3));
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 1, 1, 3));
         //addAsteroids(1);
         setupLevel(0);
         //gameState.addAsteroid(new Asteroid(new float[]{1.2f, 1.5f}, 0, new int[]{800, 10}, gameState, Asteroid.LARGE_ASTEROID_SIZE));

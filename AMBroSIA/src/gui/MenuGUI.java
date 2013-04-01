@@ -13,6 +13,7 @@ import game.Logic;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -197,16 +198,20 @@ public class MenuGUI implements Runnable
     
     public void displayGameOver(GameState gs)
     {
-        frame.setFocusable(true);
-       //create panel, show it
-        gameOverPanel = new GameOverPanel(DEFAULT_WIDTH, DEFAULT_HEIGHT, gs);
-        JPanel cardGameOver= new JPanel();
+        gameOverPanel = new GameOverPanel();
+//        gameOverPanel.updateScreen();
+        JPanel cardGameOver = new JPanel();
+        cardGameOver.setLayout(new GridLayout());
         cardGameOver.add(gameOverPanel);
-        card.add("Game Over", gameOverPanel);
+        //initialize a back button
+//        JPanel buttonPanelTutorial = new JPanel();
+//        buttonPanelTutorial.add(backButton);
+//        buttonPanelTutorial.setBackground(Color.white);
+//        backButton.addActionListener(buttonClick);
+//        cardTutorial.add(buttonPanelTutorial, BorderLayout.SOUTH);
+        cardGameOver.setBackground(Color.white);
+        card.add("GameOver", cardGameOver);
         cardLayout.show(card, "GameOver");
-        
-        //do not allow resizing at this point, as it can disrupt gameplay
-        frame.setResizable(false);
     }
         
     public void goBack() { cardLayout.show(card, "Menu");}

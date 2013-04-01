@@ -155,7 +155,7 @@ public class Logic extends KeyAdapter implements ActionListener {
      * Displays "Game Over" message.
      */
     public static void displayGameOver() {
-        
+        gui.displayGameOver(gameState);
     }
 
     /**

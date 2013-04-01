@@ -19,16 +19,22 @@ public class GameOverPanel extends JPanel {
     GameState gamestate;
     JTable StatisticsTable;
     String[] columnData = {"", ""};
-    String highscore = String.valueOf(gamestate.getCurrentScore());
+    //String highscore = String.valueOf(gamestate.getCurrentScore());
     //
     String[][] rowData = {{"Player name", "p1"},{"Highscore", "highscore"},{"Number of Lives", "5"}};
     
     JScrollPane scrollPane;
-    public GameOverPanel(int width, int height, GameState gs)
-    {
-        makeComponents(width, height);
-        makeLayout();
-    }
+//    public GameOverPanel(int width, int height, GameState gs)
+//    {
+//        makeComponents(width, height);
+//        makeLayout();
+//    }
+//    public GameOverPanel(GameState gs)
+//    {
+//        super(gs);
+//        this.gamestate = gs;
+//    }
+    
     
     private void makeComponents(int w, int h)
     {
@@ -47,10 +53,18 @@ public class GameOverPanel extends JPanel {
     @Override
     public void paint (Graphics g){
         super.paint(g);
+        System.out.println("paintme");
         g.setColor(Color.red);
         g.drawString("GAME OVER", getWidth()/2, getHeight()/2);
            
         // reset the graphics color to black
         g.setColor(Color.black);
     }
+    
+    public void updateScreen()
+    {
+        System.out.println("update screen");
+        repaint();
+    }
+    
 }

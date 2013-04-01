@@ -36,6 +36,12 @@ public class SinglePgamePanel extends DescriptionPanel {
         setSize(size);
         setLayout(null);
     }
+    
+    public SinglePgamePanel(GameState gs)
+    {
+        super(gs);
+        this.gameState = gs;
+    }
 
     // paints content onto the Single-Player mode panel
     @Override
