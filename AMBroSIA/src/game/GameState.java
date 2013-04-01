@@ -344,4 +344,22 @@ public class GameState {
             this.explosionList = new ArrayList<MapObjectTTL>();
         }
     }
+    
+        public void bombUsed() {
+        isPlayerDead = false;
+        alienShip = null;
+
+        synchronized (asteroidSync) {
+            this.asteroidList = new ArrayList<Asteroid>();
+        }
+        synchronized (projectileSync) {
+            this.projectileList = new ArrayList<Projectile>();
+        }
+        synchronized (bonusSync) {
+            this.bonusList = new ArrayList<BonusDrop>();
+        }
+        synchronized (explosionSync) {
+            this.explosionList = new ArrayList<MapObjectTTL>();
+        }
+    }
 }

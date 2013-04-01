@@ -98,6 +98,7 @@ public class PlayerShip extends Ship {
     public void useBomb() {
         if (bomb > 0) {
             bomb = bomb - 1;
+            getGameState().bombUsed();
             GameAssets.bombUsed.play();
         } else {
             GameAssets.noBombs.play();
