@@ -20,6 +20,7 @@ import game.GameState;
 /**
  *
  * @author Anthony Chin
+ * @author Haisin Yip
  */
 public class TwoPgamePanel extends DescriptionPanel {
 
