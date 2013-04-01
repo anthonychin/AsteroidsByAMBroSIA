@@ -198,17 +198,17 @@ public class MenuGUI implements Runnable
     
     public void displayGameOver(GameState gs)
     {
-        gameOverPanel = new GameOverPanel();
-//        gameOverPanel.updateScreen();
+        gameOverPanel = new GameOverPanel(new ImageIcon("./src/images/spaceBackground.jpg").getImage(), gs);
         JPanel cardGameOver = new JPanel();
-        cardGameOver.setLayout(new GridLayout());
+        cardGameOver.setLayout(new BorderLayout());
         cardGameOver.add(gameOverPanel);
+        
         //initialize a back button
-//        JPanel buttonPanelTutorial = new JPanel();
-//        buttonPanelTutorial.add(backButton);
-//        buttonPanelTutorial.setBackground(Color.white);
-//        backButton.addActionListener(buttonClick);
-//        cardTutorial.add(buttonPanelTutorial, BorderLayout.SOUTH);
+        JPanel buttonPanelGameOver = new JPanel();
+        buttonPanelGameOver.add(backButton);
+        buttonPanelGameOver.setBackground(Color.black);
+        backButton.addActionListener(buttonClick);
+        cardGameOver.add(buttonPanelGameOver, BorderLayout.SOUTH);
         cardGameOver.setBackground(Color.white);
         card.add("GameOver", cardGameOver);
         cardLayout.show(card, "GameOver");
