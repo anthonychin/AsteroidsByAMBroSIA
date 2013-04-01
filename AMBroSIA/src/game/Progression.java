@@ -15,7 +15,7 @@ public class Progression implements Runnable{
     
     private GameState gameState;
     private boolean istwoPlayer = false;
-    public static boolean playerOneTurn = true;
+    public boolean playerOneTurn = true;
     
     private int player1Score = 0;
     private int player2Score = 0;
@@ -67,6 +67,7 @@ public class Progression implements Runnable{
                     Logic.displayPlayerTwoTurn();
                     setupInitialLevel();
                     gameState.setPlayer1Score(player1Score);
+                    gameState.setPlayerTwoTurn(true);
                     playerOneTurn = false;
                 }
                 else
