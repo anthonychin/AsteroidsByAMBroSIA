@@ -66,7 +66,10 @@ public class Progression implements Runnable{
     public void setupInitialLevel()
     {
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 99, 0, 3));
-        addAsteroids(1);
+        //addAsteroids(1);
+        setupLevel(100);
+        //gameState.addAsteroid(new Asteroid(new float[]{1.2f, 1.5f}, 0, new int[]{800, 10}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
+
     }
     
     private void setupLevel(int levelNumber)

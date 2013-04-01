@@ -153,12 +153,13 @@ public class MenuGUI implements Runnable
     public void displayTwoP(GameState gs) 
     {
         frame.setFocusable(true);
-        // create single player mode game page (two player)
-        twoPPanel = new TwoPgamePanel();
+        twoPPanel = new TwoPgamePanel(gs, new ImageIcon("./src/images/spaceBackground.jpg").getImage());
         JPanel cardGame2P = new JPanel();
         //cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
         cardGame2P.add(twoPPanel);
         card.add("Two-Player Mode", cardGame2P);
+        cardLayout.show(card, "Two-Player Mode");
+        frame.setResizable(false);
     }
        
     public void displayLeaderBoard() 
@@ -212,15 +213,14 @@ public class MenuGUI implements Runnable
 
     public void updateDraw()
     {
-//     PLACEHOLDER IF STATEMENT
-//        if (singleP)
-//        {
-            onePPanel.updatePanel();
-//        }
-//        else
-//        {
-//            twoPPanel.updatePanel();
-//        }
+        if (singleP)
+        {
+           onePPanel.updatePanel();
+        }
+        else
+        {
+            twoPPanel.updatePanel();
+        }
     }
 
     @Override
