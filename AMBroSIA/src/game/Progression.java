@@ -15,7 +15,7 @@ public class Progression implements Runnable{
     
     private GameState gameState;
     private boolean istwoPlayer = false;
-    public static boolean playerOneTurn = true;
+    public boolean playerOneTurn = true;
     
     private int player1Score = 0;
     private int player2Score = 0;
@@ -67,6 +67,7 @@ public class Progression implements Runnable{
                     Logic.displayPlayerTwoTurn();
                     setupInitialLevel();
                     gameState.setPlayer1Score(player1Score);
+                    gameState.setPlayerTwoTurn(true);
                     playerOneTurn = false;
                 }
                 else
@@ -115,12 +116,15 @@ public class Progression implements Runnable{
     
     private void setupLevel(int levelNumber)
     {
-        //save old level & score
+        //save old level, score, is player two's turn
         int oldLevel = gameState.getLevel();
         int oldScore = gameState.getCurrentScore();
         //player can't be null here
         int oldPlayerLives = gameState.getPlayerShip().getLives();
         int oldPlayerBomb = gameState.getPlayerShip().getBomb();
+
+        boolean playerTwo = gameState.isPlayerTwoTurn();
+
         
         
         gameState.resetToDefaults();
@@ -128,6 +132,7 @@ public class Progression implements Runnable{
         addAsteroids(levelNumber);
         gameState.setLevel(oldLevel+1);
         gameState.addToCurrentScore(oldScore);
+        gameState.setPlayerTwoTurn(playerTwo);
     }
     
     private void addAsteroids(int levelNumber)

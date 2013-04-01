@@ -40,7 +40,8 @@ public class GameState {
     private int player1Score;
     private int player2Score;
     private int level;
-    private boolean isPlayerDead = false;
+    private boolean isPlayerDead;
+    private boolean playerTwoTurn;
     
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
@@ -320,12 +321,21 @@ public class GameState {
         return isPlayerDead;
     }
     
+    public boolean isPlayerTwoTurn() {
+        return playerTwoTurn;
+    }
+
+    public void setPlayerTwoTurn(boolean playerTwo) {
+        playerTwoTurn = playerTwo;
+    }
+
     //resets everything to defaults
     public void resetToDefaults() {
         this.playerShip = null;
         this.level = 1;
         this.currentScore = 0;
         isPlayerDead = false;
+        playerTwoTurn = false;
         playerShip = null;
         alienShip = null;
         player1Score = 0;

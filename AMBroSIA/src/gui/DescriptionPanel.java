@@ -24,11 +24,10 @@ public class DescriptionPanel extends JPanel {
     @Override
     public void paint (Graphics g){
         super.paint(g);
-        if(Progression.playerOneTurn){
-            g.setColor(Color.red);
-        }
-        else{
+        if (gameState.isPlayerTwoTurn()) {
             g.setColor(Color.blue);
+        } else {
+            g.setColor(Color.red);
         }
         String stringInfo;
         stringInfo = "Current Score " + gameState.getCurrentScore() + " Level " + gameState.getLevel();
