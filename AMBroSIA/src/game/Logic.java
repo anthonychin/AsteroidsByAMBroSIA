@@ -124,6 +124,8 @@ public class Logic extends KeyAdapter implements ActionListener {
      * Starts the game in 2 player mode.
      */
     public static void startTwoPlayer() {
+        GameAssets.theme.stop();
+        setUpLevel(true);
     }
 
     /**
