@@ -206,6 +206,18 @@ public class PlayerShip extends Ship {
     }
 
     /**
+     *  Shoot 4 Projectiles at heading of -20, 20, -60, 60 degree relative to the ship heading
+     */
+
+    public void shootDirection() {
+        getGameState().addProjectile(new Projectile(this, this.getHeading() - 20, new int[]{this.getX(), this.getY()}, getGameState()));
+        getGameState().addProjectile(new Projectile(this, this.getHeading() + 20, new int[]{this.getX(), this.getY()}, getGameState()));  
+        getGameState().addProjectile(new Projectile(this, this.getHeading() - 60, new int[]{this.getX(), this.getY()}, getGameState()));
+        getGameState().addProjectile(new Projectile(this, this.getHeading() + 60, new int[]{this.getX(), this.getY()}, getGameState()));          
+        GameAssets.playerFire.play();
+        log.debug("Projectile added");
+    }
+    /**
      * Destroys the <i>PlayerShip</i>.
      */
     @Override
