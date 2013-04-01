@@ -172,7 +172,7 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     //set up some game essentials
     private static void setUpLevel() {
-        gameState = new GameState(10, 0);
+        gameState = new GameState(1, 0);
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 99, 0, 3));
         int asteroids = Difficulty.spawnAsteroids(gameState.getLevel());
         for(int i = 0; i < asteroids; i++) {
