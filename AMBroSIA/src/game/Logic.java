@@ -130,6 +130,8 @@ public class Logic extends KeyAdapter implements ActionListener {
      * Starts the game in 2 player mode.
      */
     public static void startTwoPlayer() {
+        GameAssets.theme.stop();
+        setUpLevel(false);
     }
 
     /**
@@ -286,7 +288,9 @@ public class Logic extends KeyAdapter implements ActionListener {
             gui.displaySingleP(gameState);
             startTimer();
         } else if (action == gui.twoPbutton) {
+            startTwoPlayer();
             gui.displayTwoP(gameState);
+            startTimer();
         } else if (action == gui.leaderBoardButton) {
             gui.displayLeaderBoard();
         } else if (action == gui.tutorialButton) {
