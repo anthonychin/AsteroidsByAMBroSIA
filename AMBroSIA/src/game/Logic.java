@@ -6,15 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -45,10 +40,12 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static Physics physicsEngine;
     private static timeToLive ttlLogic;
     private static Collision collisionCheck;
+    private static Progression gameProgress;
     //fire rate limiter variables
     private static long initialShootTime;
     private static long currentShootTime;
     private static boolean shootKeyReleased = true;
+    private static int shootCounter = 0;
     //is game paused boolean
     private boolean paused = false;
     //the service used to execute all update functions
@@ -95,12 +92,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         timer.scheduleAtFixedRate(collisionCheck, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
-
-        //single threaded game loop testing thread
-        //testTimer tester = new testTimer(graphicsEngine,physicsEngine,gui,collisionCheck(),ttlLogic);
-        //timer.scheduleAtFixedRate(tester, 0, 17, TimeUnit.MILLISECONDS);
-
-
+        timer.scheduleAtFixedRate(gameProgress, 0, 1, TimeUnit.SECONDS);
     }
 
     /**
@@ -126,13 +118,15 @@ public class Logic extends KeyAdapter implements ActionListener {
      */
     public static void startSinglePlayer() {
         GameAssets.theme.stop();
-        setUpLevel();
+        setUpLevel(false);
     }
 
     /**
      * Starts the game in 2 player mode.
      */
     public static void startTwoPlayer() {
+        GameAssets.theme.stop();
+        setUpLevel(true);
     }
 
     /**
@@ -171,26 +165,14 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     //set up some game essentials
-    private static void setUpLevel() {
-        gameState = new GameState(1, 0);
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 90, new int[]{250, 150}, gameState, 99, 0, 3));
-        int asteroids = Difficulty.spawnAsteroids(gameState.getLevel());
-        for(int i = 0; i < asteroids; i++) {
-            float xVel = Difficulty.randomAsteroidVelocity(gameState.getLevel());
-            float yVel = Difficulty.randomAsteroidVelocity(gameState.getLevel());
-            float heading = Difficulty.randomHeading();
-            int xCoord = Difficulty.randomXPos();
-            int yCoord = Difficulty.randomYPos();
-            int size = Difficulty.randomAsteroidSize();
-            gameState.addAsteroid(new Asteroid(new float[]{xVel, yVel}, heading, new int[]{xCoord, yCoord}, gameState, size));
-        }
-        gameState.addAlienShip(new AlienShip(new float[] {1,1},0,new int[] {100,100},gameState));
-
-
+    private static void setUpLevel(boolean twoPlayer) {
+        gameState = new GameState();
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
         ttlLogic = new timeToLive(gameState);
         collisionCheck = new Collision(gameState, physicsEngine);
+        gameProgress = new Progression(gameState,twoPlayer);
+        gameProgress.setupInitialLevel();
 
     }
 
@@ -224,19 +206,19 @@ public class Logic extends KeyAdapter implements ActionListener {
                 player.useBomb();
             }
         } else if (keyCode == KeyEvent.VK_SPACE) {
-            if (!paused && player != null) {
                 if (shootKeyReleased) {
                     initialShootTime = System.currentTimeMillis();
                     shootKeyReleased = false;
+                    shootCounter = 0;
                     player.shoot();
                 } else if (!shootKeyReleased) {
                     currentShootTime = System.currentTimeMillis();
-                    if ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1000) {
-                        player.shoot();
-                        initialShootTime = currentShootTime;
+                    while ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1200 && shootCounter < 1) {
+                            player.shootDirection();
+                            shootCounter++;                      
+                            initialShootTime = currentShootTime;
                     }
                 }
-            }
         } else if (keyCode == KeyEvent.VK_P) {
             if (!paused) {
                 stopTimer();
@@ -252,7 +234,8 @@ public class Logic extends KeyAdapter implements ActionListener {
         }
         if (keyCode == KeyEvent.VK_Z) {
             Random randu = new Random();
-            gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(gameState.getLevel()), Difficulty.randomAsteroidVelocity(gameState.getLevel())}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
+            gameState.addAsteroid(new Asteroid(new float[]{1.5f, 1.5f}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));            
+            //gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(10), Difficulty.randomHeading()}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
         }
     }
 
@@ -301,7 +284,9 @@ public class Logic extends KeyAdapter implements ActionListener {
             gui.displaySingleP(gameState);
             startTimer();
         } else if (action == gui.twoPbutton) {
+            startTwoPlayer();
             gui.displayTwoP(gameState);
+            startTimer();
         } else if (action == gui.leaderBoardButton) {
             gui.displayLeaderBoard();
         } else if (action == gui.tutorialButton) {

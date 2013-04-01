@@ -2,7 +2,6 @@ package game;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.Semaphore;
 
 /**
  * The
@@ -38,16 +37,17 @@ public class GameState {
     private PlayerShip playerShip;
     private AlienShip alienShip;
     private int currentScore;
+    private int player1Score;
+    private int player2Score;
     private int level;
+    private boolean isPlayerDead;
+    private boolean playerTwoTurn;
+    
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
     private static final Object explosionSync = new Object();
     private static final Object bonusSync = new Object();
-
-//    private final Semaphore asteroidSync = new Semaphore(1,true);
-//    private final Semaphore projectileSync = new Semaphore(1,true);
-//    private final Semaphore explosionSync = new Semaphore(1,true);
-//    private final Semaphore bonusSync = new Semaphore(1,true);
+    
     /**
      * Creates <i>GameState</i> using given parameters. It also creates empty
      * lists for asteroid, projectile, bonus, and explosions.
@@ -55,15 +55,8 @@ public class GameState {
      * @param level
      * @param currentScore
      */
-    public GameState(int level, int currentScore) {
-        this.playerShip = null;
-        this.level = level;
-        this.currentScore = currentScore;
-
-        this.asteroidList = new ArrayList<Asteroid>();
-        this.projectileList = new ArrayList<Projectile>();
-        this.bonusList = new ArrayList<BonusDrop>();
-        this.explosionList = new ArrayList<MapObjectTTL>();
+    public GameState() {
+        resetToDefaults();
     }
 
     /**
@@ -93,6 +86,12 @@ public class GameState {
     public ArrayList<Asteroid> getAsteroids() {
         synchronized (asteroidSync) {
             return new ArrayList<Asteroid>(this.asteroidList);
+        }
+    }
+    
+    public void addAsteroidsList(ArrayList<Asteroid> list) {
+        synchronized (asteroidList) {
+            this.asteroidList.addAll(list);
         }
     }
 
@@ -265,7 +264,15 @@ public class GameState {
     public int getLevel() {
         return this.level;
     }
+    
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
+    public void increaseLevel() {
+        this.level++;
+    }
+    
     /**
      * Returns true if level is complete, false otherwise.
      * @return boolean value (true if complete, false otherwise)
@@ -288,5 +295,81 @@ public class GameState {
      */
     public void addToCurrentScore(int score) {
         this.currentScore += score;
+    }
+
+    public void setPlayer1Score(int score) {
+        player1Score = score;
+    }
+
+    public int getPlayer1Score() {
+        return player1Score;
+    }
+
+    public void setPlayer2Score(int score) {
+        player2Score = score;
+    }
+
+    public int getPlayer2Score() {
+        return player2Score;
+    }
+
+    public void setPlayerDead(boolean isDead) {
+        isPlayerDead = isDead;
+    }
+
+    public boolean isPlayerDead() {
+        return isPlayerDead;
+    }
+    
+    public boolean isPlayerTwoTurn() {
+        return playerTwoTurn;
+    }
+
+    public void setPlayerTwoTurn(boolean playerTwo) {
+        playerTwoTurn = playerTwo;
+    }
+
+    //resets everything to defaults
+    public void resetToDefaults() {
+        this.playerShip = null;
+        this.level = 1;
+        this.currentScore = 0;
+        isPlayerDead = false;
+        playerTwoTurn = false;
+        playerShip = null;
+        alienShip = null;
+        player1Score = 0;
+        player2Score = 0;
+
+        synchronized (asteroidSync) {
+            this.asteroidList = new ArrayList<Asteroid>();
+        }
+        synchronized (projectileSync) {
+            this.projectileList = new ArrayList<Projectile>();
+        }
+        synchronized (bonusSync) {
+            this.bonusList = new ArrayList<BonusDrop>();
+        }
+        synchronized (explosionSync) {
+            this.explosionList = new ArrayList<MapObjectTTL>();
+        }
+    }
+    
+        public void bombUsed() {
+        isPlayerDead = false;
+        alienShip = null;
+
+        synchronized (asteroidSync) {
+            this.asteroidList = new ArrayList<Asteroid>();
+        }
+        synchronized (projectileSync) {
+            this.projectileList = new ArrayList<Projectile>();
+        }
+        synchronized (bonusSync) {
+            this.bonusList = new ArrayList<BonusDrop>();
+        }
+        synchronized (explosionSync) {
+            this.explosionList = new ArrayList<MapObjectTTL>();
+        }
     }
 }

@@ -16,15 +16,16 @@ import javax.swing.JTable;
  */
 public class GameOverPanel extends JPanel {
     
+    GameState gamestate;
     JTable StatisticsTable;
-    GameState gs;
     String[] columnData = {"", ""};
+    String highscore = String.valueOf(gamestate.getCurrentScore());
+    //
     String[][] rowData = {{"Player name", "p1"},{"Highscore", "highscore"},{"Number of Lives", "5"}};
     
     JScrollPane scrollPane;
-    public GameOverPanel(int width, int height, GameState gamestate)
+    public GameOverPanel(int width, int height, GameState gs)
     {
-        this.gs = gamestate;
         makeComponents(width, height);
         makeLayout();
     }
@@ -47,7 +48,6 @@ public class GameOverPanel extends JPanel {
     public void paint (Graphics g){
         super.paint(g);
         g.setColor(Color.red);
-        if(gs.getPlayerShip() == null)
         g.drawString("GAME OVER", getWidth()/2, getHeight()/2);
            
         // reset the graphics color to black
