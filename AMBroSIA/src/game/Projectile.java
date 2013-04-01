@@ -9,7 +9,7 @@ package game;
 public class Projectile extends MapObjectTTL {
 
     /**
-     * The velocity of Projectile. The default is 10.
+     * The velocity of Projectile. The default is 15.
      */
     public final static float PROJECTILE_SPEED = 15.0f;
     /**

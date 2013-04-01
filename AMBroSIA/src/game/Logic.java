@@ -45,6 +45,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static long initialShootTime;
     private static long currentShootTime;
     private static boolean shootKeyReleased = true;
+    private static int shootCounter = 0;
     //is game paused boolean
     private boolean paused = false;
     //the service used to execute all update functions
@@ -205,19 +206,19 @@ public class Logic extends KeyAdapter implements ActionListener {
                 player.useBomb();
             }
         } else if (keyCode == KeyEvent.VK_SPACE) {
-            if (!paused && player != null) {
                 if (shootKeyReleased) {
                     initialShootTime = System.currentTimeMillis();
                     shootKeyReleased = false;
+                    shootCounter = 0;
                     player.shoot();
                 } else if (!shootKeyReleased) {
                     currentShootTime = System.currentTimeMillis();
-                    if ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1000) {
-                        player.shoot();
-                        initialShootTime = currentShootTime;
+                    while ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1200 && shootCounter < 1) {
+                            player.shootDirection();
+                            shootCounter++;                      
+                            initialShootTime = currentShootTime;
                     }
                 }
-            }
         } else if (keyCode == KeyEvent.VK_P) {
             if (!paused) {
                 stopTimer();
