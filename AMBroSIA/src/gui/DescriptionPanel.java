@@ -30,10 +30,10 @@ public class DescriptionPanel extends JPanel {
             g.setColor(Color.red);
         }
         String stringInfo;
-        stringInfo = "Current Score " + gameState.getCurrentScore() + " Level " + gameState.getLevel();
+        stringInfo = "Current Score: " + gameState.getCurrentScore() + "    Level: " + gameState.getLevel();
         PlayerShip player = gameState.getPlayerShip();
         if (player != null) {
-            stringInfo = stringInfo + " Lives " + player.getLives() + "Bombs: " + player.getBomb() + " Shields: " + player.getShieldPoints() + " x: " + player.getX() + " y: " + player.getY() + " heading: " + Math.abs(player.getHeading()) % 360;
+            stringInfo = stringInfo + "    Lives " + player.getLives() + "    Bombs: " + player.getBomb() + "     Shields: " + player.getShieldPoints() + "    X: " + player.getX() + "    Y: " + player.getY() + "    Heading: " + Math.abs(player.getHeading()) % 360;
         }
         g.drawString(stringInfo, 5, 10);
         // reset the graphics color to black
