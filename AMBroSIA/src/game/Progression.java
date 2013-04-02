@@ -5,7 +5,6 @@
 package game;
 
 import gui.MenuGUI;
-import game.Difficulty.*;
 
 /**
  *
@@ -45,8 +44,7 @@ public class Progression implements Runnable{
         if (!istwoPlayer) {
             if (isPlayerDead()) {
                 gameState.setPlayer1Score(gameState.getCurrentScore());
-                // Freezes when not stopped
-                //Logic.stopTimer();
+                Logic.stopTimer();
                 Logic.displayGameOver();
             } //if the player is not dead, check for level completion and move to next level
             else if (allAsteroidsDestroyed() && isAlienDestroyed()) {
@@ -75,7 +73,7 @@ public class Progression implements Runnable{
                     player2Score = gameState.getCurrentScore();
                     gameState.setPlayer1Score(player1Score);
                     gameState.setPlayer2Score(player2Score);
-                    //Logic.stopTimer();
+                    Logic.stopTimer();
                     Logic.displayWinner();
                 }
             }
@@ -104,34 +102,32 @@ public class Progression implements Runnable{
     
     public void setupInitialLevel()
     {
-        //for when the game begins, clear everything and start off at level 1.
-        gameState.resetToDefaults();
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 3, 3, 3));
-        //addAsteroids(1);
-        setupLevel(0);
-        //gameState.addAsteroid(new Asteroid(new float[]{1.2f, 1.5f}, 0, new int[]{800, 10}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
-
+        //start at level 1 (note: player ship needed, as setupLevel has as precondition that player ship != null
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 3, 99, 3));
+        setupLevel(1);
     }
     
+    //player ship != null assumed.  if null, won't do anything (will try again next turn)
     private void setupLevel(int levelNumber)
     {
-        //save old level, score, is player two's turn
-        int oldLevel = gameState.getLevel();
+        PlayerShip player = gameState.getPlayerShip();
+        if (player != null)
+        {
+            //save score, is player two's turn
         int oldScore = gameState.getCurrentScore();
         //player can't be null here
-        int oldPlayerLives = gameState.getPlayerShip().getLives();
-        int oldPlayerBomb = gameState.getPlayerShip().getBomb();
+        int oldPlayerLives = player.getLives();
+        int oldPlayerBomb = player.getBomb();
 
         boolean playerTwo = gameState.isPlayerTwoTurn();
 
-        
-        
         gameState.resetToDefaults();
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, oldPlayerLives, oldPlayerBomb, 3));
         addAsteroids(levelNumber);
-        gameState.setLevel(oldLevel+1);
+        gameState.setLevel(levelNumber);
         gameState.addToCurrentScore(oldScore);
         gameState.setPlayerTwoTurn(playerTwo);
+        }
     }
     
     private void addAsteroids(int levelNumber)
