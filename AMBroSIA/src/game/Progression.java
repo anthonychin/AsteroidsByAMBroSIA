@@ -108,25 +108,23 @@ public class Progression implements Runnable{
     }
     
     //player ship != null assumed.  if null, won't do anything (will try again next turn)
-    private void setupLevel(int levelNumber)
-    {
+    private void setupLevel(int levelNumber) {
         PlayerShip player = gameState.getPlayerShip();
-        if (player != null)
-        {
+        if (player != null) {
             //save score, is player two's turn
-        int oldScore = gameState.getCurrentScore();
-        //player can't be null here
-        int oldPlayerLives = player.getLives();
-        int oldPlayerBomb = player.getBomb();
+            int oldScore = gameState.getCurrentScore();
+            //player can't be null here
+            int oldPlayerLives = player.getLives();
+            int oldPlayerBomb = player.getBomb();
 
-        boolean playerTwo = gameState.isPlayerTwoTurn();
+            boolean playerTwo = gameState.isPlayerTwoTurn();
 
-        gameState.resetToDefaults();
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, oldPlayerLives, oldPlayerBomb, 3));
-        addAsteroids(levelNumber);
-        gameState.setLevel(levelNumber);
-        gameState.addToCurrentScore(oldScore);
-        gameState.setPlayerTwoTurn(playerTwo);
+            gameState.resetToDefaults();
+            gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, oldPlayerLives, oldPlayerBomb, 3));
+            addAsteroids(levelNumber);
+            gameState.setLevel(levelNumber);
+            gameState.addToCurrentScore(oldScore);
+            gameState.setPlayerTwoTurn(playerTwo);
         }
     }
     
