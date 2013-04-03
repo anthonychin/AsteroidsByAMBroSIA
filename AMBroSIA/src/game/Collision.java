@@ -76,7 +76,7 @@ public class Collision implements Runnable {
                     }
                 } else if (collisionOne instanceof Projectile) {
                     collisionLogic((Projectile) collisionOne, (Asteroid) collisionTwo);
-                }
+                } 
             }
         }
     }

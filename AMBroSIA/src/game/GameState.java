@@ -361,7 +361,6 @@ public class GameState {
         if (alien != null) {
             alien.destroy(true);
         }
-
         for (Asteroid element : getAsteroids())
         {
             element.destroy(true);

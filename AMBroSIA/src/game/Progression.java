@@ -33,6 +33,7 @@ public class Progression implements Runnable{
     public void run() {
         checkGameProgress();
         spawnAlien();
+        //alienShoot();
     }
 
     private void spawnAlien() {
@@ -40,7 +41,7 @@ public class Progression implements Runnable{
         //Note: asteroid heading != 0 looks really strange, so always set to 0.
         if (isAlienDestroyed() && !isPlayerDead() && spawnAlien && Difficulty.spawnAlien()) {
             gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, 0, 
-                    new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
+                                new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
         }
     }
     
@@ -129,7 +130,7 @@ public class Progression implements Runnable{
             gameState.resetToDefaults();
             gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, oldPlayerLives, oldPlayerBomb, 3));
             addAsteroids(levelNumber);
-            gameState.setLevel(levelNumber);
+            gameState.setLevel(levelNumber++);
             gameState.addToCurrentScore(oldScore);
             gameState.setPlayerTwoTurn(playerTwo);
             spawnAlien = true;
