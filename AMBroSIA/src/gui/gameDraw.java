@@ -7,12 +7,9 @@ import game.MapObjectTTL;
 import game.GameState;
 import game.PlayerShip;
 import game.Projectile;
-import game.Progression;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
@@ -98,8 +95,8 @@ public class gameDraw {
         //draw projectiles
         ArrayList<Projectile> projectileList = memory.getProjectiles();
         if (!projectileList.isEmpty()) {
-            g2d.setColor(Color.WHITE);
             for (Projectile projectile : projectileList) {
+                g2d.setColor(projectile.getColor());
                 g2d.draw(projectile.getShape());
             }
         }
@@ -111,21 +108,16 @@ public class gameDraw {
         ArrayList<BonusDrop> bonusList = memory.getBonusDrops();
         if (!bonusList.isEmpty()) {
             for (BonusDrop drop : bonusList) {
+                g2d.setColor(drop.getColor());
                 g2d.draw(drop.getShape());
             }
-        }
-
-        //set color for explosions
-        if (memory.isPlayerTwoTurn()) {
-            g2d.setColor(Color.BLUE);
-        } else {
-            g2d.setColor(Color.RED);
         }
 
         //draw explosions
         ArrayList<MapObjectTTL> explosionList = memory.getExplosions();
         if (!explosionList.isEmpty()) {
             for (MapObjectTTL explosion : explosionList) {
+                g2d.setColor(explosion.getColor());
                 g2d.draw(explosion.getShape());
             }
         }

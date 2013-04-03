@@ -355,21 +355,16 @@ public class GameState {
         }
     }
     
-        public void bombUsed() {
-        isPlayerDead = false;
-        alienShip = null;
+    //essentially, performs the function of the bomb - remove alien & all asteroids
+    public void bombUsed() {
+        AlienShip alien = getAlienShip();
+        if (alien != null) {
+            alien.destroy(true);
+        }
 
-        synchronized (asteroidSync) {
-            this.asteroidList = new ArrayList<Asteroid>();
-        }
-        synchronized (projectileSync) {
-            this.projectileList = new ArrayList<Projectile>();
-        }
-        synchronized (bonusSync) {
-            this.bonusList = new ArrayList<BonusDrop>();
-        }
-        synchronized (explosionSync) {
-            this.explosionList = new ArrayList<MapObjectTTL>();
+        for (Asteroid element : getAsteroids())
+        {
+            element.destroy(true);
         }
     }
 }

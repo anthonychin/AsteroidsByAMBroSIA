@@ -2,6 +2,7 @@ package game;
 
 import static game.Logic.executeTask;
 import gui.MenuGUI;
+import java.awt.Color;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -274,7 +275,16 @@ public class PlayerShip extends Ship {
         for (int i = 0; i < NUM_DEBRIS; i++) {
             int x = getX();
             int y = getY();
-            getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{x, y}, 0, getGameState()));
+            Color shipColor;
+            if (getGameState().isPlayerTwoTurn())
+            {
+                shipColor = Color.BLUE;
+            }
+            else
+            {
+                shipColor = Color.RED;
+            }
+            getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{x, y}, 0, getGameState(), shipColor));
         }
     }
     

@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Color;
+
 /**
  * The <code>Projectile</code> class provides the representation for the projectile
  * objects.
@@ -38,6 +40,9 @@ public class Projectile extends MapObjectTTL {
         velocity[1] = (float) (PROJECTILE_SPEED * Math.sin(Math.toRadians(heading - 90)));
 
         this.setVelocity(new float[]{velocity[0], velocity[1]});
+        
+        //by default, we want yellow projectiles
+        setColor(Color.YELLOW);
 
         if (ship instanceof PlayerShip) {
             this.owner = PLAYER_OWNER;
