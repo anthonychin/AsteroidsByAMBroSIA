@@ -6,7 +6,7 @@ package game;
  */
 public class MapObjectTTL extends MapObject {
 
-    final static private int TIME_TO_LIVE = 3;
+    static private int TIME_TO_LIVE = 3;
     private int ttl;
 
     MapObjectTTL(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState) {

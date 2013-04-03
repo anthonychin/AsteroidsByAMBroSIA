@@ -38,6 +38,7 @@ public class Projectile extends MapObjectTTL {
         velocity[1] = (float) (PROJECTILE_SPEED * Math.sin(Math.toRadians(heading - 90)));
 
         this.setVelocity(new float[]{velocity[0], velocity[1]});
+        this.setTTL(5);
 
         if (ship instanceof PlayerShip) {
             this.owner = PLAYER_OWNER;

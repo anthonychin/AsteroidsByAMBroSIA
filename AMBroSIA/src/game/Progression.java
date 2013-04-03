@@ -37,8 +37,9 @@ public class Progression implements Runnable{
         //check if alien does not already exist and difficulty says to spawn one
         //Note: asteroid heading != 0 looks really strange, so always set to 0.
         if (isAlienDestroyed() && !isPlayerDead() && Difficulty.spawnAlien()) {
-            gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, 0, 
-                    new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
+            as = new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, 0, 
+                    new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState);
+            gameState.addAlienShip(as);
         }
     }
     
@@ -135,9 +136,9 @@ public class Progression implements Runnable{
 
             boolean playerTwo = gameState.isPlayerTwoTurn();
 
-            gameState.resetToDefaults();
+            //gameState.resetToDefaults();
             gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, oldPlayerLives, oldPlayerBomb, 3));
-            addAsteroids(levelNumber);
+            //addAsteroids(levelNumber);
             gameState.setLevel(levelNumber++);
             gameState.addToCurrentScore(oldScore);
             gameState.setPlayerTwoTurn(playerTwo);
