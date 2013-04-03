@@ -41,6 +41,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static timeToLive ttlLogic;
     private static Collision collisionCheck;
     private static Progression gameProgress;
+    private static AI gameAI;
     //fire rate limiter variables
     private static long initialShootTime;
     private static long currentShootTime;
@@ -93,6 +94,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(ttlLogic, 0, 200, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(gameProgress, 0, 1, TimeUnit.SECONDS);
+        timer.scheduleAtFixedRate(gameAI, 0, 500, TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -172,6 +174,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         ttlLogic = new timeToLive(gameState);
         collisionCheck = new Collision(gameState, physicsEngine);
         gameProgress = new Progression(gameState,twoPlayer);
+        gameAI = new AI(gameState);
         gameProgress.setupInitialLevel();
 
     }

@@ -355,7 +355,7 @@ public class GameState {
         }
     }
     
-        public void bombUsed() {
+    public void bombUsed() {
         isPlayerDead = false;
         alienShip = null;
 

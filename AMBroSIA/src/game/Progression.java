@@ -18,8 +18,6 @@ public class Progression implements Runnable{
     private boolean playerOneTurn = true;
     private boolean spawnAlien = true;
     
-    static AlienShip as = null;
-    
     private int player1Score = 0;
     private int player2Score = 0;
     
@@ -35,7 +33,7 @@ public class Progression implements Runnable{
     public void run() {
         checkGameProgress();
         spawnAlien();
-        alienShoot();
+        //alienShoot();
     }
 
     private void spawnAlien() {
@@ -43,21 +41,8 @@ public class Progression implements Runnable{
         //Note: asteroid heading != 0 looks really strange, so always set to 0.
         if (isAlienDestroyed() && !isPlayerDead() && spawnAlien && Difficulty.spawnAlien()) {
             gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, 0, 
-                    new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
+                                new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
         }
-    }
-    
-    private void alienShoot() {
-       if (as != null){
-           PlayerShip ps = gameState.getPlayerShip();
-           int getX = ps.getX() - as.getX();
-           int getY = ps.getY() - as.getY();
-           
-           float heading = (float)Math.toDegrees(Math.tan(getY/getX)-90);
-           
-           System.out.println(heading);
-           gameState.addProjectile(new Projectile(as, heading, new int[]{as.getX(), as.getY()}, gameState));
-        }    
     }
     
     private void checkGameProgress() {
@@ -142,9 +127,9 @@ public class Progression implements Runnable{
 
             boolean playerTwo = gameState.isPlayerTwoTurn();
 
-            //gameState.resetToDefaults();
+            gameState.resetToDefaults();
             gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, oldPlayerLives, oldPlayerBomb, 3));
-            //addAsteroids(levelNumber);
+            addAsteroids(levelNumber);
             gameState.setLevel(levelNumber++);
             gameState.addToCurrentScore(oldScore);
             gameState.setPlayerTwoTurn(playerTwo);

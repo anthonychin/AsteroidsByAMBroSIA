@@ -95,7 +95,7 @@ public class GraphicsEngine implements Runnable {
 
     private static Polygon projectileShape() {
         //TODO: See if projectile shape OK
-        return new Polygon(new int[]{-1, 0, 1, 0}, new int[]{0, 1, 0, -1}, 4);
+        return new Polygon(new int[]{-2, 0, 2, 0}, new int[]{0, 2, 0, -2}, 4);
     }
 
     /**
