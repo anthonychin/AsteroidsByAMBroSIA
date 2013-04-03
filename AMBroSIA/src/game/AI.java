@@ -39,7 +39,7 @@ public class AI implements Runnable {
            
            float heading = (float)(Math.toDegrees(Math.tan(getY/getX)-90)%360);
            
-           System.out.println(heading);
+           //System.out.println(heading);
            gameState.addProjectile(new Projectile(as, heading, new int[]{as.getX(), as.getY()}, gameState));
         }
     }
