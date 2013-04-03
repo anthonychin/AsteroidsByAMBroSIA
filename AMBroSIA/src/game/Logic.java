@@ -209,17 +209,19 @@ public class Logic extends KeyAdapter implements ActionListener {
                 player.useBomb();
             }
         } else if (keyCode == KeyEvent.VK_SPACE) {
-                if (shootKeyReleased) {
-                    initialShootTime = System.currentTimeMillis();
-                    shootKeyReleased = false;
-                    shootCounter = 0;
-                    player.shoot();
-                } else if (!shootKeyReleased) {
-                    currentShootTime = System.currentTimeMillis();
-                    while ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1200 && shootCounter < 1) {
-                            player.shootDirection();
-                            shootCounter++;                      
-                            initialShootTime = currentShootTime;
+                if(gameState.getPlayerShip() != null){
+                    if (shootKeyReleased) {
+                        initialShootTime = System.currentTimeMillis();
+                        shootKeyReleased = false;
+                        shootCounter = 0;
+                        player.shoot();
+                    } else if (!shootKeyReleased) {
+                        currentShootTime = System.currentTimeMillis();
+                        while ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1200 && shootCounter < 1) {
+                                player.shootDirection();
+                                shootCounter++;                      
+                                initialShootTime = currentShootTime;
+                        }
                     }
                 }
         } else if (keyCode == KeyEvent.VK_P) {
