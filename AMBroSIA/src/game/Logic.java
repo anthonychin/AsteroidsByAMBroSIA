@@ -242,6 +242,7 @@ public class Logic extends KeyAdapter implements ActionListener {
             //gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(10), Difficulty.randomHeading()}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
             //gameState.addProjectile(new Projectile(gameState.getAlienShip(), randu.nextInt(360), new int[] {gameState.getAlienShip().getX(), gameState.getAlienShip().getY()}, gameState));
         } else if (keyCode == KeyEvent.VK_ESCAPE) {
+            //may have to add if statement for two player here
             displayGameOver();
         }
     }
