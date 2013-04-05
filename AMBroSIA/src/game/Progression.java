@@ -109,7 +109,7 @@ public class Progression implements Runnable{
     public void setupInitialLevel()
     {
         //start at level 1 (note: player ship needed, as setupLevel has as precondition that player ship != null
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 99, 99, 3));
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 1, 1, 1));
         setupLevel(1);
     }
     

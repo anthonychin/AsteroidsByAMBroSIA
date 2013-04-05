@@ -153,6 +153,8 @@ public class MenuGUI implements Runnable
 
     public void displayTwoP(GameState gs) 
     {
+        //let other methods know we are in Two P mode
+        singleP = false;
         frame.setFocusable(true);
         twoPPanel = new TwoPgamePanel(gs, new ImageIcon("./src/images/spaceBackground.jpg").getImage());
         JPanel cardGame2P = new JPanel();
