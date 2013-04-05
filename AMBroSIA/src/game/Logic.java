@@ -151,6 +151,7 @@ public class Logic extends KeyAdapter implements ActionListener {
      * player mode).
      */
     public static void displayWinner() {
+        gui.displayWinner(gameState);
     }
 
     /**

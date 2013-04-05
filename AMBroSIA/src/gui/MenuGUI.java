@@ -61,7 +61,8 @@ public class MenuGUI implements Runnable
     private SinglePgamePanel onePPanel;
     private TwoPgamePanel twoPPanel;
     
-    private GameOverPanel gameOverPanel;
+    private EndGamePanel gameOverPanel;
+    private EndGamePanel winnerPanel;
     
     private final static Logger log = Logger.getLogger(MenuGUI.class.getName());
     
@@ -136,6 +137,8 @@ public class MenuGUI implements Runnable
     
     public void displaySingleP(GameState gs) 
     {
+        //let other methods know we are in single P mode
+        singleP = true;
         //allow keyboard input
         frame.setFocusable(true);
        //create panel, show it
@@ -144,8 +147,6 @@ public class MenuGUI implements Runnable
         cardGame1P.add(onePPanel);
         card.add("Single-Player Mode", cardGame1P);
         cardLayout.show(card, "Single-Player Mode");
-        //let other methods know we are in single P mode
-        singleP = true;
         
         //do not allow resizing at this point, as it can disrupt gameplay
         frame.setResizable(false);
@@ -200,7 +201,25 @@ public class MenuGUI implements Runnable
     
     public void displayGameOver(GameState gs)
     {
-        gameOverPanel = new GameOverPanel(new ImageIcon("./src/images/spaceBackground.jpg").getImage(), gs);
+        gameOverPanel = new EndGamePanel(new ImageIcon("./src/images/spaceBackground.jpg").getImage(), gs, true);
+        JPanel cardGameOver = new JPanel();
+        cardGameOver.setLayout(new BorderLayout());
+        cardGameOver.add(gameOverPanel);
+        
+        //initialize a back button
+        JPanel buttonPanelGameOver = new JPanel();
+        buttonPanelGameOver.add(backButton);
+        buttonPanelGameOver.setBackground(Color.black);
+        backButton.addActionListener(buttonClick);
+        cardGameOver.add(buttonPanelGameOver, BorderLayout.SOUTH);
+        cardGameOver.setBackground(Color.white);
+        card.add("GameOver", cardGameOver);
+        cardLayout.show(card, "GameOver");
+    }
+    
+    public void displayWinner(GameState gs) 
+    {
+        gameOverPanel = new EndGamePanel(new ImageIcon("./src/images/spaceBackground.jpg").getImage(), gs, false);
         JPanel cardGameOver = new JPanel();
         cardGameOver.setLayout(new BorderLayout());
         cardGameOver.add(gameOverPanel);
