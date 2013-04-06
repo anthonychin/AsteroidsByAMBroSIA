@@ -146,13 +146,6 @@ public class Logic extends KeyAdapter implements ActionListener {
         return paused;
     }
 
-    /**
-     * Displays text that the player has won (as appropriate for single or 2
-     * player mode).
-     */
-    public static void displayWinner() {
-        gui.displayWinner(gameState);
-    }
 
     /**
      * Displays "Game Over" message.

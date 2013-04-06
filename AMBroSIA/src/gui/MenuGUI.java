@@ -96,8 +96,11 @@ public class MenuGUI implements Runnable
         frame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         frame.setLocation(100, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setMinimumSize(new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT));
+        frame.setMinimumSize(new Dimension(DEFAULT_WIDTH,DEFAULT_HEIGHT));
+        
+        //maximize game, and update the size to match
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        updateSize();
         
         //set up (but do not yet allow) keyboard input
         frame.addKeyListener(keyboard);
@@ -216,26 +219,12 @@ public class MenuGUI implements Runnable
         card.add("GameOver", cardGameOver);
         cardLayout.show(card, "GameOver");
     }
-    
-    public void displayWinner(GameState gs) 
-    {
-        gameOverPanel = new EndGamePanel(new ImageIcon("./src/images/spaceBackground.jpg").getImage(), gs, false);
-        JPanel cardGameOver = new JPanel();
-        cardGameOver.setLayout(new BorderLayout());
-        cardGameOver.add(gameOverPanel);
         
-        //initialize a back button
-        JPanel buttonPanelGameOver = new JPanel();
-        buttonPanelGameOver.add(backButton);
-        buttonPanelGameOver.setBackground(Color.black);
-        backButton.addActionListener(buttonClick);
-        cardGameOver.add(buttonPanelGameOver, BorderLayout.SOUTH);
-        cardGameOver.setBackground(Color.white);
-        card.add("GameOver", cardGameOver);
-        cardLayout.show(card, "GameOver");
+    public void goBack() { 
+        cardLayout.show(card, "Menu");
+        //don't want keyboard working in menu
+        frame.setFocusable(false);
     }
-        
-    public void goBack() { cardLayout.show(card, "Menu");}
 
     public void updateDraw()
     {

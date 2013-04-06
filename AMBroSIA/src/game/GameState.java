@@ -40,14 +40,15 @@ public class GameState {
     private int player1Score;
     private int player2Score;
     private int level;
+    private int player1Level;
+    private int player2Level;
     private boolean isPlayerDead;
     private boolean playerTwoTurn;
-    
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
     private static final Object explosionSync = new Object();
     private static final Object bonusSync = new Object();
-    
+
     /**
      * Creates <i>GameState</i> using given parameters. It also creates empty
      * lists for asteroid, projectile, bonus, and explosions.
@@ -61,6 +62,7 @@ public class GameState {
 
     /**
      * Adds asteroid to the asteroid list.
+     *
      * @param asteroid
      */
     public void addAsteroid(Asteroid asteroid) {
@@ -71,6 +73,7 @@ public class GameState {
 
     /**
      * Removes asteroid from the asteroid list.
+     *
      * @param asteroid
      */
     public void removeAsteroid(Asteroid asteroid) {
@@ -81,6 +84,7 @@ public class GameState {
 
     /**
      * Returns the list of asteroids.
+     *
      * @return list of asteroids
      */
     public ArrayList<Asteroid> getAsteroids() {
@@ -88,15 +92,16 @@ public class GameState {
             return new ArrayList<Asteroid>(this.asteroidList);
         }
     }
-    
+
     public void addAsteroidsList(ArrayList<Asteroid> list) {
-        synchronized (asteroidList) {
+        synchronized (asteroidSync) {
             this.asteroidList.addAll(list);
         }
     }
 
     /**
      * Adds projectile to the projectile list.
+     *
      * @param projectile
      */
     public void addProjectile(Projectile projectile) {
@@ -107,6 +112,7 @@ public class GameState {
 
     /**
      * Removes single projectile from the projectile list.
+     *
      * @param projectile
      */
     public void removeProjectile(Projectile projectile) {
@@ -117,6 +123,7 @@ public class GameState {
 
     /**
      * Removes all projectile from the projectile list.
+     *
      * @param list
      */
     public void removeListOfProjectiles(Collection<?> list) {
@@ -127,6 +134,7 @@ public class GameState {
 
     /**
      * Returns list of projectiles.
+     *
      * @return list of projectiles
      */
     public ArrayList<Projectile> getProjectiles() {
@@ -137,6 +145,7 @@ public class GameState {
 
     /**
      * Adds explosion to the explosion list.
+     *
      * @param explosion
      */
     public void addExplosion(MapObjectTTL explosion) {
@@ -147,6 +156,7 @@ public class GameState {
 
     /**
      * Removes single explosion from the explosion list.
+     *
      * @param explosion
      */
     public void removeExplosion(MapObjectTTL explosion) {
@@ -157,6 +167,7 @@ public class GameState {
 
     /**
      * Removes all explosion from the explosion list.
+     *
      * @param list
      */
     public void removeListOfExplosions(Collection<?> list) {
@@ -173,6 +184,7 @@ public class GameState {
 
     /**
      * Adds bonus drops to the bonus drop list.
+     *
      * @param bonusDrop
      */
     public void addBonusDrop(BonusDrop bonusDrop) {
@@ -183,6 +195,7 @@ public class GameState {
 
     /**
      * Removes a single bonus drops from the bonus drop list.
+     *
      * @param bonusDrop
      */
     public void removeBonusDrop(BonusDrop bonusDrop) {
@@ -193,6 +206,7 @@ public class GameState {
 
     /**
      * Removes all bonus drops from list.
+     *
      * @param list
      */
     public void removeListOfBonusDrops(Collection<?> list) {
@@ -203,6 +217,7 @@ public class GameState {
 
     /**
      * Returns list of all bonus drops.
+     *
      * @return list of all bonus drops
      */
     public ArrayList<BonusDrop> getBonusDrops() {
@@ -213,6 +228,7 @@ public class GameState {
 
     /**
      * Adds alien ship.
+     *
      * @param alienShip
      */
     public void addAlienShip(AlienShip alienShip) {
@@ -221,6 +237,7 @@ public class GameState {
 
     /**
      * Returns alien ship.
+     *
      * @return alien ship
      */
     public AlienShip getAlienShip() {
@@ -236,6 +253,7 @@ public class GameState {
 
     /**
      * Adds player ship.
+     *
      * @param playerShip
      */
     public void addPlayerShip(PlayerShip playerShip) {
@@ -251,6 +269,7 @@ public class GameState {
 
     /**
      * Returns player ship.
+     *
      * @return player ship
      */
     public PlayerShip getPlayerShip() {
@@ -259,12 +278,13 @@ public class GameState {
 
     /**
      * Returns current level.
+     *
      * @return integer value representing level
      */
     public int getLevel() {
         return this.level;
     }
-    
+
     public void setLevel(int level) {
         this.level = level;
     }
@@ -272,9 +292,10 @@ public class GameState {
     public void increaseLevel() {
         this.level++;
     }
-    
+
     /**
      * Returns true if level is complete, false otherwise.
+     *
      * @return boolean value (true if complete, false otherwise)
      */
     public boolean isLevelComplete() {
@@ -283,6 +304,7 @@ public class GameState {
 
     /**
      * Returns the current score.
+     *
      * @return current score
      */
     public int getCurrentScore() {
@@ -291,24 +313,65 @@ public class GameState {
 
     /**
      * Add to high score the value of score.
+     *
      * @param score
      */
     public void addToCurrentScore(int score) {
         this.currentScore += score;
+    }
+    
+    public void resetCurrentScore() {
+        this.currentScore = 0;
     }
 
     public void setPlayer1Score(int score) {
         player1Score = score;
     }
 
+    /**
+     * only valid once game is over
+     *
+     * @return
+     */
     public int getPlayer1Score() {
         return player1Score;
+    }
+
+    /**
+     * only valid once game is over
+     *
+     * @return
+     */
+    public int getPlayer1Level() {
+        return player1Level;
+    }
+
+    public void setPlayer1Level(int p1Level) {
+        player1Level = p1Level;
+    }
+
+    /**
+     * only valid once game is over
+     *
+     * @return
+     */
+    public int getPlayer2Level() {
+        return player2Level;
+    }
+
+    public void setPlayer2Level(int p2Level) {
+        player2Level = p2Level;
     }
 
     public void setPlayer2Score(int score) {
         player2Score = score;
     }
 
+    /**
+     * only valid once game is over
+     *
+     * @return
+     */
     public int getPlayer2Score() {
         return player2Score;
     }
@@ -320,7 +383,7 @@ public class GameState {
     public boolean isPlayerDead() {
         return isPlayerDead;
     }
-    
+
     public boolean isPlayerTwoTurn() {
         return playerTwoTurn;
     }
@@ -354,15 +417,14 @@ public class GameState {
             this.explosionList = new ArrayList<MapObjectTTL>();
         }
     }
-    
+
     //essentially, performs the function of the bomb - remove alien & all asteroids
     public void bombUsed() {
         AlienShip alien = getAlienShip();
         if (alien != null) {
             alien.destroy(true);
         }
-        for (Asteroid element : getAsteroids())
-        {
+        for (Asteroid element : getAsteroids()) {
             element.destroy(true);
         }
     }

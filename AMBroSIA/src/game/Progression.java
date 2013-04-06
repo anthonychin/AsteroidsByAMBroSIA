@@ -18,9 +18,6 @@ public class Progression implements Runnable{
     private boolean playerOneTurn = true;
     private boolean spawnAlien = true;
     
-    private int player1Score = 0;
-    private int player2Score = 0;
-    
     private final static Logger log = Logger.getLogger(Progression.class.getName());
     
     public Progression(GameState gs, boolean twoPlayer){
@@ -50,6 +47,7 @@ public class Progression implements Runnable{
         if (!istwoPlayer) {
             if (isPlayerDead()) {
                 gameState.setPlayer1Score(gameState.getCurrentScore());
+                gameState.setPlayer1Level(gameState.getLevel());
                 Logic.stopTimer();
                 Logic.displayGameOver();
             } //if the player is not dead, check for level completion and move to next level
@@ -66,21 +64,24 @@ public class Progression implements Runnable{
                 if (playerOneTurn)
                 {
                     //restart game for player 2, save player 1 score
-                    player1Score = gameState.getCurrentScore();
+                    int player1Score = gameState.getCurrentScore();
+                    int player1Level = gameState.getLevel();
                     Logic.displayPlayerTwoTurn();
                     setupInitialLevel();
                     gameState.setPlayer1Score(player1Score);
+                    gameState.setPlayer1Level(player1Level);
                     gameState.setPlayerTwoTurn(true);
                     playerOneTurn = false;
                 }
                 else
                 {
                     //game over: save player 2 score, put it in the game state, and stop updating
-                    player2Score = gameState.getCurrentScore();
-                    gameState.setPlayer1Score(player1Score);
+                    int player2Score = gameState.getCurrentScore();
                     gameState.setPlayer2Score(player2Score);
+                    gameState.setPlayer2Level(gameState.getCurrentScore());
+                    //note: player 1 info already set beforehand
                     Logic.stopTimer();
-                    Logic.displayWinner();
+                    Logic.displayGameOver();
                 }
             }
             //same as 1 player
@@ -111,6 +112,8 @@ public class Progression implements Runnable{
         //start at level 1 (note: player ship needed, as setupLevel has as precondition that player ship != null
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 1, 1, 1));
         setupLevel(1);
+        //in case of 2 player, setupLevel saves the old score, so erase it
+        gameState.resetCurrentScore();
     }
     
     //player ship != null assumed.  if null, won't do anything (will try again next turn)
