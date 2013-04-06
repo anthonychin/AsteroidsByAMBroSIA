@@ -44,7 +44,7 @@ public class Projectile extends MapObjectTTL {
         //by default, we want yellow projectiles
         setColor(Color.YELLOW);
         //longer time to live than default
-        this.setTTL(5);
+        this.setTTL(10);
 
         if (ship instanceof PlayerShip) {
             this.owner = PLAYER_OWNER;

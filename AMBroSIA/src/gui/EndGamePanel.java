@@ -49,6 +49,7 @@ public class EndGamePanel extends JPanel {
             highscore = String.valueOf(gamestate.getCurrentScore());
             level = String.valueOf(gamestate.getLevel());
             player = "p1";
+            
         }
         
         else
@@ -87,13 +88,13 @@ public class EndGamePanel extends JPanel {
         add(new JScrollPane(StatisticsTable));
     }
     
-    @Override
-    public void paint (Graphics g){
-        super.paint(g);
-        g.setColor(Color.red);
-        g.setFont(new Font("default", Font.BOLD, 100));
-        g.drawString("GAME OVER", this.getWidth()/3, this.getHeight()/2);
-    }
+//    @Override
+//    public void paint (Graphics g){
+//        super.paint(g);
+//        g.setColor(Color.red);
+//        g.setFont(new Font("default", Font.BOLD, 100));
+//        g.drawString("GAME OVER", this.getWidth()/3, this.getHeight()/2);
+//    }
     
     @Override
     public void paintComponent(Graphics g) {

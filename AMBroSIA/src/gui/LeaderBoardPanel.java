@@ -2,9 +2,7 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.ScrollPane;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,10 +22,6 @@ public class LeaderBoardPanel extends JPanel
     
     GameState gamestate;
     
-    //String highscore = String.valueOf(gamestate.getCurrentScore());
-    //String lives = String.valueOf(gamestate.getPlayerShip().getLives());
-    
-    //ArrayList<String> playerNames = new ArrayList<String>();
     String[] columns = {"Player", "Highscore", "Number of Lives", "Asteroid Destroyed", "Aliens destroyed", "Total deaths", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
     String[][] rowdata = {{"p1", "highscore", "lives", " ", "2", "3", "1.4", "3", "3", "3"}};
     
