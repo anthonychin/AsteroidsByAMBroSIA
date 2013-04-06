@@ -202,9 +202,9 @@ public class MenuGUI implements Runnable
         cardLayout.show(card, "Tutorial");
     }
     
-    public void displayGameOver(GameState gs)
+    public void displayGameOver(GameState gs, boolean mode)
     {
-        gameOverPanel = new EndGamePanel(new ImageIcon("./src/images/spaceBackground.jpg").getImage(), gs, true);
+        gameOverPanel = new EndGamePanel(new ImageIcon("./src/images/spaceBackground.jpg").getImage(), gs, mode);
         JPanel cardGameOver = new JPanel();
         cardGameOver.setLayout(new BorderLayout());
         cardGameOver.add(gameOverPanel);

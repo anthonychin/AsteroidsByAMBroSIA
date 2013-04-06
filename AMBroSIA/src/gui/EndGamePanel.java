@@ -43,6 +43,7 @@ public class EndGamePanel extends JPanel {
     private void makeComponents(int w, int h, boolean singleP)
     {
         String player, highscore, level;
+        
         if(singleP)
         { 
             highscore = String.valueOf(gamestate.getCurrentScore());
@@ -53,28 +54,25 @@ public class EndGamePanel extends JPanel {
         else
         {
             int highscoreP1 = gamestate.getPlayer1Score();
-            String levelP1 = String.valueOf(gamestate.getLevel());
+            String levelP1 = String.valueOf(gamestate.getPlayer1Level());
             int highscoreP2 = gamestate.getPlayer2Score();
-            String levelP2 = String.valueOf(gamestate.getLevel());
-            if(highscoreP1 > highscoreP2)
+            String levelP2 = String.valueOf(gamestate.getPlayer2Level());
+            
+            if(highscoreP1 >= highscoreP2)
             {
                 highscore = String.valueOf(highscoreP1);
                 player = "p1";
                 level = levelP1;
             }
-            else if(highscoreP1 < highscoreP2)
+            
+            else
             {
                 highscore = String.valueOf(highscoreP2);
                 player = "p2";
                 level = levelP2;
             }
-            else
-            {
-                highscore = String.valueOf(highscoreP1);
-                player = "p1 and p2";
-                level = levelP1;
-            }
         }
+        
         String[] columnData = {"", ""};
         String[][] rowData = {{"Player name", player},{"Highscore", highscore},{"Last level", level}};
         StatisticsTable = new JTable(rowData, columnData);

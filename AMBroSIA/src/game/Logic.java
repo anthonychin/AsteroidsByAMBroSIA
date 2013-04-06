@@ -150,8 +150,9 @@ public class Logic extends KeyAdapter implements ActionListener {
     /**
      * Displays "Game Over" message.
      */
-    public static void displayGameOver() {
-        gui.displayGameOver(gameState);
+    public static void displayGameOver(boolean mode) {
+        GameAssets.theme.stop();
+        gui.displayGameOver(gameState, mode);
     }
 
     /**
@@ -237,7 +238,9 @@ public class Logic extends KeyAdapter implements ActionListener {
             //gameState.addProjectile(new Projectile(gameState.getAlienShip(), randu.nextInt(360), new int[] {gameState.getAlienShip().getX(), gameState.getAlienShip().getY()}, gameState));
         } else if (keyCode == KeyEvent.VK_ESCAPE) {
             //may have to add if statement for two player here
-            displayGameOver();
+            stopTimer();
+            GameAssets.theme.stop();
+            displayGameOver(true);
         }
     }
 
