@@ -1,6 +1,5 @@
 package game;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
@@ -16,7 +15,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Sound {
 
-    private File file;
     private AudioInputStream sound;
     private Clip clip;
     
@@ -56,6 +54,5 @@ public class Sound {
      */
     public void playLoop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
-//        Thread.sleep(10000);
     }
 }

@@ -6,7 +6,6 @@ package game;
 
 import java.awt.Image;
 import java.io.IOException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
@@ -19,6 +18,7 @@ import javax.swing.ImageIcon;
  */
 public class GameAssets {
 
+    //all sounds and images are accessible
     public static Sound victory;
     public static Sound gameOver;
     public static Sound noBombs;

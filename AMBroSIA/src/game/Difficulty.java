@@ -80,9 +80,8 @@ public class Difficulty {
     private static float randomFloat() {
         return rand.nextFloat() * 2 - 1;
     }
-    
-    private static int randomInt(int min, int max)
-    {
+
+    private static int randomInt(int min, int max) {
         return rand.nextInt(max - min) + min;
     }
 }

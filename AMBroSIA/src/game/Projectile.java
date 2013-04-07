@@ -24,6 +24,8 @@ public class Projectile extends MapObjectTTL {
     public final static int ALIEN_OWNER = 2;
     private int velocity; // to be fixed
     private int owner;
+    
+    private final static int TIME_TO_LIVE = 10;
 
     /**
      * Creates <i>Projectile</i> with the given parameters.
@@ -35,16 +37,15 @@ public class Projectile extends MapObjectTTL {
      */
     public Projectile(Ship ship, float heading, int[] coordinates, GameState gameState) {
         super(new float[]{0, 0}, heading, coordinates, 0, gameState);
-        float[] velocity = {0, 0};
-        velocity[0] = (float) (PROJECTILE_SPEED * Math.cos(Math.toRadians(heading - 90)));
-        velocity[1] = (float) (PROJECTILE_SPEED * Math.sin(Math.toRadians(heading - 90)));
+        float velocityX = (float) (PROJECTILE_SPEED * Math.cos(Math.toRadians(heading - 90)));
+        float velocityY = (float) (PROJECTILE_SPEED * Math.sin(Math.toRadians(heading - 90)));
 
-        this.setVelocity(new float[]{velocity[0], velocity[1]});
+        this.setVelocity(new float[]{velocityX, velocityY});
         
         //by default, we want yellow projectiles
         setColor(Color.YELLOW);
         //longer time to live than default
-        this.setTTL(10);
+        this.setTTL(TIME_TO_LIVE);
 
         if (ship instanceof PlayerShip) {
             this.owner = PLAYER_OWNER;

@@ -43,6 +43,7 @@ public class MapObjectTTL extends MapObject {
         this.ttl = ttl;
     }
 
+    //remove from game
     @Override
     public void destroy() {
         getGameState().removeExplosion(this);

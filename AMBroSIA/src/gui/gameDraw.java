@@ -16,6 +16,8 @@ import java.awt.Stroke;
 import java.util.ArrayList;
 
 /**
+ * Responsible for drawing all in game objects, from asteroids to the player
+ * ship to bonus drops. Uses the Polygon class that comes with java.
  *
  * @author Michael
  */
@@ -33,6 +35,7 @@ public class gameDraw {
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_LCD_CONTRAST, 100);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
+        //store default stroke so we can reset
         Stroke defaultStroke = g2d.getStroke();
 
         //draw asteroids
@@ -40,11 +43,14 @@ public class gameDraw {
         if (!asteroidList.isEmpty()) {
             g2d.setColor(Color.black);
             for (Asteroid asteroid : asteroidList) {
-                //make asteroid border a little thicker
                 Polygon shape = asteroid.getShape();
+
+                //give asteroid gray outline
                 g2d.setStroke(new BasicStroke(10, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
                 g2d.setColor(Color.GRAY);
                 g2d.drawPolygon(shape);
+
+                //fill asteroid black
                 g2d.setColor(Color.black);
                 g2d.fillPolygon(shape);
             }
@@ -70,11 +76,11 @@ public class gameDraw {
             g2d.setColor(fill);
             g2d.fillPolygon(shape);
 
+            //shield, if activated
             if (player.getShieldStatus()) {
                 g2d.setColor(shield);
                 g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
             }
-
             g2d.drawPolygon(shape);
         }
 
@@ -86,7 +92,7 @@ public class gameDraw {
         AlienShip alien = memory.getAlienShip();
         if (alien != null) {
             g2d.setColor(Color.MAGENTA);
-            g2d.draw(alien.getShape());
+            g2d.drawPolygon(alien.getShape());
         }
 
         //reset color
@@ -97,7 +103,7 @@ public class gameDraw {
         if (!projectileList.isEmpty()) {
             for (Projectile projectile : projectileList) {
                 g2d.setColor(projectile.getColor());
-                g2d.draw(projectile.getShape());
+                g2d.drawPolygon(projectile.getShape());
             }
         }
 
@@ -109,7 +115,7 @@ public class gameDraw {
         if (!bonusList.isEmpty()) {
             for (BonusDrop drop : bonusList) {
                 g2d.setColor(drop.getColor());
-                g2d.draw(drop.getShape());
+                g2d.drawPolygon(drop.getShape());
             }
         }
 
@@ -118,7 +124,7 @@ public class gameDraw {
         if (!explosionList.isEmpty()) {
             for (MapObjectTTL explosion : explosionList) {
                 g2d.setColor(explosion.getColor());
-                g2d.draw(explosion.getShape());
+                g2d.drawPolygon(explosion.getShape());
             }
         }
 

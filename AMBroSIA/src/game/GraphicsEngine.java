@@ -74,36 +74,14 @@ public class GraphicsEngine implements Runnable {
     }
 
     private static Polygon alienShape() {
-        //TODO: give shape to alien
-        // return new Polygon(new int[]{-15,-4,-3,3,4,15,4,-4}, new int[]{0,3,6,6,3,0,-3,-3}, 8);
-        //return new Polygon(new int[]{-20,-15,-10,10,15,20,10,-10}, new int[]{0,3,9,9,3,0,-4,-4}, 8);
         return new Polygon(new int[]{-20,-15,-10, -5, 5, 10,15,20,10, -10}, new int[]{0,3,9, 11, 11, 9,3,0,-3,-3}, 10);        
-        
-        /*
-         * 0,3,9,9,3,0,-4,-4
-         * alien shape
-         * -10,0
-         * -4,3
-         * -1,5
-         * 1,5
-         * 4,3
-         * 10,0
-         * 0,-2
-         * 
-         */
     }
 
     private static Polygon projectileShape() {
-        //TODO: See if projectile shape OK
         return new Polygon(new int[]{-2, 0, 2, 0}, new int[]{0, 2, 0, -2}, 4);
     }
 
-    /**
-     * Returns the shape of explosion.
-     *
-     * @return shape of explosion
-     */
-    public static Polygon explosionShape() {
+    private static Polygon explosionShape() {
         return new Polygon(new int[]{-5, 5}, new int[]{0, 0}, 2);
     }
 
@@ -117,7 +95,7 @@ public class GraphicsEngine implements Runnable {
         MapObject player = memory.getPlayerShip();
         //move to appropriate position, rotate, set shape
         if (player != null) {
-            setPosition(playerShape(), player); //shape and gameobj
+            setPosition(playerShape(), player);
         }
     }
 

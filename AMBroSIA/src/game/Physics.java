@@ -2,10 +2,7 @@ package game;
 
 import gui.MenuGUI;
 import java.awt.Polygon;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import org.apache.log4j.Logger;
 
 /**

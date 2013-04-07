@@ -14,6 +14,33 @@ import java.util.Collection;
  */
 public class GameState {
 
+    /*
+     * Note on Synchronization:
+     * The way GameState is written, methods are provided that return lists of
+     * objects, thus allowing someone to write code that iterates through
+     * a list or retrieves only a select few items.  While this gives
+     * a lot of flexibility, it introduces some problems; namely, that of 
+     * synchronization: objects can be added or removed from the list
+     * at any time, which can cause another thread iterating through
+     * the list to freeze.  While this involves multithreading, it also 
+     * occurs when the game is made to run single-threaded, as the keyboard
+     * runs in its own thread.
+     * 
+     * Thus the decision was made to fix the root of the problem: namely,
+     * the ability to modify a list while another thread is iterating through
+     * it.  After much trial and error, we found that creating a new,
+     * independent list whenever a list is returned - as well as making
+     * sure that additions/deletions and the creation of the new list in
+     * question are all synchronized,  fixed the issue, as iterations
+     * are always performed on a list that cannot be modified
+     * by another thread.
+     * 
+     * Note that objects contained in the lists do not need
+     * synchronization, as most operations are atomic, and those that are
+     * not are not affected by concurrency issues - i.e. removing 
+     * an object when it is already removed is OK.
+     */
+    
     /**
      * Score the player receives when large asteroid is destroyed.
      */
@@ -36,14 +63,22 @@ public class GameState {
     private ArrayList<MapObjectTTL> explosionList;
     private PlayerShip playerShip;
     private AlienShip alienShip;
+    
+    //information for current player
     private int currentScore;
-    private int player1Score;
-    private int player2Score;
     private int level;
+    
+    //stored information (particuarly useful in two player)
     private int player1Level;
     private int player2Level;
+    private int player1Score;
+    private int player2Score;
+    
+    
     private boolean isPlayerDead;
     private boolean playerTwoTurn;
+    
+    //synchronization objects
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
     private static final Object explosionSync = new Object();
@@ -93,6 +128,7 @@ public class GameState {
         }
     }
 
+    //add a whole list of asteroids at once
     public void addAsteroidsList(ArrayList<Asteroid> list) {
         synchronized (asteroidSync) {
             this.asteroidList.addAll(list);
@@ -176,6 +212,7 @@ public class GameState {
         }
     }
 
+    //return explosion list
     public ArrayList<MapObjectTTL> getExplosions() {
         synchronized (explosionSync) {
             return new ArrayList<MapObjectTTL>(this.explosionList);
@@ -285,12 +322,9 @@ public class GameState {
         return this.level;
     }
 
+    //change current level
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public void increaseLevel() {
-        this.level++;
     }
 
     /**
@@ -324,6 +358,7 @@ public class GameState {
         this.currentScore = 0;
     }
 
+    //set the score of player 1
     public void setPlayer1Score(int score) {
         player1Score = score;
     }
@@ -346,6 +381,7 @@ public class GameState {
         return player1Level;
     }
 
+    //player 1, player 2 level useful in two player to store data while the other is playing
     public void setPlayer1Level(int p1Level) {
         player1Level = p1Level;
     }
@@ -363,6 +399,7 @@ public class GameState {
         player2Level = p2Level;
     }
 
+    //same idea as setting playerX level
     public void setPlayer2Score(int score) {
         player2Score = score;
     }
@@ -380,6 +417,7 @@ public class GameState {
         isPlayerDead = isDead;
     }
 
+    //whether or not the player is dead (and not just in the process of respawning)
     public boolean isPlayerDead() {
         return isPlayerDead;
     }

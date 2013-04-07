@@ -50,10 +50,10 @@ public class Ship extends MapObject {
     }
 
     /**
-     * Creates a projectile.
+     * Creates a projectile.  Must be overridden.
      */
     public void shoot() {
-        //this.getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), this.getGameState()));   
+        throw new UnsupportedOperationException("Not implemented");
     }
 
     private int[] calculateCoordinate(int[] shipCoord) {

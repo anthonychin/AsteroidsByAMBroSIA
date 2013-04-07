@@ -158,6 +158,7 @@ public class MapObject {
     /**
      * Removes the <i>MapObject</i> from the game state. 
      */
-    public void destroy() {
+    public void destroy(){
+        throw new UnsupportedOperationException("Not implemented");
     }
 }

@@ -1,9 +1,7 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.log4j.Logger;
 
 /**
@@ -39,30 +37,24 @@ public class timeToLive implements Runnable {
         if (!objectList.isEmpty()) {
             log.debug("Starting TTL Check");
             ArrayList<Object> toRemove = new ArrayList<Object>();
-            for (MapObjectTTL object : objectList) {             
-                //TTL is in seconds : if it still has life left we simply set it for the next one, else, it's gone
+            for (MapObjectTTL object : objectList) {
+                //TTL is in 200 msec increments : if it still has life left we simply set it for the next one, else, it's gone
                 if (object.getTTL() > 0) {
                     object.setTTL(object.getTTL() - 1);
-                } 
-                else {
+                } else {
                     toRemove.add(object);
                 }
             }
-            
+
             //now that we have a list of objects, we remove them
             //deal with types as appropriate.  OK to pull first entry always because we make sure befor that the list is not empty
-            if (objectList.get(0) instanceof Projectile)
-            {
-               gameState.removeListOfProjectiles(toRemove); 
-            }
-            else if (objectList.get(0) instanceof MapObjectTTL)
-            {
-                gameState.removeListOfExplosions(toRemove);
-            }
-            //last possibility
-            else
-            {
+            if (objectList.get(0) instanceof Projectile) {
+                gameState.removeListOfProjectiles(toRemove);
+            } else if (objectList.get(0) instanceof BonusDrop) {
                 gameState.removeListOfBonusDrops(toRemove);
+            } //last possibility
+            else {
+                gameState.removeListOfExplosions(toRemove);
             }
         }
     }
