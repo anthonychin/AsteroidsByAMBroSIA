@@ -1,5 +1,6 @@
 package gui;
 
+import game.GameAssets;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,7 +19,7 @@ import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel
 {
-      private Image img = Toolkit.getDefaultToolkit().createImage("./src/images/asteroids.jpg");
+      private Image img = GameAssets.menuImage;
   
     public MenuPanel() {
         

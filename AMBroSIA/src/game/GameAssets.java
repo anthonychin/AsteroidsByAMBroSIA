@@ -4,11 +4,14 @@
  */
 package game;
 
+import java.awt.Image;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -34,6 +37,11 @@ public class GameAssets {
     public static Sound alienDetected;
     public static Sound thrusters;
     public static Sound warp;
+    
+    public static Image spaceBackground;
+    public static Image menuImage;
+    public static Image tutorialImage;
+    public static Image gameOverImage;
 
     public static void loadSounds() {
         try {
@@ -65,5 +73,9 @@ public class GameAssets {
     }
 
     public static void loadImages() {
+        spaceBackground = new ImageIcon(GameAssets.class.getResource("images/spaceBackground.jpg")).getImage();
+        tutorialImage = new ImageIcon(GameAssets.class.getResource("images/keyboard.jpg")).getImage();
+        gameOverImage = new ImageIcon(GameAssets.class.getResource("images/GameOver.jpg")).getImage();
+        menuImage = new ImageIcon(GameAssets.class.getResource("images/asteroids.jpg")).getImage();
     }
 }

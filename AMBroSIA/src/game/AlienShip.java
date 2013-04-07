@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Color;
+import java.util.Random;
 
 /**
  *
@@ -17,10 +18,12 @@ public class AlienShip extends Ship {
     }
 
     public void destroy(boolean bombUsed) {
+        int[] lastCoord = getCoord();
         getGameState().removeAlienShip();
         GameAssets.crash.play();
         if (!bombUsed) {
             getGameState().addToCurrentScore(GameState.ALIEN_SCORE);
+            getGameState().addBonusDrop(new BonusDrop(lastCoord, getGameState(), new Random().nextInt(5)));
         }
         createExplosionEffect();
     }
