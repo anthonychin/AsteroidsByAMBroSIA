@@ -1,5 +1,6 @@
 package gui;
 
+import game.GameAssets;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -145,7 +146,7 @@ public class MenuGUI implements Runnable
         //allow keyboard input
         frame.setFocusable(true);
        //create panel, show it
-        onePPanel = new SinglePgamePanel(gs, new ImageIcon("./src/images/spaceBackground.jpg").getImage());
+        onePPanel = new SinglePgamePanel(gs, GameAssets.spaceBackground);
         JPanel cardGame1P = new JPanel();
         cardGame1P.add(onePPanel);
         card.add("Single-Player Mode", cardGame1P);
@@ -160,7 +161,7 @@ public class MenuGUI implements Runnable
         //let other methods know we are in Two P mode
         singleP = false;
         frame.setFocusable(true);
-        twoPPanel = new TwoPgamePanel(gs, new ImageIcon("./src/images/spaceBackground.jpg").getImage());
+        twoPPanel = new TwoPgamePanel(gs, GameAssets.spaceBackground);
         JPanel cardGame2P = new JPanel();
         //cardGame.setLayout(new GridLayout(2,1)); not sure how to set layout for actual gameplay
         cardGame2P.add(twoPPanel);
@@ -189,7 +190,7 @@ public class MenuGUI implements Runnable
     {
         JPanel cardTutorial = new JPanel();
         cardTutorial.setLayout(new BorderLayout());
-        JPanel tutorialPanel = new TutorialPanel(new ImageIcon("./src/images/keyboard.jpg").getImage());
+        JPanel tutorialPanel = new TutorialPanel(GameAssets.tutorialImage);
         cardTutorial.add(tutorialPanel, BorderLayout.NORTH);
         //initialize a back button
         JPanel buttonPanelTutorial = new JPanel();
@@ -204,7 +205,7 @@ public class MenuGUI implements Runnable
     
     public void displayGameOver(GameState gs, boolean mode)
     {
-        gameOverPanel = new EndGamePanel(new ImageIcon("./src/images/GameOver.jpg").getImage(), gs, mode);
+        gameOverPanel = new EndGamePanel(GameAssets.gameOverImage, gs, mode);
         JPanel cardGameOver = new JPanel();
         cardGameOver.setLayout(new BorderLayout());
         cardGameOver.add(gameOverPanel);

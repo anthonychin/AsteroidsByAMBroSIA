@@ -2,6 +2,7 @@ package game;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -29,8 +30,8 @@ public class Sound {
      */
     public Sound(String inputFile) throws UnsupportedAudioFileException, 
             IOException, LineUnavailableException {
-        file = new File("./src/sounds/" + inputFile);
-        sound = AudioSystem.getAudioInputStream(file);
+        URL soundFile = Sound.class.getResource("sounds/" + inputFile);
+        sound = AudioSystem.getAudioInputStream(soundFile);
         clip = AudioSystem.getClip();
         clip.open(sound);
     }

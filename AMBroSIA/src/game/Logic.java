@@ -66,6 +66,7 @@ public class Logic extends KeyAdapter implements ActionListener {
      */
     public static void main(String args[]) {
         GameAssets.loadSounds();
+        GameAssets.loadImages();
         //set log configuration to defaults
         BasicConfigurator.configure();
 
