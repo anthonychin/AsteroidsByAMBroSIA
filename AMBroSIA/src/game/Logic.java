@@ -239,6 +239,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         } else if (keyCode == KeyEvent.VK_ESCAPE) {
             //may have to add if statement for two player here
             stopTimer();
+            paused = false;
             GameAssets.theme.stop();
             displayGameOver(true);
         }
