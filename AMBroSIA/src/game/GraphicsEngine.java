@@ -109,7 +109,7 @@ public class GraphicsEngine implements Runnable {
 
     private static Polygon bonusDropShape() {
         //TODO: Give bonus drop shape
-        return new Polygon(new int[]{-3, -3, 3, 3}, new int[]{3, -3, 3, -3}, 4);
+        return new Polygon(new int[]{-8, -8, 8, 8}, new int[]{8, -8, 8, -8}, 4);
     }
 
     private void updatePlayerShip() {
