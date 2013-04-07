@@ -216,6 +216,7 @@ public class PlayerShip extends Ship {
 
     /**
      *  Shoot 4 Projectiles at heading of -20, 20, -60, 60 degree relative to the ship heading.
+     *  Used when the spacebar is held.
      */
     public void shootDirection() {
         getGameState().addProjectile(new Projectile(this, this.getHeading() - 20, new int[]{this.getX(), this.getY()}, getGameState()));
@@ -227,7 +228,7 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Destroys the PlayerShip.
+     * Destroys the PlayerShip, or respawns if enough lives are remaining.
      */
     @Override
     public void destroy() {

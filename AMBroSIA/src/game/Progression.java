@@ -4,7 +4,7 @@ import gui.MenuGUI;
 import org.apache.log4j.Logger;
 
 /**
- *
+ * Class responsible for keeping the game going: spawning aliens, moving to the next level, or ending the game.
  * @author Michael
  */
 public class Progression implements Runnable {
@@ -22,7 +22,7 @@ public class Progression implements Runnable {
      * @param twoPlayer true if two player mode, false otherwise
      */
     public Progression(GameState gameState, boolean twoPlayer) {
-        gameState = gameState;
+        this.gameState = gameState;
         istwoPlayer = twoPlayer;
         log.setLevel(Logic.LOG_LEVEL);
     }
@@ -102,7 +102,7 @@ public class Progression implements Runnable {
     }
 
     /**
-     * Sets up initial level.
+     * Sets up initial level (level 1).
      */
     public void setupInitialLevel() {
         //start at level 1 (note: player ship needed, as setupLevel has as precondition that player ship != null
