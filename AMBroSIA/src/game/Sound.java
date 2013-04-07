@@ -10,17 +10,16 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * The <code>Sound</code> class contains necessary codes for playing sound throughout the game.
- * It provides <tt>play</tt>, <tt>stop</tt>, and <tt>playLoop</tt> operations.
+ * It provides play, stop, and playLoop operations.
  * @author Meong Hee
  */
 public class Sound {
 
     private AudioInputStream sound;
     private Clip clip;
-    
-    //  The string inputFile should contain the Path of the sound file.
+
     /**
-     * Creates <i>Sound</i> using given inputFile. If the file is not found or the given file is not supported, it throws an exception.
+     * Creates Sound using given inputFile. If the file is not found or the given file is not supported, it throws an exception.
      * @param inputFile name of the sound file
      * @throws UnsupportedAudioFileException
      * @throws IOException

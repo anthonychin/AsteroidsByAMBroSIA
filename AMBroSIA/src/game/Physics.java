@@ -128,9 +128,9 @@ public class Physics implements Runnable {
     }
 
     /**
-     * Returns list of <i>MapObject</i>s that have been detected in collision.
+     * Returns list of MapObjects that have been detected in collision.
      * The list will always have an even number of entries. Each sequential pair
-     * of <i>MapObject</i>s indicates that the two of them collided.
+     * of MapObjects indicates that the two of them collided.
      *
      * @return list of MapObject detected in collision
      */

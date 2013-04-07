@@ -8,21 +8,28 @@ import org.apache.log4j.Logger;
  * @author Michael
  */
 public class Progression implements Runnable {
-    
+
     private GameState gameState;
     private boolean istwoPlayer = false;
     private boolean playerOneTurn = true;
     private boolean spawnAlien = true;
-    
     private final static Logger log = Logger.getLogger(Progression.class.getName());
-    
-    public Progression(GameState gs, boolean twoPlayer){
-        gameState = gs;
+
+    /**
+     * Creates Progression using given parameter.
+     *
+     * @param gameState current game state
+     * @param twoPlayer true if two player mode, false otherwise
+     */
+    public Progression(GameState gameState, boolean twoPlayer) {
+        gameState = gameState;
         istwoPlayer = twoPlayer;
         log.setLevel(Logic.LOG_LEVEL);
     }
 
-    //allow for a thread to run this
+    /**
+     * Checks progress of game and spawns alien.
+     */
     @Override
     public void run() {
         checkGameProgress();
@@ -34,12 +41,11 @@ public class Progression implements Runnable {
         //check if alien does not already exist and difficulty says to spawn one
         //Note: alien heading != 0 looks really strange, so always set to 0.
         if (isAlienDestroyed() && !isPlayerDead() && spawnAlien && Difficulty.spawnAlien()) {
-            gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, 0, 
-                                new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
+            gameState.addAlienShip(new AlienShip(new float[]{Difficulty.randomAlienVelocity(), Difficulty.randomAlienVelocity()}, 0,
+                    new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, gameState));
         }
     }
-    
-    //checks current game status, and ends game or goes to next level if it is time
+
     private void checkGameProgress() {
         //single player
         if (!istwoPlayer) {
@@ -52,15 +58,11 @@ public class Progression implements Runnable {
             else if (allAsteroidsDestroyed() && isAlienDestroyed()) {
                 setupLevel(gameState.getLevel() + 1);
             }
-        }
-        //two player
-        else
-        {
-           //if a player dies, need to find out if first or second player.
-            if (isPlayerDead())
-            {
-                if (playerOneTurn)
-                {
+        } //two player
+        else {
+            //if a player dies, need to find out if first or second player.
+            if (isPlayerDead()) {
+                if (playerOneTurn) {
                     //restart game for player 2, save player 1 score
                     int player1Score = gameState.getCurrentScore();
                     int player1Level = gameState.getLevel();
@@ -70,9 +72,7 @@ public class Progression implements Runnable {
                     gameState.setPlayer1Level(player1Level);
                     gameState.setPlayerTwoTurn(true);
                     playerOneTurn = false;
-                }
-                else
-                {
+                } else {
                     //game over: save player 2 score, put it in the game state, and stop updating
                     int player2Score = gameState.getCurrentScore();
                     gameState.setPlayer2Score(player2Score);
@@ -81,10 +81,9 @@ public class Progression implements Runnable {
                     Logic.stopTimer();
                     Logic.displayGameOver(false);
                 }
-            }
-            //same as 1 player
+            } //same as 1 player
             else if (allAsteroidsDestroyed() && isAlienDestroyed()) {
-                 setupLevel(gameState.getLevel() + 1);
+                setupLevel(gameState.getLevel() + 1);
             }
         }
     }
@@ -101,17 +100,18 @@ public class Progression implements Runnable {
     private boolean isPlayerDead() {
         return gameState.isPlayerDead();
     }
-    
-    //set up for level 1
-    public void setupInitialLevel()
-    {
+
+    /**
+     * Sets up initial level.
+     */
+    public void setupInitialLevel() {
         //start at level 1 (note: player ship needed, as setupLevel has as precondition that player ship != null
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2}, gameState, 1, 1, 1));
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, 1, 1, 1));
         setupLevel(1);
         //in case of 2 player, setupLevel saves the old score, so erase it
         gameState.resetCurrentScore();
     }
-    
+
     //player ship != null assumed.  if null, won't do anything (will try again next turn)
     private void setupLevel(int levelNumber) {
         log.info("Going to level " + levelNumber);
@@ -133,8 +133,7 @@ public class Progression implements Runnable {
             gameState.addToCurrentScore(oldScore);
             gameState.setPlayerTwoTurn(playerTwo);
             spawnAlien = true;
-        }
-        else{
+        } else {
             //want to disable/enable alien spawning if the player is null
             spawnAlien = false;
         }

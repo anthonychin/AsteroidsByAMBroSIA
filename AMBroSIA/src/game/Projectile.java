@@ -30,10 +30,10 @@ public class Projectile extends MapObjectTTL {
     /**
      * Creates <i>Projectile</i> with the given parameters.
      *
-     * @param ship
-     * @param heading
-     * @param coordinates
-     * @param gameState
+     * @param ship owner of the projectile created
+     * @param heading angle that the projectile is headed
+     * @param coordinates initial x, y coordinate
+     * @param gameState current game state
      */
     public Projectile(Ship ship, float heading, int[] coordinates, GameState gameState) {
         super(new float[]{0, 0}, heading, coordinates, 0, gameState);
@@ -55,8 +55,7 @@ public class Projectile extends MapObjectTTL {
     }
 
     /**
-     * Returns the integer value that represents the owner of the
-     * <i>Projectile.</i>
+     * Returns the integer value that represents the owner of the Projectile.
      * The owner is the one who created and fired the projectile.
      *
      * @return owner of the projectile

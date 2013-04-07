@@ -49,10 +49,20 @@ public class MapObjectTTL extends MapObject {
         getGameState().removeExplosion(this);
     }
     
+
+    /**
+     * Returns the color of MapObjectTTL
+     * @return color of the object
+     */
     public Color getColor() {
         return objectColor;
     }
 
+
+    /**
+     * Sets the color of the MapObjectTTL
+     * @param newColor new color of the object
+     */
     public void setColor(Color newColor) {
         objectColor = newColor;
     }
