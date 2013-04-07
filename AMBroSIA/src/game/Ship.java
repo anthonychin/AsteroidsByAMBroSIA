@@ -14,7 +14,7 @@ public class Ship extends MapObject {
     /**
      * Constructs Ship with the given parameters.
      *
-     * @param velocity speed of ship
+     * @param velocity magnitude and direction of ship
      * @param heading heading of ship (in degrees)
      * @param coordinates initial x, y position of the ship
      * @param acceleration acceleration of the ship

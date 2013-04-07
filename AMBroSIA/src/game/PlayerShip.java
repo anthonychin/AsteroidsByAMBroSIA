@@ -57,7 +57,7 @@ public class PlayerShip extends Ship {
     /**
      * Creates PlayerShip with the given parameters.
      *
-     * @param velocity initial speed of the player ship
+     * @param velocity magnitude and direction of the player ship
      * @param heading angle that the player ship is facing
      * @param coordinates initial x, y coordinate of the player ship
      * @param gameState current game state

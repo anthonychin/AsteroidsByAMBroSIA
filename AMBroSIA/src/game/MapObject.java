@@ -17,9 +17,9 @@ public class MapObject {
     private Polygon shape;
 
     /**
-     * Creates <i>MapObject</i> with given parameter.
+     * Creates MapObject with given parameter.
      * 
-     * @param velocity
+     * @param velocity magnitude and direction of an object
      * @param heading
      * @param coordinates
      * @param acceleration
