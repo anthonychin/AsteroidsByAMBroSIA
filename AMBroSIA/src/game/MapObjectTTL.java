@@ -13,6 +13,15 @@ public class MapObjectTTL extends MapObject {
     static private int TIME_TO_LIVE = 3;
     private int ttl;
 
+    /**
+     * Creates MapObjectTTL with given parameters.
+     * @param velocity magnitude and direction of the object
+     * @param heading heading of the object
+     * @param coordinates initial x, y position of the object
+     * @param acceleration acceleration of the object
+     * @param gameState current game state
+     * @param color color of the object in game
+     */
     public MapObjectTTL(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState, Color color) {
         super(velocity, heading, coordinates, acceleration, gameState);
         this.ttl = TIME_TO_LIVE;
@@ -20,6 +29,14 @@ public class MapObjectTTL extends MapObject {
         objectColor = color;
     }
     
+    /**
+     * Creates MapObjectTTL with given parameters.
+     * @param velocity magnitude and direction of the object
+     * @param heading heading of the object
+     * @param coordinates initial x, y position of the object
+     * @param acceleration acceleration of the object
+     * @param gameState current game state
+     */
     public MapObjectTTL(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState)
     {
         this(velocity, heading, coordinates, acceleration, gameState, DEFAULT_COLOR);
