@@ -19,9 +19,9 @@ public class GraphicsEngine implements Runnable {
     private final static Logger log = Logger.getLogger(GraphicsEngine.class.getName());
 
     /**
-     * Creates <i>GraphicsEngine</i> using given gamestate.
+     * Creates GraphicsEngine using given gamestate.
      *
-     * @param gamestate
+     * @param gamestate current game state
      */
     public GraphicsEngine(GameState gamestate) {
         memory = gamestate;
