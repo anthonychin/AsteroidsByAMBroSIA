@@ -20,6 +20,10 @@ public class Physics implements Runnable {
     private final static int ANGULAR_SPEED = 3;
     private final static Logger log = Logger.getLogger(Physics.class.getName());
 
+    /**
+     * Creates Physics using given game state.
+     * @param gameState current game state
+     */
     public Physics(GameState gameState) {
         this.gameState = gameState;
         log.setLevel(Logic.LOG_LEVEL);
