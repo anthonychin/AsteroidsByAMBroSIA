@@ -106,11 +106,11 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     /**
-     * ?
+     * Executes a command after the given delay.
      *
-     * @param command
-     * @param delay
-     * @param unit
+     * @param command task to execute
+     * @param delay amount of time to delay
+     * @param unit unit of delay parameter
      */
     public static void executeTask(Runnable command, long delay, TimeUnit unit) {
         timer.schedule(command, delay, unit);
@@ -150,6 +150,7 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     /**
      * Displays "Game Over" message.
+     * @param singleP true if in single player mode, false otherwise
      */
     public static void displayGameOver(boolean singleP) {
         GameAssets.theme.stop();
@@ -179,7 +180,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     /**
      * Handles event caused by user key presses.
      *
-     * @param e
+     * @param e key event
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -258,7 +259,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     /**
      * Handle events caused by release of key.
      *
-     * @param e
+     * @param e key event
      */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -292,7 +293,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     /**
      * Handles events relating to the user clicking menu buttons.
      *
-     * @param e
+     * @param e action event
      */
     @Override
     public void actionPerformed(ActionEvent e) {
