@@ -21,7 +21,7 @@ public class timeToLive implements Runnable {
      * @param gameState state of current game
      */
     public timeToLive(GameState gameState) {
-        gameState = gameState;
+        this.gameState = gameState;
         log.setLevel(Logic.LOG_LEVEL);
     }
 

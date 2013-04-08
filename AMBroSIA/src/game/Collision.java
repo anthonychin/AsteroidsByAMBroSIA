@@ -174,7 +174,7 @@ public class Collision implements Runnable {
         //simply destroy both alien and asteroid
         log.debug("Collision between Alien and Asteroid");
         alienShip.destroy(false);
-        asteroid.destroy();
+        asteroid.destroy(false);
     }
 
     private void collisionLogic(AlienShip alienShip, Projectile projectile) {
