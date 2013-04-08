@@ -97,7 +97,9 @@ public class MenuGUI implements Runnable {
         //disable keyboard input
         frame.setFocusable(false);
         // create menu page panel, set it up, show it
-        JPanel cardMenu = new JPanel(new GridLayout(2, 1));
+        //JPanel cardMenu = new JPanel(new GridLayout(2, 1));
+        JPanel cardMenu = new JPanel(new GridLayout(1, 1));
+        
         cardMenu.add(new MenuPanel());
 
 
@@ -109,6 +111,20 @@ public class MenuGUI implements Runnable {
         buttonPanelMenu.add(leaderBoardButton);
         buttonPanelMenu.add(tutorialButton);
         buttonPanelMenu.add(quitButton);
+        
+        
+        
+        singlePbutton.setBackground(Color.DARK_GRAY);
+        twoPbutton.setBackground(Color.DARK_GRAY);
+        leaderBoardButton.setBackground(Color.DARK_GRAY);
+        tutorialButton.setBackground(Color.DARK_GRAY);
+        quitButton.setBackground(Color.DARK_GRAY);
+     
+        singlePbutton.setForeground(Color.pink);
+        twoPbutton.setForeground(Color.pink);
+        leaderBoardButton.setForeground(Color.pink);
+        tutorialButton.setForeground(Color.pink);        
+        quitButton.setForeground(Color.pink);
 
         singlePbutton.addActionListener(buttonClick);
         twoPbutton.addActionListener(buttonClick);
@@ -177,7 +193,7 @@ public class MenuGUI implements Runnable {
     //show tutorial screen
     public void displayTutorial() {
         //create panel
-        JPanel cardTutorial = new JPanel();
+        MenuPanel cardTutorial = new MenuPanel();
         cardTutorial.setLayout(new BorderLayout());
         JPanel tutorialPanel = new TutorialPanel(GameAssets.tutorialImage);
         cardTutorial.add(tutorialPanel, BorderLayout.NORTH);
@@ -185,10 +201,10 @@ public class MenuGUI implements Runnable {
         //initialize a back button
         JPanel buttonPanelTutorial = new JPanel();
         buttonPanelTutorial.add(backButton);
-        buttonPanelTutorial.setBackground(Color.white);
+        buttonPanelTutorial.setBackground(Color.black);
         backButton.addActionListener(buttonClick);
         cardTutorial.add(buttonPanelTutorial, BorderLayout.SOUTH);
-        cardTutorial.setBackground(Color.white);
+        //cardTutorial.setBackground(Color.white);
 
         //show it
         card.add("Tutorial", cardTutorial);

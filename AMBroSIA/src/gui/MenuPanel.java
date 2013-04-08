@@ -26,6 +26,6 @@ public class MenuPanel extends JPanel {
     //draw image
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(img, 0, 0, MenuGUI.WIDTH, MenuGUI.HEIGHT, this);
     }
 }

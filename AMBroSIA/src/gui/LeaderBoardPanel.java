@@ -15,6 +15,7 @@ import game.GameState;
  */
 public class LeaderBoardPanel extends JPanel {
 
+    
     JTable table;
     GameState gamestate;
     
