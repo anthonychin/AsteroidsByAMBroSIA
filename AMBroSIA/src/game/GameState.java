@@ -85,11 +85,8 @@ public class GameState {
     private static final Object bonusSync = new Object();
 
     /**
-     * Creates <i>GameState</i> using given parameters. It also creates empty
-     * lists for asteroid, projectile, bonus, and explosions.
+     * Creates <i>GameState</i>.
      *
-     * @param level
-     * @param currentScore
      */
     public GameState() {
         resetToDefaults();
@@ -98,7 +95,7 @@ public class GameState {
     /**
      * Adds asteroid to the asteroid list.
      *
-     * @param asteroid
+     * @param asteroid asteroid to be inserted in asteroid list
      */
     public void addAsteroid(Asteroid asteroid) {
         synchronized (asteroidSync) {
@@ -109,7 +106,7 @@ public class GameState {
     /**
      * Removes asteroid from the asteroid list.
      *
-     * @param asteroid
+     * @param asteroid asteroid to be removed from the asteroid list
      */
     public void removeAsteroid(Asteroid asteroid) {
         synchronized (asteroidSync) {
@@ -129,6 +126,10 @@ public class GameState {
     }
 
     //add a whole list of asteroids at once
+    /**
+     * Adds list of asteroids at once.
+     * @param list list of asteroids to be added to the asteroid list
+     */
     public void addAsteroidsList(ArrayList<Asteroid> list) {
         synchronized (asteroidSync) {
             this.asteroidList.addAll(list);
@@ -138,7 +139,7 @@ public class GameState {
     /**
      * Adds projectile to the projectile list.
      *
-     * @param projectile
+     * @param projectile projectile to be added to the projectile list
      */
     public void addProjectile(Projectile projectile) {
         synchronized (projectileSync) {
@@ -149,7 +150,7 @@ public class GameState {
     /**
      * Removes single projectile from the projectile list.
      *
-     * @param projectile
+     * @param projectile projectile to be removed from the projectile list
      */
     public void removeProjectile(Projectile projectile) {
         synchronized (projectileSync) {
@@ -160,7 +161,7 @@ public class GameState {
     /**
      * Removes all projectile from the projectile list.
      *
-     * @param list
+     * @param list list of projectile to be removed from projectile list
      */
     public void removeListOfProjectiles(Collection<?> list) {
         synchronized (projectileSync) {
@@ -182,7 +183,7 @@ public class GameState {
     /**
      * Adds explosion to the explosion list.
      *
-     * @param explosion
+     * @param explosion explosion to be added to the explosion list
      */
     public void addExplosion(MapObjectTTL explosion) {
         synchronized (explosionSync) {
@@ -193,7 +194,7 @@ public class GameState {
     /**
      * Removes single explosion from the explosion list.
      *
-     * @param explosion
+     * @param explosion explosion to be removed from the explosion list
      */
     public void removeExplosion(MapObjectTTL explosion) {
         synchronized (explosionSync) {
@@ -204,7 +205,7 @@ public class GameState {
     /**
      * Removes all explosion from the explosion list.
      *
-     * @param list
+     * @param list list of explosions that needs to be removed from explosion list
      */
     public void removeListOfExplosions(Collection<?> list) {
         synchronized (explosionSync) {
@@ -213,6 +214,10 @@ public class GameState {
     }
 
     //return explosion list
+    /**
+     * Returns explosion list.
+     * @return list of all explosions
+     */
     public ArrayList<MapObjectTTL> getExplosions() {
         synchronized (explosionSync) {
             return new ArrayList<MapObjectTTL>(this.explosionList);
@@ -222,7 +227,7 @@ public class GameState {
     /**
      * Adds bonus drops to the bonus drop list.
      *
-     * @param bonusDrop
+     * @param bonusDrop bonus drop to be added to the bonus drop list
      */
     public void addBonusDrop(BonusDrop bonusDrop) {
         synchronized (bonusSync) {
@@ -233,7 +238,7 @@ public class GameState {
     /**
      * Removes a single bonus drops from the bonus drop list.
      *
-     * @param bonusDrop
+     * @param bonusDrop bonus drop to be removed from the bonus drop list
      */
     public void removeBonusDrop(BonusDrop bonusDrop) {
         synchronized (bonusSync) {
@@ -244,7 +249,7 @@ public class GameState {
     /**
      * Removes all bonus drops from list.
      *
-     * @param list
+     * @param list list of bonus drops to be removed from the bonus drop list
      */
     public void removeListOfBonusDrops(Collection<?> list) {
         synchronized (bonusSync) {
@@ -266,7 +271,7 @@ public class GameState {
     /**
      * Adds alien ship.
      *
-     * @param alienShip
+     * @param alienShip alien ship to be added to the game
      */
     public void addAlienShip(AlienShip alienShip) {
         this.alienShip = alienShip;
@@ -282,7 +287,7 @@ public class GameState {
     }
 
     /**
-     * Sets the variable <i>alienShip</i> to null.
+     * Removes alien ship from the game.
      */
     public void removeAlienShip() {
         this.alienShip = null;
@@ -291,14 +296,14 @@ public class GameState {
     /**
      * Adds player ship.
      *
-     * @param playerShip
+     * @param playerShip player ship to be added to the game
      */
     public void addPlayerShip(PlayerShip playerShip) {
         this.playerShip = playerShip;
     }
 
     /**
-     * Sets the variable <i>playerShip</i> to null.
+     * Removes player ship from the game.
      */
     public void removePlayerShip() {
         this.playerShip = null;
@@ -323,6 +328,10 @@ public class GameState {
     }
 
     //change current level
+    /**
+     * Changes current level.
+     * @param level new level
+     */
     public void setLevel(int level) {
         this.level = level;
     }
@@ -348,89 +357,127 @@ public class GameState {
     /**
      * Add to high score the value of score.
      *
-     * @param score
+     * @param score new current score
      */
     public void addToCurrentScore(int score) {
         this.currentScore += score;
     }
     
+    /**
+     * Resets current score to 0.
+     */
     public void resetCurrentScore() {
         this.currentScore = 0;
     }
 
     //set the score of player 1
+    /**
+     * Sets the score of player 1.
+     * @param score
+     */
     public void setPlayer1Score(int score) {
         player1Score = score;
     }
 
     /**
-     * only valid once game is over
+     * Returns the score of Player 1. Only valid once game is over.
      *
-     * @return
+     * @return score of player 1
      */
     public int getPlayer1Score() {
         return player1Score;
     }
 
     /**
-     * only valid once game is over
+     * Returns the level of Player 1. Only valid once game is over.
      *
-     * @return
+     * @return level of player 1
      */
     public int getPlayer1Level() {
         return player1Level;
     }
 
     //player 1, player 2 level useful in two player to store data while the other is playing
+    /**
+     * Sets Player 1's level. Useful in two player mode to store data while the other is playing.
+     * @param p1Level player 1's level
+     */
     public void setPlayer1Level(int p1Level) {
         player1Level = p1Level;
     }
 
     /**
-     * only valid once game is over
+     * Returns the score of Player 2. Only valid once game is over.
      *
-     * @return
+     * @return score of player 2
      */
     public int getPlayer2Level() {
         return player2Level;
     }
 
+    /**
+     * Sets the level of Player 2.
+     * @param p2Level player 2's level
+     */
     public void setPlayer2Level(int p2Level) {
         player2Level = p2Level;
     }
 
     //same idea as setting playerX level
+    /**
+     * Sets score of Player 2.
+     * @param score player 2's score
+     */
     public void setPlayer2Score(int score) {
         player2Score = score;
     }
 
     /**
-     * only valid once game is over
+     * Returns score of Player 2. Only valid once game is over.
      *
-     * @return
+     * @return Player 2's score
      */
     public int getPlayer2Score() {
         return player2Score;
     }
 
+    /**
+     * Sets whether or not the player is dead.
+     * @param isDead true if dead, false otherwise
+     */
     public void setPlayerDead(boolean isDead) {
         isPlayerDead = isDead;
     }
 
     //whether or not the player is dead (and not just in the process of respawning)
+    /**
+     * Checks whether or not the player is dead.
+     * @return true if dead false otherwise
+     */
     public boolean isPlayerDead() {
         return isPlayerDead;
     }
 
+    /**
+     * Checks if it is Player 2's turn to play.
+     * @return true if Player 2's turn, false otherwise
+     */
     public boolean isPlayerTwoTurn() {
         return playerTwoTurn;
     }
 
+    /**
+     * Sets the variable playerTwoTurn.
+     * @param playerTwo ture if Player 2's turn, false otherwise
+     */
     public void setPlayerTwoTurn(boolean playerTwo) {
         playerTwoTurn = playerTwo;
     }
 
     //resets everything to defaults
+    /**
+     * Resets everything to default. (Returns to Level 1)
+     */
     public void resetToDefaults() {
         this.playerShip = null;
         this.level = 1;
@@ -457,6 +504,9 @@ public class GameState {
     }
 
     //essentially, performs the function of the bomb - remove alien & all asteroids
+    /**
+     * Performs the function of the bomb. Removes alien and all asteroids.
+     */
     public void bombUsed() {
         AlienShip alien = getAlienShip();
         if (alien != null) {
