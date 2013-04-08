@@ -170,7 +170,7 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Checks if <i>PlayerShip</i> is turning left.
+     * Checks if PlayerShip is turning left.
      *
      * @return true if the ship is turning left, false otherwise
      */
@@ -179,7 +179,7 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Sets the <i>PlayerShip</i> to turn right.
+     * Sets the PlayerShip to turn right.
      *
      * @param turning boolean value, true if turning false otherwise
      */
@@ -188,7 +188,7 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Checks if <i>PlayerShip</i> is turning right.
+     * Checks if PlayerShip is turning right.
      *
      * @return true if the ship is turning right, false otherwise.
      */
@@ -197,7 +197,7 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Checks if <i>PlayerShip</i> is accelerating.
+     * Checks if PlayerShip is accelerating.
      *
      * @return ture if ship is accelerating, false otherwise.
      */
@@ -214,7 +214,7 @@ public class PlayerShip extends Ship {
 
     /**
      *  Shoot 4 Projectiles at heading of -20, 20, -60, 60 degree relative to the ship heading.
-     *  Used when the spacebar is held.
+     *  Used when the space bar is held.
      */
     public void shootDirection() {
         getGameState().addProjectile(new Projectile(this, this.getHeading() - 20, new int[]{this.getX(), this.getY()}, getGameState()));
