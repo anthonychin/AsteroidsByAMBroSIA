@@ -103,7 +103,7 @@ public class gameDraw {
         if (!projectileList.isEmpty()) {
             for (Projectile projectile : projectileList) {
                 g2d.setColor(projectile.getColor());
-                g2d.drawPolygon(projectile.getShape());
+                g2d.fillPolygon(projectile.getShape());
             }
         }
 

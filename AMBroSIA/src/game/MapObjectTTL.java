@@ -13,14 +13,14 @@ public class MapObjectTTL extends MapObject {
     static private int TIME_TO_LIVE = 3;
     private int ttl;
 
-    MapObjectTTL(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState, Color color) {
+    public MapObjectTTL(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState, Color color) {
         super(velocity, heading, coordinates, acceleration, gameState);
         this.ttl = TIME_TO_LIVE;
         //set a default color
         objectColor = color;
     }
     
-    MapObjectTTL(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState)
+    public MapObjectTTL(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState)
     {
         this(velocity, heading, coordinates, acceleration, gameState, DEFAULT_COLOR);
     }

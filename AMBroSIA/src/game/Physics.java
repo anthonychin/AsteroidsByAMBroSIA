@@ -20,7 +20,7 @@ public class Physics implements Runnable {
     private final static int ANGULAR_SPEED = 3;
     private final static Logger log = Logger.getLogger(Physics.class.getName());
 
-    Physics(GameState gameState) {
+    public Physics(GameState gameState) {
         this.gameState = gameState;
         log.setLevel(Logic.LOG_LEVEL);
     }

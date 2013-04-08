@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package game;
 
 import java.awt.Image;
@@ -69,9 +66,10 @@ public class GameAssets {
             Logger.getLogger(GameAssets.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
             Logger.getLogger(GameAssets.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException e){
         }
     }
-
+    
     public static void loadImages() {
         spaceBackground = new ImageIcon(GameAssets.class.getResource("images/spaceBackground.jpg")).getImage();
         tutorialImage = new ImageIcon(GameAssets.class.getResource("images/keyboard.jpg")).getImage();

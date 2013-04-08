@@ -16,7 +16,7 @@ public class BonusDrop extends MapObjectTTL {
     final private int TIME_TO_LIVE = 25;
 
     //create bonus drop
-    BonusDrop(int[] coordinates, GameState gameState, int type) {
+    public BonusDrop(int[] coordinates, GameState gameState, int type) {
         super(new float[]{0, 0}, 0, coordinates, 0, gameState);
         this.type = type;
         this.setTTL(TIME_TO_LIVE);

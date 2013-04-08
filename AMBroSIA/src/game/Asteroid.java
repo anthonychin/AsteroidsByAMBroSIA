@@ -23,7 +23,7 @@ public class Asteroid extends MapObject {
     
     private final static Logger log = Logger.getLogger(Asteroid.class.getName());
 
-    Asteroid(float[] velocity, float heading, int[] coordinates, GameState gameState, int size) {
+    public Asteroid(float[] velocity, float heading, int[] coordinates, GameState gameState, int size) {
         super(velocity, heading, coordinates, 0, gameState);
         this.size = size;
         log.setLevel(Logic.LOG_LEVEL);

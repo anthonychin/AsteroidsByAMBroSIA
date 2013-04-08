@@ -78,7 +78,7 @@ public class GraphicsEngine implements Runnable {
     }
 
     private static Polygon projectileShape() {
-        return new Polygon(new int[]{-2, 0, 2, 0}, new int[]{0, 2, 0, -2}, 4);
+        return new Polygon(new int[]{-3, 0, 3, 0}, new int[]{0, 3, 0, -3}, 4);
     }
 
     private static Polygon explosionShape() {

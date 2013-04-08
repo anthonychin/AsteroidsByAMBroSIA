@@ -69,8 +69,6 @@ public class PlayerShip extends Ship {
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
 
-        //play warping in sound
-        GameAssets.warp.play();
         getGameState().setPlayerDead(false);
         log.setLevel(Logic.LOG_LEVEL);
     }
