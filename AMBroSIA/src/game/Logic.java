@@ -106,11 +106,11 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     /**
-     * ?
+     * Executes a command after the given delay.
      *
-     * @param command
-     * @param delay
-     * @param unit
+     * @param command task to execute
+     * @param delay amount of time to delay
+     * @param unit unit of delay parameter
      */
     public static void executeTask(Runnable command, long delay, TimeUnit unit) {
         timer.schedule(command, delay, unit);
@@ -150,6 +150,7 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     /**
      * Displays "Game Over" message.
+     * @param singleP true if in single player mode, false otherwise
      */
     public static void displayGameOver(boolean singleP) {
         GameAssets.theme.stop();
@@ -179,20 +180,23 @@ public class Logic extends KeyAdapter implements ActionListener {
     /**
      * Handles event caused by user key presses.
      *
-     * @param e
+     * @param e key event
      */
     @Override
     public void keyPressed(KeyEvent e) {
+        
         int keyCode = e.getKeyCode();
         PlayerShip player = gameState.getPlayerShip();
-        //handles most basic key commands.  Should activate a boolean stating that the key has been pressed
+        
+        //accelerate
         if (keyCode == KeyEvent.VK_UP) {
-            //accelerate
             if (!paused && player != null) {
                 player.accelerate(true);
                 GameAssets.thrusters.playLoop();
             }
-        } else if (keyCode == KeyEvent.VK_LEFT) {
+        } 
+        //turn left/right
+        else if (keyCode == KeyEvent.VK_LEFT) {
             if (!paused && player != null) {
                 player.turnLeft(true);
             }
@@ -200,11 +204,10 @@ public class Logic extends KeyAdapter implements ActionListener {
             if (!paused && player != null) {
                 player.turnRight(true);
             }
-        } else if (keyCode == KeyEvent.VK_DOWN) {
-            if (!paused && player != null) {
-                player.useBomb();
-            }
-        } else if (keyCode == KeyEvent.VK_SPACE) {
+        } 
+
+        //shoot projectiles (rate limited)
+        else if (keyCode == KeyEvent.VK_SPACE) {
                 if(gameState.getPlayerShip() != null){
                     if (shootKeyReleased) {
                         initialShootTime = System.currentTimeMillis();
@@ -220,7 +223,9 @@ public class Logic extends KeyAdapter implements ActionListener {
                         }
                     }
                 }
-        } else if (keyCode == KeyEvent.VK_P) {
+        } 
+        //pause
+        else if (keyCode == KeyEvent.VK_P) {
             if (!paused) {
                 stopTimer();
                 paused = true;
@@ -228,17 +233,22 @@ public class Logic extends KeyAdapter implements ActionListener {
                 startTimer();
                 paused = false;
             }
-        } else if (keyCode == KeyEvent.VK_B) {
+        } 
+        //bomb
+        else if (keyCode == KeyEvent.VK_B) {
             if (!paused && player != null) {
                 player.useBomb();
             }
-        } else if (keyCode == KeyEvent.VK_Z) {
+        } 
+        //REMOVE IN FINAL GAME
+        else if (keyCode == KeyEvent.VK_Z) {
             Random randu = new Random();
             gameState.addAsteroid(new Asteroid(new float[]{1.5f, 1.5f}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
             //gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(10), Difficulty.randomHeading()}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
             //gameState.addProjectile(new Projectile(gameState.getAlienShip(), randu.nextInt(360), new int[] {gameState.getAlienShip().getX(), gameState.getAlienShip().getY()}, gameState));
-        } else if (keyCode == KeyEvent.VK_ESCAPE) {
-            //may have to add if statement for two player here
+        } 
+        //end game
+        else if (keyCode == KeyEvent.VK_ESCAPE) {
             stopTimer();
             paused = false;
             GameAssets.theme.stop();
@@ -246,24 +256,26 @@ public class Logic extends KeyAdapter implements ActionListener {
         }
     }
 
-    //same as keyPressed, except when it is released
     /**
      * Handle events caused by release of key.
      *
-     * @param e
+     * @param e key event
      */
     @Override
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
         PlayerShip player = gameState.getPlayerShip();
-        //stops doing whatever that keypress was doing
+        
+        //halt acceleration
         if (keyCode == KeyEvent.VK_UP) {
-            //accelerate
             if (player != null) {
                 player.accelerate(false);
                 GameAssets.thrusters.stop();
             }
-        } else if (keyCode == KeyEvent.VK_LEFT) {
+        } 
+        
+        //stop turning left/right
+        else if (keyCode == KeyEvent.VK_LEFT) {
             if (player != null) {
                 player.turnLeft(false);
             }
@@ -271,17 +283,17 @@ public class Logic extends KeyAdapter implements ActionListener {
             if (player != null) {
                 player.turnRight(false);
             }
-        } else if (keyCode == KeyEvent.VK_SPACE) {
+        } 
+        
+        else if (keyCode == KeyEvent.VK_SPACE) {
             shootKeyReleased = true;
         }
     }
 
-    //This section needs a LOT of work....
-    //called when a gui button is clicked
     /**
      * Handles events relating to the user clicking menu buttons.
      *
-     * @param e
+     * @param e action event
      */
     @Override
     public void actionPerformed(ActionEvent e) {

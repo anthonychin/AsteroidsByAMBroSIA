@@ -17,13 +17,13 @@ public class MapObject {
     private Polygon shape;
 
     /**
-     * Creates <i>MapObject</i> with given parameter.
+     * Creates MapObject with given parameter.
      * 
-     * @param velocity
-     * @param heading
-     * @param coordinates
-     * @param acceleration
-     * @param gameState
+     * @param velocity magnitude and direction of the object
+     * @param heading heading of the object
+     * @param coordinates initial x, y position of the object
+     * @param acceleration acceleration of the object
+     * @param gameState current game state
      */
     public MapObject(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState) {
         this.velocity = velocity;
@@ -35,7 +35,7 @@ public class MapObject {
     }
 
     /**
-     * Returns velocity of <i>MapObject</i>.
+     * Returns velocity of MapObject.
      * @return array representing velocity of the object
      */
     public float[] getVelocity() {
@@ -43,47 +43,47 @@ public class MapObject {
     }
 
     /**
-     * Sets the velocity of <i>MapObject</i>.
-     * @param velocity
+     * Sets the velocity of MapObject.
+     * @param velocity array containing magnitude and direction
      */
     public void setVelocity(float[] velocity) {
         this.velocity = velocity;
     }
 
     /**
-     * Returns the acceleration of the <i>MapObject</i>.
-     * @return acceleration
+     * Returns the acceleration of the MapObject.
+     * @return acceleration of the object
      */
     public float getAcceleration() {
         return this.acceleration;
     }
 
     /**
-     * Sets the acceleration of the <i>MapObject</i>.
-     * @param acceleration
+     * Sets the acceleration of the MapObject.
+     * @param acceleration new acceleration value
      */
     public void setAcceleration(float acceleration) {
         this.acceleration = acceleration;
     }
 
     /**
-     * Returns the heading in which the <i>MapObject</i> is facing.
-     * @return value of heading
+     * Returns the heading in which the MapObject is facing.
+     * @return heading of the object
      */
     public float getHeading() {
         return this.heading;
     }
 
     /**
-     * Sets the heading of <i>MapObject</i>.
-     * @param heading
+     * Sets the heading of MapObject.
+     * @param heading new heading of object
      */
     public void setHeading(float heading) {
         this.heading = heading;
     }
 
     /**
-     * Returns the coordinates of <i>MapObject</i>.
+     * Returns the coordinates of MapObject.
      * @return array of length 2 consisting of coordinates
      */
     public int[] getCoord() {
@@ -91,56 +91,56 @@ public class MapObject {
     }
 
     /**
-     * Sets the coordinates of <i>MapObject</i>.
-     * @param coordinates
+     * Sets the coordinates of MapObject.
+     * @param coordinates new x, y position of the object
      */
     public void setCoord(int[] coordinates) {
         this.coordinates = coordinates;
     }
 
     /**
-     * Returns x-coordinate of <i>MapObject</i>.
-     * @return x-coordinate of an object
+     * Returns x-coordinate of MapObject.
+     * @return X coordinate of the object
      */
     public int getX() {
         return coordinates[0];
     }
 
     /**
-     * Sets x-coordinate of <i>MapObject</i>.
-     * @param x
+     * Sets x-coordinate of MapObject.
+     * @param x new X coordinate of the object
      */
     public void setX(int x) {
         this.coordinates[0] = x;
     }
 
     /**
-     * Returns y-coordinate of <i>MapObject</i>.
-     * @return y-coordinate of an object
+     * Returns y-coordinate of MapObject.
+     * @return Y coordinate of the object
      */
     public int getY() {
         return coordinates[1];
     }
 
     /**
-     * Sets y-coordinate of <i>MapObject</i>.
-     * @param y
+     * Sets y-coordinate of MapObject.
+     * @param y new Y coordinate of the object
      */
     public void setY(int y) {
         this.coordinates[1] = y;
     }
 
     /**
-     * Returns shape of <i>MapObject</i>.
-     * @return polygon representing shape
+     * Returns shape of MapObject.
+     * @return shape of the object
      */
     public Polygon getShape() {
         return this.shape;
     }
 
     /**
-     * Sets the shape of <i>MapObject</i>.
-     * @param shape
+     * Sets the shape of MapObject.
+     * @param shape new shape of the object
      */
     public void setShape(Polygon shape) {
         this.shape = shape;
@@ -148,7 +148,7 @@ public class MapObject {
 
     /**
      * Returns the game state.
-     * @return gameState object initially passed as a constructor argument
+     * @return game state initially passed as a constructor argument
      */
     public GameState getGameState() {
         return this.gameState;
@@ -156,8 +156,9 @@ public class MapObject {
 
     //unimplemented.  All implementing classes should override.
     /**
-     * Removes the <i>MapObject</i> from the game state. 
+     * Removes the MapObject from the game state. 
      */
-    public void destroy() {
+    public void destroy(){
+        throw new UnsupportedOperationException("Not implemented");
     }
 }

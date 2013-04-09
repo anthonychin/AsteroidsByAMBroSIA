@@ -15,14 +15,14 @@ import java.awt.Image;
 import java.util.ArrayList;
 
 /**
+ * The leaderboard, showing score information for past (and current) players
  *
  * @author Haisin Yip
  */
+public class LeaderBoardPanel extends JPanel {
 
-public class LeaderBoardPanel extends JPanel
-{
-    JTable table;
     
+    JTable table;
     GameState gamestate;
     
     private Image img;
@@ -56,9 +56,8 @@ public class LeaderBoardPanel extends JPanel
         table.setPreferredScrollableViewportSize(new Dimension(w/2, h));
         table.setFillsViewportHeight(true);  
     }
-    
-    private void makeLayout()
-    {
+
+    private void makeLayout() {
         setLayout(new FlowLayout());
         add(table);
         add(new JScrollPane(table));

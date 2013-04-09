@@ -1,7 +1,5 @@
 package game;
 
-import game.GameState;
-
 /**
  *
  * @author Anthony Chin
@@ -16,6 +14,7 @@ public class AI implements Runnable {
         this.gameState = gs;
     }
     
+    //for AI thread
     public void run(){
         targetPS();
     }
@@ -29,6 +28,7 @@ public class AI implements Runnable {
         
     }
     
+    //get player, target it and fire
     public void targetPS()
     {
         PlayerShip ps = gameState.getPlayerShip();
@@ -37,18 +37,11 @@ public class AI implements Runnable {
            int getX = ps.getX() - as.getX();
            int getY = ps.getY() - as.getY();
            
+           //calculate heading to player
            float heading = (float)(Math.toDegrees(Math.tan(getY/getX)-90)%360);
            
-           //System.out.println(heading);
+           //fire
            gameState.addProjectile(new Projectile(as, heading, new int[]{as.getX(), as.getY()}, gameState));
         }
-    }
-    
-    private int randomHeading()
-    {
-        Random randomGen = new Random();
-        //int number = randomGen.next(9);
-        return 0;
-        
     }
 }

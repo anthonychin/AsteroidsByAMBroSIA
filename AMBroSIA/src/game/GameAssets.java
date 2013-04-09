@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package game;
 
 import java.awt.Image;
 import java.io.IOException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.LineUnavailableException;
@@ -19,6 +15,7 @@ import javax.swing.ImageIcon;
  */
 public class GameAssets {
 
+    //all sounds and images are accessible
     public static Sound victory;
     public static Sound gameOver;
     public static Sound noBombs;
@@ -69,9 +66,10 @@ public class GameAssets {
             Logger.getLogger(GameAssets.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
             Logger.getLogger(GameAssets.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException e){
         }
     }
-
+    
     public static void loadImages() {
         spaceBackground = new ImageIcon(GameAssets.class.getResource("images/spaceBackground.jpg")).getImage();
         tutorialImage = new ImageIcon(GameAssets.class.getResource("images/keyboard.jpg")).getImage();

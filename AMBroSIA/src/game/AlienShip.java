@@ -4,19 +4,21 @@ import java.awt.Color;
 import java.util.Random;
 
 /**
- *
+ * Alien object.
  * @author Nikolaos, Anthony
  */
 public class AlienShip extends Ship {
 
-    final public static int FIRE_RATE = 8;
     final private static int NUM_DEBRIS = 20;
 
+    //create alien
     public AlienShip(float[] velocity, float heading, int[] coordinates, GameState gameState) {
         super(velocity, heading, coordinates, 0, gameState, 1);
+        //play alien entering system sound
         GameAssets.alienDetected.play();
     }
 
+    //remove alien from game: add bonus drop where it was destroyed, play destruction sound, add sto core
     public void destroy(boolean bombUsed) {
         int[] lastCoord = getCoord();
         getGameState().removeAlienShip();
@@ -28,6 +30,7 @@ public class AlienShip extends Ship {
         createExplosionEffect();
     }
     
+    //create all the debris (with proper color and position)
     private void createExplosionEffect() {
         for (int i = 0; i < NUM_DEBRIS; i++) {
             int x = getX();

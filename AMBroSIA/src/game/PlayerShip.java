@@ -4,8 +4,6 @@ import static game.Logic.executeTask;
 import gui.MenuGUI;
 import java.awt.Color;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The
@@ -17,38 +15,36 @@ import java.util.logging.Logger;
 public class PlayerShip extends Ship {
 
     /**
-     * Value of the maximum velocity of the player ship. The default is set to
-     * 10.
+     * Value of the maximum velocity of the player ship.
      */
     final public static int MAX_VELOCITY = 8;
     /**
-     * Value of the acceleration of the player ship. The default is set to
-     * 0.09f.
+     * Value of the acceleration of the player ship.
      */
     final public static float ACCELERATION = 0.09f;
     /**
-     * Value of the deceleration of the player ship. The default is set to -2.
+     * Value of the deceleration of the player ship.
      */
     final public static int DECELERATION = -2;
     /**
-     * Value of the fire rate of the player ship. The default is set to 5.
+     * Value of the fire rate of the player ship.
      */
     final public static float FIRE_RATE = 0.2f;
     /**
-     * Value of the angular speed of the player ship. The default is set to 10.
+     * Value of the angular speed of the player ship.
      */
     final public static int ANGULAR_SPEED = 30;
-    /**
-     * Value of the number of debris when the player ship gets destroyed. The
-     * default is set to 20.
-     */
-    
+
     //in milliseconds
     final private static int RESPAWN_DELAY = 2500;
-    //number of debris pieces to spawn
+    /**
+     * Value of the number of debris when the player ship gets destroyed. 
+     */
     final public static int NUM_DEBRIS = 20;
+    /**
+     * Number of torpedos used when the bomb is used.
+     */
     final public static int BOMB_BARRIER = 30;
-    
     private int bomb;
     private int shieldPoints;
     private boolean isAccelerating = false;
@@ -58,21 +54,21 @@ public class PlayerShip extends Ship {
     private final static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PlayerShip.class.getName());
 
     /**
-     * Creates <i>PlayerShip</i> with the given parameters.
+     * Creates PlayerShip with the given parameters.
      *
-     * @param velocity
-     * @param heading
-     * @param coordinates
-     * @param gameState
-     * @param lives
-     * @param bomb
-     * @param shieldPoints
+     * @param velocity magnitude and direction of the player ship
+     * @param heading angle that the player ship is facing
+     * @param coordinates initial x, y coordinate of the player ship
+     * @param gameState current game state
+     * @param lives lives of  player ship
+     * @param bomb number of bomb that player ship has
+     * @param shieldPoints shield point of player ship
      */
     public PlayerShip(float[] velocity, float heading, int[] coordinates, GameState gameState, int lives, int bomb, int shieldPoints) {
         super(velocity, heading, coordinates, 0, gameState, lives);
         this.bomb = bomb;
         this.shieldPoints = shieldPoints;
-        GameAssets.warp.play();
+
         getGameState().setPlayerDead(false);
         log.setLevel(Logic.LOG_LEVEL);
     }
@@ -96,20 +92,20 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Detonates the bomb.
+     * Detonates the bomb after 1 second.
      */
     public void useBomb() {
         if (bomb > 0) {
             bomb = bomb - 1;
             GameAssets.bombUsed.play();
             createBombEffect();
-            
-            Thread explode = new Thread(){
-            public void run(){
-                getGameState().bombUsed();
-            }
+
+            Thread explode = new Thread() {
+                public void run() {
+                    getGameState().bombUsed();
+                }
             };
-            executeTask(explode,1000,TimeUnit.MILLISECONDS);
+            executeTask(explode, 1000, TimeUnit.MILLISECONDS);
         } else {
             GameAssets.noBombs.play();
         }
@@ -127,7 +123,7 @@ public class PlayerShip extends Ship {
     /**
      * Sets the amount of shield points using the parameter.
      *
-     * @param shieldpoints
+     * @param shieldpoints number representing the new value of shield point
      */
     public void setShieldPoints(int shieldpoints) {
         this.shieldPoints = shieldpoints;
@@ -152,9 +148,9 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Sets the <i>PlayerShip</i> to accelerate.
+     * Sets the PlayerShip to accelerate.
      *
-     * @param isAccelerating
+     * @param isAccelerating true if accelerating, false otherwise
      */
     public void accelerate(boolean isAccelerating) {
         if (isAccelerating) {
@@ -165,16 +161,16 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Sets the <i>PlayerShip</i> to turn left.
+     * Sets the PlayerShip to turn left.
      *
-     * @param turning
+     * @param turning boolean value, true if turning false otherwise
      */
     public void turnLeft(boolean turning) {
         this.isTurningLeft = turning;
     }
 
     /**
-     * Checks if <i>PlayerShip</i> is turning left.
+     * Checks if PlayerShip is turning left.
      *
      * @return true if the ship is turning left, false otherwise
      */
@@ -183,16 +179,16 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Sets the <i>PlayerShip</i> to turn right.
+     * Sets the PlayerShip to turn right.
      *
-     * @param turning
+     * @param turning boolean value, true if turning false otherwise
      */
     public void turnRight(boolean turning) {
         this.isTurningRight = turning;
     }
 
     /**
-     * Checks if <i>PlayerShip</i> is turning right.
+     * Checks if PlayerShip is turning right.
      *
      * @return true if the ship is turning right, false otherwise.
      */
@@ -201,7 +197,7 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     * Checks if <i>PlayerShip</i> is accelerating.
+     * Checks if PlayerShip is accelerating.
      *
      * @return ture if ship is accelerating, false otherwise.
      */
@@ -217,19 +213,20 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     *  Shoot 4 Projectiles at heading of -20, 20, -60, 60 degree relative to the ship heading
+     *  Shoot 4 Projectiles at heading of -20, 20, -60, 60 degree relative to the ship heading.
+     *  Used when the space bar is held.
      */
-
     public void shootDirection() {
         getGameState().addProjectile(new Projectile(this, this.getHeading() - 20, new int[]{this.getX(), this.getY()}, getGameState()));
-        getGameState().addProjectile(new Projectile(this, this.getHeading() + 20, new int[]{this.getX(), this.getY()}, getGameState()));  
+        getGameState().addProjectile(new Projectile(this, this.getHeading() + 20, new int[]{this.getX(), this.getY()}, getGameState()));
         getGameState().addProjectile(new Projectile(this, this.getHeading() - 60, new int[]{this.getX(), this.getY()}, getGameState()));
-        getGameState().addProjectile(new Projectile(this, this.getHeading() + 60, new int[]{this.getX(), this.getY()}, getGameState()));          
+        getGameState().addProjectile(new Projectile(this, this.getHeading() + 60, new int[]{this.getX(), this.getY()}, getGameState()));
         GameAssets.playerFire.play();
         log.debug("Projectile added");
     }
+
     /**
-     * Destroys the <i>PlayerShip</i>.
+     * Destroys the PlayerShip, or respawns if enough lives are remaining.
      */
     @Override
     public void destroy() {
@@ -239,21 +236,22 @@ public class PlayerShip extends Ship {
             resetShip();
         } else {
             getGameState().removePlayerShip();
+            //if not respawining, let other classes know
             getGameState().setPlayerDead(true);
         }
     }
     
-        /**
+    /**
      * Resets the player ship after it gets destroyed.
      */
     public void resetShip() {
-        
+
         final PlayerShip oldShip = getGameState().getPlayerShip();
         Thread resetShip = new Thread() {
             public void run() {
                 getGameState().addPlayerShip(oldShip);
                 //to center of screen
-                getGameState().getPlayerShip().setCoord(new int[]{MenuGUI.WIDTH/2, MenuGUI.HEIGHT/2});
+                getGameState().getPlayerShip().setCoord(new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2});
                 getGameState().getPlayerShip().setVelocity(new float[]{0, 0});
                 getGameState().getPlayerShip().setShieldPoints(3);
                 getGameState().getPlayerShip().setHeading(0);
@@ -271,28 +269,27 @@ public class PlayerShip extends Ship {
         }
     }
 
+    //creates debris, colored appropriately for 2 player
     private void createExplosionEffect() {
         for (int i = 0; i < NUM_DEBRIS; i++) {
             int x = getX();
             int y = getY();
             Color shipColor;
-            if (getGameState().isPlayerTwoTurn())
-            {
+            if (getGameState().isPlayerTwoTurn()) {
                 shipColor = Color.BLUE;
-            }
-            else
-            {
+            } else {
                 shipColor = Color.RED;
             }
             getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{x, y}, 0, getGameState(), shipColor));
         }
     }
-    
+
+    //create a bomb launched effect
     private void createBombEffect() {
-        for (int i = 0; i < BOMB_BARRIER; i++) { 
+        for (int i = 0; i < BOMB_BARRIER; i++) {
             int x = getX();
             int y = getY();
-            getGameState().addExplosion(new MapObjectTTL(new float[]{i*360, i*-360}, i, new int[]{x, y}, 0, getGameState()));
+            getGameState().addExplosion(new MapObjectTTL(new float[]{i * 360, i * -360}, i, new int[]{x, y}, 0, getGameState()));
         }
     }
 }

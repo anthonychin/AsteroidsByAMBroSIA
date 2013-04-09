@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package game;
 
 import static game.Logic.LOG_LEVEL;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import org.apache.log4j.Logger;
 
 /**
@@ -19,6 +11,7 @@ import org.apache.log4j.Logger;
  */
 public class Collision implements Runnable {
 
+    //number of shield points used by colliding with various objects
     final public static int ALIEN_SHIELD_DAMAGE = 1;
     final public static int LARGE_ASTEROID_SHIELD_DAMAGE = 3;
     final public static int MEDIUM_ASTEROID_SHIELD_DAMAGE = 2;
@@ -34,12 +27,17 @@ public class Collision implements Runnable {
         gameState = gs;
     }
 
+    //actual collision check code
     @Override
     public void run() {
         log.debug("Collision start");
+        
+        //get all collisions
         ArrayList<MapObject> collisionList = physicsEngine.getCollisions();
         log.debug("SIZE OF THE COLLISION LIST = " + collisionList.size());
         log.debug("COLLISION LIST = " + Arrays.toString(collisionList.toArray()));
+        
+        //go through the returned colliding objects, and take action
         if (!collisionList.isEmpty()) {
             for (int i = 0; i < collisionList.size(); i = i + 2) {
                 MapObject collisionOne = collisionList.get(i);
@@ -76,16 +74,17 @@ public class Collision implements Runnable {
                     }
                 } else if (collisionOne instanceof Projectile) {
                     collisionLogic((Projectile) collisionOne, (Asteroid) collisionTwo);
-                } 
+                }
             }
         }
     }
 
     private boolean collisionLogic(PlayerShip playerShip, Asteroid asteroid) {
         log.debug("Collision between Player and Asteroid");
-        
+
         asteroid.destroy(false);
 
+        //based on asteroid size, deal with player ship shield effects and destroy if necessary
         if (asteroid.getSize() == Asteroid.LARGE_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= LARGE_ASTEROID_SHIELD_DAMAGE) {
                 playerShip.setShieldPoints(playerShip.getShieldPoints() - LARGE_ASTEROID_SHIELD_DAMAGE);
@@ -116,11 +115,13 @@ public class Collision implements Runnable {
             }
         }
 
+        //return has the player been removed
         return gameState.getPlayerShip() == null;
     }
 
     private void collisionLogic(PlayerShip playerShip, BonusDrop bonusDrop) {
         log.debug("Collision between Player and Bonus");
+        //give bonus to player, then remove
         if (bonusDrop.getType() == BonusDrop.BOMB_BONUS_DROP) {
             playerShip.addBomb();
         } else if (bonusDrop.getType() == BonusDrop.LIFE_BONUS_DROP) {
@@ -138,6 +139,7 @@ public class Collision implements Runnable {
 
     private boolean collisionLogic(PlayerShip playerShip, AlienShip alienShip) {
         log.debug("Collision between Player and Alien");
+        //take care of shield damage (and player destruction if necessary), and return true if the alien has been destroyed
         if (playerShip.getShieldPoints() >= ALIEN_SHIELD_DAMAGE) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() - ALIEN_SHIELD_DAMAGE);
             playerShip.destroy();
@@ -146,11 +148,13 @@ public class Collision implements Runnable {
         }
         alienShip.destroy(false);
 
+        //return has the player been removed
         return gameState.getPlayerShip() == null;
     }
 
     private boolean collisionLogic(PlayerShip playerShip, Projectile projectile) {
         log.debug("Collision between Player and Projectile");
+        //deal with shield effects, and destroy player if necessary.
         if (playerShip.getShieldPoints() >= PROJECTILE_SHIELD_DAMAGE) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() - PROJECTILE_SHIELD_DAMAGE);
         } else if (playerShip.getLives() == 1) {
@@ -159,28 +163,31 @@ public class Collision implements Runnable {
             playerShip.setLives(playerShip.getLives() - 1);
         }
 
+        //always destroy projectile
         projectile.destroy();
 
+        //return has the player been removed
         return gameState.getPlayerShip() == null;
     }
 
     private void collisionLogic(AlienShip alienShip, Asteroid asteroid) {
+        //simply destroy both alien and asteroid
         log.debug("Collision between Alien and Asteroid");
         alienShip.destroy(false);
-        asteroid.destroy();
+        asteroid.destroy(false);
     }
 
     private void collisionLogic(AlienShip alienShip, Projectile projectile) {
         log.debug("Collision between Alien and Projectile");
+        //destroy alien and projectile
         alienShip.destroy(false);
         projectile.destroy();
     }
 
     private void collisionLogic(Projectile projectile, Asteroid asteroid) {
         log.debug("Collision between Projectile and Asteroid");
-        log.debug("DESTROYING PROJECTILE " + projectile.toString());
+        //destroy asteroid and projectile
         projectile.destroy();
-        log.debug("DESTROYING ASTEROID " + asteroid.toString());
         asteroid.destroy(false);
     }
 }

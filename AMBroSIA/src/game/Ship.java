@@ -12,25 +12,20 @@ public class Ship extends MapObject {
     private int lives;
 
     /**
-     * Constructs <i>Ship</i> with the given parameters.
+     * Constructs Ship with the given parameters.
      *
-     * @param velocity speed of the ship
-     * @param heading
-     * @param coordinates
-     * @param acceleration
-     * @param gameState
-     * @param lives
+     * @param velocity magnitude and direction of ship
+     * @param heading heading of ship (in degrees)
+     * @param coordinates initial x, y position of the ship
+     * @param acceleration acceleration of the ship
+     * @param gameState current game state
+     * @param lives lives of the ship
      */
     public Ship(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState, int lives) {
         super(velocity, heading, coordinates, acceleration, gameState);
         this.lives = lives;
     }
 
-    /**
-     * Returns the value of the ship's fire rate.
-     *
-     * @return fire rate of the ship
-     */
     /**
      * Returns the value of the ship's lives.
      *
@@ -43,17 +38,17 @@ public class Ship extends MapObject {
     /**
      * Sets the lives of the current ship to specified lives.
      *
-     * @param lives
+     * @param lives new lives value
      */
     public void setLives(int lives) {
         this.lives = lives;
     }
 
     /**
-     * Creates a projectile.
+     * Creates a projectile.  Must be overridden.
      */
     public void shoot() {
-        //this.getGameState().addProjectile(new Projectile(this, Projectile.PROJECTILE_VELOCITY, this.getHeading(), calculateCoordinate(this.getCoord()), this.getGameState()));   
+        throw new UnsupportedOperationException("Not implemented");
     }
 
     private int[] calculateCoordinate(int[] shipCoord) {
