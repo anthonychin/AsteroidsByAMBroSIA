@@ -94,17 +94,17 @@ public class Difficulty {
     }
 
     /**
-     * 
-     * @return
+     * Returns a random boolean value that determines whether to spawn alien or not.
+     * @return randomly generated boolean value
      */
     public static boolean spawnAlien() {
         return randomInt(0, 100) <= ALIEN_SPAWN_RATE;
     }
 
     /**
-     *
-     * @param level
-     * @return
+     * Determines the number of asteroid that needs to be spawned.
+     * @param level current game level
+     * @return number of asteroid
      */
     public static int spawnAsteroids(int level) {
         float val = (float) level / ASTEROID_SPAWN_RATE;
