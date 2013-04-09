@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import game.*;
 import gui.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -20,6 +21,7 @@ public class ObjectsTest {
     @Before
     public void setUp() throws Exception{
         gameState = new GameState();
+        GameAssets.loadSounds();
     }
     
     //@Test
@@ -44,10 +46,25 @@ public class ObjectsTest {
         assertTrue("PlayerShip is in the field", gameState.getPlayerShip()!=null);
     }
 
-    public void NPCObject(){
+    @Test
+    public void AsteroidObject(){
         Random randu = new Random();
         gameState.addAsteroid(new Asteroid(new float[]{1.5f, 1.5f}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
-        assertTrue("NPC objects are currently at the field", gameState.getAsteroids()!=null);    
+        assertTrue("Asteroid do not exist on the field", gameState.getAsteroids()!=null);    
     }
 
+    @Test
+    public void AlienObject(){
+        gameState.addAlienShip(new AlienShip(new float[]{1.5f,1.5f}, 20, new int[]{800,600}, gameState));
+        assertTrue("Alien do not exist on the field", gameState.getAlienShip()!=null);
+    }
+    
+    @Test 
+    public void ProjectileObject(){
+        AlienShip as = new AlienShip(new float[]{1.5f,1.5f}, 20, new int[]{800,600}, gameState);
+        gameState.addAlienShip(as);        
+        gameState.addProjectile(new Projectile(as, 20, new int[]{800,600}, gameState));
+        ArrayList<Projectile> al = gameState.getProjectiles();
+        assertTrue("Projectile object do not exist on the field", al!=null);
+    }
 }
