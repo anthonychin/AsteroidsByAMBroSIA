@@ -62,6 +62,8 @@ public class MenuGUI implements Runnable
     private SinglePgamePanel onePPanel;
     private TwoPgamePanel twoPPanel;
     
+    private LeaderBoardPanel leaderBoardPanel;
+    
     private EndGamePanel gameOverPanel;
     private EndGamePanel winnerPanel;
     
@@ -170,16 +172,17 @@ public class MenuGUI implements Runnable
         frame.setResizable(false);
     }
        
-    public void displayLeaderBoard() 
+    public void displayLeaderBoard(GameState gs) 
     {
-        // create leaderboard page
+        leaderBoardPanel = new LeaderBoardPanel(GameAssets.spaceBackground, gs);
         JPanel cardLeaderBoard = new JPanel();
         cardLeaderBoard.setLayout(new BorderLayout());
-        JPanel leaderBoardPanel = new LeaderBoardPanel(WIDTH, HEIGHT);
-        cardLeaderBoard.add(leaderBoardPanel, BorderLayout.NORTH);
+        cardLeaderBoard.add(leaderBoardPanel);
+        
         //initialize a back button
         JPanel buttonPanelLeaderBoard = new JPanel();
         buttonPanelLeaderBoard.add(backButton);
+        buttonPanelLeaderBoard.setBackground(Color.black);
         backButton.addActionListener(buttonClick);
         cardLeaderBoard.add(buttonPanelLeaderBoard, BorderLayout.SOUTH);
         card.add("LeaderBoard", cardLeaderBoard);
@@ -192,6 +195,7 @@ public class MenuGUI implements Runnable
         cardTutorial.setLayout(new BorderLayout());
         JPanel tutorialPanel = new TutorialPanel(GameAssets.tutorialImage);
         cardTutorial.add(tutorialPanel, BorderLayout.NORTH);
+        
         //initialize a back button
         JPanel buttonPanelTutorial = new JPanel();
         buttonPanelTutorial.add(backButton);

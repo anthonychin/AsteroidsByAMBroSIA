@@ -4,12 +4,15 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.ScrollPane;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import game.GameState;
+import highscoreData.highScoreReader;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,20 +25,35 @@ public class LeaderBoardPanel extends JPanel
     
     GameState gamestate;
     
+    private Image img;
+  
     String[] columns = {"Player", "Highscore", "Number of Lives", "Asteroid Destroyed", "Aliens destroyed", "Total deaths", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
-    String[][] rowdata = {{"p1", "highscore", "lives", " ", "2", "3", "1.4", "3", "3", "3"}};
+    String[][] rowdata;
     
     JScrollPane scrollPane;
-    public LeaderBoardPanel(int width, int height)
+    public LeaderBoardPanel(Image img, GameState gs)
     {
-        makeComponents(width, height);
+        this.gamestate = gs;
+        
+        this.img = img;
+        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+        setPreferredSize(size);
+        setMinimumSize(size);
+        setMaximumSize(size);
+        setSize(size);
+        setLayout(null);
+        
+        makeComponents(this.getWidth(), this.getHeight());
         makeLayout();
     }
     
     private void makeComponents(int w, int h)
     {
+        highScoreReader reader = new highScoreReader("./src/highscoreData/scoreInfo.txt");
+        reader.openFile();
+        rowdata = reader.readFile();
         table = new JTable(rowdata, columns);
-        table.setPreferredScrollableViewportSize(new Dimension(w-40, h-110));
+        table.setPreferredScrollableViewportSize(new Dimension(w/2, h));
         table.setFillsViewportHeight(true);  
     }
     
@@ -44,5 +62,10 @@ public class LeaderBoardPanel extends JPanel
         setLayout(new FlowLayout());
         add(table);
         add(new JScrollPane(table));
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
     }
 }

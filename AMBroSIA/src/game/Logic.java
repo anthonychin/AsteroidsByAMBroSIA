@@ -295,7 +295,7 @@ public class Logic extends KeyAdapter implements ActionListener {
             gui.displayTwoP(gameState);
             startTimer();
         } else if (action == gui.leaderBoardButton) {
-            gui.displayLeaderBoard();
+            gui.displayLeaderBoard(gameState);
         } else if (action == gui.tutorialButton) {
             gui.displayTutorial();
         } else if (action == gui.backButton) {

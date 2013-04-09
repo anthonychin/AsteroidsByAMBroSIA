@@ -2,12 +2,16 @@
 package gui;
 
 import game.GameState;
+import highscoreData.highScoreWriter;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -79,6 +83,10 @@ public class EndGamePanel extends JPanel {
         StatisticsTable = new JTable(rowData, columnData);
         StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w/2, h/12));
         StatisticsTable.setFillsViewportHeight(true);  
+       
+        String[] scoreData = {player + " ", highscore + " ", "lives ", "asteroidsdestroyed ", "aliensdestroyed ", "deaths ", "Kill-Deathratio ", level + " ", "bombs ", "shootingaccuracy"};
+        highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
+        writer.writeToFile();
     }
     
     private void makeLayout()
@@ -87,14 +95,6 @@ public class EndGamePanel extends JPanel {
         add(StatisticsTable);
         add(new JScrollPane(StatisticsTable));
     }
-    
-//    @Override
-//    public void paint (Graphics g){
-//        super.paint(g);
-//        g.setColor(Color.red);
-//        g.setFont(new Font("default", Font.BOLD, 100));
-//        g.drawString("GAME OVER", this.getWidth()/3, this.getHeight()/2);
-//    }
     
     @Override
     public void paintComponent(Graphics g) {
