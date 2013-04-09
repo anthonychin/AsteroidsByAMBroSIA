@@ -4,7 +4,7 @@ import gui.MenuGUI;
 import java.util.Random;
 
 /**
- *
+ * 
  * @author Nikolaos Bukas, Anthony Chin
  */
 public class Difficulty {
@@ -25,16 +25,29 @@ public class Difficulty {
     final private static int MAX_LEVEL = 50;
     final private static Random rand = new Random();
 
+    /**
+     * Generates random heading value.
+     * @return random heading value
+     */
     public static float randomHeading() {
         return randomFloat() * 360;
     }
 
+    /**
+     * Generates random velocity for asteroid.
+     * @param level current level of game
+     * @return random velocity for asteroid
+     */
     public static float randomAsteroidVelocity(int level) {
         float ratio = (float) level / MAX_LEVEL;
         int maxVal = (int) (ratio * INITIAL_ASTEROID_SPEED);
         return randomFloat() * (randomInt(1, INITIAL_ASTEROID_SPEED));
     }
 
+    /**
+     * Generates random size for asteroid.
+     * @return random size for asteroid
+     */
     public static int randomAsteroidSize() {
         int val = randomInt(0, 100);
         if (val <= SMALL_ASTEROID_SPAWN_RATE) {
@@ -46,33 +59,62 @@ public class Difficulty {
         }
     }
 
+    /**
+     * Generates random velocity for alien.
+     * @return random velocity for alien
+     */
     public static float randomAlienVelocity() {
         return randomFloat() * randomInt(1, 10);
     }
 
+    /**
+     * Generates random X position.
+     * @return new X position
+     */
     public static int randomXPos() {
 //        return rand.nextInt(MenuGUI.WIDTH);
         return randomInt(0, MenuGUI.WIDTH * 2);
     }
 
+    /**
+     * Generates random Y position.
+     * @return new Y position
+     */
     public static int randomYPos() {
 //        return rand.nextInt(MenuGUI.HEIGHT);
         return randomInt(0, MenuGUI.HEIGHT * 2);
     }
 
+    /**
+     * Returns the rate that bonus drop appears.
+     * @return rate of bonus drop
+     */
     public static String bonusDropRate() {
         return null;
     }
 
+    /**
+     * 
+     * @return
+     */
     public static boolean spawnAlien() {
         return randomInt(0, 100) <= ALIEN_SPAWN_RATE;
     }
 
+    /**
+     *
+     * @param level
+     * @return
+     */
     public static int spawnAsteroids(int level) {
         float val = (float) level / ASTEROID_SPAWN_RATE;
         return (int) (val * 100);
     }
 
+    /**
+     * Generates random explosion velocity.
+     * @return new random explosion velocity
+     */
     public static float randExplosionVelocity() {
         return (rand.nextInt(5) + 1) * (rand.nextFloat() - rand.nextFloat());
     }
