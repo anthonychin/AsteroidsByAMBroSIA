@@ -12,15 +12,35 @@ import org.apache.log4j.Logger;
 public class Collision implements Runnable {
 
     //number of shield points used by colliding with various objects
+    /**
+     * Number of shield points used by colliding with alien ship.
+     */
     final public static int ALIEN_SHIELD_DAMAGE = 1;
+    /**
+     * Number of shield points used by colliding with large asteroid.
+     */
     final public static int LARGE_ASTEROID_SHIELD_DAMAGE = 3;
+    /**
+     * Number of shield points used by colliding with medium asteroid.
+     */
     final public static int MEDIUM_ASTEROID_SHIELD_DAMAGE = 2;
+    /**
+     * Number of shield points used by colliding with small asteroid.
+     */
     final public static int SMALL_ASTEROID_SHIELD_DAMAGE = 1;
+    /**
+     * Number of shield points used by colliding with projectile.
+     */
     final public static int PROJECTILE_SHIELD_DAMAGE = 1;
     private Physics physicsEngine;
     private GameState gameState;
     private final static Logger log = Logger.getLogger(Collision.class.getName());
 
+    /**
+     * Creates Collision with given parameters.
+     * @param gs current game state
+     * @param phys game physics
+     */
     public Collision(GameState gs, Physics phys) {
         log.setLevel(LOG_LEVEL);
         physicsEngine = phys;
@@ -28,6 +48,9 @@ public class Collision implements Runnable {
     }
 
     //actual collision check code
+    /**
+     * Checks collision.
+     */
     @Override
     public void run() {
         log.debug("Collision start");
