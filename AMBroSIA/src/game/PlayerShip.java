@@ -58,7 +58,7 @@ public class PlayerShip extends Ship {
      *
      * @param velocity magnitude and direction of the player ship
      * @param heading angle that the player ship is facing
-     * @param coordinates initial x, y coordinate of the player ship
+     * @param coordinates initial X, Y coordinate of the player ship
      * @param gameState current game state
      * @param lives lives of  player ship
      * @param bomb number of bomb that player ship has

@@ -32,7 +32,7 @@ public class Projectile extends MapObjectTTL {
      *
      * @param ship owner of the projectile created
      * @param heading angle that the projectile is headed
-     * @param coordinates initial x, y coordinate
+     * @param coordinates initial X, Y coordinate
      * @param gameState current game state
      */
     public Projectile(Ship ship, float heading, int[] coordinates, GameState gameState) {

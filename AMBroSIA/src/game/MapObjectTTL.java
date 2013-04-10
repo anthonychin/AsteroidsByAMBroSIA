@@ -17,7 +17,7 @@ public class MapObjectTTL extends MapObject {
      * Creates MapObjectTTL with given parameters.
      * @param velocity magnitude and direction of the object
      * @param heading heading of the object
-     * @param coordinates initial x, y position of the object
+     * @param coordinates initial X, Y position of the object
      * @param acceleration acceleration of the object
      * @param gameState current game state
      * @param color color of the object in game
@@ -33,7 +33,7 @@ public class MapObjectTTL extends MapObject {
      * Creates MapObjectTTL with given parameters.
      * @param velocity magnitude and direction of the object
      * @param heading heading of the object
-     * @param coordinates initial x, y position of the object
+     * @param coordinates initial X, Y position of the object
      * @param acceleration acceleration of the object
      * @param gameState current game state
      */
@@ -54,7 +54,7 @@ public class MapObjectTTL extends MapObject {
     /**
      * Sets the Time to Live property.
      *
-     * @param ttl
+     * @param ttl new time to live value
      */
     public void setTTL(int ttl) {
         this.ttl = ttl;

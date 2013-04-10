@@ -16,7 +16,7 @@ public class Ship extends MapObject {
      *
      * @param velocity magnitude and direction of ship
      * @param heading heading of ship (in degrees)
-     * @param coordinates initial x, y position of the ship
+     * @param coordinates initial X, Y position of the ship
      * @param acceleration acceleration of the ship
      * @param gameState current game state
      * @param lives lives of the ship

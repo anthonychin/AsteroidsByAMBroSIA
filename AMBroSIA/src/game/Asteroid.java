@@ -11,10 +11,25 @@ import org.apache.log4j.Logger;
 public class Asteroid extends MapObject {
 
     //integer definitions for each size
+    /**
+     * Integer definitions for large size asteroid.
+     */
     final public static int LARGE_ASTEROID_SIZE = 3;
+    /**
+     * Integer definitions for medium size asteroid.
+     */
     final public static int MEDIUM_ASTEROID_SIZE = 2;
+    /**
+     * Integer definitions for small size asteroid.
+     */
     final public static int SMALL_ASTEROID_SIZE = 1;
+    /**
+     * Number of asteroid created when large size asteroid is destroyed.
+     */
     final public static int ASTEROIDS_FROM_LARGE = 2;
+    /**
+     * Number of asteroid created when medium size asteroid is destroyed.
+     */
     final public static int ASTEROIDS_FROM_MEDIUM = 2;
     
     //number of debris pieces to spawn
@@ -23,6 +38,14 @@ public class Asteroid extends MapObject {
     
     private final static Logger log = Logger.getLogger(Asteroid.class.getName());
 
+    /**
+     * Creates Asteroid using given parameter.
+     * @param velocity magnitude and direction of the asteroid
+     * @param heading heading of the asteroid
+     * @param coordinates initial X, Y position of the asteroid
+     * @param gameState current game state
+     * @param size asteroid size
+     */
     public Asteroid(float[] velocity, float heading, int[] coordinates, GameState gameState, int size) {
         super(velocity, heading, coordinates, 0, gameState);
         this.size = size;
@@ -30,11 +53,19 @@ public class Asteroid extends MapObject {
     }
 
     //size of asteroid
+    /**
+     * Return the size of the asteroid.
+     * @return size of the asteroid
+     */
     public int getSize() {
         return this.size;
     }
 
     //destroy asteroid: add score if no bomb was used, spawn new asteroids, remove it from the game, add debris
+    /**
+     * Destroys asteroid. Adds score if no bomb was used, spawns new asteroids, removes it from the game, and adds debris.
+     * @param bombUsed true if bomb was used, false otherwise
+     */
     public void destroy(boolean bombUsed) {
         log.debug("destroying asteroid " + this.toString());
         

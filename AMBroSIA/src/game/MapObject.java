@@ -21,7 +21,7 @@ public class MapObject {
      * 
      * @param velocity magnitude and direction of the object
      * @param heading heading of the object
-     * @param coordinates initial x, y position of the object
+     * @param coordinates initial X, Y position of the object
      * @param acceleration acceleration of the object
      * @param gameState current game state
      */
@@ -92,7 +92,7 @@ public class MapObject {
 
     /**
      * Sets the coordinates of MapObject.
-     * @param coordinates new x, y position of the object
+     * @param coordinates new X, Y position of the object
      */
     public void setCoord(int[] coordinates) {
         this.coordinates = coordinates;
