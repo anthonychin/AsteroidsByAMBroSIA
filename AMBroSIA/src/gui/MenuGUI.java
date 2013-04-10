@@ -27,19 +27,43 @@ public class MenuGUI implements Runnable {
 
     private static final int DEFAULT_WIDTH = 800;
     private static final int DEFAULT_HEIGHT = 600;
+    /**
+     * Default width of main window.
+     */
     public static int WIDTH = DEFAULT_WIDTH;
+    /**
+     * Default height of main window.
+     */
     public static int HEIGHT = DEFAULT_HEIGHT;
     //main window, associated elements
     private JFrame frame;
     private CardLayout cardLayout;
     private JPanel card = new JPanel();
     // menu buttons
+    /**
+     * Menu button for single player mode.
+     */
     public JButton singlePbutton = new JButton("SINGLE-PLAYER MODE");
+    /**
+     * Menu button for two player mode.
+     */
     public JButton twoPbutton = new JButton("TWO-PLAYER MODE");
+    /**
+     * Menu button for leaderboard.
+     */
     public JButton leaderBoardButton = new JButton("LEADERBOARD");
+    /**
+     * Menu button for tutorial.
+     */
     public JButton tutorialButton = new JButton("TUTORIAL");
+    /**
+     * Menu button for quit.
+     */
     public JButton quitButton = new JButton("QUIT");
     //back button for both leaderboard and tutorial
+    /**
+     * Menu button for back in leaderboard and tutorial.
+     */
     public JButton backButton = new JButton("BACK");
     //keyboard, button press handlers
     private ActionListener buttonClick;
@@ -58,8 +82,8 @@ public class MenuGUI implements Runnable {
     /**
      * Starts the GUI Menu.
      *
-     * @param AL
-     * @param keyb
+     * @param AL input from ActionListener
+     * @param keyb input from KeyListener
      */
     public MenuGUI(ActionListener AL, KeyListener keyb) {
         try {
@@ -96,13 +120,16 @@ public class MenuGUI implements Runnable {
         frame.setFocusable(false);
     }
 
+    /**
+     * Displays menu.
+     */
     public void showMenu() {
         //disable keyboard input
         frame.setFocusable(false);
         // create menu page panel, set it up, show it
         //JPanel cardMenu = new JPanel(new GridLayout(2, 1));
         JPanel cardMenu = new JPanel(new GridLayout(1, 1));
-        
+
         cardMenu.add(new MenuPanel());
 
 
@@ -114,19 +141,19 @@ public class MenuGUI implements Runnable {
         buttonPanelMenu.add(leaderBoardButton);
         buttonPanelMenu.add(tutorialButton);
         buttonPanelMenu.add(quitButton);
-        
-        
-        
+
+
+
         singlePbutton.setBackground(Color.DARK_GRAY);
         twoPbutton.setBackground(Color.DARK_GRAY);
         leaderBoardButton.setBackground(Color.DARK_GRAY);
         tutorialButton.setBackground(Color.DARK_GRAY);
         quitButton.setBackground(Color.DARK_GRAY);
-     
+
         singlePbutton.setForeground(Color.pink);
         twoPbutton.setForeground(Color.pink);
         leaderBoardButton.setForeground(Color.pink);
-        tutorialButton.setForeground(Color.pink);        
+        tutorialButton.setForeground(Color.pink);
         quitButton.setForeground(Color.pink);
 
         singlePbutton.addActionListener(buttonClick);
@@ -145,6 +172,11 @@ public class MenuGUI implements Runnable {
     }
 
     //show single player interface
+    /**
+     * Displays single player mode interface.
+     *
+     * @param gs current game state
+     */
     public void displaySingleP(GameState gs) {
         //let other methods know we are in single P mode
         singleP = true;
@@ -162,6 +194,11 @@ public class MenuGUI implements Runnable {
     }
 
     //show two player interface
+    /**
+     * Displays two player mode interface.
+     *
+     * @param gs current game state
+     */
     public void displayTwoP(GameState gs) {
         //let other methods know we are in Two P mode.  Virtually identical code to single player above
         singleP = false;
@@ -173,14 +210,18 @@ public class MenuGUI implements Runnable {
         cardLayout.show(card, "Two-Player Mode");
         frame.setResizable(false);
     }
-       
-    public void displayLeaderBoard(GameState gs) 
-    {
+
+    /**
+     * Displays leaderboard screen.
+     *
+     * @param gs current game state
+     */
+    public void displayLeaderBoard(GameState gs) {
         leaderBoardPanel = new LeaderBoardPanel(GameAssets.spaceBackground, gs);
         JPanel cardLeaderBoard = new JPanel();
         cardLeaderBoard.setLayout(new BorderLayout());
         cardLeaderBoard.add(leaderBoardPanel);
-        
+
         //initialize a back button
         JPanel buttonPanelLeaderBoard = new JPanel();
         buttonPanelLeaderBoard.add(backButton);
@@ -194,13 +235,16 @@ public class MenuGUI implements Runnable {
     }
 
     //show tutorial screen
+    /**
+     * Display tutorial screen.
+     */
     public void displayTutorial() {
         //create panel
         MenuPanel cardTutorial = new MenuPanel();
         cardTutorial.setLayout(new BorderLayout());
         JPanel tutorialPanel = new TutorialPanel(GameAssets.tutorialImage);
         cardTutorial.add(tutorialPanel, BorderLayout.NORTH);
-        
+
         //initialize a back button
         JPanel buttonPanelTutorial = new JPanel();
         buttonPanelTutorial.add(backButton);
@@ -215,6 +259,13 @@ public class MenuGUI implements Runnable {
     }
 
     //display game over screen
+    /**
+     * Display game over screen.
+     *
+     * @param gs current game state
+     * @param mode boolean value that determines whether its single player mode
+     * or two player mode
+     */
     public void displayGameOver(GameState gs, boolean mode) {
         //create panel
         gameOverPanel = new EndGamePanel(GameAssets.gameOverImage, gs, mode);
@@ -234,6 +285,9 @@ public class MenuGUI implements Runnable {
     }
 
     //essentially the back button
+    /**
+     * The back button.
+     */
     public void goBack() {
         cardLayout.show(card, "Menu");
         //don't want keyboard working in menu
@@ -241,6 +295,9 @@ public class MenuGUI implements Runnable {
     }
 
     //draw the game
+    /**
+     * Draws the game.
+     */
     public void updateDraw() {
         if (singleP) {
             onePPanel.updatePanel();
@@ -250,6 +307,9 @@ public class MenuGUI implements Runnable {
     }
 
     //for gui thread: update the window size variables, as well as the screen
+    /**
+     * Update the window size variables as well as the screen.
+     */
     @Override
     public void run() {
         log.info("GUI updating");
