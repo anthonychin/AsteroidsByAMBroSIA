@@ -1,47 +1,65 @@
 package game;
 
-/**
- *
- * @author Anthony Chin
- */
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The
+ * <code>AI</code> class serves a controller for the Alien Ship. In other words,
+ * it will control how the Alien ship moves and reacts.
+ *
+ * @author Anthony Chin
+ */
 public class AI implements Runnable {
+
     private GameState gameState;
-    
-    public AI(GameState gs){
+
+    /**
+     * Creates AI with given game state
+     * @param gs current game state
+     */
+    public AI(GameState gs) {
         this.gameState = gs;
     }
-    
+
     //for AI thread
-    public void run(){
+    /**
+     * Runs targetPS method, which targets player ship and fires.
+     */
+    public void run() {
         targetPS();
     }
-    public ArrayList<int[]> pathFind()
-    {
+
+    /**
+     * Returns coordinates representing the path it should follow.
+     * @return set of path coordinates
+     */
+    public ArrayList<int[]> pathFind() {
         return null;
     }
-    
-    public void alienPath()
-    {
-        
+
+    /**
+     * The path that alien ship traverses before disappearing.
+     */
+    public void alienPath() {
     }
-    
+
     //get player, target it and fire
-    public void targetPS()
-    {
+    /**
+     * Finds the set of coordinates of where the player ship and shoot the projectile at that point.
+     */
+    public void targetPS() {
         PlayerShip ps = gameState.getPlayerShip();
         AlienShip as = gameState.getAlienShip();
-        if (gameState.getAlienShip() != null && gameState.getPlayerShip() != null){
-           int getX = ps.getX() - as.getX();
-           int getY = ps.getY() - as.getY();
-           
-           //calculate heading to player
-           float heading = (float)(Math.toDegrees(Math.tan(getY/getX)-90)%360);
-           
-           //fire
-           gameState.addProjectile(new Projectile(as, heading, new int[]{as.getX(), as.getY()}, gameState));
+        if (gameState.getAlienShip() != null && gameState.getPlayerShip() != null) {
+            int getX = ps.getX() - as.getX();
+            int getY = ps.getY() - as.getY();
+
+            //calculate heading to player
+            float heading = (float) (Math.toDegrees(Math.tan(getY / getX) - 90) % 360);
+
+            //fire
+            gameState.addProjectile(new Projectile(as, heading, new int[]{as.getX(), as.getY()}, gameState));
         }
     }
 }
