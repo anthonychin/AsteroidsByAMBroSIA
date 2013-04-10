@@ -1,9 +1,4 @@
-p1 740 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
-p1 790 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
-p1 900 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
-p1 240 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
-p1 100 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
-p1 240 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
-p1 90 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
-p1 90 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
-p1 100 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
+p1 190 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
+p1 640 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
+p1 40 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy
+p1 540 lives asteroidsdestroyed aliensdestroyed deaths Kill-Deathratio 1 bombs shootingaccuracy

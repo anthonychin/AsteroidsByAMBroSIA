@@ -52,6 +52,7 @@ public class LeaderBoardPanel extends JPanel {
         highScoreReader reader = new highScoreReader("./src/highscoreData/scoreInfo.txt");
         reader.openFile();
         rowdata = reader.readFile();
+        bblsort(rowdata);
         table = new JTable(rowdata, columns);
         table.setPreferredScrollableViewportSize(new Dimension(w/2, h));
         table.setFillsViewportHeight(true);  
@@ -66,5 +67,21 @@ public class LeaderBoardPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+    }
+    
+    public static void bblsort(String[][] array)
+    {
+        for(int i = 0 ; i < array.length ; i++)
+        {
+            for(int j = 1 ; j < array.length-i ; j++)
+            {
+                if(Integer.parseInt(array[j-1][1]) < Integer.parseInt(array[j][1]))
+                {
+                    String[] tmp = array[j-1];
+                    array[j-1] = array[j];
+                    array[j] = tmp;
+                }
+            }
+        }
     }
 }
