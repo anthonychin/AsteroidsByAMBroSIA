@@ -70,6 +70,7 @@ public class Asteroid extends MapObject {
         log.debug("destroying asteroid " + this.toString());
         
         //bomb not used, get score, new asteroids spawned
+        checkP1orP2();
         if (!bombUsed) {
             if (size == LARGE_ASTEROID_SIZE) {
                 for (int i = 0; i < ASTEROIDS_FROM_LARGE; i++) {
@@ -97,5 +98,14 @@ public class Asteroid extends MapObject {
             int y = getY();
             getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{x, y}, 0, getGameState(), Color.GRAY));
         }
+    }
+    
+    private void checkP1orP2(){
+        if(!getGameState().isPlayerTwoTurn()){
+            getGameState().addP1asteroidDestroyed();
+        }
+        else{
+            getGameState().addP2asteroidDestroyed();
+        }    
     }
 }
