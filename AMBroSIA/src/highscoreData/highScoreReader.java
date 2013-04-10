@@ -32,6 +32,7 @@ public class highScoreReader
         ArrayList<String[]> scoreList = new ArrayList<String[]>();
         try
         {
+            // if file exists, read from it
             if(file.exists())
             {
                 while(fileScanner.hasNext())
@@ -47,6 +48,7 @@ public class highScoreReader
                 return to2Darray(scoreList);
             }
             
+            // if it does not exist, abort
             else
             {
                 fileScanner.close();

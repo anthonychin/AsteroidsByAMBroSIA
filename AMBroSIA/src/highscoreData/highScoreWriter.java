@@ -29,6 +29,7 @@ public class highScoreWriter
     {
         try
         {
+            // if file exists append content to it
             if(file.exists())
             {
                 BufferedWriter fwriter = new BufferedWriter(new FileWriter(path, true));
@@ -40,7 +41,7 @@ public class highScoreWriter
                 fwriter.close();
             }
             
-            
+            // else, create a new file and append to it
             else
             {
                 File f = new File(path);
