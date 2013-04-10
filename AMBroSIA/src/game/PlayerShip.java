@@ -241,10 +241,8 @@ public class PlayerShip extends Ship {
         }
     }
     
-    /**
-     * Resets the player ship after it gets destroyed.
-     */
-    public void resetShip() {
+    // Resets the player ship after it gets destroyed.
+    private void resetShip() {
 
         final PlayerShip oldShip = getGameState().getPlayerShip();
         Thread resetShip = new Thread() {
