@@ -75,8 +75,9 @@ public class Progression implements Runnable {
                 } else {
                     //game over: save player 2 score, put it in the game state, and stop updating
                     int player2Score = gameState.getCurrentScore();
+                    int player2Level = gameState.getPlayer2Level();
                     gameState.setPlayer2Score(player2Score);
-                    gameState.setPlayer2Level(gameState.getCurrentScore());
+                    gameState.setPlayer2Level(player2Level);
                     //note: player 1 info already set beforehand
                     Logic.stopTimer();
                     Logic.displayGameOver(false);
