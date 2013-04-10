@@ -16,13 +16,21 @@ import java.awt.Stroke;
 import java.util.ArrayList;
 
 /**
- * Responsible for drawing all in game objects, from asteroids to the player
- * ship to bonus drops. Uses the Polygon class that comes with java.
+ * The
+ * <code>gameDraw</code> class is responsible for drawing all in game objects,
+ * from asteroids to the player ship to bonus drops. Uses the Polygon class that
+ * comes with Java.
  *
  * @author Michael
  */
 public class gameDraw {
 
+    /**
+     * Draws all in-game objects.
+     *
+     * @param g2d 2 dimensional shape
+     * @param memory current game state
+     */
     public static void drawObjects(Graphics2D g2d, GameState memory) {
         //some nice settings that improve visual quality.  Some do not appear to have an effect however...
         g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);

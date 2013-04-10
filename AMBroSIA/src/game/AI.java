@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * The
@@ -16,6 +15,7 @@ public class AI implements Runnable {
 
     /**
      * Creates AI with given game state
+     *
      * @param gs current game state
      */
     public AI(GameState gs) {
@@ -32,6 +32,7 @@ public class AI implements Runnable {
 
     /**
      * Returns coordinates representing the path it should follow.
+     *
      * @return set of path coordinates
      */
     public ArrayList<int[]> pathFind() {
@@ -46,7 +47,8 @@ public class AI implements Runnable {
 
     //get player, target it and fire
     /**
-     * Finds the set of coordinates of where the player ship and shoot the projectile at that point.
+     * Finds the set of coordinates of where the player ship is and shoots the
+     * projectile.
      */
     public void targetPS() {
         PlayerShip ps = gameState.getPlayerShip();

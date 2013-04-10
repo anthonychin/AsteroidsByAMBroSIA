@@ -3,7 +3,8 @@ package game;
 import java.awt.Color;
 
 /**
- * The <code>Projectile</code> class provides the representation for the projectile
+ * The
+ * <code>Projectile</code> class provides the representation for the projectile
  * objects.
  *
  * @author Anthony Chin
@@ -11,24 +12,23 @@ import java.awt.Color;
 public class Projectile extends MapObjectTTL {
 
     /**
-     * The velocity of Projectile. The default is 15.
+     * The velocity of Projectile.
      */
     public final static float PROJECTILE_SPEED = 15.0f;
     /**
-     * Value of the owner when the player owns the projectile.
+     * Value of the variable owner when the player owns the projectile.
      */
     public final static int PLAYER_OWNER = 1;
     /**
-     * Value of the owner when the alien owns the projectile.
+     * Value of the variable owner when the alien owns the projectile.
      */
     public final static int ALIEN_OWNER = 2;
     private int velocity; // to be fixed
     private int owner;
-    
     private final static int TIME_TO_LIVE = 10;
 
     /**
-     * Creates <i>Projectile</i> with the given parameters.
+     * Creates Projectile with the given parameters.
      *
      * @param ship owner of the projectile created
      * @param heading angle that the projectile is headed
@@ -41,12 +41,12 @@ public class Projectile extends MapObjectTTL {
         float velocityY = (float) (PROJECTILE_SPEED * Math.sin(Math.toRadians(heading - 90)));
 
         this.setVelocity(new float[]{velocityX, velocityY});
-        
+
         //longer time to live than default
         this.setTTL(TIME_TO_LIVE);
 
         if (ship instanceof PlayerShip) {
-            this.owner = PLAYER_OWNER;            
+            this.owner = PLAYER_OWNER;
             // Yellow projectiles for player
             setColor(Color.YELLOW);
         } else {

@@ -40,7 +40,6 @@ public class GameState {
      * not are not affected by concurrency issues - i.e. removing 
      * an object when it is already removed is OK.
      */
-    
     /**
      * Score the player receives when large asteroid is destroyed.
      */
@@ -64,18 +63,14 @@ public class GameState {
     private ArrayList<MapObjectTTL> explosionList;
     private PlayerShip playerShip;
     private AlienShip alienShip;
-    
     //information for current player
     private int currentScore;
     private int level;
-    
     //stored information (particuarly useful in two player)
     private int player1Level;
     private int player2Level;
     private int player1Score;
     private int player2Score;
-    
-    
     private boolean isPlayerDead;
     private boolean playerTwoTurn;
     
@@ -97,7 +92,7 @@ public class GameState {
     
 
     /**
-     * Creates <i>GameState</i>.
+     * Creates GameState with default values.
      *
      */
     public GameState() {
@@ -140,6 +135,7 @@ public class GameState {
     //add a whole list of asteroids at once
     /**
      * Adds list of asteroids at once.
+     *
      * @param list list of asteroids to be added to the asteroid list
      */
     public void addAsteroidsList(ArrayList<Asteroid> list) {
@@ -217,7 +213,8 @@ public class GameState {
     /**
      * Removes all explosion from the explosion list.
      *
-     * @param list list of explosions that needs to be removed from explosion list
+     * @param list list of explosions that needs to be removed from explosion
+     * list
      */
     public void removeListOfExplosions(Collection<?> list) {
         synchronized (explosionSync) {
@@ -228,6 +225,7 @@ public class GameState {
     //return explosion list
     /**
      * Returns explosion list.
+     *
      * @return list of all explosions
      */
     public ArrayList<MapObjectTTL> getExplosions() {
@@ -342,6 +340,7 @@ public class GameState {
     //change current level
     /**
      * Changes current level.
+     *
      * @param level new level
      */
     public void setLevel(int level) {
@@ -374,7 +373,7 @@ public class GameState {
     public void addToCurrentScore(int score) {
         this.currentScore += score;
     }
-    
+
     /**
      * Resets current score to 0.
      */
@@ -385,6 +384,7 @@ public class GameState {
     //set the score of player 1
     /**
      * Sets the score of player 1.
+     *
      * @param score
      */
     public void setPlayer1Score(int score) {
@@ -411,7 +411,9 @@ public class GameState {
 
     //player 1, player 2 level useful in two player to store data while the other is playing
     /**
-     * Sets Player 1's level. Useful in two player mode to store data while the other is playing.
+     * Sets Player 1's level. Useful in two player mode to store data while the
+     * other is playing.
+     *
      * @param p1Level player 1's level
      */
     public void setPlayer1Level(int p1Level) {
@@ -429,6 +431,7 @@ public class GameState {
 
     /**
      * Sets the level of Player 2.
+     *
      * @param p2Level player 2's level
      */
     public void setPlayer2Level(int p2Level) {
@@ -438,6 +441,7 @@ public class GameState {
     //same idea as setting playerX level
     /**
      * Sets score of Player 2.
+     *
      * @param score player 2's score
      */
     public void setPlayer2Score(int score) {
@@ -455,6 +459,7 @@ public class GameState {
 
     /**
      * Sets whether or not the player is dead.
+     *
      * @param isDead true if dead, false otherwise
      */
     public void setPlayerDead(boolean isDead) {
@@ -464,6 +469,7 @@ public class GameState {
     //whether or not the player is dead (and not just in the process of respawning)
     /**
      * Checks whether or not the player is dead.
+     *
      * @return true if dead false otherwise
      */
     public boolean isPlayerDead() {
@@ -588,6 +594,7 @@ public class GameState {
     
     /**
      * Checks if it is Player 2's turn to play.
+     *
      * @return true if Player 2's turn, false otherwise
      */
     public boolean isPlayerTwoTurn() {

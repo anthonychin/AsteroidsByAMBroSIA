@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.util.Random;
 
 /**
- * Alien object.
- * @author Nikolaos, Anthony
+ * The
+ * <code>AlienShip</code> class defines all the properties and methods
+ * appropriate to the alien ships that are not included in Ship.
  */
 public class AlienShip extends Ship {
 
@@ -14,6 +15,7 @@ public class AlienShip extends Ship {
     //create alien
     /**
      * Create AlienShip using given parameters.
+     *
      * @param velocity magnitude and direction of the alien ship
      * @param heading heading of the alien ship
      * @param coordinates initial X, Y position of the alien ship
@@ -27,7 +29,9 @@ public class AlienShip extends Ship {
 
     //remove alien from game: add bonus drop where it was destroyed, play destruction sound, add sto core
     /**
-     * Removes alien from game. Adds bonus drop where it was destroyed, plays destruction sound, and adds score.
+     * Removes alien from the game state. Adds bonus drop where it was
+     * destroyed, plays destruction sound, and adds score.
+     *
      * @param bombUsed true if bomb was used false otherwise
      */
     public void destroy(boolean bombUsed) {
@@ -43,7 +47,7 @@ public class AlienShip extends Ship {
         
         createExplosionEffect();
     }
-    
+
     //create all the debris (with proper color and position)
     private void createExplosionEffect() {
         for (int i = 0; i < NUM_DEBRIS; i++) {

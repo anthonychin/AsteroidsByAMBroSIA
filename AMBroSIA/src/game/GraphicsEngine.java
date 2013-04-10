@@ -19,7 +19,7 @@ public class GraphicsEngine implements Runnable {
     private final static Logger log = Logger.getLogger(GraphicsEngine.class.getName());
 
     /**
-     * Creates GraphicsEngine using given gamestate.
+     * Creates GraphicsEngine using given game state.
      *
      * @param gamestate current game state
      */
@@ -74,7 +74,7 @@ public class GraphicsEngine implements Runnable {
     }
 
     private static Polygon alienShape() {
-        return new Polygon(new int[]{-20,-15,-10, -5, 5, 10,15,20,10, -10}, new int[]{0,3,9, 11, 11, 9,3,0,-3,-3}, 10);        
+        return new Polygon(new int[]{-20, -15, -10, -5, 5, 10, 15, 20, 10, -10}, new int[]{0, 3, 9, 11, 11, 9, 3, 0, -3, -3}, 10);
     }
 
     private static Polygon projectileShape() {

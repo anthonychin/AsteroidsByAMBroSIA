@@ -45,7 +45,7 @@ public class Ship extends MapObject {
     }
 
     /**
-     * Creates a projectile.  Must be overridden.
+     * Creates a projectile. Must be overridden.
      */
     public void shoot() {
         throw new UnsupportedOperationException("Not implemented");

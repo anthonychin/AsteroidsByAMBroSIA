@@ -4,10 +4,11 @@ import java.awt.Color;
 import org.apache.log4j.Logger;
 
 /**
- * The asteroid object.
+ * The
+ * <code>Asteroid</code> class represents asteroids in the game.
+ *
  * @author Nikolaos
  */
-
 public class Asteroid extends MapObject {
 
     //integer definitions for each size
@@ -31,15 +32,14 @@ public class Asteroid extends MapObject {
      * Number of asteroid created when medium size asteroid is destroyed.
      */
     final public static int ASTEROIDS_FROM_MEDIUM = 2;
-    
     //number of debris pieces to spawn
     final private static int NUM_DEBRIS = 20;
     private int size;
-    
     private final static Logger log = Logger.getLogger(Asteroid.class.getName());
 
     /**
      * Creates Asteroid using given parameter.
+     *
      * @param velocity magnitude and direction of the asteroid
      * @param heading heading of the asteroid
      * @param coordinates initial X, Y position of the asteroid
@@ -55,6 +55,7 @@ public class Asteroid extends MapObject {
     //size of asteroid
     /**
      * Return the size of the asteroid.
+     *
      * @return size of the asteroid
      */
     public int getSize() {
@@ -63,12 +64,14 @@ public class Asteroid extends MapObject {
 
     //destroy asteroid: add score if no bomb was used, spawn new asteroids, remove it from the game, add debris
     /**
-     * Destroys asteroid. Adds score if no bomb was used, spawns new asteroids, removes it from the game, and adds debris.
+     * Destroys asteroid. Adds score if no bomb was used, spawns new asteroids,
+     * removes it from the game, and adds debris.
+     *
      * @param bombUsed true if bomb was used, false otherwise
      */
     public void destroy(boolean bombUsed) {
         log.debug("destroying asteroid " + this.toString());
-        
+
         //bomb not used, get score, new asteroids spawned
         checkP1orP2();
         if (!bombUsed) {
@@ -91,7 +94,7 @@ public class Asteroid extends MapObject {
         getGameState().removeAsteroid(this);
         createExplosionEffect();
     }
-    
+
     private void createExplosionEffect() {
         for (int i = 0; i < NUM_DEBRIS; i++) {
             int x = getX();

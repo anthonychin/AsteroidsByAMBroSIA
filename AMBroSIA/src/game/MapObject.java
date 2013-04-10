@@ -3,8 +3,11 @@ package game;
 import java.awt.Polygon;
 
 /**
- * The <code>MapObject</code> class provides a general representation of game objects (such as asteroids and aliens).
- * It includes functionality present in all objects (to some extent). 
+ * The
+ * <code>MapObject</code> class provides a general representation of game
+ * objects (such as asteroids and aliens). It includes functionality present in
+ * all objects (to some extent).
+ *
  * @author Nikolaos
  */
 public class MapObject {
@@ -18,7 +21,7 @@ public class MapObject {
 
     /**
      * Creates MapObject with given parameter.
-     * 
+     *
      * @param velocity magnitude and direction of the object
      * @param heading heading of the object
      * @param coordinates initial X, Y position of the object
@@ -36,6 +39,7 @@ public class MapObject {
 
     /**
      * Returns velocity of MapObject.
+     *
      * @return array representing velocity of the object
      */
     public float[] getVelocity() {
@@ -44,6 +48,7 @@ public class MapObject {
 
     /**
      * Sets the velocity of MapObject.
+     *
      * @param velocity array containing magnitude and direction
      */
     public void setVelocity(float[] velocity) {
@@ -52,6 +57,7 @@ public class MapObject {
 
     /**
      * Returns the acceleration of the MapObject.
+     *
      * @return acceleration of the object
      */
     public float getAcceleration() {
@@ -60,6 +66,7 @@ public class MapObject {
 
     /**
      * Sets the acceleration of the MapObject.
+     *
      * @param acceleration new acceleration value
      */
     public void setAcceleration(float acceleration) {
@@ -68,6 +75,7 @@ public class MapObject {
 
     /**
      * Returns the heading in which the MapObject is facing.
+     *
      * @return heading of the object
      */
     public float getHeading() {
@@ -76,6 +84,7 @@ public class MapObject {
 
     /**
      * Sets the heading of MapObject.
+     *
      * @param heading new heading of object
      */
     public void setHeading(float heading) {
@@ -84,6 +93,7 @@ public class MapObject {
 
     /**
      * Returns the coordinates of MapObject.
+     *
      * @return array of length 2 consisting of coordinates
      */
     public int[] getCoord() {
@@ -92,6 +102,7 @@ public class MapObject {
 
     /**
      * Sets the coordinates of MapObject.
+     *
      * @param coordinates new X, Y position of the object
      */
     public void setCoord(int[] coordinates) {
@@ -100,6 +111,7 @@ public class MapObject {
 
     /**
      * Returns x-coordinate of MapObject.
+     *
      * @return X coordinate of the object
      */
     public int getX() {
@@ -108,6 +120,7 @@ public class MapObject {
 
     /**
      * Sets x-coordinate of MapObject.
+     *
      * @param x new X coordinate of the object
      */
     public void setX(int x) {
@@ -116,6 +129,7 @@ public class MapObject {
 
     /**
      * Returns y-coordinate of MapObject.
+     *
      * @return Y coordinate of the object
      */
     public int getY() {
@@ -124,6 +138,7 @@ public class MapObject {
 
     /**
      * Sets y-coordinate of MapObject.
+     *
      * @param y new Y coordinate of the object
      */
     public void setY(int y) {
@@ -132,6 +147,7 @@ public class MapObject {
 
     /**
      * Returns shape of MapObject.
+     *
      * @return shape of the object
      */
     public Polygon getShape() {
@@ -140,6 +156,7 @@ public class MapObject {
 
     /**
      * Sets the shape of MapObject.
+     *
      * @param shape new shape of the object
      */
     public void setShape(Polygon shape) {
@@ -148,6 +165,7 @@ public class MapObject {
 
     /**
      * Returns the game state.
+     *
      * @return game state initially passed as a constructor argument
      */
     public GameState getGameState() {
@@ -156,9 +174,9 @@ public class MapObject {
 
     //unimplemented.  All implementing classes should override.
     /**
-     * Removes the MapObject from the game state. 
+     * Removes the MapObject from the game state.
      */
-    public void destroy(){
+    public void destroy() {
         throw new UnsupportedOperationException("Not implemented");
     }
 }

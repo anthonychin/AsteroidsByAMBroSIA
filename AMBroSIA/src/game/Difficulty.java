@@ -4,7 +4,7 @@ import gui.MenuGUI;
 import java.util.Random;
 
 /**
- * 
+ *
  * @author Nikolaos Bukas, Anthony Chin
  */
 public class Difficulty {
@@ -27,6 +27,7 @@ public class Difficulty {
 
     /**
      * Generates random heading value.
+     *
      * @return random heading value
      */
     public static float randomHeading() {
@@ -35,6 +36,7 @@ public class Difficulty {
 
     /**
      * Generates random velocity for asteroid.
+     *
      * @param level current level of game
      * @return random velocity for asteroid
      */
@@ -46,6 +48,7 @@ public class Difficulty {
 
     /**
      * Generates random size for asteroid.
+     *
      * @return random size for asteroid
      */
     public static int randomAsteroidSize() {
@@ -61,6 +64,7 @@ public class Difficulty {
 
     /**
      * Generates random velocity for alien.
+     *
      * @return random velocity for alien
      */
     public static float randomAlienVelocity() {
@@ -69,6 +73,7 @@ public class Difficulty {
 
     /**
      * Generates random X position.
+     *
      * @return new X position
      */
     public static int randomXPos() {
@@ -78,6 +83,7 @@ public class Difficulty {
 
     /**
      * Generates random Y position.
+     *
      * @return new Y position
      */
     public static int randomYPos() {
@@ -87,6 +93,7 @@ public class Difficulty {
 
     /**
      * Returns the rate that bonus drop appears.
+     *
      * @return rate of bonus drop
      */
     public static String bonusDropRate() {
@@ -94,7 +101,9 @@ public class Difficulty {
     }
 
     /**
-     * Returns a random boolean value that determines whether to spawn alien or not.
+     * Returns a random boolean value that determines whether to spawn alien or
+     * not.
+     *
      * @return randomly generated boolean value
      */
     public static boolean spawnAlien() {
@@ -103,6 +112,7 @@ public class Difficulty {
 
     /**
      * Determines the number of asteroid that needs to be spawned.
+     *
      * @param level current game level
      * @return number of asteroid
      */
@@ -113,6 +123,7 @@ public class Difficulty {
 
     /**
      * Generates random explosion velocity.
+     *
      * @return new random explosion velocity
      */
     public static float randExplosionVelocity() {

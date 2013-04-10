@@ -1,13 +1,7 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -18,8 +12,7 @@ import java.awt.Toolkit;
 import game.GameState;
 
 /**
- *
- * 2-Player mode interface
+ * The <code>TwoPgamePanel</code> class is the interface for 2-player game mode.
  * @author Haisin Yip
  * @author Anthony Chin
  */
@@ -30,6 +23,11 @@ public class TwoPgamePanel extends DescriptionPanel {
     private GameState gameState;
 
     // initialize size and background image in 2 player mode panel 
+    /**
+     * Creates TwoPgamePanel using given parameters. It initializes size and background image in two player mode panel.
+     * @param gs current game state
+     * @param img image for two player mode game panel
+     */
     public TwoPgamePanel(GameState gs, Image img) {
         super(gs);
         this.gameState = gs;
@@ -55,11 +53,18 @@ public class TwoPgamePanel extends DescriptionPanel {
         Toolkit.getDefaultToolkit().sync();
     }
 
+    /**
+     * Calls paint through swing.
+     */
     public void updatePanel() {
         repaint();
     }
     
      // set endgame background image
+    /**
+     * Sets endgame background image.
+     * @param g graphics
+     */
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
