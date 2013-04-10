@@ -22,7 +22,7 @@ public class Difficulty {
     final private static int ALIEN_SPAWN_RATE = 20;
     final private static int INITIAL_ASTEROID_SPEED = 20;
     final private static int INITIAL_ALIEN_SPEED = 10;
-    final private static int MAX_LEVEL = 50;
+    final private static int MAX_LEVEL = 30;
     final private static Random rand = new Random();
 
     /**
