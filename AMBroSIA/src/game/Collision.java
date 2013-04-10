@@ -38,6 +38,7 @@ public class Collision implements Runnable {
 
     /**
      * Creates Collision with given parameters.
+     *
      * @param gs current game state
      * @param phys game physics
      */
@@ -54,12 +55,12 @@ public class Collision implements Runnable {
     @Override
     public void run() {
         log.debug("Collision start");
-        
+
         //get all collisions
         ArrayList<MapObject> collisionList = physicsEngine.getCollisions();
         log.debug("SIZE OF THE COLLISION LIST = " + collisionList.size());
         log.debug("COLLISION LIST = " + Arrays.toString(collisionList.toArray()));
-        
+
         //go through the returned colliding objects, and take action
         if (!collisionList.isEmpty()) {
             for (int i = 0; i < collisionList.size(); i = i + 2) {

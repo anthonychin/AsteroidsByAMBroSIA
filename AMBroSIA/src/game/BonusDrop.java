@@ -1,7 +1,10 @@
 package game;
 
 /**
- * The bonus drop object.
+ * The
+ * <code>BonusDrop</code> class provides a general representation of all the
+ * bonus drop objects.
+ *
  * @author Nikolaos, Meong Hye Seo
  */
 public class BonusDrop extends MapObjectTTL {
@@ -33,6 +36,7 @@ public class BonusDrop extends MapObjectTTL {
     //create bonus drop
     /**
      * Creates bonus drop with given parameters.
+     *
      * @param coordinates initial X, Y position of the bonus drop
      * @param gameState current game state
      * @param type type of bonus drop
@@ -46,6 +50,7 @@ public class BonusDrop extends MapObjectTTL {
     //the type of bonus drop
     /**
      * Returns the type of bonus drop.
+     *
      * @return int value representing type of bonus drop
      */
     public int getType() {

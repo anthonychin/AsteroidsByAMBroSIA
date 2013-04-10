@@ -4,7 +4,10 @@ import gui.MenuGUI;
 import org.apache.log4j.Logger;
 
 /**
- * Class responsible for keeping the game going: spawning aliens, moving to the next level, or ending the game.
+ * The
+ * <code>Progression</code> class is responsible for keeping the game going:
+ * spawning aliens, moving to the next level, or ending the game.
+ *
  * @author Michael
  */
 public class Progression implements Runnable {
@@ -88,7 +91,7 @@ public class Progression implements Runnable {
             }
         }
     }
-    
+
     //various end of game or level conditions are checked here
     private boolean isAlienDestroyed() {
         return gameState.getAlienShip() == null;
@@ -111,7 +114,7 @@ public class Progression implements Runnable {
         GameAssets.warp.play();
         gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, 1, 1, 1));
         setupLevel(1);
-        
+
         //in case of 2 player, setupLevel saves the old score, so erase it
         gameState.resetCurrentScore();
     }
@@ -119,7 +122,7 @@ public class Progression implements Runnable {
     //player ship != null assumed.  if null, won't do anything (will try again next turn)
     private void setupLevel(int levelNumber) {
         log.info("Going to level " + levelNumber);
-        
+
         PlayerShip player = gameState.getPlayerShip();
         if (player != null) {
             log.info("Player != null; actually increasing level");
@@ -142,13 +145,12 @@ public class Progression implements Runnable {
             spawnAlien = false;
         }
     }
-    
+
     //spawn asteroids, with number and parameters (velocity, size, position) dictated by the difficulty level
-    private void addAsteroids(int levelNumber)
-    {
+    private void addAsteroids(int levelNumber) {
         int NumberOfAsteroids = Difficulty.spawnAsteroids(levelNumber);
         log.info("Spawining " + NumberOfAsteroids + " asteroids");
-        
+
         for (int i = 0; i < NumberOfAsteroids; i++) {
             float xVel = Difficulty.randomAsteroidVelocity(levelNumber);
             float yVel = Difficulty.randomAsteroidVelocity(levelNumber);

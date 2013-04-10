@@ -5,9 +5,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
- * The <code>timeToLive</code> class contains code that checks the time to live of certain
- * objects (such as bonus drops, projectiles) and removes them from the game
- * once it is time for them to be removed.
+ * The
+ * <code>timeToLive</code> class contains code that checks the time to live of
+ * certain objects (such as bonus drops, projectiles) and removes them from the
+ * game once it is time for them to be removed.
  *
  * @author Michael
  */
@@ -18,6 +19,7 @@ public class timeToLive implements Runnable {
 
     /**
      * Creates new timeToLive using GameState.
+     *
      * @param gameState state of current game
      */
     public timeToLive(GameState gameState) {

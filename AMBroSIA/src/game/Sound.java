@@ -9,8 +9,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- * The <code>Sound</code> class contains necessary codes for playing sound throughout the game.
- * It provides play, stop, and playLoop operations.
+ * The
+ * <code>Sound</code> class contains necessary codes for playing sound
+ * throughout the game. It provides play, stop, and playLoop operations.
+ *
  * @author Meong Hee
  */
 public class Sound {
@@ -19,20 +21,22 @@ public class Sound {
     private Clip clip;
 
     /**
-     * Creates Sound using given inputFile. If the file is not found or the given file is not supported, it throws an exception.
+     * Creates Sound using given inputFile. If the file is not found or the
+     * given file is not supported, it throws an exception.
+     *
      * @param inputFile name of the sound file
      * @throws UnsupportedAudioFileException
      * @throws IOException
      * @throws LineUnavailableException
      */
-    public Sound(String inputFile) throws UnsupportedAudioFileException, 
+    public Sound(String inputFile) throws UnsupportedAudioFileException,
             IOException, LineUnavailableException {
         URL soundFile = Sound.class.getResource("sounds/" + inputFile);
         sound = AudioSystem.getAudioInputStream(soundFile);
         clip = AudioSystem.getClip();
         clip.open(sound);
     }
-    
+
     /**
      * Plays the clip once.
      */
@@ -40,14 +44,14 @@ public class Sound {
         clip.setFramePosition(0);
         clip.start();
     }
-    
+
     /**
      * Stops the currently playing clip.
      */
     public void stop() {
         clip.stop();
     }
-    
+
     /**
      * Plays the clip continously.
      */

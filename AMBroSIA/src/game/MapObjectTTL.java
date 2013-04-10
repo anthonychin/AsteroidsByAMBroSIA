@@ -15,6 +15,7 @@ public class MapObjectTTL extends MapObject {
 
     /**
      * Creates MapObjectTTL with given parameters.
+     *
      * @param velocity magnitude and direction of the object
      * @param heading heading of the object
      * @param coordinates initial X, Y position of the object
@@ -28,17 +29,17 @@ public class MapObjectTTL extends MapObject {
         //set a default color
         objectColor = color;
     }
-    
+
     /**
      * Creates MapObjectTTL with given parameters.
+     *
      * @param velocity magnitude and direction of the object
      * @param heading heading of the object
      * @param coordinates initial X, Y position of the object
      * @param acceleration acceleration of the object
      * @param gameState current game state
      */
-    public MapObjectTTL(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState)
-    {
+    public MapObjectTTL(float[] velocity, float heading, int[] coordinates, float acceleration, GameState gameState) {
         this(velocity, heading, coordinates, acceleration, gameState, DEFAULT_COLOR);
     }
 
@@ -65,19 +66,19 @@ public class MapObjectTTL extends MapObject {
     public void destroy() {
         getGameState().removeExplosion(this);
     }
-    
 
     /**
      * Returns the color of MapObjectTTL
+     *
      * @return color of the object
      */
     public Color getColor() {
         return objectColor;
     }
 
-
     /**
      * Sets the color of the MapObjectTTL
+     *
      * @param newColor new color of the object
      */
     public void setColor(Color newColor) {

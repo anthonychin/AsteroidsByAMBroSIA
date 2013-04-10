@@ -34,11 +34,10 @@ public class PlayerShip extends Ship {
      * Value of the angular speed of the player ship.
      */
     final public static int ANGULAR_SPEED = 30;
-
     //in milliseconds
     final private static int RESPAWN_DELAY = 2500;
     /**
-     * Value of the number of debris when the player ship gets destroyed. 
+     * Value of the number of debris when the player ship gets destroyed.
      */
     final public static int NUM_DEBRIS = 20;
     /**
@@ -60,7 +59,7 @@ public class PlayerShip extends Ship {
      * @param heading angle that the player ship is facing
      * @param coordinates initial X, Y coordinate of the player ship
      * @param gameState current game state
-     * @param lives lives of  player ship
+     * @param lives lives of player ship
      * @param bomb number of bomb that player ship has
      * @param shieldPoints shield point of player ship
      */
@@ -213,8 +212,8 @@ public class PlayerShip extends Ship {
     }
 
     /**
-     *  Shoot 4 Projectiles at heading of -20, 20, -60, 60 degree relative to the ship heading.
-     *  Used when the space bar is held.
+     * Shoot 4 Projectiles at heading of -20, 20, -60, 60 degree relative to the
+     * ship heading. Used when the space bar is held.
      */
     public void shootDirection() {
         getGameState().addProjectile(new Projectile(this, this.getHeading() - 20, new int[]{this.getX(), this.getY()}, getGameState()));
@@ -240,7 +239,7 @@ public class PlayerShip extends Ship {
             getGameState().setPlayerDead(true);
         }
     }
-    
+
     // Resets the player ship after it gets destroyed.
     private void resetShip() {
 

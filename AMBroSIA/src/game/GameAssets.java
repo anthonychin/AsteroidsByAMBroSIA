@@ -1,4 +1,3 @@
-
 package game;
 
 import java.awt.Image;
@@ -88,7 +87,6 @@ public class GameAssets {
      * Sound for warp.
      */
     public static Sound warp;
-    
     /**
      * Image for game background.
      */
@@ -135,10 +133,10 @@ public class GameAssets {
             Logger.getLogger(GameAssets.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
             Logger.getLogger(GameAssets.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
         }
     }
-    
+
     /**
      * Loads all images.
      */

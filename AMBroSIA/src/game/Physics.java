@@ -22,6 +22,7 @@ public class Physics implements Runnable {
 
     /**
      * Creates Physics using given game state.
+     *
      * @param gameState current game state
      */
     public Physics(GameState gameState) {
@@ -89,13 +90,13 @@ public class Physics implements Runnable {
 
         float[] velocity = gameObject.getVelocity();
         float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
-        
+
         int[] displacement = calculateDisplacement(velocity, acceleration, 1);
         //int[] displacement = calculateDisplacement(velocity, gameObject.getVelocity(), 1);
         gameObject.setX(gameObject.getX() + displacement[0]);
         gameObject.setY(gameObject.getY() + displacement[1]);
 
-       
+
         gameObject.setVelocity(calculateNewVelocity(gameObject, velocity, acceleration, 1));
         wrapAround(gameObject);
     }
@@ -133,9 +134,9 @@ public class Physics implements Runnable {
     }
 
     /**
-     * Returns list of MapObjects that have been detected in collision.
-     * The list will always have an even number of entries. Each sequential pair
-     * of MapObjects indicates that the two of them collided.
+     * Returns list of MapObjects that have been detected in collision. The list
+     * will always have an even number of entries. Each sequential pair of
+     * MapObjects indicates that the two of them collided.
      *
      * @return list of MapObject detected in collision
      */
@@ -227,7 +228,7 @@ public class Physics implements Runnable {
                 return true;
             }
         }
-        
+
         for (int i = 0; i < shapeOne.npoints; i++) {
             if (shapeTwo.contains(shapeOne.xpoints[i], shapeOne.ypoints[i])) {
                 return true;
@@ -242,7 +243,7 @@ public class Physics implements Runnable {
 
         acceleration2D[0] = (float) (acceleration * Math.cos(Math.toRadians(heading - 90)));
         acceleration2D[1] = (float) (acceleration * Math.sin(Math.toRadians(heading - 90)));
-        
+
         return acceleration2D;
     }
 
@@ -280,7 +281,7 @@ public class Physics implements Runnable {
 //        displacement[1] = Math.round((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
         displacement[0] = Math.round(velocity[0] * time + 0.5f * acceleration[0]);
         displacement[1] = Math.round(velocity[1] * time + 0.5f * acceleration[1]);
-        
+
         return displacement;
     }
 

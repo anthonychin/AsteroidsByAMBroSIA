@@ -147,9 +147,9 @@ public class Logic extends KeyAdapter implements ActionListener {
         return paused;
     }
 
-
     /**
      * Displays "Game Over" message.
+     *
      * @param singleP true if in single player mode, false otherwise
      */
     public static void displayGameOver(boolean singleP) {
@@ -170,7 +170,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         physicsEngine = new Physics(gameState);
         ttlLogic = new timeToLive(gameState);
         collisionCheck = new Collision(gameState, physicsEngine);
-        gameProgress = new Progression(gameState,twoPlayer);
+        gameProgress = new Progression(gameState, twoPlayer);
         gameAI = new AI(gameState);
         gameProgress.setupInitialLevel();
 
@@ -184,18 +184,17 @@ public class Logic extends KeyAdapter implements ActionListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        
+
         int keyCode = e.getKeyCode();
         PlayerShip player = gameState.getPlayerShip();
-        
+
         //accelerate
         if (keyCode == KeyEvent.VK_UP) {
             if (!paused && player != null) {
                 player.accelerate(true);
                 GameAssets.thrusters.playLoop();
             }
-        } 
-        //turn left/right
+        } //turn left/right
         else if (keyCode == KeyEvent.VK_LEFT) {
             if (!paused && player != null) {
                 player.turnLeft(true);
@@ -204,27 +203,24 @@ public class Logic extends KeyAdapter implements ActionListener {
             if (!paused && player != null) {
                 player.turnRight(true);
             }
-        } 
-
-        //shoot projectiles (rate limited)
+        } //shoot projectiles (rate limited)
         else if (keyCode == KeyEvent.VK_SPACE) {
-                if(gameState.getPlayerShip() != null){
-                    if (shootKeyReleased) {
-                        initialShootTime = System.currentTimeMillis();
-                        shootKeyReleased = false;
-                        shootCounter = 0;
-                        player.shoot();
-                    } else if (!shootKeyReleased) {
-                        currentShootTime = System.currentTimeMillis();
-                        while ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1200 && shootCounter < 1) {
-                                player.shootDirection();
-                                shootCounter++;                      
-                                initialShootTime = currentShootTime;
-                        }
+            if (gameState.getPlayerShip() != null) {
+                if (shootKeyReleased) {
+                    initialShootTime = System.currentTimeMillis();
+                    shootKeyReleased = false;
+                    shootCounter = 0;
+                    player.shoot();
+                } else if (!shootKeyReleased) {
+                    currentShootTime = System.currentTimeMillis();
+                    while ((currentShootTime - initialShootTime) > PlayerShip.FIRE_RATE * 1200 && shootCounter < 1) {
+                        player.shootDirection();
+                        shootCounter++;
+                        initialShootTime = currentShootTime;
                     }
                 }
-        } 
-        //pause
+            }
+        } //pause
         else if (keyCode == KeyEvent.VK_P) {
             if (!paused) {
                 stopTimer();
@@ -233,21 +229,18 @@ public class Logic extends KeyAdapter implements ActionListener {
                 startTimer();
                 paused = false;
             }
-        } 
-        //bomb
+        } //bomb
         else if (keyCode == KeyEvent.VK_B) {
             if (!paused && player != null) {
                 player.useBomb();
             }
-        } 
-        //REMOVE IN FINAL GAME
+        } //REMOVE IN FINAL GAME
         else if (keyCode == KeyEvent.VK_Z) {
             Random randu = new Random();
             gameState.addAsteroid(new Asteroid(new float[]{1.5f, 1.5f}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
             //gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(10), Difficulty.randomHeading()}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
             //gameState.addProjectile(new Projectile(gameState.getAlienShip(), randu.nextInt(360), new int[] {gameState.getAlienShip().getX(), gameState.getAlienShip().getY()}, gameState));
-        } 
-        //end game
+        } //end game
         else if (keyCode == KeyEvent.VK_ESCAPE) {
             stopTimer();
             paused = false;
@@ -265,16 +258,14 @@ public class Logic extends KeyAdapter implements ActionListener {
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
         PlayerShip player = gameState.getPlayerShip();
-        
+
         //halt acceleration
         if (keyCode == KeyEvent.VK_UP) {
             if (player != null) {
                 player.accelerate(false);
                 GameAssets.thrusters.stop();
             }
-        } 
-        
-        //stop turning left/right
+        } //stop turning left/right
         else if (keyCode == KeyEvent.VK_LEFT) {
             if (player != null) {
                 player.turnLeft(false);
@@ -283,9 +274,7 @@ public class Logic extends KeyAdapter implements ActionListener {
             if (player != null) {
                 player.turnRight(false);
             }
-        } 
-        
-        else if (keyCode == KeyEvent.VK_SPACE) {
+        } else if (keyCode == KeyEvent.VK_SPACE) {
             shootKeyReleased = true;
         }
     }
