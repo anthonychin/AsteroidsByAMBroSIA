@@ -59,8 +59,16 @@ public class AsteroidsTest {
             assertEquals("smaller asteroid size", gameState.getAsteroids().get(1).getSize(), s-1);
         }
         else {
-            assertNull("the first roid shouldnt exist", gameState.getAsteroids());
+            assertEquals("no roid shouldnt exist", gameState.getAsteroids().size(),0);
         }
+    }
+    
+    @Test
+    public void destroyAsteroidBomb(){
+        gameState.addAsteroid(roid);
+        roid.destroy(true);
+        
+        assertEquals("the asteroid do not exist", gameState.getAsteroids().size(),0);
     }
     
 }
