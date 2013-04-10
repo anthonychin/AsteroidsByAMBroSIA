@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package highscoreData;
 
 import java.io.BufferedWriter;
@@ -11,21 +7,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * Reads the highscore information from highscore database(external text file)
  * @author Haisin Yip
  */
 public class highScoreReader
 {
+    // private properties
     private Scanner fileScanner;
     private String path;
     private File file;
     
+    // initializes the path and a file
     public highScoreReader(String path)
     {
         this.path = path;
         this.file = new File(path);
     }
     
+    // each row contains a player's score summary
+    // returns the list of all player scores in a 2D array
     public String[][] readFile()
     {
         this.openFile();
@@ -36,7 +36,7 @@ public class highScoreReader
             {
                 while(fileScanner.hasNext())
                 {
-                    String[] scores = new String[10];
+                    String[] scores = new String[8];
                     for(int i = 0 ; i < scores.length ; i++)
                     {
                         scores[i] = fileScanner.next();
@@ -62,12 +62,13 @@ public class highScoreReader
         return to2Darray(scoreList);
     }
     
+    // turns arraylist of string arrays into 2d string array
     public static String[][] to2Darray(ArrayList<String[]> list)
     {
-        String[][] arr = new String[list.size()][10];
+        String[][] arr = new String[list.size()][8];
         for(int i = 0 ; i < list.size() ; i++)
         {
-            for(int j = 0 ; j < 10 ; j++)
+            for(int j = 0 ; j < 8 ; j++)
             {
                 arr[i][j] = list.get(i)[j];
             }
@@ -75,6 +76,7 @@ public class highScoreReader
         return arr;
     }
     
+    // open file for usage
     public void openFile()
     {
         try
@@ -87,6 +89,7 @@ public class highScoreReader
         }
     }
     
+    // close file for end of usage
     public void closeFile()
     {
         fileScanner.close();

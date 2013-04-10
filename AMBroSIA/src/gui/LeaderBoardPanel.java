@@ -20,17 +20,17 @@ import java.util.ArrayList;
  * @author Haisin Yip
  */
 public class LeaderBoardPanel extends JPanel {
-
     
-    JTable table;
-    GameState gamestate;
-    
+    // private properties
+    private JTable table;
+    private GameState gamestate;
     private Image img;
   
-    String[] columns = {"Player", "Highscore", "Number of Lives", "Asteroid Destroyed", "Aliens destroyed", "Total deaths", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
+    private String[] columns = {"Player", "Highscore", "Asteroid Destroyed", "Aliens destroyed", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
     String[][] rowdata;
+    private JScrollPane scrollPane;
     
-    JScrollPane scrollPane;
+    // creates leaderboard that will display history of highest scores
     public LeaderBoardPanel(Image img, GameState gs)
     {
         this.gamestate = gs;
@@ -47,6 +47,7 @@ public class LeaderBoardPanel extends JPanel {
         makeLayout();
     }
     
+    // construct the main components and informative content 
     private void makeComponents(int w, int h)
     {
         highScoreReader reader = new highScoreReader("./src/highscoreData/scoreInfo.txt");
@@ -58,23 +59,27 @@ public class LeaderBoardPanel extends JPanel {
         table.setFillsViewportHeight(true);  
     }
 
+    // set the layout with a scrollable table
     private void makeLayout() {
         setLayout(new FlowLayout());
         add(table);
         add(new JScrollPane(table));
     }
     
+    // set endgame background image
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
     }
     
+    // bubble sort that sorts the highscores in descending order
     public static void bblsort(String[][] array)
     {
         for(int i = 0 ; i < array.length ; i++)
         {
             for(int j = 1 ; j < array.length-i ; j++)
             {
+                // value at array[x][1] is the highscore which is used for comparison
                 if(Integer.parseInt(array[j-1][1]) < Integer.parseInt(array[j][1]))
                 {
                     String[] tmp = array[j-1];

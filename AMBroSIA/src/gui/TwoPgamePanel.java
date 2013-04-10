@@ -19,14 +19,17 @@ import game.GameState;
 
 /**
  *
- * @author Anthony Chin
+ * 2-Player mode interface
  * @author Haisin Yip
+ * @author Anthony Chin
  */
 public class TwoPgamePanel extends DescriptionPanel {
-
+    
+    // private properties
     private Image img;
     private GameState gameState;
 
+    // initialize size and background image in 2 player mode panel 
     public TwoPgamePanel(GameState gs, Image img) {
         super(gs);
         this.gameState = gs;
@@ -55,7 +58,8 @@ public class TwoPgamePanel extends DescriptionPanel {
     public void updatePanel() {
         repaint();
     }
-
+    
+     // set endgame background image
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);

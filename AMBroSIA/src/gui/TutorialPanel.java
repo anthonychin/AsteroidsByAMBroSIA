@@ -21,7 +21,7 @@ public class TutorialPanel extends JPanel {
         setLayout(null);
     }
 
-    //draw the tutorial image
+     // set endgame background image
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(img, 0, 0, img.getWidth(null), img.getHeight(null), null);

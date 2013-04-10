@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * game over screen
@@ -22,12 +23,13 @@ import javax.swing.JTable;
  */
 public class EndGamePanel extends JPanel {
 
-    GameState gamestate;
-    JTable StatisticsTable;
-    JScrollPane scrollPane;
+    // private properties
+    private GameState gamestate;
+    private JTable StatisticsTable;
+    private JScrollPane scrollPane;
     private Image img;
 
-    //setup: create the panel itself
+    // initialize size, layout and informative display
     public EndGamePanel(Image img, GameState gs, boolean singleP) {
         this.gamestate = gs;
 
@@ -38,57 +40,69 @@ public class EndGamePanel extends JPanel {
         setMaximumSize(size);
         setSize(size);
         setLayout(null);
+        
         makeComponents(getWidth(), getHeight(), singleP);
         makeLayout();
     }
 
+    // construct the main components and informative content 
     private void makeComponents(int w, int h, boolean singleP) {
-        String player, highscore, level;
+        // informative content will be displayed at end game
+        String player, highscore, asteroidsDestroyed, aliensDestroyed, killDeathRatio, level, bombs, shootingAccuracy;
 
         //when single player, display player's information
         if (singleP) {
-            highscore = String.valueOf(gamestate.getCurrentScore());
-            level = String.valueOf(gamestate.getLevel());
             player = "p1";
-
+            highscore = String.valueOf(gamestate.getCurrentScore());
+            asteroidsDestroyed = "";
+            aliensDestroyed = "";
+            killDeathRatio = "";
+            level = String.valueOf(gamestate.getLevel());
+            bombs = "";
+            shootingAccuracy = "";
         } //two player
         else {
             //player 1, player 2 scores
             int highscoreP1 = gamestate.getPlayer1Score();
             String levelP1 = String.valueOf(gamestate.getPlayer1Level());
+        
             int highscoreP2 = gamestate.getPlayer2Score();
             String levelP2 = String.valueOf(gamestate.getPlayer2Level());
 
             //display winner's score
             if (highscoreP1 >= highscoreP2) {
-                highscore = String.valueOf(highscoreP1);
                 player = "p1";
+                highscore = String.valueOf(highscoreP1);
+                
                 level = levelP1;
             } else {
-                highscore = String.valueOf(highscoreP2);
                 player = "p2";
+                highscore = String.valueOf(highscoreP2);
+                
                 level = levelP2;
             }
         }
 
         //fill in table info
         String[] columnData = {"", ""};
-        String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Last level", level}};
+        String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", "asteroidsDestroyed"}, {"Aliens Destroyed", "aliensDestroyed"}, {"Kill-Death ratio", "killDeathRatio"}, {"Last level", level}, {"Bombs used", "bombs"}, {"Shooting Accuracy", "shootingAccuracy"}};
         StatisticsTable = new JTable(rowData, columnData);
-        StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w/2, h/12));
+        StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w/2, h/6));
         StatisticsTable.setFillsViewportHeight(true);  
        
-        String[] scoreData = {player + " ", highscore + " ", "lives ", "asteroidsdestroyed ", "aliensdestroyed ", "deaths ", "Kill-Deathratio ", level + " ", "bombs ", "shootingaccuracy"};
+        String[] scoreData = {player + " ", highscore + " ", "asteroidsdestroyed ", "aliensdestroyed ", "Kill-Deathratio ", level + " ", "bombs ", "shootingaccuracy"};
         highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
         writer.writeToFile();
     }
 
+    // set the layout with a scrollable table
     private void makeLayout() {
         setLayout(new FlowLayout());
         add(StatisticsTable);
         add(new JScrollPane(StatisticsTable));
     }
     
+    // set endgame background image
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);

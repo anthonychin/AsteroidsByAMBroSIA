@@ -8,7 +8,8 @@ import javax.swing.JPanel;
 
 /**
  * Draws the image for the menu
- * @author Haisin Yip, Anthony Chin
+ * @author Haisin Yip
+ * @author Anthony Chin
  */
 public class MenuPanel extends JPanel {
 

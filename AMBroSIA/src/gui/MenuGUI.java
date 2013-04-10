@@ -49,9 +49,9 @@ public class MenuGUI implements Runnable {
     //Panels for single and 2 player modes
     private SinglePgamePanel onePPanel;
     private TwoPgamePanel twoPPanel;
-    
+    //Panel for leaderboard
     private LeaderBoardPanel leaderBoardPanel;
-    
+    //Panel for endgame
     private EndGamePanel gameOverPanel;
     private final static Logger log = Logger.getLogger(MenuGUI.class.getName());
 

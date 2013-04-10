@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package highscoreData;
 
 import java.io.BufferedWriter;
@@ -10,14 +6,17 @@ import java.io.FileWriter;
 
 /**
  *
+ * Writes to an external text file which acts as a database containing all highscores
  * @author Haisin Yip
  */
 public class highScoreWriter
 {
+    // private properties
     private String[] scoreData;
     private String path;
     private File file;
     
+    // initializes data to be written, path, and file
     public highScoreWriter(String[] data, String path)
     {
         this.scoreData = data;
@@ -25,6 +24,7 @@ public class highScoreWriter
         this.file = new File(path);
     }
     
+    // writes all highscore entries to external text file
     public void writeToFile()
     {
         try
