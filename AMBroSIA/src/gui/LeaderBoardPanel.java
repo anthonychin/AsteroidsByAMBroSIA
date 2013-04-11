@@ -109,14 +109,39 @@ public class LeaderBoardPanel extends JPanel {
      *
      * @param array array that needs to be sorted
      */
-    public static void bblsort(String[][] array, int score) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 1; j < array.length - i; j++) {
-                // value at array[x][1] is the highscore which is used for comparison
-                if (Integer.parseInt(array[j - 1][score]) < Integer.parseInt(array[j][1])) {
-                    String[] tmp = array[j - 1];
-                    array[j - 1] = array[j];
-                    array[j] = tmp;
+    public static void bblsort(String[][] array, int scoreType) {
+        
+        // if first column is returned, then sort names alphabeticaly
+        if(scoreType == 0)
+        {
+            
+        }
+   
+        // if column 1,2,3,5 or 6 is returned sort with decreasing order
+        else if((scoreType >=1 && scoreType <= 3) || scoreType == 5 || scoreType == 6)
+        {
+            for (int i = 0; i < array.length; i++) {
+                for (int j = 1; j < array.length - i; j++) {
+                    // value at array[x][1] is the highscore which is used for comparison
+                    if (Integer.parseInt(array[j - 1][scoreType]) < Integer.parseInt(array[j][1])) {
+                        String[] tmp = array[j - 1];
+                        array[j - 1] = array[j];
+                        array[j] = tmp;
+                    }
+                }
+            }
+        }
+        
+        else
+        {
+            for (int i = 0; i < array.length; i++) {
+                for (int j = 1; j < array.length - i; j++) {
+                    // value at array[x][1] is the highscore which is used for comparison
+                    if (Double.parseDouble(array[j - 1][scoreType]) < Double.parseDouble(array[j][1])) {
+                        String[] tmp = array[j - 1];
+                        array[j - 1] = array[j];
+                        array[j] = tmp;
+                    }
                 }
             }
         }

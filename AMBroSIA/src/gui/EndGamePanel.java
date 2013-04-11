@@ -151,11 +151,17 @@ public class EndGamePanel extends JPanel {
                         String customName = data.toString();
                         
                         // update name and print it on the leaderboard through the external highscore text file
-                        String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy+"%"};
+                        String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
                         highScoreWriter writer = new highScoreWriter(newScoreData, "./src/highscoreData/scoreInfo.txt");
                         writer.writeToFile();
                     }
                 });
+        
+        // write write to highscore text file with default name p1 or p2
+        String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
+        highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
+        writer.writeToFile();
+        
         //disable selecting for all cells in table
         StatisticsTable.setRowSelectionAllowed( false );
         StatisticsTable.setColumnSelectionAllowed( false );
