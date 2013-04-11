@@ -11,6 +11,8 @@ import game.GameState;
 import highscoreData.highScoreReader;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * The
@@ -28,6 +30,7 @@ public class LeaderBoardPanel extends JPanel {
     private String[] columns = {"Player", "Highscore", "Asteroid Destroyed", "Aliens destroyed", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
     String[][] rowdata;
     private JScrollPane scrollPane;
+    private int selectedColumn;
 
     // creates leaderboard that will display history of highest scores
     /**
@@ -61,6 +64,22 @@ public class LeaderBoardPanel extends JPanel {
         table = new JTable(rowdata, columns);
         table.setPreferredScrollableViewportSize(new Dimension(w / 2, h));
         table.setFillsViewportHeight(true);
+        
+        // listen for mouse clicks and indicates which column was pressed
+        table.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                if(e.getClickCount() >= 2)
+                {
+                    String selectedData = null;
+                    JTable target = (JTable)e.getSource();
+                    selectedColumn = target.getSelectedColumn();
+                    System.out.println("Selected column "+ selectedColumn);
+                }
+            }
+        });
     }
 
     // set the layout with a scrollable table
