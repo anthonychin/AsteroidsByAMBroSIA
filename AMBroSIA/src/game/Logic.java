@@ -175,6 +175,11 @@ public class Logic extends KeyAdapter implements ActionListener {
         gameProgress.setupInitialLevel();
 
     }
+    
+    public static void showLevelTransition()
+    {
+        
+    }
 
     //called whenever a key is pressed (thread seperate from timer)
     /**
