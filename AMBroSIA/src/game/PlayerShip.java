@@ -84,10 +84,9 @@ public class PlayerShip extends Ship {
     /**
      * Increase the amount of bombs by 1.
      *
-     * @return number of bombs after the increment
      */
-    public int addBomb() {
-        return this.bomb + 1;
+    public void addBomb() {
+        this.bomb++;
     }
 
     /**

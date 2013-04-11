@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Color;
+
 /**
  * The
  * <code>BonusDrop</code> class provides a general representation of all the
@@ -29,6 +31,10 @@ public class BonusDrop extends MapObjectTTL {
      * An int value that declares the type of bonus drop to 1 shield point.
      */
     final public static int SHIELD_ONE_POINT_DROP = 4;
+    
+    final private static Color LIFE_COLOR = Color.GREEN;
+    final private static Color BOMB_COLOR = Color.RED;
+    final private static Color SHIELD = Color.BLUE;
     private int type;
     //10 sec.
     final private int TIME_TO_LIVE = 75;
@@ -45,6 +51,19 @@ public class BonusDrop extends MapObjectTTL {
         super(new float[]{0, 0}, 0, coordinates, 0, gameState);
         this.type = type;
         this.setTTL(TIME_TO_LIVE);
+        //set color based on type: 
+        if (type == BOMB_BONUS_DROP)
+        {
+            this.setColor(BOMB_COLOR);
+        }
+        else if (type == LIFE_BONUS_DROP)
+        {
+            this.setColor(LIFE_COLOR);
+        }
+        else if ((type == SHIELD_THREE_POINTS_DROP) ||  (type == SHIELD_TWO_POINTS_DROP) ||  (type == SHIELD_ONE_POINT_DROP))
+        {
+            this.setColor(SHIELD);
+        }
     }
 
     //the type of bonus drop

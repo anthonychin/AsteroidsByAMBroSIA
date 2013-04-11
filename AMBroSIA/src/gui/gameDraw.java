@@ -122,10 +122,18 @@ public class gameDraw {
         ArrayList<BonusDrop> bonusList = gameState.getBonusDrops();
         if (!bonusList.isEmpty()) {
             for (BonusDrop drop : bonusList) {
+                Polygon bonusShape = drop.getShape();
                 graphics2d.setColor(drop.getColor());
-                graphics2d.drawPolygon(drop.getShape());
+                graphics2d.fillPolygon(bonusShape);
+                //create outline
+                graphics2d.setColor(Color.GRAY);
+                graphics2d.setStroke(new BasicStroke(1, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_BEVEL));
+                graphics2d.drawPolygon(bonusShape);
             }
         }
+        //reset color, stroke
+        graphics2d.setStroke(defaultStroke);
+        graphics2d.setColor(Color.BLACK);
 
         //draw explosions
         ArrayList<MapObjectTTL> explosionList = gameState.getExplosions();
