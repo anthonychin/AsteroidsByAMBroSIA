@@ -248,6 +248,8 @@ public class PlayerShip extends Ship {
             //if not respawining, let other classes know
             getGameState().setPlayerDead(true);
         }
+        
+        checkP1orP2();
     }
 
     // Resets the player ship after it gets destroyed.
@@ -298,7 +300,7 @@ public class PlayerShip extends Ship {
         }
     }
     
-    //check if P1 or P2
+    //check if P1 or P2 for shoot counter
     private void checkP1orP2(int counter){
         if(!getGameState().isPlayerTwoTurn()){
             getGameState().setP1shootCounter(counter);
@@ -306,5 +308,14 @@ public class PlayerShip extends Ship {
         else{
             getGameState().setP2shootCounter(counter);
         }    
-    }        
+    }
+    // check if P1 or P2 for player lives
+    private void checkP1orP2(){
+        if(!getGameState().isPlayerTwoTurn()){
+            getGameState().addP1deaths();
+        }
+        else{
+            getGameState().addP2deaths();
+        }    
+    }         
 }

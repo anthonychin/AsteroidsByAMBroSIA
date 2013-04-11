@@ -88,6 +88,8 @@ public class GameState {
     private int p2AsteroidDestroyed;
     private int p1shootCounter;
     private int p2shootCounter;
+    private int p1Deaths;
+    private int p2Deaths;
 
     
 
@@ -590,7 +592,36 @@ public class GameState {
      */
     public void setP2shootCounter(int shot){
         this.p2shootCounter = p2shootCounter + shot;
-    }    
+    } 
+    
+     /**
+     * Get the amount of asteroids killed by P1
+     * @return 
+     */
+    public int getP1deaths(){
+        return p1Deaths;
+    }
+    
+    /**
+     * Get the amount of asteroids killed by P2
+     * @return 
+     */
+    public int getP2deaths(){
+        return p2Deaths;
+    }
+    /**
+     * 
+     */
+    public void addP1deaths(){
+        this.p1Deaths = ++p1Deaths;
+    }
+    
+    /**
+     * 
+     */
+    public void addP2deaths(){
+        this.p2Deaths = ++p2Deaths;
+    }     
     
     /**
      * Checks if it is Player 2's turn to play.
