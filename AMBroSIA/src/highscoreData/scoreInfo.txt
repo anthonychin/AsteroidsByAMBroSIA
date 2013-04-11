@@ -50,11 +50,3 @@ p1 920 asteroidsdestroyed aliensdestroyed Kill-Deathratio 4 bombs shootingaccura
 p1 12140 asteroidsdestroyed aliensdestroyed Kill-Deathratio 5 0 shootingaccuracy
 p1 2270 asteroidsdestroyed aliensdestroyed Kill-Deathratio 2 0 shootingaccuracy
 p1 140 asteroidsdestroyed aliensdestroyed Kill-Deathratio 1 0 shootingaccuracy
-p1 90 0aliensdestroyed Kill-Deathratio 1 0 shootingaccuracy
-p1 11750 0aliensdestroyed Kill-Deathratio 4 0 shootingaccuracy
-p1 1740 0aliensdestroyed Kill-Deathratio 1 0 shootingaccuracy
-p1 4500 0aliensdestroyed Kill-Deathratio 3 0 shootingaccuracy
-p1 5940 61aliensdestroyed Kill-Deathratio 3 0 shootingaccuracy
-p1 290 4aliensdestroyed Kill-Deathratio 1 0 shootingaccuracy
-p1 730 10aliensdestroyed Kill-Deathratio 2 0 shootingaccuracy
-p1 220 5aliensdestroyed Kill-Deathratio 1 0 shootingaccuracy

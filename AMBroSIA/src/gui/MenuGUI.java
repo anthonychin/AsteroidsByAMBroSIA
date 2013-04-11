@@ -165,8 +165,18 @@ public class MenuGUI implements Runnable {
         singlePbutton.setOpaque(false);
         singlePbutton.setContentAreaFilled(false);
         singlePbutton.setBorderPainted(false);
-        
-        
+        twoPbutton.setOpaque(false);
+        twoPbutton.setContentAreaFilled(false);
+        twoPbutton.setBorderPainted(false);        
+        leaderBoardButton.setOpaque(false);
+        leaderBoardButton.setContentAreaFilled(false);
+        leaderBoardButton.setBorderPainted(false);        
+        tutorialButton.setOpaque(false);
+        tutorialButton.setContentAreaFilled(false);
+        tutorialButton.setBorderPainted(false);
+        quitButton.setOpaque(false);
+        quitButton.setContentAreaFilled(false);
+        quitButton.setBorderPainted(false);        
         
         cardMenu.add(buttonPanelMenu);
         buttonPanelMenu.setOpaque(false);
