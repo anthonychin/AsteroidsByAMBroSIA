@@ -31,7 +31,7 @@ public class BonusDrop extends MapObjectTTL {
     final public static int SHIELD_ONE_POINT_DROP = 4;
     private int type;
     //10 sec.
-    final private int TIME_TO_LIVE = 25;
+    final private int TIME_TO_LIVE = 75;
 
     //create bonus drop
     /**

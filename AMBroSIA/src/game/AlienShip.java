@@ -40,7 +40,10 @@ public class AlienShip extends Ship {
         GameAssets.crash.play();
         if (!bombUsed) {
             getGameState().addToCurrentScore(GameState.ALIEN_SCORE);
-            getGameState().addBonusDrop(new BonusDrop(lastCoord, getGameState(), new Random().nextInt(5)));
+            int type = Difficulty.bonusDropRate();
+            if (type != -1) {
+                getGameState().addBonusDrop(new BonusDrop(lastCoord, getGameState(), type));
+            }
         }
         createExplosionEffect();
     }
