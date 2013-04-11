@@ -4,7 +4,10 @@ import gui.MenuGUI;
 import java.util.Random;
 
 /**
- *
+ * The <code>Difficulty</code> class is responsible for
+ * generating the velocity, heading and other in game
+ * parameters of various objects based on the
+ * current level.
  * @author Nikolaos Bukas, Anthony Chin
  */
 public class Difficulty {

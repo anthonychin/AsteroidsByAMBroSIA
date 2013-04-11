@@ -150,10 +150,15 @@ public class EndGamePanel extends JPanel {
                         Object data = model.getValueAt(row, column);
                         String customName = data.toString();
                         
-                        // update name and print it on the leaderboard through the external highscore text file
-                        String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
-                        highScoreWriter writer = new highScoreWriter(newScoreData, "./src/highscoreData/scoreInfo.txt");
-                        writer.writeToFile();
+                        System.out.println(customName);
+                        
+                        // if the name is changed to p1 or p2, do not write to file
+                        if(!customName.equals("p1") && !customName.equals("p2"))
+                        {
+                            String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
+                            highScoreWriter writer = new highScoreWriter(newScoreData, "./src/highscoreData/scoreInfo.txt");
+                            writer.writeToFile();
+                        }
                     }
                 });
         

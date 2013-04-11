@@ -6,7 +6,9 @@ import java.util.Arrays;
 import org.apache.log4j.Logger;
 
 /**
- *
+ * Handles all code involving collision between two objects,
+ * including player and alien collisions.  Relies on
+ * the destroy() methods of objects that inherit from MapObject.
  * @author Nikolaos Bukas
  */
 public class Collision implements Runnable {
