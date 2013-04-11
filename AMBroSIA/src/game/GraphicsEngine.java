@@ -60,6 +60,10 @@ public class GraphicsEngine implements Runnable {
     private static Polygon playerShape() {
         return new Polygon(new int[]{0, 8, -8}, new int[]{10, -10, -10}, 3);
     }
+    
+    private static Polygon playerShapeThruster() {
+        return new Polygon(new int[]{0, 8, 6, 0, -6, -8}, new int[]{10, -10, -15, -10, -15, -10}, 6);
+    }
 
     private static Polygon smallAsteroidShape() {
         return new Polygon(new int[]{-15, -7, 4, 19, 7, 2, -8}, new int[]{4, 12, 20, 3, -9, -11, -5}, 7);
@@ -92,10 +96,15 @@ public class GraphicsEngine implements Runnable {
 
     private void updatePlayerShip() {
         log.debug("Updating PS");
-        MapObject player = memory.getPlayerShip();
+        PlayerShip player = memory.getPlayerShip();
         //move to appropriate position, rotate, set shape
         if (player != null) {
-            setPosition(playerShape(), player);
+            //show thruster if accelerating
+            if (player.getAccelerate()) {
+                setPosition(playerShapeThruster(), player);
+            } else {
+                setPosition(playerShape(), player);
+            }
         }
     }
 

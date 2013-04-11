@@ -154,8 +154,10 @@ public class PlayerShip extends Ship {
     public void accelerate(boolean isAccelerating) {
         if (isAccelerating) {
             this.setAcceleration(ACCELERATION);
+            this.isAccelerating = true;
         } else {
             this.setAcceleration(0);
+            this.isAccelerating = false;
         }
     }
 
