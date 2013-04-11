@@ -15,6 +15,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
@@ -26,7 +27,7 @@ import org.apache.log4j.Logger;
 public class MenuGUI implements Runnable {
     //default panel width/height
 
-    private final int FONT_SIZE = 68;
+    private final int FONT_SIZE = 50;
     private static final int DEFAULT_WIDTH = 800;
     private static final int DEFAULT_HEIGHT = 600;
     /**
@@ -146,11 +147,11 @@ public class MenuGUI implements Runnable {
 
 
 
-        //singlePbutton.setBackground(Color.DARK_GRAY);
-        twoPbutton.setBackground(Color.DARK_GRAY);
-        leaderBoardButton.setBackground(Color.DARK_GRAY);
-        tutorialButton.setBackground(Color.DARK_GRAY);
-        quitButton.setBackground(Color.DARK_GRAY);
+//        //singlePbutton.setBackground(Color.DARK_GRAY);
+//        twoPbutton.setBackground(Color.DARK_GRAY);
+//        leaderBoardButton.setBackground(Color.DARK_GRAY);
+//        tutorialButton.setBackground(Color.DARK_GRAY);
+//        quitButton.setBackground(Color.DARK_GRAY);
 
         singlePbutton.setForeground(Color.pink);
         twoPbutton.setForeground(Color.pink);
@@ -164,31 +165,31 @@ public class MenuGUI implements Runnable {
         tutorialButton.addActionListener(buttonClick);
         quitButton.addActionListener(buttonClick);
 
-        singlePbutton.setFont(new Font("SANS_SERIF", Font.PLAIN, FONT_SIZE));
+        singlePbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
         singlePbutton.setOpaque(false);
         singlePbutton.setContentAreaFilled(false);
         singlePbutton.setBorderPainted(false);
-        twoPbutton.setFont(new Font("SANS_SERIF", Font.PLAIN, FONT_SIZE));
+        twoPbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
         twoPbutton.setOpaque(false);
         twoPbutton.setContentAreaFilled(false);
-        twoPbutton.setBorderPainted(false);        
-        leaderBoardButton.setFont(new Font("SANS_SERIF", Font.PLAIN, FONT_SIZE));
+        twoPbutton.setBorderPainted(false);
+        leaderBoardButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
         leaderBoardButton.setOpaque(false);
         leaderBoardButton.setContentAreaFilled(false);
-        leaderBoardButton.setBorderPainted(false);        
-        tutorialButton.setFont(new Font("SANS_SERIF", Font.PLAIN, FONT_SIZE));
+        leaderBoardButton.setBorderPainted(false);
+        tutorialButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
         tutorialButton.setOpaque(false);
         tutorialButton.setContentAreaFilled(false);
         tutorialButton.setBorderPainted(false);
-        quitButton.setFont(new Font("SANS_SERIF", Font.PLAIN, FONT_SIZE));
+        quitButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
         quitButton.setOpaque(false);
         quitButton.setContentAreaFilled(false);
-        quitButton.setBorderPainted(false);        
-        
+        quitButton.setBorderPainted(false);
+
         cardMenu.add(buttonPanelMenu);
         buttonPanelMenu.setOpaque(false);
-        
-        
+
+
         card.add("Menu", cardMenu);
         cardLayout.show(card, "Menu");
 
