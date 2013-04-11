@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
  *
  * @author Haisin Yip
  * @author Michael Smith
+ * @author Anrhony Chin
  */
 public class MenuGUI implements Runnable {
     //default panel width/height
@@ -146,10 +147,10 @@ public class MenuGUI implements Runnable {
         filler2.setOpaque(false);
         JPanel filler3 = new JPanel();
         filler3.setOpaque(false);
-        JPanel filler4 = new JPanel();
-        filler4.setOpaque(false);
-        JPanel filler5 = new JPanel();
-        filler5.setOpaque(false);
+//        JPanel filler4 = new JPanel();
+//        filler4.setOpaque(false);
+//        JPanel filler5 = new JPanel();
+//        filler5.setOpaque(false);
         
         cardMenu.add(new TitlePanel());
         cardMenu.add(filler2);
@@ -211,15 +212,15 @@ public class MenuGUI implements Runnable {
      * @param gs current game state
      */
     public void displayLeaderBoard(GameState gs) {
-        leaderBoardPanel = new LeaderBoardPanel(GameAssets.spaceBackground, gs);
-        JPanel cardLeaderBoard = new JPanel();
-        cardLeaderBoard.setLayout(new BorderLayout());
+        leaderBoardPanel = new LeaderBoardPanel(GameAssets.spaceBackground,gs);
+        SpaceBackgroundPanel cardLeaderBoard = new SpaceBackgroundPanel(new BorderLayout());
         cardLeaderBoard.add(leaderBoardPanel);
 
         //initialize a back button
         JPanel buttonPanelLeaderBoard = new JPanel();
+        buttonPanelLeaderBoard.setOpaque(false);
+        decorateButton(backButton);
         buttonPanelLeaderBoard.add(backButton);
-        buttonPanelLeaderBoard.setBackground(Color.black);
         backButton.addActionListener(buttonClick);
 
         //show panel
@@ -234,13 +235,13 @@ public class MenuGUI implements Runnable {
      */
     public void displayTutorial() {
         //create panel
-        MenuPanel cardTutorial = new MenuPanel();
-        cardTutorial.setLayout(new BorderLayout());
+        SpaceBackgroundPanel cardTutorial = new SpaceBackgroundPanel(new BorderLayout());
         JPanel tutorialPanel = new TutorialPanel(GameAssets.tutorialImage);
-        cardTutorial.add(tutorialPanel, BorderLayout.NORTH);
-
+        cardTutorial.add(tutorialPanel);        
         //initialize a back button
         JPanel buttonPanelTutorial = new JPanel();
+        buttonPanelTutorial.setOpaque(false);
+        decorateButton(backButton);
         buttonPanelTutorial.add(backButton);
         buttonPanelTutorial.setBackground(Color.black);
         backButton.addActionListener(buttonClick);
@@ -263,12 +264,14 @@ public class MenuGUI implements Runnable {
     public void displayGameOver(GameState gs, boolean mode) {
         //create panel
         gameOverPanel = new EndGamePanel(GameAssets.gameOverImage, gs, mode);
-        JPanel cardGameOver = new JPanel();
+        SpaceBackgroundPanel cardGameOver = new SpaceBackgroundPanel(new BorderLayout());
         cardGameOver.setLayout(new BorderLayout());
         cardGameOver.add(gameOverPanel);
 
         //initialize a back button
         JPanel buttonPanelGameOver = new JPanel();
+        buttonPanelGameOver.setOpaque(false);
+        decorateButton(backButton);
         buttonPanelGameOver.add(backButton);
         buttonPanelGameOver.setBackground(Color.black);
         backButton.addActionListener(buttonClick);
@@ -315,7 +318,7 @@ public class MenuGUI implements Runnable {
         MenuGUI.WIDTH = frame.getWidth();
         MenuGUI.HEIGHT = frame.getHeight();
     }
-    
+    //Take the whole Jbutton and make them into a panel
     private void makeJButtonPanel(JPanel p){
         p.add(singlePbutton);
         p.add(twoPbutton);
@@ -323,46 +326,24 @@ public class MenuGUI implements Runnable {
         p.add(tutorialButton);
         p.add(quitButton);
 
-
-
-        singlePbutton.setBackground(Color.DARK_GRAY);
-        twoPbutton.setBackground(Color.DARK_GRAY);
-        leaderBoardButton.setBackground(Color.DARK_GRAY);
-        tutorialButton.setBackground(Color.DARK_GRAY);
-        quitButton.setBackground(Color.DARK_GRAY);
-
-        singlePbutton.setForeground(Color.pink);
-        twoPbutton.setForeground(Color.pink);
-        leaderBoardButton.setForeground(Color.pink);
-        tutorialButton.setForeground(Color.pink);
-        quitButton.setForeground(Color.pink);
-
         singlePbutton.addActionListener(buttonClick);
         twoPbutton.addActionListener(buttonClick);
         leaderBoardButton.addActionListener(buttonClick);
         tutorialButton.addActionListener(buttonClick);
         quitButton.addActionListener(buttonClick);
 
-        singlePbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        singlePbutton.setOpaque(false);
-        singlePbutton.setContentAreaFilled(false);
-        singlePbutton.setBorderPainted(false);
-        twoPbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        twoPbutton.setOpaque(false);
-        twoPbutton.setContentAreaFilled(false);
-        twoPbutton.setBorderPainted(false);
-        leaderBoardButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        leaderBoardButton.setOpaque(false);
-        leaderBoardButton.setContentAreaFilled(false);
-        leaderBoardButton.setBorderPainted(false);
-        tutorialButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        tutorialButton.setOpaque(false);
-        tutorialButton.setContentAreaFilled(false);
-        tutorialButton.setBorderPainted(false);
-        quitButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        quitButton.setOpaque(false);
-        quitButton.setContentAreaFilled(false);
-        quitButton.setBorderPainted(false);
-        
+        decorateButton(singlePbutton);
+        decorateButton(twoPbutton);
+        decorateButton(leaderBoardButton);
+        decorateButton(tutorialButton);
+        decorateButton(quitButton);
+    }
+    //decorate the JButton
+    private void decorateButton(JButton b){
+        b.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
+        b.setOpaque(false);
+        b.setContentAreaFilled(false);
+        b.setBorderPainted(false);
+        b.setForeground(Color.pink);
     }
 }

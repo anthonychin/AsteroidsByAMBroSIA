@@ -10,38 +10,24 @@ import javax.swing.JPanel;
 
 /**
  * The
- * <code>MenuPanel</code> class draws the image for the menu.
+ * <code>StarBackGroundPanel</code> class draws the image for the menu.
  *
- * @author Haisin Yip
  * @author Anthony Chin
  */
-public class MenuPanel extends JPanel {
+public class SpaceBackgroundPanel extends JPanel {
 
-    private Image img = GameAssets.menuImage;
+    private Image img = GameAssets.spaceBackground;
     //set up image location, size, etc.
     /**
-     * Constructor which sets up image location, size, borderlayout, etc.
+     * Constructor which sets up image location, size, etc.
      */
-    public MenuPanel(BorderLayout bl) {
+    public SpaceBackgroundPanel(BorderLayout bl) {
         super(bl);
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
         setMaximumSize(size);
         setSize(size);
-    }
-    
-    //set up image location, size, etc.
-    /**
-     * Constructor which sets up image location, size, gridlayout,etc.
-     */    
-    public MenuPanel(GridLayout gd){
-        super(gd);
-        Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-        setPreferredSize(size);
-        setMinimumSize(size);
-        setMaximumSize(size);
-        setSize(size);        
     }
 
     //draw image
