@@ -32,7 +32,6 @@ public class LeaderBoardPanel extends JPanel {
     private JScrollPane scrollPane;
     private int selectedColumn;
 
-    // creates leaderboard that will display history of highest scores
     /**
      * Creates LeaderBoardPanel using given parameters. It displays history of
      * highest scores.
@@ -59,7 +58,13 @@ public class LeaderBoardPanel extends JPanel {
         reader.openFile();
         rowdata = reader.readFile();
         bblsort(rowdata);
-        table = new JTable(rowdata, columns);
+        table = new JTable(rowdata, columns)
+        {
+             @Override
+             public boolean isCellEditable(int rowData, int columnData){
+                return false;
+            }
+        };
         table.setPreferredScrollableViewportSize(new Dimension(w / 2, h));
         table.setFillsViewportHeight(true);
         
@@ -87,7 +92,6 @@ public class LeaderBoardPanel extends JPanel {
         add(new JScrollPane(table));
     }
 
-    // set endgame background image
     /**
      * Set leaderboard background image
      *
@@ -98,7 +102,6 @@ public class LeaderBoardPanel extends JPanel {
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
     }
 
-    // bubble sort that sorts the highscores in descending order
     /**
      * Bubble sort which sorts the highscores in descending orders.
      *
