@@ -136,7 +136,7 @@ public class PlayerShip extends Ship {
             GameAssets.shields2.play();
         } else if (this.shieldPoints == 1) {
             GameAssets.shields1.play();
-        } else {
+        } else if(this.shieldPoints == 0) {
             GameAssets.shields0.play();
         }
     }
