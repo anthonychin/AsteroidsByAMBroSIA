@@ -142,7 +142,7 @@ public class EndGamePanel extends JPanel {
                     @Override
                     public void tableChanged(TableModelEvent e)
                     {
-                        // cell update
+                        // get cell update
                         int row = e.getFirstRow();
                         int column = e.getColumn();
                         TableModel model = (TableModel)e.getSource();
@@ -150,7 +150,7 @@ public class EndGamePanel extends JPanel {
                         Object data = model.getValueAt(row, column);
                         String customName = data.toString();
                         
-                        //update name
+                        // update name and print it on the leaderboard through the external highscore text file
                         String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy+"%"};
                         highScoreWriter writer = new highScoreWriter(newScoreData, "./src/highscoreData/scoreInfo.txt");
                         writer.writeToFile();
@@ -159,12 +159,8 @@ public class EndGamePanel extends JPanel {
         StatisticsTable.setRowSelectionAllowed( false );
         StatisticsTable.setColumnSelectionAllowed( false );
         StatisticsTable.setCellSelectionEnabled( false );
-        StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w / 2, h / 6));
+        StatisticsTable.setPreferredScrollableViewportSize(new Dimension(width / 2, height / 6));
         StatisticsTable.setFillsViewportHeight(true);
-
-        String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy+"%"};
-        highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
-        writer.writeToFile();
     }
 
     // set the layout with a scrollable table
