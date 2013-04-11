@@ -1,28 +1,29 @@
 package gui;
 
 import game.GameAssets;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import javax.swing.JPanel;
 
 /**
- * The
- * <code>MenuPanel</code> class draws the image for the menu.
  *
- * @author Haisin Yip
  * @author Anthony Chin
  */
-public class MenuPanel extends JPanel {
+public class TitlePanel extends JPanel{
 
-    private Image img = GameAssets.menuImage;
+    private Image img = GameAssets.titleImage;
+    private Font font = new Font(Font.MONOSPACED,Font.PLAIN,30);
 
+    
     //set up image location, size, etc.
     /**
      * Constructor which sets up image location, size, etc.
      */
-    public MenuPanel() {
+    public TitlePanel() {
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
@@ -30,7 +31,7 @@ public class MenuPanel extends JPanel {
         setSize(size);
     }
     
-    public MenuPanel(GridLayout gd){
+    public TitlePanel(GridLayout gd){
         super(gd);
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
@@ -47,6 +48,14 @@ public class MenuPanel extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+        
+        g.drawImage(img, 0, 0, this.getMinimumSize().width, this.getMinimumSize().height, this);
+        g.setFont(font);
+        g.setColor(Color.red);
+        g.drawString("Anthony Chin", 10, 100);
+        g.drawString("Haisin Yip", 10, 130);
+        g.drawString("Meong Hee Seo", 10, 160);
+        g.drawString("Michael Smith", 10, 190);
+        g.drawString("Nikolaos Bukas", 10, 220);
     }
 }

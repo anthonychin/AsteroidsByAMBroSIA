@@ -16,6 +16,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
@@ -27,7 +29,7 @@ import org.apache.log4j.Logger;
 public class MenuGUI implements Runnable {
     //default panel width/height
 
-    private final int FONT_SIZE = 50;
+    private final int FONT_SIZE = 30;
     private static final int DEFAULT_WIDTH = 800;
     private static final int DEFAULT_HEIGHT = 600;
     /**
@@ -130,69 +132,35 @@ public class MenuGUI implements Runnable {
         //disable keyboard input
         frame.setFocusable(false);
         // create menu page panel, set it up, show it
-        //JPanel cardMenu = new JPanel(new GridLayout(2, 1));
-        //JPanel cardMenu = new JPanel(new GridLayout(1, 1));
-        MenuPanel cardMenu = new MenuPanel();
-        //cardMenu.add(new MenuPanel());
-
-
+        MenuPanel cardMenu = new MenuPanel(new GridLayout(2,2));
+        
         // initialize the 5 buttons that shall be in the menu page
-        JPanel buttonPanelMenu = new JPanel(new GridLayout(5, 1));
-
-        buttonPanelMenu.add(singlePbutton);
-        buttonPanelMenu.add(twoPbutton);
-        buttonPanelMenu.add(leaderBoardButton);
-        buttonPanelMenu.add(tutorialButton);
-        buttonPanelMenu.add(quitButton);
-
-
-
-//        //singlePbutton.setBackground(Color.DARK_GRAY);
-//        twoPbutton.setBackground(Color.DARK_GRAY);
-//        leaderBoardButton.setBackground(Color.DARK_GRAY);
-//        tutorialButton.setBackground(Color.DARK_GRAY);
-//        quitButton.setBackground(Color.DARK_GRAY);
-
-        singlePbutton.setForeground(Color.pink);
-        twoPbutton.setForeground(Color.pink);
-        leaderBoardButton.setForeground(Color.pink);
-        tutorialButton.setForeground(Color.pink);
-        quitButton.setForeground(Color.pink);
-
-        singlePbutton.addActionListener(buttonClick);
-        twoPbutton.addActionListener(buttonClick);
-        leaderBoardButton.addActionListener(buttonClick);
-        tutorialButton.addActionListener(buttonClick);
-        quitButton.addActionListener(buttonClick);
-
-        singlePbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        singlePbutton.setOpaque(false);
-        singlePbutton.setContentAreaFilled(false);
-        singlePbutton.setBorderPainted(false);
-        twoPbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        twoPbutton.setOpaque(false);
-        twoPbutton.setContentAreaFilled(false);
-        twoPbutton.setBorderPainted(false);
-        leaderBoardButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        leaderBoardButton.setOpaque(false);
-        leaderBoardButton.setContentAreaFilled(false);
-        leaderBoardButton.setBorderPainted(false);
-        tutorialButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        tutorialButton.setOpaque(false);
-        tutorialButton.setContentAreaFilled(false);
-        tutorialButton.setBorderPainted(false);
-        quitButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        quitButton.setOpaque(false);
-        quitButton.setContentAreaFilled(false);
-        quitButton.setBorderPainted(false);
-
-        cardMenu.add(buttonPanelMenu);
+        JPanel buttonPanelMenu = new JPanel(new GridLayout(5,1));
+        makeJButtonPanel(buttonPanelMenu);
+       
         buttonPanelMenu.setOpaque(false);
-
-
+        
+        JPanel filler = new JPanel();
+        filler.setOpaque(false);
+        JPanel filler2 = new JPanel();
+        filler2.setOpaque(false);
+        JPanel filler3 = new JPanel();
+        filler3.setOpaque(false);
+        JPanel filler4 = new JPanel();
+        filler4.setOpaque(false);
+        JPanel filler5 = new JPanel();
+        filler5.setOpaque(false);
+        
+        cardMenu.add(new TitlePanel());
+        cardMenu.add(filler2);
+        cardMenu.add(filler3);
+        //cardMenu.add(filler4);
+        cardMenu.add(buttonPanelMenu);
+        //cardMenu.add(filler5);
+        
         card.add("Menu", cardMenu);
+        
         cardLayout.show(card, "Menu");
-
         //allow user to resize
         frame.setResizable(true);
     }
@@ -346,5 +314,55 @@ public class MenuGUI implements Runnable {
     private void updateSize() {
         MenuGUI.WIDTH = frame.getWidth();
         MenuGUI.HEIGHT = frame.getHeight();
+    }
+    
+    private void makeJButtonPanel(JPanel p){
+        p.add(singlePbutton);
+        p.add(twoPbutton);
+        p.add(leaderBoardButton);
+        p.add(tutorialButton);
+        p.add(quitButton);
+
+
+
+        singlePbutton.setBackground(Color.DARK_GRAY);
+        twoPbutton.setBackground(Color.DARK_GRAY);
+        leaderBoardButton.setBackground(Color.DARK_GRAY);
+        tutorialButton.setBackground(Color.DARK_GRAY);
+        quitButton.setBackground(Color.DARK_GRAY);
+
+        singlePbutton.setForeground(Color.pink);
+        twoPbutton.setForeground(Color.pink);
+        leaderBoardButton.setForeground(Color.pink);
+        tutorialButton.setForeground(Color.pink);
+        quitButton.setForeground(Color.pink);
+
+        singlePbutton.addActionListener(buttonClick);
+        twoPbutton.addActionListener(buttonClick);
+        leaderBoardButton.addActionListener(buttonClick);
+        tutorialButton.addActionListener(buttonClick);
+        quitButton.addActionListener(buttonClick);
+
+        singlePbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
+        singlePbutton.setOpaque(false);
+        singlePbutton.setContentAreaFilled(false);
+        singlePbutton.setBorderPainted(false);
+        twoPbutton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
+        twoPbutton.setOpaque(false);
+        twoPbutton.setContentAreaFilled(false);
+        twoPbutton.setBorderPainted(false);
+        leaderBoardButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
+        leaderBoardButton.setOpaque(false);
+        leaderBoardButton.setContentAreaFilled(false);
+        leaderBoardButton.setBorderPainted(false);
+        tutorialButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
+        tutorialButton.setOpaque(false);
+        tutorialButton.setContentAreaFilled(false);
+        tutorialButton.setBorderPainted(false);
+        quitButton.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
+        quitButton.setOpaque(false);
+        quitButton.setContentAreaFilled(false);
+        quitButton.setBorderPainted(false);
+        
     }
 }
