@@ -103,6 +103,10 @@ public class GameAssets {
      * Image for game over.
      */
     public static Image gameOverImage;
+    /**
+     * Image for title page
+     */
+    public static Image titleImage;
 
     /**
      * Load all the sounds.
@@ -145,5 +149,6 @@ public class GameAssets {
         tutorialImage = new ImageIcon(GameAssets.class.getResource("images/keyboard.jpg")).getImage();
         gameOverImage = new ImageIcon(GameAssets.class.getResource("images/GameOver.jpg")).getImage();
         menuImage = new ImageIcon(GameAssets.class.getResource("images/asteroids.jpg")).getImage();
+        titleImage = new ImageIcon(GameAssets.class.getResource("images/AMBRoSIA.png")).getImage();        
     }
 }

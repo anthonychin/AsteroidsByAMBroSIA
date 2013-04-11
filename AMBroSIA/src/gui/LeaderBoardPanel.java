@@ -42,8 +42,6 @@ public class LeaderBoardPanel extends JPanel {
      */
     public LeaderBoardPanel(Image img, GameState gs) {
         this.gamestate = gs;
-
-        this.img = img;
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);

@@ -9,6 +9,8 @@ import java.awt.Image;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * The
@@ -94,11 +96,21 @@ public class EndGamePanel extends JPanel {
                 shootingAccuracy = String.valueOf(100.0*(double)gamestate.getP2asteroidDestroyed()/(double)gamestate.getP1shootCounter());;
             }
         }
-
-        //fill in table info
+        
         String[] columnData = {"", ""};
         String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", asteroidsDestroyed}, {"Aliens Destroyed", aliensDestroyed}, {"Kill-Death ratio", killDeathRatio}, {"Last level", level}, {"Bombs used", bombs}, {"Shooting Accuracy", shootingAccuracy+"%"}};
-        StatisticsTable = new JTable(rowData, columnData);
+        StatisticsTable = new JTable(rowData, columnData){
+            public boolean isCellEditable(int rowData, int columnData){
+                if (rowData == 0 && columnData == 1){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        };
+        String s = StatisticsTable.getModel().getValueAt(0, 1).toString();
+        System.out.println(s);
         StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w / 2, h / 6));
         StatisticsTable.setFillsViewportHeight(true);
 
