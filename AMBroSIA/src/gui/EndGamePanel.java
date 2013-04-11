@@ -59,12 +59,14 @@ public class EndGamePanel extends JPanel {
         if (singleP) {
             player = "p1";
             highscore = String.valueOf(gamestate.getCurrentScore());
-            asteroidsDestroyed = "";
-            aliensDestroyed = "";
+            asteroidsDestroyed = String.valueOf(gamestate.getP1asteroidDestroyed());
+            aliensDestroyed = String.valueOf(gamestate.getP1alienDestroyed());;
             killDeathRatio = "";
             level = String.valueOf(gamestate.getLevel());
-            bombs = "";
+            bombs = String.valueOf(gamestate.getP1BombUsed());
             shootingAccuracy = "";
+            //Total Shot used
+            System.out.println(gamestate.getP1shootCounter());
         } //two player
         else {
             //player 1, player 2 scores
@@ -73,29 +75,33 @@ public class EndGamePanel extends JPanel {
 
             int highscoreP2 = gamestate.getPlayer2Score();
             String levelP2 = String.valueOf(gamestate.getPlayer2Level());
-
+            
             //display winner's score
             if (highscoreP1 >= highscoreP2) {
                 player = "p1";
                 highscore = String.valueOf(highscoreP1);
-
+                bombs = String.valueOf(gamestate.getP1BombUsed());
+                aliensDestroyed = String.valueOf(gamestate.getP1alienDestroyed());
+                asteroidsDestroyed = String.valueOf(gamestate.getP1asteroidDestroyed());
                 level = levelP1;
             } else {
                 player = "p2";
                 highscore = String.valueOf(highscoreP2);
-
+                bombs = String.valueOf(gamestate.getP2BombUsed());
+                aliensDestroyed = String.valueOf(gamestate.getP2alienDestroyed());
+                asteroidsDestroyed = String.valueOf(gamestate.getP2asteroidDestroyed());
                 level = levelP2;
             }
         }
 
         //fill in table info
         String[] columnData = {"", ""};
-        String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", "asteroidsDestroyed"}, {"Aliens Destroyed", "aliensDestroyed"}, {"Kill-Death ratio", "killDeathRatio"}, {"Last level", level}, {"Bombs used", "bombs"}, {"Shooting Accuracy", "shootingAccuracy"}};
+        String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", asteroidsDestroyed}, {"Aliens Destroyed", aliensDestroyed}, {"Kill-Death ratio", "killDeathRatio"}, {"Last level", level}, {"Bombs used", bombs}, {"Shooting Accuracy", "shootingAccuracy"}};
         StatisticsTable = new JTable(rowData, columnData);
         StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w / 2, h / 6));
         StatisticsTable.setFillsViewportHeight(true);
 
-        String[] scoreData = {player + " ", highscore + " ", "asteroidsdestroyed ", "aliensdestroyed ", "Kill-Deathratio ", level + " ", "bombs ", "shootingaccuracy"};
+        String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + "", "aliensdestroyed ", "Kill-Deathratio ", level + " ", bombs + " ", "shootingaccuracy"};
         highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
         writer.writeToFile();
     }

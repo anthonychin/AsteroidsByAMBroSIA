@@ -95,6 +95,12 @@ public class PlayerShip extends Ship {
      */
     public void useBomb() {
         if (bomb > 0) {
+            if(!getGameState().isPlayerTwoTurn()){
+                getGameState().addP1BombUsed();
+            }
+            else{
+                getGameState().addP2BombUsed();
+            }
             bomb = bomb - 1;
             GameAssets.bombUsed.play();
             createBombEffect();
@@ -209,6 +215,7 @@ public class PlayerShip extends Ship {
     @Override
     public void shoot() {
         getGameState().addProjectile(new Projectile(this, this.getHeading(), new int[]{this.getX(), this.getY()}, getGameState()));
+        checkP1orP2(1);
         GameAssets.playerFire.play();
         log.debug("Projectile added");
     }
@@ -218,6 +225,7 @@ public class PlayerShip extends Ship {
      * ship heading. Used when the space bar is held.
      */
     public void shootDirection() {
+        checkP1orP2(4);
         getGameState().addProjectile(new Projectile(this, this.getHeading() - 20, new int[]{this.getX(), this.getY()}, getGameState()));
         getGameState().addProjectile(new Projectile(this, this.getHeading() + 20, new int[]{this.getX(), this.getY()}, getGameState()));
         getGameState().addProjectile(new Projectile(this, this.getHeading() - 60, new int[]{this.getX(), this.getY()}, getGameState()));
@@ -291,4 +299,14 @@ public class PlayerShip extends Ship {
             getGameState().addExplosion(new MapObjectTTL(new float[]{i * 360, i * -360}, i, new int[]{x, y}, 0, getGameState()));
         }
     }
+    
+    //check if P1 or P2
+    private void checkP1orP2(int counter){
+        if(!getGameState().isPlayerTwoTurn()){
+            getGameState().setP1shootCounter(counter);
+        }
+        else{
+            getGameState().setP2shootCounter(counter);
+        }    
+    }        
 }

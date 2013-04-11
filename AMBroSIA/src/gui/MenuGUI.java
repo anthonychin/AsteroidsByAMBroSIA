@@ -128,9 +128,9 @@ public class MenuGUI implements Runnable {
         frame.setFocusable(false);
         // create menu page panel, set it up, show it
         //JPanel cardMenu = new JPanel(new GridLayout(2, 1));
-        JPanel cardMenu = new JPanel(new GridLayout(1, 1));
-
-        cardMenu.add(new MenuPanel());
+        //JPanel cardMenu = new JPanel(new GridLayout(1, 1));
+        MenuPanel cardMenu = new MenuPanel();
+        //cardMenu.add(new MenuPanel());
 
 
         // initialize the 5 buttons that shall be in the menu page
@@ -144,7 +144,7 @@ public class MenuGUI implements Runnable {
 
 
 
-        singlePbutton.setBackground(Color.DARK_GRAY);
+        //singlePbutton.setBackground(Color.DARK_GRAY);
         twoPbutton.setBackground(Color.DARK_GRAY);
         leaderBoardButton.setBackground(Color.DARK_GRAY);
         tutorialButton.setBackground(Color.DARK_GRAY);
@@ -162,8 +162,26 @@ public class MenuGUI implements Runnable {
         tutorialButton.addActionListener(buttonClick);
         quitButton.addActionListener(buttonClick);
 
-        //show menu
+        singlePbutton.setOpaque(false);
+        singlePbutton.setContentAreaFilled(false);
+        singlePbutton.setBorderPainted(false);
+        twoPbutton.setOpaque(false);
+        twoPbutton.setContentAreaFilled(false);
+        twoPbutton.setBorderPainted(false);        
+        leaderBoardButton.setOpaque(false);
+        leaderBoardButton.setContentAreaFilled(false);
+        leaderBoardButton.setBorderPainted(false);        
+        tutorialButton.setOpaque(false);
+        tutorialButton.setContentAreaFilled(false);
+        tutorialButton.setBorderPainted(false);
+        quitButton.setOpaque(false);
+        quitButton.setContentAreaFilled(false);
+        quitButton.setBorderPainted(false);        
+        
         cardMenu.add(buttonPanelMenu);
+        buttonPanelMenu.setOpaque(false);
+        
+        
         card.add("Menu", cardMenu);
         cardLayout.show(card, "Menu");
 
