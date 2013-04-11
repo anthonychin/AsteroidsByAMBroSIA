@@ -18,11 +18,14 @@ public class SpaceBackgroundPanel extends JPanel {
 
     private Image img = GameAssets.spaceBackground;
     //set up image location, size, etc.
+
     /**
      * Constructor which sets up image location, size, etc.
+     *
+     * @param borderLayout new border layout
      */
-    public SpaceBackgroundPanel(BorderLayout bl) {
-        super(bl);
+    public SpaceBackgroundPanel(BorderLayout borderLayout) {
+        super(borderLayout);
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
@@ -34,10 +37,10 @@ public class SpaceBackgroundPanel extends JPanel {
     /**
      * Draws image.
      *
-     * @param g graphics
+     * @param graphic graphics
      */
     @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+    public void paintComponent(Graphics graphic) {
+        graphic.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }
