@@ -68,6 +68,10 @@ public class LeaderBoardPanel extends JPanel {
         table.setPreferredScrollableViewportSize(new Dimension(w / 2, h));
         table.setFillsViewportHeight(true);
         
+        table.setRowSelectionAllowed( false );  
+        table.setColumnSelectionAllowed( false );  
+        table.setCellSelectionEnabled( false );
+        
         // listen for mouse clicks and indicates which column was pressed
         table.addMouseListener(new MouseAdapter()
         {
