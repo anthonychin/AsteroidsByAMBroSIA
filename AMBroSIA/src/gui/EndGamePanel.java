@@ -101,7 +101,7 @@ public class EndGamePanel extends JPanel {
         StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w / 2, h / 6));
         StatisticsTable.setFillsViewportHeight(true);
 
-        String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + "", "aliensdestroyed ", "Kill-Deathratio ", level + " ", bombs + " ", "shootingaccuracy"};
+        String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + " ", "aliensdestroyed ", "Kill-Deathratio ", level + " ", bombs + " ", "shootingaccuracy"};
         highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
         writer.writeToFile();
     }
