@@ -123,13 +123,13 @@ public class Progression implements Runnable {
     private void setupLevel(int levelNumber) {
         log.info("Going to level " + levelNumber);
 
-        PlayerShip player = gameState.getPlayerShip();
-        if (player != null) {
+        PlayerShip playerShip = gameState.getPlayerShip();
+        if (playerShip != null) {
             log.info("Player != null; actually increasing level");
             //save score, is player two's turn
             int oldScore = gameState.getCurrentScore();
-            int oldPlayerLives = player.getLives();
-            int oldPlayerBomb = player.getBomb();
+            int oldPlayerLives = playerShip.getLives();
+            int oldPlayerBomb = playerShip.getBomb();
             boolean playerTwo = gameState.isPlayerTwoTurn();
 
             //reset to default, and setup for next level
