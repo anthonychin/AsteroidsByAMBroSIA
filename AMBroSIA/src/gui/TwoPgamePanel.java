@@ -25,12 +25,12 @@ public class TwoPgamePanel extends DescriptionPanel {
     // initialize size and background image in 2 player mode panel 
     /**
      * Creates TwoPgamePanel using given parameters. It initializes size and background image in two player mode panel.
-     * @param gs current game state
+     * @param gameState current game state
      * @param img image for two player mode game panel
      */
-    public TwoPgamePanel(GameState gs, Image img) {
-        super(gs);
-        this.gameState = gs;
+    public TwoPgamePanel(GameState gameState, Image img) {
+        super(gameState);
+        this.gameState = gameState;
 
         this.img = img;
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
@@ -42,11 +42,11 @@ public class TwoPgamePanel extends DescriptionPanel {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics graphic) {
         super.setBounds(0, 0, MenuGUI.WIDTH, MenuGUI.HEIGHT);
-        super.paint(g);
+        super.paint(graphic);
 
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) graphic;
 
         gameDraw.drawObjects(g2, gameState);
 
@@ -63,10 +63,10 @@ public class TwoPgamePanel extends DescriptionPanel {
      // set endgame background image
     /**
      * Sets endgame background image.
-     * @param g graphics
+     * @param graphic graphics
      */
     @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+    public void paintComponent(Graphics graphic) {
+        graphic.drawImage(img, 0, 0, getWidth(), getHeight(), null);
     }
 }
