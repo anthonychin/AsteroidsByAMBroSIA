@@ -25,7 +25,7 @@ public class LeaderBoardPanel extends JPanel {
 
     // private properties
     private JTable table;
-    private GameState gamestate;
+    private GameState gameState;
     private Image img;
     private String[] columns = {"Player", "Highscore", "Asteroid Destroyed", "Aliens destroyed", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
     String[][] rowdata;
@@ -37,10 +37,10 @@ public class LeaderBoardPanel extends JPanel {
      * highest scores.
      *
      * @param img image for leaderboard panel
-     * @param gs current game state
+     * @param gameState current game state
      */
-    public LeaderBoardPanel(Image img, GameState gs) {
-        this.gamestate = gs;
+    public LeaderBoardPanel(Image img, GameState gameState) {
+        this.gameState = gameState;
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
@@ -53,7 +53,7 @@ public class LeaderBoardPanel extends JPanel {
     }
 
     // construct the main components and informative content 
-    private void makeComponents(int w, int h) {
+    private void makeComponents(int width, int height) {
         highScoreReader reader = new highScoreReader("./src/highscoreData/scoreInfo.txt");
         reader.openFile();
         rowdata = reader.readFile();
@@ -65,7 +65,7 @@ public class LeaderBoardPanel extends JPanel {
                 return false;
             }
         };
-        table.setPreferredScrollableViewportSize(new Dimension(w / 2, h));
+        table.setPreferredScrollableViewportSize(new Dimension(width / 2, height));
         table.setFillsViewportHeight(true);
         
         table.setRowSelectionAllowed( false );  
@@ -99,11 +99,11 @@ public class LeaderBoardPanel extends JPanel {
     /**
      * Set leaderboard background image
      *
-     * @param g leaderboard background image
+     * @param graphic leaderboard background image
      */
     @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+    public void paintComponent(Graphics graphic) {
+        graphic.drawImage(img, 0, 0, getWidth(), getHeight(), null);
     }
 
     /**
