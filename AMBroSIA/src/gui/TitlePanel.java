@@ -19,7 +19,6 @@ public class TitlePanel extends JPanel{
     private Font font = new Font(Font.MONOSPACED,Font.PLAIN,30);
 
     
-    //set up image location, size, etc.
     /**
      * Constructor which sets up image location, size, etc.
      */
@@ -40,7 +39,6 @@ public class TitlePanel extends JPanel{
         setSize(size);        
     }
 
-    //draw image
     /**
      * Draws image.
      *

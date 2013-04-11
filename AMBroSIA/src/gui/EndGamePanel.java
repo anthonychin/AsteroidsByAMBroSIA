@@ -9,6 +9,9 @@ import java.awt.Image;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 
 /**
  * The
@@ -24,7 +27,8 @@ public class EndGamePanel extends JPanel {
     private JTable StatisticsTable;
     private JScrollPane scrollPane;
     private Image img;
-
+    String player, highscore, asteroidsDestroyed, aliensDestroyed, killDeathRatio, level, bombs, shootingAccuracy;
+    
     
     /**
      * Creates EndGamePanel using given parameters. It initializes size, layout
@@ -53,7 +57,7 @@ public class EndGamePanel extends JPanel {
     // construct the main components and informative content 
     private void makeComponents(int w, int h, boolean singleP) {
         // informative content will be displayed at end game
-        String player, highscore, asteroidsDestroyed, aliensDestroyed, killDeathRatio, level, bombs, shootingAccuracy;
+        
 
         //when single player, display player's information
         if (singleP) {
@@ -119,6 +123,7 @@ public class EndGamePanel extends JPanel {
         
         String[] columnData = {"", ""};
         String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", asteroidsDestroyed}, {"Aliens Destroyed", aliensDestroyed}, {"Kill-Death ratio", killDeathRatio}, {"Last level", level}, {"Bombs used", bombs}, {"Shooting Accuracy", shootingAccuracy+"%"}};
+        
         StatisticsTable = new JTable(rowData, columnData){
             @Override
             public boolean isCellEditable(int rowData, int columnData){
@@ -130,11 +135,30 @@ public class EndGamePanel extends JPanel {
                 }
             }
         };
-        StatisticsTable.setRowSelectionAllowed( false );  
-        StatisticsTable.setColumnSelectionAllowed( false );  
+        
+        StatisticsTable.getModel().addTableModelListener(
+                new TableModelListener()
+                {
+                    @Override
+                    public void tableChanged(TableModelEvent e)
+                    {
+                        // cell update
+                        int row = e.getFirstRow();
+                        int column = e.getColumn();
+                        TableModel model = (TableModel)e.getSource();
+                        String columnName = model.getColumnName(column);
+                        Object data = model.getValueAt(row, column);
+                        String customName = data.toString();
+                        
+                        //update name
+                        String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy+"%"};
+                        highScoreWriter writer = new highScoreWriter(newScoreData, "./src/highscoreData/scoreInfo.txt");
+                        writer.writeToFile();
+                    }
+                });
+        StatisticsTable.setRowSelectionAllowed( false );
+        StatisticsTable.setColumnSelectionAllowed( false );
         StatisticsTable.setCellSelectionEnabled( false );
-        String s = StatisticsTable.getModel().getValueAt(0, 1).toString();
-        System.out.println(s);
         StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w / 2, h / 6));
         StatisticsTable.setFillsViewportHeight(true);
 

@@ -30,7 +30,6 @@ public class SpaceBackgroundPanel extends JPanel {
         setSize(size);
     }
 
-    //draw image
     /**
      * Draws image.
      *
