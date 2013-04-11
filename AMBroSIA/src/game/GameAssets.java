@@ -9,7 +9,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * The <code>GameAssets</code> class loads and provides
+ * references for all image and sound files used in the
+ * game.
  * @author Nikolaos Bukas
  */
 public class GameAssets {

@@ -53,15 +53,9 @@ public class AI implements Runnable {
     public void targetPS() {
         PlayerShip playerShip = gameState.getPlayerShip();
         AlienShip alienShip = gameState.getAlienShip();
-        if (gameState.getAlienShip() != null && gameState.getPlayerShip() != null) {
-            int getX = playerShip.getX() - alienShip.getX();
-            int getY = playerShip.getY() - alienShip.getY();
-
-            //calculate heading to player
-            float heading = (float) (Math.toDegrees(Math.tan(getY / getX) - 90) % 360);
-
+        if (alienShip != null && playerShip != null) {
             //fire
-            gameState.addProjectile(new Projectile(alienShip, heading, new int[]{alienShip.getX(), alienShip.getY()}, gameState));
+            gameState.addProjectile(new Projectile(alienShip, Difficulty.randomHeading(), new int[]{alienShip.getX(), alienShip.getY()}, gameState));
         }
     }
 }

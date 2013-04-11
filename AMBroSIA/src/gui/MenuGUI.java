@@ -19,7 +19,13 @@ import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
 /**
- *
+ * The main GUI class.  Responsible for 
+ * the main menu and the initialization of other GUI 
+ * elements, such as single player mode
+ * or the leaderboard.
+ * 
+ * Also provides high-level access to methods
+ * responsible for redrawing the screen.
  * @author Haisin Yip
  * @author Michael Smith
  * @author Anrhony Chin
