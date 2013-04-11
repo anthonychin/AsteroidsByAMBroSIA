@@ -130,6 +130,9 @@ public class EndGamePanel extends JPanel {
                 }
             }
         };
+        StatisticsTable.setRowSelectionAllowed( false );  
+        StatisticsTable.setColumnSelectionAllowed( false );  
+        StatisticsTable.setCellSelectionEnabled( false );
         String s = StatisticsTable.getModel().getValueAt(0, 1).toString();
         System.out.println(s);
         StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w / 2, h / 6));
