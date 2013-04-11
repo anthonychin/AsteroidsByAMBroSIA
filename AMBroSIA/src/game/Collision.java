@@ -115,8 +115,8 @@ public class Collision implements Runnable {
             } else if (playerShip.getLives() == 1) {
                 playerShip.destroy();
             } else {
-                playerShip.destroy();
                 playerShip.setLives(playerShip.getLives() - 1);
+                playerShip.destroy();
             }
         } else if (asteroid.getSize() == Asteroid.MEDIUM_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= MEDIUM_ASTEROID_SHIELD_DAMAGE) {
@@ -124,9 +124,8 @@ public class Collision implements Runnable {
             } else if (playerShip.getLives() == 1) {
                 playerShip.destroy();
             } else {
-                playerShip.destroy();
                 playerShip.setLives(playerShip.getLives() - 1);
-
+                playerShip.destroy();
             }
         } else if (asteroid.getSize() == Asteroid.SMALL_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= SMALL_ASTEROID_SHIELD_DAMAGE) {
@@ -134,8 +133,8 @@ public class Collision implements Runnable {
             } else if (playerShip.getLives() == 1) {
                 playerShip.destroy();
             } else {
-                playerShip.destroy();
                 playerShip.setLives(playerShip.getLives() - 1);
+                playerShip.destroy();
             }
         }
 
@@ -166,9 +165,10 @@ public class Collision implements Runnable {
         //take care of shield damage (and player destruction if necessary), and return true if the alien has been destroyed
         if (playerShip.getShieldPoints() >= ALIEN_SHIELD_DAMAGE) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() - ALIEN_SHIELD_DAMAGE);
+        } else if (playerShip.getLives() == 1) {
             playerShip.destroy();
         } else {
-            playerShip.destroy();
+            playerShip.setLives(playerShip.getLives() - 1);
         }
         alienShip.destroy(false);
 

@@ -25,7 +25,7 @@ public class Projectile extends MapObjectTTL {
     public final static int ALIEN_OWNER = 2;
     private int velocity; // to be fixed
     private int owner;
-    private final static int TIME_TO_LIVE = 10;
+    private final static int TIME_TO_LIVE = 3;
 
     /**
      * Creates Projectile with the given parameters.

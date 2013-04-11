@@ -41,9 +41,9 @@ public class PlayerShip extends Ship {
      */
     final public static int NUM_DEBRIS = 20;
     /**
-     * Number of torpedos used when the bomb is used.
+     * Amount of debris shown when the bomb is used.
      */
-    final public static int BOMB_BARRIER = 30;
+    final public static int BOMB_EFFECT_DENSITY = 1000;
     private int bomb;
     private int shieldPoints;
     private boolean isAccelerating = false;
@@ -293,10 +293,8 @@ public class PlayerShip extends Ship {
 
     //create a bomb launched effect
     private void createBombEffect() {
-        for (int i = 0; i < BOMB_BARRIER; i++) {
-            int x = getX();
-            int y = getY();
-            getGameState().addExplosion(new MapObjectTTL(new float[]{i * 360, i * -360}, i, new int[]{x, y}, 0, getGameState()));
+        for (int i = 0; i < BOMB_EFFECT_DENSITY; i++) {
+            getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, 0, getGameState()));
         }
     }
     
