@@ -13,7 +13,7 @@ public class TutorialPanel extends JPanel {
 
     private Image img;
 
-    //create panel
+    
     /**
      * Creates TutorialPanel with Image.
      *
@@ -26,9 +26,9 @@ public class TutorialPanel extends JPanel {
         setLayout(null);
     }
 
-    // set endgame background image
+    
     /**
-     * Sets endgame background image.
+     * Sets background image.
      *
      * @param g graphics
      */

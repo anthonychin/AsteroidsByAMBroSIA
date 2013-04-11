@@ -1,6 +1,7 @@
 package gui;
 
 import game.GameAssets;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -28,6 +29,7 @@ public class MenuPanel extends JPanel {
         setMinimumSize(size);
         setMaximumSize(size);
         setSize(size);
+        this.setLayout(new BorderLayout());
     }
     
     public MenuPanel(GridLayout gd){
