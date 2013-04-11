@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public class GraphicsEngine implements Runnable {
 
-    private GameState memory;
+    private GameState gameState;
     private final static Logger log = Logger.getLogger(GraphicsEngine.class.getName());
 
     /**
@@ -24,7 +24,7 @@ public class GraphicsEngine implements Runnable {
      * @param gamestate current game state
      */
     public GraphicsEngine(GameState gamestate) {
-        memory = gamestate;
+        this.gameState = gamestate;
         log.setLevel(Logic.LOG_LEVEL);
     }
 
@@ -34,22 +34,22 @@ public class GraphicsEngine implements Runnable {
      */
     public void updateGraphics() {
         log.info("Graphics update start");
-        if (memory.getPlayerShip() != null) {
+        if (gameState.getPlayerShip() != null) {
             updatePlayerShip();
         }
-        if (!memory.getAsteroids().isEmpty()) {
+        if (!gameState.getAsteroids().isEmpty()) {
             updateAsteroids();
         }
-        if (memory.getAlienShip() != null) {
+        if (gameState.getAlienShip() != null) {
             updateAlien();
         }
-        if (!memory.getProjectiles().isEmpty()) {
+        if (!gameState.getProjectiles().isEmpty()) {
             updateProjectiles();
         }
-        if (!memory.getBonusDrops().isEmpty()) {
+        if (!gameState.getBonusDrops().isEmpty()) {
             updateBonusDrops();
         }
-        if (!memory.getExplosions().isEmpty()) {
+        if (!gameState.getExplosions().isEmpty()) {
             updateExplosions();
         }
     }
@@ -60,7 +60,7 @@ public class GraphicsEngine implements Runnable {
     private static Polygon playerShape() {
         return new Polygon(new int[]{0, 8, -8}, new int[]{10, -10, -10}, 3);
     }
-    
+
     private static Polygon playerShapeThruster() {
         return new Polygon(new int[]{0, 8, 6, 0, -6, -8}, new int[]{10, -10, -15, -10, -15, -10}, 6);
     }
@@ -96,38 +96,38 @@ public class GraphicsEngine implements Runnable {
 
     private void updatePlayerShip() {
         log.debug("Updating PS");
-        PlayerShip player = memory.getPlayerShip();
+        PlayerShip playerShip = gameState.getPlayerShip();
         //move to appropriate position, rotate, set shape
-        if (player != null) {
+        if (playerShip != null) {
             //show thruster if accelerating
-            if (player.getAccelerate()) {
-                setPosition(playerShapeThruster(), player);
+            if (playerShip.getAccelerate()) {
+                setPosition(playerShapeThruster(), playerShip);
             } else {
-                setPosition(playerShape(), player);
+                setPosition(playerShape(), playerShip);
             }
         }
     }
 
     private void updateAlien() {
         log.debug("updating alien");
-        AlienShip alien = memory.getAlienShip();
+        AlienShip alienShip = gameState.getAlienShip();
         //translate and rotate, set shape
-        if (alien != null) {
-            setPosition(alienShape(), alien);
+        if (alienShip != null) {
+            setPosition(alienShape(), alienShip);
         }
     }
 
     private void updateProjectiles() {
         log.debug("updating projectiles");
-        for (Projectile aProjectile : memory.getProjectiles()) {
-            setPosition(projectileShape(), aProjectile);
+        for (Projectile projectile : gameState.getProjectiles()) {
+            setPosition(projectileShape(), projectile);
         }
     }
 
     private void updateExplosions() {
         log.debug("updating explosions");
         //for all explosions
-        for (MapObjectTTL explosion : memory.getExplosions()) {
+        for (MapObjectTTL explosion : gameState.getExplosions()) {
             setPosition(explosionShape(), explosion);
         }
     }
@@ -135,23 +135,23 @@ public class GraphicsEngine implements Runnable {
     private void updateBonusDrops() {
         log.debug("updating bonus drops");
         //for all drops
-        for (MapObject aBonusDrop : memory.getBonusDrops()) {
-            setPosition(bonusDropShape(), aBonusDrop);
+        for (MapObject bonusDrop : gameState.getBonusDrops()) {
+            setPosition(bonusDropShape(), bonusDrop);
         }
     }
 
     private void updateAsteroids() {
         log.debug("updating asteroids");
         //do for every asteroid in the game
-        for (Asteroid anAsteroid : memory.getAsteroids()) {
+        for (Asteroid asteroid : gameState.getAsteroids()) {
             //take care of different shapes for each size
             Polygon asteroidShape = smallAsteroidShape();
-            if (anAsteroid.getSize() == Asteroid.LARGE_ASTEROID_SIZE) {
+            if (asteroid.getSize() == Asteroid.LARGE_ASTEROID_SIZE) {
                 asteroidShape = largeAsteroidShape();
-            } else if (anAsteroid.getSize() == Asteroid.MEDIUM_ASTEROID_SIZE) {
+            } else if (asteroid.getSize() == Asteroid.MEDIUM_ASTEROID_SIZE) {
                 asteroidShape = mediumAsteroidShape();
             }
-            setPosition(asteroidShape, anAsteroid);
+            setPosition(asteroidShape, asteroid);
         }
     }
 

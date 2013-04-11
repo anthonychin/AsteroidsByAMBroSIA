@@ -38,16 +38,16 @@ public class Physics implements Runnable {
         log.info("Physics update start");
         height = MenuGUI.HEIGHT;
         width = MenuGUI.WIDTH;
-        PlayerShip player = gameState.getPlayerShip();
-        if (player != null) {
+        PlayerShip playerShip = gameState.getPlayerShip();
+        if (playerShip != null) {
             log.debug("updating player ship");
-            updateObject(player);
+            updateObject(playerShip);
         }
 
-        AlienShip alien = gameState.getAlienShip();
-        if (alien != null) {
+        AlienShip alienShip = gameState.getAlienShip();
+        if (alienShip != null) {
             log.debug("updating alien");
-            updateObject(alien);
+            updateObject(alienShip);
         }
 
         if (!gameState.getAsteroids().isEmpty()) {
@@ -84,8 +84,8 @@ public class Physics implements Runnable {
 
     private static void updateObject(MapObject gameObject) {
         if (gameObject instanceof PlayerShip) {
-            PlayerShip ship = (PlayerShip) gameObject;
-            ship.setHeading(ship.getHeading() + calculateHeadingDisplacement(ship.isTurningRight(), ship.isTurningLeft()));
+            PlayerShip playerShip = (PlayerShip) gameObject;
+            playerShip.setHeading(playerShip.getHeading() + calculateHeadingDisplacement(playerShip.isTurningRight(), playerShip.isTurningLeft()));
         }
 
         float[] velocity = gameObject.getVelocity();
@@ -103,8 +103,8 @@ public class Physics implements Runnable {
 
     private static void updateObject(PlayerShip gameObject) {
         log.info("updating object");
-        PlayerShip ship = (PlayerShip) gameObject;
-        ship.setHeading(ship.getHeading() + calculateHeadingDisplacement(ship.isTurningRight(), ship.isTurningLeft()));
+        PlayerShip playerShip = (PlayerShip) gameObject;
+        playerShip.setHeading(playerShip.getHeading() + calculateHeadingDisplacement(playerShip.isTurningRight(), playerShip.isTurningLeft()));
 
         float[] velocity = gameObject.getVelocity();
         float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());

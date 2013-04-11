@@ -21,9 +21,10 @@ public class MenuPanel extends JPanel {
     //set up image location, size, etc.
     /**
      * Constructor which sets up image location, size, borderlayout, etc.
+     * @param borderLayout new border layout
      */
-    public MenuPanel(BorderLayout bl) {
-        super(bl);
+    public MenuPanel(BorderLayout borderLayout) {
+        super(borderLayout);
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
@@ -34,9 +35,10 @@ public class MenuPanel extends JPanel {
     //set up image location, size, etc.
     /**
      * Constructor which sets up image location, size, gridlayout,etc.
+     * @param gridLayout new grid layout
      */    
-    public MenuPanel(GridLayout gd){
-        super(gd);
+    public MenuPanel(GridLayout gridLayout){
+        super(gridLayout);
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
@@ -48,10 +50,10 @@ public class MenuPanel extends JPanel {
     /**
      * Draws image.
      *
-     * @param g graphics
+     * @param graphic graphic
      */
     @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+    public void paintComponent(Graphics graphic) {
+        graphic.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }

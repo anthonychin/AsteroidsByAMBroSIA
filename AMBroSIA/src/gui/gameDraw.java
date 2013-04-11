@@ -28,51 +28,51 @@ public class gameDraw {
     /**
      * Draws all in-game objects.
      *
-     * @param g2d 2 dimensional shape
-     * @param memory current game state
+     * @param graphics2d 2 dimensional shape
+     * @param gameState current game state
      */
-    public static void drawObjects(Graphics2D g2d, GameState memory) {
+    public static void drawObjects(Graphics2D graphics2d, GameState gameState) {
         //some nice settings that improve visual quality.  Some do not appear to have an effect however...
-        g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
-        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_LCD_CONTRAST, 100);
-        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        graphics2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+        graphics2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+        graphics2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+        graphics2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+        graphics2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        graphics2d.setRenderingHint(RenderingHints.KEY_TEXT_LCD_CONTRAST, 100);
+        graphics2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
         //store default stroke so we can reset
-        Stroke defaultStroke = g2d.getStroke();
+        Stroke defaultStroke = graphics2d.getStroke();
 
         //draw asteroids
-        ArrayList<Asteroid> asteroidList = memory.getAsteroids();
+        ArrayList<Asteroid> asteroidList = gameState.getAsteroids();
         if (!asteroidList.isEmpty()) {
-            g2d.setColor(Color.black);
+            graphics2d.setColor(Color.black);
             for (Asteroid asteroid : asteroidList) {
                 Polygon shape = asteroid.getShape();
 
                 //give asteroid gray outline
-                g2d.setStroke(new BasicStroke(10, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-                g2d.setColor(Color.GRAY);
-                g2d.drawPolygon(shape);
+                graphics2d.setStroke(new BasicStroke(10, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+                graphics2d.setColor(Color.GRAY);
+                graphics2d.drawPolygon(shape);
 
                 //fill asteroid black
-                g2d.setColor(Color.black);
-                g2d.fillPolygon(shape);
+                graphics2d.setColor(Color.black);
+                graphics2d.fillPolygon(shape);
             }
         }
         //reset to default width for other objects for now
-        g2d.setStroke(defaultStroke);
+        graphics2d.setStroke(defaultStroke);
 
         //draw player
-        PlayerShip player = memory.getPlayerShip();
+        PlayerShip player = gameState.getPlayerShip();
         if (player != null) {
             Color fill;
             Color shield;
             //adjust color depending on whose turn it is
-            if (memory.isPlayerTwoTurn()) {
+            if (gameState.isPlayerTwoTurn()) {
                 fill = Color.blue;
                 shield = new Color(255, 0, 51); //light red
             } else {
@@ -81,62 +81,62 @@ public class gameDraw {
             }
 
             Polygon shape = player.getShape();
-            g2d.setColor(fill);
-            g2d.fillPolygon(shape);
+            graphics2d.setColor(fill);
+            graphics2d.fillPolygon(shape);
 
             //shield, if activated
             if (player.getShieldStatus()) {
-                g2d.setColor(shield);
-                g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
+                graphics2d.setColor(shield);
+                graphics2d.setStroke(new BasicStroke(2, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
             }
-            g2d.drawPolygon(shape);
+            graphics2d.drawPolygon(shape);
         }
 
         //reset color, stroke
-        g2d.setColor(Color.BLACK);
-        g2d.setStroke(defaultStroke);
+        graphics2d.setColor(Color.BLACK);
+        graphics2d.setStroke(defaultStroke);
 
         //draw alien
-        AlienShip alien = memory.getAlienShip();
+        AlienShip alien = gameState.getAlienShip();
         if (alien != null) {
-            g2d.setColor(Color.MAGENTA);
-            g2d.drawPolygon(alien.getShape());
+            graphics2d.setColor(Color.MAGENTA);
+            graphics2d.drawPolygon(alien.getShape());
         }
 
         //reset color
-        g2d.setColor(Color.BLACK);
+        graphics2d.setColor(Color.BLACK);
 
         //draw projectiles
-        ArrayList<Projectile> projectileList = memory.getProjectiles();
+        ArrayList<Projectile> projectileList = gameState.getProjectiles();
         if (!projectileList.isEmpty()) {
             for (Projectile projectile : projectileList) {
-                g2d.setColor(projectile.getColor());
-                g2d.fillPolygon(projectile.getShape());
+                graphics2d.setColor(projectile.getColor());
+                graphics2d.fillPolygon(projectile.getShape());
             }
         }
 
         //reset color
-        g2d.setColor(Color.BLACK);
+        graphics2d.setColor(Color.BLACK);
 
         //draw bonus drops
-        ArrayList<BonusDrop> bonusList = memory.getBonusDrops();
+        ArrayList<BonusDrop> bonusList = gameState.getBonusDrops();
         if (!bonusList.isEmpty()) {
             for (BonusDrop drop : bonusList) {
-                g2d.setColor(drop.getColor());
-                g2d.drawPolygon(drop.getShape());
+                graphics2d.setColor(drop.getColor());
+                graphics2d.drawPolygon(drop.getShape());
             }
         }
 
         //draw explosions
-        ArrayList<MapObjectTTL> explosionList = memory.getExplosions();
+        ArrayList<MapObjectTTL> explosionList = gameState.getExplosions();
         if (!explosionList.isEmpty()) {
             for (MapObjectTTL explosion : explosionList) {
-                g2d.setColor(explosion.getColor());
-                g2d.drawPolygon(explosion.getShape());
+                graphics2d.setColor(explosion.getColor());
+                graphics2d.drawPolygon(explosion.getShape());
             }
         }
 
         //See http://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#dispose%28%29
-        g2d.dispose();
+        graphics2d.dispose();
     }
 }

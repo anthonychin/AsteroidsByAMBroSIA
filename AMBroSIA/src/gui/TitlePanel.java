@@ -30,8 +30,12 @@ public class TitlePanel extends JPanel{
         setSize(size);
     }
     
-    public TitlePanel(GridLayout gd){
-        super(gd);
+    /**
+     * Constructor which sets up image location, size, etc
+     * @param gridLayout new grid layout
+     */
+    public TitlePanel(GridLayout gridLayout){
+        super(gridLayout);
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
@@ -42,18 +46,18 @@ public class TitlePanel extends JPanel{
     /**
      * Draws image.
      *
-     * @param g graphics
+     * @param graphic graphics
      */
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics graphic) {
         
-        g.drawImage(img, 0, 0, this.getMinimumSize().width, this.getMinimumSize().height, this);
-        g.setFont(font);
-        g.setColor(Color.red);
-        g.drawString("Anthony Chin", 10, 100);
-        g.drawString("Haisin Yip", 10, 130);
-        g.drawString("Meong Hee Seo", 10, 160);
-        g.drawString("Michael Smith", 10, 190);
-        g.drawString("Nikolaos Bukas", 10, 220);
+        graphic.drawImage(img, 0, 0, this.getMinimumSize().width, this.getMinimumSize().height, this);
+        graphic.setFont(font);
+        graphic.setColor(Color.red);
+        graphic.drawString("Anthony Chin", 10, 100);
+        graphic.drawString("Haisin Yip", 10, 130);
+        graphic.drawString("Meong Hee Seo", 10, 160);
+        graphic.drawString("Michael Smith", 10, 190);
+        graphic.drawString("Nikolaos Bukas", 10, 220);
     }
 }

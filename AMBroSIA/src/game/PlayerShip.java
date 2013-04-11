@@ -95,10 +95,9 @@ public class PlayerShip extends Ship {
      */
     public void useBomb() {
         if (bomb > 0) {
-            if(!getGameState().isPlayerTwoTurn()){
+            if (!getGameState().isPlayerTwoTurn()) {
                 getGameState().addP1BombUsed();
-            }
-            else{
+            } else {
                 getGameState().addP2BombUsed();
             }
             bomb = bomb - 1;
@@ -248,7 +247,7 @@ public class PlayerShip extends Ship {
             //if not respawining, let other classes know
             getGameState().setPlayerDead(true);
         }
-        
+
         checkP1orP2();
     }
 
@@ -299,23 +298,22 @@ public class PlayerShip extends Ship {
             getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, 0, getGameState()));
         }
     }
-    
+
     //check if P1 or P2 for shoot counter
-    private void checkP1orP2(int counter){
-        if(!getGameState().isPlayerTwoTurn()){
+    private void checkP1orP2(int counter) {
+        if (!getGameState().isPlayerTwoTurn()) {
             getGameState().setP1shootCounter(counter);
-        }
-        else{
+        } else {
             getGameState().setP2shootCounter(counter);
-        }    
+        }
     }
     // check if P1 or P2 for player lives
-    private void checkP1orP2(){
-        if(!getGameState().isPlayerTwoTurn()){
+
+    private void checkP1orP2() {
+        if (!getGameState().isPlayerTwoTurn()) {
             getGameState().addP1deaths();
-        }
-        else{
+        } else {
             getGameState().addP2deaths();
-        }    
-    }         
+        }
+    }
 }
