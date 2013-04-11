@@ -15,6 +15,7 @@ public class highScoreWriter
     private String[] scoreData;
     private String path;
     private File file;
+    private final String delimiter = " ; ";
     
     // initializes data to be written, path, and file
     public highScoreWriter(String[] data, String path)
@@ -36,6 +37,7 @@ public class highScoreWriter
                 for(int i = 0 ; i < scoreData.length ; i++)
                 {
                     fwriter.write(scoreData[i]);
+                    fwriter.write(delimiter);
                 }
                 fwriter.newLine();
                 fwriter.close();
@@ -49,6 +51,7 @@ public class highScoreWriter
                 for(int i = 0 ; i < scoreData.length ; i++)
                 {
                     fwriter.write(scoreData[i]);
+                    fwriter.write(delimiter);
                 }
                 fwriter.newLine();
                 fwriter.close();

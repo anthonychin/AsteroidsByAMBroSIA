@@ -19,6 +19,7 @@ public class highScoreReader
     private Scanner fileScanner;
     private String path;
     private File file;
+    private final String delims = ";";
     
     // initializes the path and a file
     public highScoreReader(String path)
@@ -38,13 +39,11 @@ public class highScoreReader
             // if file exists, read from it
             if(file.exists())
             {
-                while(fileScanner.hasNext())
-                {
-                    String[] scores = new String[8];
-                    for(int i = 0 ; i < scores.length ; i++)
-                    {
-                        scores[i] = fileScanner.next();
-                    }
+                while(fileScanner.hasNextLine())
+                {   
+                    String scoresLine = fileScanner.nextLine();
+                    String[] scores  = scoresLine.split(delims);
+                    
                     scoreList.add(scores);
                 }
                 fileScanner.close();
