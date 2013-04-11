@@ -15,9 +15,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.Image;
-import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
@@ -171,15 +168,15 @@ public class MenuGUI implements Runnable {
     /**
      * Displays single player mode interface.
      *
-     * @param gs current game state
+     * @param gameState current game state
      */
-    public void displaySingleP(GameState gs) {
+    public void displaySingleP(GameState gameState) {
         //let other methods know we are in single P mode
         singleP = true;
         //allow keyboard input
         frame.setFocusable(true);
         //create panel, show it
-        onePPanel = new SinglePgamePanel(gs, GameAssets.spaceBackground);
+        onePPanel = new SinglePgamePanel(gameState, GameAssets.spaceBackground);
         JPanel cardGame1P = new JPanel();
         cardGame1P.add(onePPanel);
         card.add("Single-Player Mode", cardGame1P);
@@ -193,13 +190,13 @@ public class MenuGUI implements Runnable {
     /**
      * Displays two player mode interface.
      *
-     * @param gs current game state
+     * @param gameState current game state
      */
-    public void displayTwoP(GameState gs) {
+    public void displayTwoP(GameState gameState) {
         //let other methods know we are in Two P mode.  Virtually identical code to single player above
         singleP = false;
         frame.setFocusable(true);
-        twoPPanel = new TwoPgamePanel(gs, GameAssets.spaceBackground);
+        twoPPanel = new TwoPgamePanel(gameState, GameAssets.spaceBackground);
         JPanel cardGame2P = new JPanel();
         cardGame2P.add(twoPPanel);
         card.add("Two-Player Mode", cardGame2P);
@@ -210,10 +207,10 @@ public class MenuGUI implements Runnable {
     /**
      * Displays leaderboard screen.
      *
-     * @param gs current game state
+     * @param gameState current game state
      */
-    public void displayLeaderBoard(GameState gs) {
-        leaderBoardPanel = new LeaderBoardPanel(GameAssets.spaceBackground,gs);
+    public void displayLeaderBoard(GameState gameState) {
+        leaderBoardPanel = new LeaderBoardPanel(GameAssets.spaceBackground,gameState);
         SpaceBackgroundPanel cardLeaderBoard = new SpaceBackgroundPanel(new BorderLayout());
         cardLeaderBoard.add(leaderBoardPanel);
 
@@ -258,13 +255,13 @@ public class MenuGUI implements Runnable {
     /**
      * Display game over screen.
      *
-     * @param gs current game state
+     * @param gameState current game state
      * @param mode boolean value that determines whether its single player mode
      * or two player mode
      */
-    public void displayGameOver(GameState gs, boolean mode) {
+    public void displayGameOver(GameState gameState, boolean mode) {
         //create panel
-        gameOverPanel = new EndGamePanel(GameAssets.gameOverImage, gs, mode);
+        gameOverPanel = new EndGamePanel(GameAssets.gameOverImage, gameState, mode);
         SpaceBackgroundPanel cardGameOver = new SpaceBackgroundPanel(new BorderLayout());
         cardGameOver.setLayout(new BorderLayout());
         cardGameOver.add(gameOverPanel);
@@ -320,12 +317,12 @@ public class MenuGUI implements Runnable {
         MenuGUI.HEIGHT = frame.getHeight();
     }
     //Take the whole Jbutton and make them into a panel
-    private void makeJButtonPanel(JPanel p){
-        p.add(singlePbutton);
-        p.add(twoPbutton);
-        p.add(leaderBoardButton);
-        p.add(tutorialButton);
-        p.add(quitButton);
+    private void makeJButtonPanel(JPanel panel){
+        panel.add(singlePbutton);
+        panel.add(twoPbutton);
+        panel.add(leaderBoardButton);
+        panel.add(tutorialButton);
+        panel.add(quitButton);
 
         singlePbutton.addActionListener(buttonClick);
         twoPbutton.addActionListener(buttonClick);
@@ -340,11 +337,11 @@ public class MenuGUI implements Runnable {
         decorateButton(quitButton);
     }
     //decorate the JButton
-    private void decorateButton(JButton b){
-        b.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
-        b.setOpaque(false);
-        b.setContentAreaFilled(false);
-        b.setBorderPainted(false);
-        b.setForeground(Color.pink);
+    private void decorateButton(JButton button){
+        button.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setForeground(Color.pink);
     }
 }
