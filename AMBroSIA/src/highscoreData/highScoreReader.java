@@ -3,8 +3,11 @@ package highscoreData;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Reads the highscore information from highscore database(external text file)
@@ -81,13 +84,26 @@ public class highScoreReader
     // open file for usage
     public void openFile()
     {
-        try
+        
+        if(file.exists())
         {
-            fileScanner = new Scanner(new File(path));
+            try
+            {
+                fileScanner = new Scanner(new File(path));
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
         }
-        catch(Exception e)
+        else
         {
-            e.printStackTrace();
+            file = new File(path);
+            try {
+                file.createNewFile();
+            } catch (IOException ioexception) {
+                ioexception.printStackTrace();
+            }
         }
     }
     

@@ -13,6 +13,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  * The
@@ -59,6 +60,7 @@ public class LeaderBoardPanel extends JPanel {
         rowdata = reader.readFile();
         table = new JTable(rowdata, columns)
         {
+            //make cells not editable
              @Override
              public boolean isCellEditable(int rowData, int columnData){
                 return false;
@@ -78,20 +80,29 @@ public class LeaderBoardPanel extends JPanel {
                 
             }
         });
-        
+      
+        //make table visible
         table.setPreferredScrollableViewportSize(new Dimension(width / 2, height));
         table.setFillsViewportHeight(true);
-        
-        table.setRowSelectionAllowed( false );  
-        table.setColumnSelectionAllowed( false );  
-        table.setCellSelectionEnabled( false );
     }
 
     // set the layout with a scrollable table
     private void makeLayout() {
         setLayout(new FlowLayout());
+        
+        // make table cells not selectable
+        table.setRowSelectionAllowed( false );  
+        table.setColumnSelectionAllowed( false );  
+        table.setCellSelectionEnabled( false );
+        
+        // attempt to make JTable transparent
+        table.setOpaque(false);
+        ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+        table.setShowGrid(false);
+        
         add(table);
         add(new JScrollPane(table));
+        
     }
 
     /**
@@ -134,6 +145,7 @@ public class LeaderBoardPanel extends JPanel {
                         }
                     }
                 }
+                
             }
             
             // if column 1,2,3,5 or 6 is returned sort with decreasing order
@@ -151,6 +163,7 @@ public class LeaderBoardPanel extends JPanel {
                 }
             }
             
+            // if column 4 or 7 is returned sort with decreasing order
             else
             {
                 for (int i = 0; i < array.length; i++) {
