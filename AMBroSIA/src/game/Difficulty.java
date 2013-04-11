@@ -96,36 +96,24 @@ public class Difficulty {
      *
      * @return rate of bonus drop
      */
-    
-    
-    
     public static int bonusDropRate() {
         int val = randomInt(0, 100);
-        if(val <= INITIAL_BONUS_DROP_RATE){
+        if (val <= INITIAL_BONUS_DROP_RATE) {
             val = randomInt(0, 100);
-            if(val <= BOMB_DROP_RATE)
-            {
+            if (val <= BOMB_DROP_RATE) {
                 return BonusDrop.BOMB_BONUS_DROP;
-            }
-            else if(val <= LIFE_DROP_RATE)
-            {
+            } else if (val <= LIFE_DROP_RATE) {
                 return BonusDrop.LIFE_BONUS_DROP;
-            }
-            else if(val <= SHIELD_THREE_DROP_RATE)
-            {
+            } else if (val <= SHIELD_THREE_DROP_RATE) {
                 return BonusDrop.SHIELD_THREE_POINTS_DROP;
-            }
-            else if(val <= SHIELD_TWO_DROP_RATE)
-            {
+            } else if (val <= SHIELD_TWO_DROP_RATE) {
                 return BonusDrop.SHIELD_TWO_POINTS_DROP;
-            }
-            else
-            {
+            } else {
                 return BonusDrop.SHIELD_ONE_POINT_DROP;
             }
-        }
-        else
+        } else {
             return -1;
+        }
     }
 
     /**

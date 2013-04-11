@@ -39,13 +39,13 @@ public class Collision implements Runnable {
     /**
      * Creates Collision with given parameters.
      *
-     * @param gs current game state
-     * @param phys game physics
+     * @param gameState current game state
+     * @param physics game physics
      */
-    public Collision(GameState gs, Physics phys) {
+    public Collision(GameState gameState, Physics physics) {
         log.setLevel(LOG_LEVEL);
-        physicsEngine = phys;
-        gameState = gs;
+        physicsEngine = physics;
+       this.gameState = gameState;
     }
 
     //actual collision check code

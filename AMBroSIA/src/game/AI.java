@@ -16,10 +16,10 @@ public class AI implements Runnable {
     /**
      * Creates AI with given game state
      *
-     * @param gs current game state
+     * @param gameState current game state
      */
-    public AI(GameState gs) {
-        this.gameState = gs;
+    public AI(GameState gameState) {
+        this.gameState = gameState;
     }
 
     //for AI thread
@@ -51,17 +51,17 @@ public class AI implements Runnable {
      * projectile.
      */
     public void targetPS() {
-        PlayerShip ps = gameState.getPlayerShip();
-        AlienShip as = gameState.getAlienShip();
+        PlayerShip playerShip = gameState.getPlayerShip();
+        AlienShip alienShip = gameState.getAlienShip();
         if (gameState.getAlienShip() != null && gameState.getPlayerShip() != null) {
-            int getX = ps.getX() - as.getX();
-            int getY = ps.getY() - as.getY();
+            int getX = playerShip.getX() - alienShip.getX();
+            int getY = playerShip.getY() - alienShip.getY();
 
             //calculate heading to player
             float heading = (float) (Math.toDegrees(Math.tan(getY / getX) - 90) % 360);
 
             //fire
-            gameState.addProjectile(new Projectile(as, heading, new int[]{as.getX(), as.getY()}, gameState));
+            gameState.addProjectile(new Projectile(alienShip, heading, new int[]{alienShip.getX(), alienShip.getY()}, gameState));
         }
     }
 }

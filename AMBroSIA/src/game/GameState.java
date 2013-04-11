@@ -56,7 +56,6 @@ public class GameState {
      * Score the player receives when alien ship is destroyed.
      */
     final public static int ALIEN_SCORE = 200;
-    
     private ArrayList<Asteroid> asteroidList;
     private ArrayList<Projectile> projectileList;
     private ArrayList<BonusDrop> bonusList;
@@ -73,12 +72,10 @@ public class GameState {
     private int player2Score;
     private boolean isPlayerDead;
     private boolean playerTwoTurn;
-    
     private int P1BombUsed;
     private int P2BombUsed;
     private int p2AlienDestroyed;
     private int p1AlienDestroyed;
-    
     //synchronization objects
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
@@ -90,8 +87,6 @@ public class GameState {
     private int p2shootCounter;
     private int p1Deaths;
     private int p2Deaths;
-
-    
 
     /**
      * Creates GameState with default values.
@@ -352,7 +347,7 @@ public class GameState {
     /**
      * Returns true if level is complete, false otherwise.
      *
-     * @return boolean value (true if complete, false otherwise)
+     * @return true if complete, false otherwise
      */
     public boolean isLevelComplete() {
         return true;
@@ -479,150 +474,169 @@ public class GameState {
     }
 
     /**
-     * Get the amount of bomb used by P1
-     * @return 
+     * Returns the amount of bomb used by Player 1.
+     *
+     * @return number of times the bomb was used by Player 1
      */
-    public int getP1BombUsed(){
+    public int getP1BombUsed() {
         return P1BombUsed;
     }
-    
+
     /**
-     * Get the amount of bomb used by P2
-     * @return 
+     * Returns the amount of bomb used by Player 2.
+     *
+     * @return number of times the bomb was used by Player 2
      */
-    public int getP2BombUsed(){
+    public int getP2BombUsed() {
         return P2BombUsed;
     }
+
     /**
-     * 
+     * Increments the amount of bomb used by Player 1.
      */
-    public void addP1BombUsed(){
-        this.P1BombUsed = ++this.P2BombUsed;
+    public void addP1BombUsed() {
+        this.P1BombUsed = ++this.P1BombUsed;
     }
-    
+
     /**
-     * 
+     * Increments the amount of bomb used by Player 2.
      */
-    public void addP2BombUsed(){
+    public void addP2BombUsed() {
         this.P2BombUsed = ++this.P2BombUsed;
     }
 
-     /**
-     * Get the amount of aliens killed by P1
-     * @return 
+    /**
+     * Returns the amount of aliens destroyed by Player 1.
+     *
+     * @return number of aliens killed by Player 1
      */
-    public int getP1alienDestroyed(){
+    public int getP1alienDestroyed() {
         return p1AlienDestroyed;
     }
-    
+
     /**
-     * Get the amount of aliens killed by P2
-     * @return 
+     * Returns the amount of aliens destroyed by Player 2.
+     *
+     * @return number of alien killed by Player 2
      */
-    public int getP2alienDestroyed(){
+    public int getP2alienDestroyed() {
         return p2AlienDestroyed;
     }
+
     /**
-     * 
+     * Increments the number of alien destroyed by Player 1.
      */
-    public void addP1alienDestroyed(){
+    public void addP1alienDestroyed() {
         this.p1AlienDestroyed = ++p1AlienDestroyed;
     }
-    
+
     /**
-     * 
+     * Increments the number of alien destroyed by Player 2.
      */
-    public void addP2alienDestroyed(){
+    public void addP2alienDestroyed() {
         this.p2AlienDestroyed = ++p2AlienDestroyed;
     }
-    
-     /**
-     * Get the amount of asteroids killed by P1
-     * @return 
+
+    /**
+     * Returns the amount of asteroids destroyed by Player 1.
+     *
+     * @return number of asteroids destroyed by Player 1
      */
-    public int getP1asteroidDestroyed(){
+    public int getP1asteroidDestroyed() {
         return p1AsteroidDestroyed;
     }
-    
+
     /**
-     * Get the amount of asteroids killed by P2
-     * @return 
+     * Returns the amount of asteroids destroyed by Player 2.
+     *
+     * @return number of asteroids destroyed by Player 2
      */
-    public int getP2asteroidDestroyed(){
+    public int getP2asteroidDestroyed() {
         return p2AsteroidDestroyed;
     }
+
     /**
-     * 
+     * Increments the number of asteroid destroyed by Player 1.
      */
-    public void addP1asteroidDestroyed(){
+    public void addP1asteroidDestroyed() {
         this.p1AsteroidDestroyed = ++p1AsteroidDestroyed;
     }
-    
+
     /**
-     * 
+     * Increments the number of asteroid destroyed by Player 2.
      */
-    public void addP2asteroidDestroyed(){
+    public void addP2asteroidDestroyed() {
         this.p2AsteroidDestroyed = ++p2AsteroidDestroyed;
     }
- 
-     /**
-     * Get the amount of asteroids killed by P1
-     * @return 
+
+    /**
+     * Returns the number of shots taken by Player 1.
+     *
+     * @return number of shots by Player 1
      */
-    public int getP1shootCounter(){
+    public int getP1shootCounter() {
         return p1shootCounter;
     }
-    
+
     /**
-     * Get the amount of asteroids killed by P2
-     * @return 
+     * Returns the number of shots taken by Player 2.
+     *
+     * @return number of shots by Player 2
      */
-    public int getP2shootCounter(){
+    public int getP2shootCounter() {
         return p2shootCounter;
     }
+
     /**
-     * 
+     * Sets the number of shots taken by Player 1.
+     *
+     * @param shot number of shots that needs to be added to shoot counter
      */
-    public void setP1shootCounter(int shot){
+    public void setP1shootCounter(int shot) {
         this.p1shootCounter = p1shootCounter + shot;
     }
-    
+
     /**
-     * 
+     * Sets the number of shots taken by Player 2.
+     *
+     * @param shot number of shots that needs to be added to shoot counter
      */
-    public void setP2shootCounter(int shot){
+    public void setP2shootCounter(int shot) {
         this.p2shootCounter = p2shootCounter + shot;
-    } 
-    
-     /**
-     * Get the amount of asteroids killed by P1
-     * @return 
+    }
+
+    /**
+     * Returns the number of times Player 1 dies.
+     *
+     * @return number of times Player 1 dies
      */
-    public int getP1deaths(){
+    public int getP1deaths() {
         return p1Deaths;
     }
-    
+
     /**
-     * Get the amount of asteroids killed by P2
-     * @return 
+     * Returns the number of times Player 2 dies.
+     *
+     * @return number of times Player 2 dies
      */
-    public int getP2deaths(){
+    public int getP2deaths() {
         return p2Deaths;
     }
+
     /**
-     * 
+     * Increments the number of times Player 1 dies.
      */
-    public void addP1deaths(){
+    public void addP1deaths() {
         this.p1Deaths = ++p1Deaths;
     }
-    
+
     /**
-     * 
+     * Increments the number of times Player 2 dies.
      */
-    public void addP2deaths(){
+    public void addP2deaths() {
         this.p2Deaths = ++p2Deaths;
-    }     
-    
+    }
+
     /**
      * Checks if it is Player 2's turn to play.
      *
@@ -634,6 +648,7 @@ public class GameState {
 
     /**
      * Sets the variable playerTwoTurn.
+     *
      * @param playerTwo true if Player 2's turn, false otherwise
      */
     public void setPlayerTwoTurn(boolean playerTwo) {

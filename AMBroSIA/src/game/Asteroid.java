@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
  */
 public class Asteroid extends MapObject {
 
-    //integer definitions for each size
     /**
      * Integer definitions for large size asteroid.
      */
@@ -52,7 +51,6 @@ public class Asteroid extends MapObject {
         log.setLevel(Logic.LOG_LEVEL);
     }
 
-    //size of asteroid
     /**
      * Return the size of the asteroid.
      *
@@ -62,7 +60,6 @@ public class Asteroid extends MapObject {
         return this.size;
     }
 
-    //destroy asteroid: add score if no bomb was used, spawn new asteroids, remove it from the game, add debris
     /**
      * Destroys asteroid. Adds score if no bomb was used, spawns new asteroids,
      * removes it from the game, and adds debris.
@@ -102,13 +99,12 @@ public class Asteroid extends MapObject {
             getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{x, y}, 0, getGameState(), Color.GRAY));
         }
     }
-    
-    private void checkP1orP2(){
-        if(!getGameState().isPlayerTwoTurn()){
+
+    private void checkP1orP2() {
+        if (!getGameState().isPlayerTwoTurn()) {
             getGameState().addP1asteroidDestroyed();
-        }
-        else{
+        } else {
             getGameState().addP2asteroidDestroyed();
-        }    
+        }
     }
 }
