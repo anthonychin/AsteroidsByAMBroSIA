@@ -11,6 +11,8 @@ import game.GameState;
 import highscoreData.highScoreReader;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * The
@@ -28,8 +30,8 @@ public class LeaderBoardPanel extends JPanel {
     private String[] columns = {"Player", "Highscore", "Asteroid Destroyed", "Aliens destroyed", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
     String[][] rowdata;
     private JScrollPane scrollPane;
+    private int selectedColumn;
 
-    // creates leaderboard that will display history of highest scores
     /**
      * Creates LeaderBoardPanel using given parameters. It displays history of
      * highest scores.
@@ -56,9 +58,31 @@ public class LeaderBoardPanel extends JPanel {
         reader.openFile();
         rowdata = reader.readFile();
         bblsort(rowdata);
-        table = new JTable(rowdata, columns);
+        table = new JTable(rowdata, columns)
+        {
+             @Override
+             public boolean isCellEditable(int rowData, int columnData){
+                return false;
+            }
+        };
         table.setPreferredScrollableViewportSize(new Dimension(w / 2, h));
         table.setFillsViewportHeight(true);
+        
+        // listen for mouse clicks and indicates which column was pressed
+        table.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                if(e.getClickCount() >= 2)
+                {
+                    String selectedData = null;
+                    JTable target = (JTable)e.getSource();
+                    selectedColumn = target.getSelectedColumn();
+                    System.out.println("Selected column "+ selectedColumn);
+                }
+            }
+        });
     }
 
     // set the layout with a scrollable table
@@ -68,7 +92,6 @@ public class LeaderBoardPanel extends JPanel {
         add(new JScrollPane(table));
     }
 
-    // set endgame background image
     /**
      * Set leaderboard background image
      *
@@ -79,7 +102,6 @@ public class LeaderBoardPanel extends JPanel {
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
     }
 
-    // bubble sort that sorts the highscores in descending order
     /**
      * Bubble sort which sorts the highscores in descending orders.
      *

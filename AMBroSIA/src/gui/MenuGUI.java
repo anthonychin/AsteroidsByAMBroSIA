@@ -73,6 +73,7 @@ public class MenuGUI implements Runnable {
     public JButton backButton = new JButton("BACK");
     //keyboard, button press handlers
     private ActionListener buttonClick;
+    
     private KeyListener keyboard;
     //whether or not we are in single player mode
     private boolean singleP = false;

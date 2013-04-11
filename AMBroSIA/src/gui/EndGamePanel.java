@@ -9,8 +9,6 @@ import java.awt.Image;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 /**
  * The
@@ -63,19 +61,22 @@ public class EndGamePanel extends JPanel {
             highscore = String.valueOf(gamestate.getCurrentScore());  
             asteroidsDestroyed = String.valueOf(gamestate.getP1asteroidDestroyed());  
             aliensDestroyed = String.valueOf(gamestate.getP1alienDestroyed());
-            //need get player 1 and 2 lives
-            killDeathRatio = String.valueOf((double)gamestate.getP1asteroidDestroyed()/5.0);
+            killDeathRatio = String.valueOf((double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getP1deaths());
+            if(gamestate.getP1deaths() == 0 )
+            {
+                killDeathRatio = String.valueOf(0);
+            }
             level = String.valueOf(gamestate.getLevel());
             bombs = String.valueOf(gamestate.getP1BombUsed());
-            shootingAccuracy = String.valueOf((double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getP1shootCounter());
-            
-     
+            shootingAccuracy = String.valueOf(100*(double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getP1shootCounter());
+            if(gamestate.getP1shootCounter() == 0 )
+            {
+                shootingAccuracy = String.valueOf(0);
+            }
         } //two player
         else {
             //player 1, player 2 scores
             int highscoreP1 = gamestate.getPlayer1Score();
-            
-
             int highscoreP2 = gamestate.getPlayer2Score();
             
             //display winner's score
@@ -84,25 +85,42 @@ public class EndGamePanel extends JPanel {
                 highscore = String.valueOf(highscoreP1);
                 asteroidsDestroyed = String.valueOf(gamestate.getP1asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gamestate.getP1alienDestroyed());
-                killDeathRatio = String.valueOf((double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getPlayerShip().getLives());
+                killDeathRatio = String.valueOf((double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getP1deaths());
+                if(gamestate.getP1deaths() == 0 )
+                {
+                    killDeathRatio = String.valueOf(0);
+                }
                 level = String.valueOf(gamestate.getPlayer1Level());
                 bombs = String.valueOf(gamestate.getP1BombUsed());
-                shootingAccuracy = String.valueOf((double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getP1shootCounter());;
+                shootingAccuracy = String.valueOf(100*(double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getP1shootCounter());
+                if(gamestate.getP1shootCounter() == 0 )
+                {
+                    shootingAccuracy = String.valueOf(0);
+                }
             } else {
                 player = "p2";
                 highscore = String.valueOf(highscoreP2);
                 asteroidsDestroyed = String.valueOf(gamestate.getP2asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gamestate.getP2alienDestroyed());
-                killDeathRatio = String.valueOf((double)gamestate.getP2asteroidDestroyed()/(double)gamestate.getPlayerShip().getLives());
+                killDeathRatio = String.valueOf((double)gamestate.getP2asteroidDestroyed()/(double)gamestate.getP1deaths());
+                if(gamestate.getP1deaths() == 0 )
+                {
+                    killDeathRatio = String.valueOf(0);
+                }
                 level = String.valueOf(gamestate.getPlayer2Level());
                 bombs = String.valueOf(gamestate.getP2BombUsed());
-                shootingAccuracy = String.valueOf(100.0*(double)gamestate.getP2asteroidDestroyed()/(double)gamestate.getP1shootCounter());;
+                shootingAccuracy = String.valueOf(100.0*(double)gamestate.getP2asteroidDestroyed()/(double)gamestate.getP1shootCounter());
+                if(gamestate.getP1shootCounter() == 0 )
+                {
+                    shootingAccuracy = String.valueOf(0);
+                }
             }
         }
         
         String[] columnData = {"", ""};
         String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", asteroidsDestroyed}, {"Aliens Destroyed", aliensDestroyed}, {"Kill-Death ratio", killDeathRatio}, {"Last level", level}, {"Bombs used", bombs}, {"Shooting Accuracy", shootingAccuracy+"%"}};
         StatisticsTable = new JTable(rowData, columnData){
+            @Override
             public boolean isCellEditable(int rowData, int columnData){
                 if (rowData == 0 && columnData == 1){
                     return true;
