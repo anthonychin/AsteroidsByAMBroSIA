@@ -10,7 +10,8 @@ import java.awt.Image;
 import javax.swing.JPanel;
 
 /**
- *
+ * A small panel that shows the AMBroSIA logo
+ * and the developer's names.
  * @author Anthony Chin
  */
 public class TitlePanel extends JPanel{

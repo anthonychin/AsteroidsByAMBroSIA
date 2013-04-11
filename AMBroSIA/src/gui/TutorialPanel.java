@@ -6,7 +6,8 @@ import java.awt.Image;
 import javax.swing.JPanel;
 
 /**
- *
+ * The tutorial menu, responsible for displaying
+ * the game's key mapping.
  * @author Haisin Yip
  */
 public class TutorialPanel extends JPanel {
