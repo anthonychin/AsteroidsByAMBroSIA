@@ -25,7 +25,7 @@ public class EndGamePanel extends JPanel {
     private JScrollPane scrollPane;
     private Image img;
 
-    // initialize size, layout and informative display
+    
     /**
      * Creates EndGamePanel using given parameters. It initializes size, layout
      * and informative display.
@@ -58,50 +58,54 @@ public class EndGamePanel extends JPanel {
         //when single player, display player's information
         if (singleP) {
             player = "p1";
-            highscore = String.valueOf(gamestate.getCurrentScore());
-            asteroidsDestroyed = String.valueOf(gamestate.getP1asteroidDestroyed());
-            aliensDestroyed = String.valueOf(gamestate.getP1alienDestroyed());;
-            killDeathRatio = "";
+            highscore = String.valueOf(gamestate.getCurrentScore());  
+            asteroidsDestroyed = String.valueOf(gamestate.getP1asteroidDestroyed());  
+            aliensDestroyed = String.valueOf(gamestate.getP1alienDestroyed());
+            //need get player 1 and 2 lives
+            killDeathRatio = String.valueOf((double)gamestate.getP1asteroidDestroyed()/5.0);
             level = String.valueOf(gamestate.getLevel());
             bombs = String.valueOf(gamestate.getP1BombUsed());
-            shootingAccuracy = "";
-            //Total Shot used
-            System.out.println(gamestate.getP1shootCounter());
+            shootingAccuracy = String.valueOf((double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getP1shootCounter());
+            
+     
         } //two player
         else {
             //player 1, player 2 scores
             int highscoreP1 = gamestate.getPlayer1Score();
-            String levelP1 = String.valueOf(gamestate.getPlayer1Level());
+            
 
             int highscoreP2 = gamestate.getPlayer2Score();
-            String levelP2 = String.valueOf(gamestate.getPlayer2Level());
             
             //display winner's score
             if (highscoreP1 >= highscoreP2) {
                 player = "p1";
                 highscore = String.valueOf(highscoreP1);
-                bombs = String.valueOf(gamestate.getP1BombUsed());
-                aliensDestroyed = String.valueOf(gamestate.getP1alienDestroyed());
                 asteroidsDestroyed = String.valueOf(gamestate.getP1asteroidDestroyed());
-                level = levelP1;
+                aliensDestroyed = String.valueOf(gamestate.getP1alienDestroyed());
+                killDeathRatio = String.valueOf((double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getPlayerShip().getLives());
+                level = String.valueOf(gamestate.getPlayer1Level());
+                bombs = String.valueOf(gamestate.getP1BombUsed());
+                shootingAccuracy = String.valueOf((double)gamestate.getP1asteroidDestroyed()/(double)gamestate.getP1shootCounter());;
             } else {
                 player = "p2";
                 highscore = String.valueOf(highscoreP2);
-                bombs = String.valueOf(gamestate.getP2BombUsed());
-                aliensDestroyed = String.valueOf(gamestate.getP2alienDestroyed());
                 asteroidsDestroyed = String.valueOf(gamestate.getP2asteroidDestroyed());
-                level = levelP2;
+                aliensDestroyed = String.valueOf(gamestate.getP2alienDestroyed());
+                killDeathRatio = String.valueOf((double)gamestate.getP2asteroidDestroyed()/(double)gamestate.getPlayerShip().getLives());
+                level = String.valueOf(gamestate.getPlayer2Level());
+                bombs = String.valueOf(gamestate.getP2BombUsed());
+                shootingAccuracy = String.valueOf(100.0*(double)gamestate.getP2asteroidDestroyed()/(double)gamestate.getP1shootCounter());;
             }
         }
 
         //fill in table info
         String[] columnData = {"", ""};
-        String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", asteroidsDestroyed}, {"Aliens Destroyed", aliensDestroyed}, {"Kill-Death ratio", "killDeathRatio"}, {"Last level", level}, {"Bombs used", bombs}, {"Shooting Accuracy", "shootingAccuracy"}};
+        String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", asteroidsDestroyed}, {"Aliens Destroyed", aliensDestroyed}, {"Kill-Death ratio", killDeathRatio}, {"Last level", level}, {"Bombs used", bombs}, {"Shooting Accuracy", shootingAccuracy+"%"}};
         StatisticsTable = new JTable(rowData, columnData);
         StatisticsTable.setPreferredScrollableViewportSize(new Dimension(w / 2, h / 6));
         StatisticsTable.setFillsViewportHeight(true);
 
-        String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + " ", "aliensdestroyed ", "Kill-Deathratio ", level + " ", bombs + " ", "shootingaccuracy"};
+        String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy+"%"};
         highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
         writer.writeToFile();
     }
@@ -113,7 +117,7 @@ public class EndGamePanel extends JPanel {
         add(new JScrollPane(StatisticsTable));
     }
 
-    // set endgame background image
+    
     /**
      * Sets endgame background image.
      *
