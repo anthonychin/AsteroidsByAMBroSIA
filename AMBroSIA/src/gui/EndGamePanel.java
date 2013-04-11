@@ -156,6 +156,7 @@ public class EndGamePanel extends JPanel {
                         writer.writeToFile();
                     }
                 });
+        //disable selecting for all cells in table
         StatisticsTable.setRowSelectionAllowed( false );
         StatisticsTable.setColumnSelectionAllowed( false );
         StatisticsTable.setCellSelectionEnabled( false );

@@ -57,7 +57,6 @@ public class LeaderBoardPanel extends JPanel {
         highScoreReader reader = new highScoreReader("./src/highscoreData/scoreInfo.txt");
         reader.openFile();
         rowdata = reader.readFile();
-        bblsort(rowdata);
         table = new JTable(rowdata, columns)
         {
              @Override
@@ -65,28 +64,27 @@ public class LeaderBoardPanel extends JPanel {
                 return false;
             }
         };
+        
+         // listen for mouse clicks and indicates which column was pressed and sort accordingly
+        table.getTableHeader().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                int tableColumn = table.columnAtPoint(e.getPoint());
+                int index = table.convertColumnIndexToModel(tableColumn);
+                        
+                bblsort(rowdata, index);
+                
+            }
+        });
+        
         table.setPreferredScrollableViewportSize(new Dimension(width / 2, height));
         table.setFillsViewportHeight(true);
         
         table.setRowSelectionAllowed( false );  
         table.setColumnSelectionAllowed( false );  
         table.setCellSelectionEnabled( false );
-        
-        // listen for mouse clicks and indicates which column was pressed
-        table.addMouseListener(new MouseAdapter()
-        {
-            @Override
-            public void mouseClicked(MouseEvent e)
-            {
-                if(e.getClickCount() >= 2)
-                {
-                    String selectedData = null;
-                    JTable target = (JTable)e.getSource();
-                    selectedColumn = target.getSelectedColumn();
-                    System.out.println("Selected column "+ selectedColumn);
-                }
-            }
-        });
     }
 
     // set the layout with a scrollable table
@@ -111,11 +109,11 @@ public class LeaderBoardPanel extends JPanel {
      *
      * @param array array that needs to be sorted
      */
-    public static void bblsort(String[][] array) {
+    public static void bblsort(String[][] array, int score) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 1; j < array.length - i; j++) {
                 // value at array[x][1] is the highscore which is used for comparison
-                if (Integer.parseInt(array[j - 1][1]) < Integer.parseInt(array[j][1])) {
+                if (Integer.parseInt(array[j - 1][score]) < Integer.parseInt(array[j][1])) {
                     String[] tmp = array[j - 1];
                     array[j - 1] = array[j];
                     array[j] = tmp;
