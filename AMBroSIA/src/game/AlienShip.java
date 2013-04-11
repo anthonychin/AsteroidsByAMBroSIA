@@ -45,6 +45,9 @@ public class AlienShip extends Ship {
                 getGameState().addBonusDrop(new BonusDrop(lastCoord, getGameState(), type));
             }
         }
+        
+        checkP1orP2();
+        
         createExplosionEffect();
     }
 
@@ -55,5 +58,14 @@ public class AlienShip extends Ship {
             int y = getY();
             getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{x, y}, 0, getGameState(), Color.MAGENTA));
         }
+    }
+    // check for p1 or p2
+    private void checkP1orP2(){
+        if(!getGameState().isPlayerTwoTurn()){
+            getGameState().addP1alienDestroyed();
+        }
+        else{
+            getGameState().addP2alienDestroyed();
+        }    
     }
 }

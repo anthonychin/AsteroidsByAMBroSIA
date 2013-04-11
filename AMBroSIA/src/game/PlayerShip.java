@@ -41,9 +41,9 @@ public class PlayerShip extends Ship {
      */
     final public static int NUM_DEBRIS = 20;
     /**
-     * Number of torpedos used when the bomb is used.
+     * Amount of debris shown when the bomb is used.
      */
-    final public static int BOMB_BARRIER = 30;
+    final public static int BOMB_EFFECT_DENSITY = 1000;
     private int bomb;
     private int shieldPoints;
     private boolean isAccelerating = false;
@@ -95,6 +95,12 @@ public class PlayerShip extends Ship {
      */
     public void useBomb() {
         if (bomb > 0) {
+            if(!getGameState().isPlayerTwoTurn()){
+                getGameState().addP1BombUsed();
+            }
+            else{
+                getGameState().addP2BombUsed();
+            }
             bomb = bomb - 1;
             GameAssets.bombUsed.play();
             createBombEffect();
@@ -154,8 +160,10 @@ public class PlayerShip extends Ship {
     public void accelerate(boolean isAccelerating) {
         if (isAccelerating) {
             this.setAcceleration(ACCELERATION);
+            this.isAccelerating = true;
         } else {
             this.setAcceleration(0);
+            this.isAccelerating = false;
         }
     }
 
@@ -207,6 +215,7 @@ public class PlayerShip extends Ship {
     @Override
     public void shoot() {
         getGameState().addProjectile(new Projectile(this, this.getHeading(), new int[]{this.getX(), this.getY()}, getGameState()));
+        checkP1orP2(1);
         GameAssets.playerFire.play();
         log.debug("Projectile added");
     }
@@ -216,6 +225,7 @@ public class PlayerShip extends Ship {
      * ship heading. Used when the space bar is held.
      */
     public void shootDirection() {
+        checkP1orP2(4);
         getGameState().addProjectile(new Projectile(this, this.getHeading() - 20, new int[]{this.getX(), this.getY()}, getGameState()));
         getGameState().addProjectile(new Projectile(this, this.getHeading() + 20, new int[]{this.getX(), this.getY()}, getGameState()));
         getGameState().addProjectile(new Projectile(this, this.getHeading() - 60, new int[]{this.getX(), this.getY()}, getGameState()));
@@ -283,10 +293,18 @@ public class PlayerShip extends Ship {
 
     //create a bomb launched effect
     private void createBombEffect() {
-        for (int i = 0; i < BOMB_BARRIER; i++) {
-            int x = getX();
-            int y = getY();
-            getGameState().addExplosion(new MapObjectTTL(new float[]{i * 360, i * -360}, i, new int[]{x, y}, 0, getGameState()));
+        for (int i = 0; i < BOMB_EFFECT_DENSITY; i++) {
+            getGameState().addExplosion(new MapObjectTTL(new float[]{Difficulty.randExplosionVelocity(), Difficulty.randExplosionVelocity()}, Difficulty.randomHeading(), new int[]{Difficulty.randomXPos(), Difficulty.randomYPos()}, 0, getGameState()));
         }
     }
+    
+    //check if P1 or P2
+    private void checkP1orP2(int counter){
+        if(!getGameState().isPlayerTwoTurn()){
+            getGameState().setP1shootCounter(counter);
+        }
+        else{
+            getGameState().setP2shootCounter(counter);
+        }    
+    }        
 }
