@@ -134,6 +134,7 @@ public class LeaderBoardPanel extends JPanel {
                         }
                     }
                 }
+                
             }
             
             // if column 1,2,3,5 or 6 is returned sort with decreasing order
@@ -151,6 +152,7 @@ public class LeaderBoardPanel extends JPanel {
                 }
             }
             
+            // if column 4 or 7 is returned sort with decreasing order
             else
             {
                 for (int i = 0; i < array.length; i++) {
