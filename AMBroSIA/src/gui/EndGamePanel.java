@@ -151,7 +151,7 @@ public class EndGamePanel extends JPanel {
                         String customName = data.toString();
                         
                         // if the name is changed to p1 or p2, do not write to file
-                        if(!customName.equals("p1") && !customName.equals("p2"))
+                        if(!customName.equals("p1") &&  !customName.equals("p2"))
                         {
                             String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
                             highScoreWriter writer = new highScoreWriter(newScoreData, "./src/highscoreData/scoreInfo.txt");
@@ -161,9 +161,12 @@ public class EndGamePanel extends JPanel {
                 });
         
         // write write to highscore text file with default name p1 or p2
-        String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
-        highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
-        writer.writeToFile();
+        if(!player.equals("p1") && !player.equals("p2")){
+            System.out.println(player);
+            String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
+            highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
+            writer.writeToFile();
+        }
         
         //disable selecting for all cells in table
         StatisticsTable.setRowSelectionAllowed( false );
