@@ -97,9 +97,14 @@ public class Collision implements Runnable {
                     } else if (collisionTwo instanceof Projectile) {
                         // AlienShip collided with a Projectile
                         collisionLogic((AlienShip) collisionOne, (Projectile) collisionTwo);
+                        checkP1orP2cleanShotCounter();
                     }
                 } else if (collisionOne instanceof Projectile) {
+                    Projectile p = (Projectile) collisionOne;
                     collisionLogic((Projectile) collisionOne, (Asteroid) collisionTwo);
+                    if(p.getOwner() == 1){
+                        checkP1orP2cleanShotCounter();
+                    }
                 }
             }
         }
@@ -215,5 +220,13 @@ public class Collision implements Runnable {
         //destroy asteroid and projectile
         projectile.destroy();
         asteroid.destroy(false);
+    }
+    
+    private void checkP1orP2cleanShotCounter(){
+        if (!gameState.isPlayerTwoTurn()) {
+            gameState.addP1cleanShotCounter();
+        } else {
+            gameState.addP2cleanShotCounter();
+        }
     }
 }

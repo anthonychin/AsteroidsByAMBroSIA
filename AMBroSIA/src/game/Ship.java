@@ -42,6 +42,7 @@ public class Ship extends MapObject {
      */
     public void setLives(int lives) {
         this.lives = lives;
+        
     }
 
     /**
@@ -51,12 +52,4 @@ public class Ship extends MapObject {
         throw new UnsupportedOperationException("Not implemented");
     }
 
-    private int[] calculateCoordinate(int[] shipCoord) {
-        shipCoord = this.getCoord();
-        int i = 0;
-        while (i < shipCoord.length) {
-            shipCoord[i] = shipCoord[i] + 1;
-        }
-        return shipCoord;
-    }
 }

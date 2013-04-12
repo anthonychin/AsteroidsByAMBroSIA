@@ -88,7 +88,15 @@ public class GameAssets {
     /**
      * Sound for warp.
      */
-    public static Sound warp; 
+    public static Sound warp;
+    /**
+     * Sound for power up.
+     */
+    public static Sound powerUp;    
+    /**
+     * Sound for space.
+     */
+    public static Sound spaceSound;        
     /**
      * Image for game background.
      */
@@ -133,6 +141,8 @@ public class GameAssets {
             thrusters = new Sound("engine1.wav");
             warp = new Sound("enter warp.wav");
             gameOver = new Sound("GameOver.wav");
+            powerUp = new Sound("PowerUp.wav");
+            spaceSound = new Sound("spaceSound.wav");
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(GameAssets.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

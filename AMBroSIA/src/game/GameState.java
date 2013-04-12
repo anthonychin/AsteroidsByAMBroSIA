@@ -76,6 +76,8 @@ public class GameState {
     private int P2BombUsed;
     private int p2AlienDestroyed;
     private int p1AlienDestroyed;
+    private int p1cleanShotCounter;
+    private int p2cleanShotCounter;    
     //synchronization objects
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
@@ -587,6 +589,42 @@ public class GameState {
         return p2shootCounter;
     }
 
+    /**
+     * Returns the number of shots that hits a target taken by Player 1.
+     *
+     * @return number of shots by Player 1
+     */
+    public int getP1cleanShot() {
+        return p1cleanShotCounter;
+    }
+
+    /**
+     * Returns the number of shots that hits a target taken by Player 2.
+     *
+     * @return number of shots by Player 2
+     */
+    public int getP2cleanShot() {
+        return p2cleanShotCounter;
+    }
+
+    /**
+     * Add the number of shots that hits a target taken by Player 1.
+     *
+     * @param shot number of shots that needs to be added to shoot counter
+     */
+    public void addP1cleanShotCounter() {
+        this.p1cleanShotCounter++;
+    }
+
+    /**
+     * Add the number of shots that hits a target taken by Player 2.
+     *
+     * @param shot number of shots that needs to be added to shoot counter
+     */
+    public void addP2cleanShotCounter() {
+        this.p2cleanShotCounter++;
+    }    
+    
     /**
      * Sets the number of shots taken by Player 1.
      *

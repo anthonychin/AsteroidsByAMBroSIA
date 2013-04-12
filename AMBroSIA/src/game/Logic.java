@@ -121,6 +121,7 @@ public class Logic extends KeyAdapter implements ActionListener {
      */
     public static void startSinglePlayer() {
         GameAssets.theme.stop();
+        GameAssets.spaceSound.playLoop();
         setUpLevel(false);
     }
 
@@ -129,6 +130,7 @@ public class Logic extends KeyAdapter implements ActionListener {
      */
     public static void startTwoPlayer() {
         GameAssets.theme.stop();
+        GameAssets.spaceSound.playLoop();
         setUpLevel(true);
     }
 
@@ -154,6 +156,7 @@ public class Logic extends KeyAdapter implements ActionListener {
      */
     public static void displayGameOver(boolean singleP) {
         //GameAssets.theme.stop();
+        GameAssets.spaceSound.stop();
         GameAssets.shields0.stop();
         GameAssets.shields1.stop();
         GameAssets.shields2.stop();

@@ -27,7 +27,7 @@ public class DescriptionPanel extends JPanel {
     /**
      * Creates DescriptionPanel with given GameState.
      *
-     * @param gs current game state
+     * @param gameState current game state
      */
     public DescriptionPanel(GameState gameState) {
         this.gameState = gameState;

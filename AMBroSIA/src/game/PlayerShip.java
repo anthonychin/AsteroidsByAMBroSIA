@@ -86,6 +86,7 @@ public class PlayerShip extends Ship {
      *
      */
     public void addBomb() {
+        GameAssets.powerUp.play();
         this.bomb++;
     }
 
@@ -130,13 +131,15 @@ public class PlayerShip extends Ship {
      */
     public void setShieldPoints(int shieldpoints) {
         this.shieldPoints = shieldpoints;
-        if (this.shieldPoints == 3) {
+        if (this.shieldPoints > 3) {
+            GameAssets.powerUp.play();
+        } else if (this.shieldPoints == 3) {
             GameAssets.shields3.play();
         } else if (this.shieldPoints == 2) {
             GameAssets.shields2.play();
-        } else if (this.shieldPoints == 1) {
+        } else if (this.shieldPoints == 1){
             GameAssets.shields1.play();
-        } else if(this.shieldPoints == 0) {
+        } else{
             GameAssets.shields0.play();
         }
     }
