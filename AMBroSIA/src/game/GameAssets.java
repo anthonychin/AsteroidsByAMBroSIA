@@ -148,7 +148,7 @@ public class GameAssets {
      */
     public static void loadImages() {
         spaceBackground = new ImageIcon(GameAssets.class.getResource("images/spaceBackground.jpg")).getImage();
-        tutorialImage = new ImageIcon(GameAssets.class.getResource("images/keyboard.jpg")).getImage();
+        tutorialImage = new ImageIcon(GameAssets.class.getResource("images/keyboard.png")).getImage();
         gameOverImage = new ImageIcon(GameAssets.class.getResource("images/GameOver.jpg")).getImage();
         menuImage = new ImageIcon(GameAssets.class.getResource("images/asteroids.jpg")).getImage();
         titleImage = new ImageIcon(GameAssets.class.getResource("images/AMBRoSIA.png")).getImage();
