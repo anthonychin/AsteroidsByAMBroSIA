@@ -13,7 +13,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  * The
@@ -30,7 +29,6 @@ public class LeaderBoardPanel extends JPanel {
     private Image img;
     private String[] columns = {"Player", "Highscore", "Asteroid Destroyed", "Aliens destroyed", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
     String[][] rowdata;
-    private static JScrollPane scrollPane;
     private int selectedColumn;
 
     /**
@@ -84,7 +82,6 @@ public class LeaderBoardPanel extends JPanel {
         //make table visible
         table.setPreferredScrollableViewportSize(new Dimension(width / 2, height));
         table.setFillsViewportHeight(true);
-        scrollPane = new JScrollPane(table);
     }
 
     // set the layout with a scrollable table
@@ -100,7 +97,7 @@ public class LeaderBoardPanel extends JPanel {
         table.setShowGrid(false);
         
         add(table);
-        add(scrollPane);
+        add(new JScrollPane(table));
         
     }
 
