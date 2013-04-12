@@ -291,6 +291,7 @@ public class MenuGUI implements Runnable {
      */
     public void goBack() {
         cardLayout.show(card, "Menu");
+        GameAssets.theme.playLoop();
         //don't want keyboard working in menu
         frame.setFocusable(false);
     }

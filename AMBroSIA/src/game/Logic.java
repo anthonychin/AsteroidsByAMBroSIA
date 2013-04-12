@@ -153,7 +153,12 @@ public class Logic extends KeyAdapter implements ActionListener {
      * @param singleP true if in single player mode, false otherwise
      */
     public static void displayGameOver(boolean singleP) {
-        GameAssets.theme.stop();
+        //GameAssets.theme.stop();
+        GameAssets.shields0.stop();
+        GameAssets.shields1.stop();
+        GameAssets.shields2.stop();
+        GameAssets.shields3.stop();
+        GameAssets.gameOver.play();
         gui.displayGameOver(gameState, singleP);
     }
 

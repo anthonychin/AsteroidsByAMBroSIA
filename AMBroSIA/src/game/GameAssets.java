@@ -88,7 +88,7 @@ public class GameAssets {
     /**
      * Sound for warp.
      */
-    public static Sound warp;
+    public static Sound warp; 
     /**
      * Image for game background.
      */
@@ -116,7 +116,6 @@ public class GameAssets {
     public static void loadSounds() {
         try {
             victory = new Sound("GoalsComplete.wav");
-            gameOver = new Sound("MissionFailed.wav");
             noBombs = new Sound("NoTorpedos.wav");
             bombUsed = new Sound("TorpedoFired.wav");
             shields3 = new Sound("Shields100.wav");
@@ -133,6 +132,7 @@ public class GameAssets {
             alienDetected = new Sound("Incoming1.wav");
             thrusters = new Sound("engine1.wav");
             warp = new Sound("enter warp.wav");
+            gameOver = new Sound("GameOver.wav");
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(GameAssets.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
