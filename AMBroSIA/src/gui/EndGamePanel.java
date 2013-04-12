@@ -61,7 +61,7 @@ public class EndGamePanel extends JPanel {
 
         //when single player, display player's information
         if (singleP) {
-            player = "p1";
+            player = "Enter Your Name Here, Player1";
             highscore = String.valueOf(gameState.getCurrentScore());  
             asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());  
             aliensDestroyed = String.valueOf(gameState.getP1alienDestroyed());
@@ -85,7 +85,7 @@ public class EndGamePanel extends JPanel {
             
             //display winner's score
             if (highscoreP1 >= highscoreP2) {
-                player = "p1";
+                player = "Enter Your Name Here, Player1";
                 highscore = String.valueOf(highscoreP1);
                 asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gameState.getP1alienDestroyed());
@@ -102,7 +102,7 @@ public class EndGamePanel extends JPanel {
                     shootingAccuracy = String.valueOf(0);
                 }
             } else {
-                player = "p2";
+                player = "Enter Your Name Here, Player2";
                 highscore = String.valueOf(highscoreP2);
                 asteroidsDestroyed = String.valueOf(gameState.getP2asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gameState.getP2alienDestroyed());
@@ -150,8 +150,8 @@ public class EndGamePanel extends JPanel {
                         Object data = model.getValueAt(row, column);
                         String customName = data.toString();
                         
-                        // if the name is changed to p1 or p2, do not write to file
-                        if(!customName.equals("p1") &&  !customName.equals("p2"))
+                        // write to file if the player name is changed to something different than the default "Enter Your Name Here, Player1(2)"
+                        if(!customName.equals("Enter Your Name Here, Player1") &&  !customName.equals("Enter Your Name Here, Player2"))
                         {
                             String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
                             highScoreWriter writer = new highScoreWriter(newScoreData, "./src/highscoreData/scoreInfo.txt");
@@ -159,14 +159,6 @@ public class EndGamePanel extends JPanel {
                         }
                     }
                 });
-        
-        // write write to highscore text file with default name p1 or p2
-        if(!player.equals("p1") && !player.equals("p2")){
-            System.out.println(player);
-            String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
-            highScoreWriter writer = new highScoreWriter(scoreData, "./src/highscoreData/scoreInfo.txt");
-            writer.writeToFile();
-        }
         
         //disable selecting for all cells in table
         StatisticsTable.setRowSelectionAllowed( false );

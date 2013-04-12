@@ -17,7 +17,7 @@ public class highScoreWriter
     private File file;
     
     // use delimiter to separate the different string tokens in the text file
-    private final String delimiter = " Ħ ";
+    private final String delimiter = "Ħ";
     
     // initializes data to be written, path, and file
     public highScoreWriter(String[] data, String path)
@@ -60,8 +60,16 @@ public class highScoreWriter
                 BufferedWriter fwriter = new BufferedWriter(new FileWriter(path, true));
                 for(int i = 0 ; i < scoreData.length ; i++)
                 {
-                    fwriter.write(scoreData[i]);
-                    fwriter.write(delimiter);
+                    if(i < scoreData.length-1)
+                    {
+                        fwriter.write(scoreData[i]);
+                        fwriter.write(delimiter);
+                    }
+                    
+                    else if(i == scoreData.length-1)
+                    {
+                        fwriter.write(scoreData[i]);
+                    }
                 }
                 fwriter.newLine();
                 fwriter.close();

@@ -43,6 +43,14 @@ public class highScoreReader
                 {   
                     String scoresLine = fileScanner.nextLine();
                     String[] scores  = scoresLine.split(delims);
+                    for(int i = 0 ; i < scores.length ; i++)
+                    {
+                        System.out.println(scores[i]);
+                        if(i == scores.length - 1)
+                        {
+                            System.out.println("end of array");
+                        }
+                    }
                     scoreList.add(scores);
                 }
                 fileScanner.close();
@@ -73,6 +81,7 @@ public class highScoreReader
         {
             for(int j = 0 ; j < 8 ; j++)
             {
+                System.out.println(arr[i][j]);
                 arr[i][j] = list.get(i)[j];
             }
         }

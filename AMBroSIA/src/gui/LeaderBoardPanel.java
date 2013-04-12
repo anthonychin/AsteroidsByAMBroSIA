@@ -75,7 +75,6 @@ public class LeaderBoardPanel extends JPanel {
                 int index = table.convertColumnIndexToModel(tableColumn);
                         
                 bblsort(rowdata, index);
-                
             }
         });
       
@@ -97,8 +96,7 @@ public class LeaderBoardPanel extends JPanel {
         table.setShowGrid(false);
         
         add(table);
-        add(new JScrollPane(table));
-        
+        add(new JScrollPane(table));   
     }
 
     /**
@@ -132,7 +130,10 @@ public class LeaderBoardPanel extends JPanel {
                     flag = false;
                     for ( j = 0;  j < array.length - 1;  j++ )
                     {
-                        if ( array[j][scoreType].compareToIgnoreCase( array[j+1][scoreType] ) > 0 )
+                        
+                        String s1 = array[j+1][scoreType].trim();
+                        String s2 = array[j][scoreType].trim();
+                        if ( s2.compareToIgnoreCase( s1 ) > 0 )
                         {                                             
                             String[] tmp = array[j];
                             array[j] = array[j+1];     
@@ -145,12 +146,16 @@ public class LeaderBoardPanel extends JPanel {
             }
             
             // if column 1,2,3,5 or 6 is returned sort with decreasing order
-            else if((scoreType >=1 && scoreType <= 3) || scoreType == 5 || scoreType == 6)
+            else if((scoreType == 1 || scoreType == 3) || scoreType == 5 || scoreType == 6)
             {
                 for (int i = 0; i < array.length; i++) {
                     for (int j = 1; j < array.length - i; j++) {
-                        // value at array[x][1] is the highscore which is used for comparison
-                        if (Integer.parseInt(array[j - 1][scoreType]) < Integer.parseInt(array[j][1])) {
+                        // value at array[x][scoreType] is used for comparison 
+                        // eg at scoreType = 1, the highscore is used for comparison
+                        String s1 = array[j-1][scoreType].trim();
+                        String s2 = array[j][scoreType].trim();
+                      
+                        if (Integer.parseInt(s1) < Integer.parseInt(s2)) {
                             String[] tmp = array[j - 1];
                             array[j - 1] = array[j];
                             array[j] = tmp;
@@ -164,8 +169,11 @@ public class LeaderBoardPanel extends JPanel {
             {
                 for (int i = 0; i < array.length; i++) {
                     for (int j = 1; j < array.length - i; j++) {
-                        // value at array[x][1] is the highscore which is used for comparison
-                        if (Double.parseDouble(array[j - 1][scoreType]) < Double.parseDouble(array[j][1])) {
+                        
+                        String s1 = array[j-1][scoreType].trim();
+                        String s2 = array[j][scoreType].trim();
+                        
+                        if (Double.parseDouble(s1) < Double.parseDouble(s2)) {
                             String[] tmp = array[j - 1];
                             array[j - 1] = array[j];
                             array[j] = tmp;
