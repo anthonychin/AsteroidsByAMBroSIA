@@ -160,7 +160,7 @@ public class EndGamePanel extends JPanel {
                     }
                 });
         
-        // write write to highscore text file with default name p1 or p2
+        // write write to highscore text file without p1 or p2
         if(!player.equals("p1") && !player.equals("p2")){
             System.out.println(player);
             String[] scoreData = {player + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
