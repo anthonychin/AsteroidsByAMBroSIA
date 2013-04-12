@@ -80,7 +80,7 @@ public class LeaderBoardPanel extends JPanel {
         });
       
         //make table visible
-        table.setPreferredScrollableViewportSize(new Dimension(width / 2, height));
+        table.setPreferredScrollableViewportSize(new Dimension(width / 2, height / 2));
         table.setFillsViewportHeight(true);
     }
 
