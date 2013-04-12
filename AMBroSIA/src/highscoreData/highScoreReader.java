@@ -19,7 +19,7 @@ public class highScoreReader
     private Scanner fileScanner;
     private String path;
     private File file;
-    private final String delims = "Ħ";
+    private final String delims = ";";
     
     // initializes the path and a file
     public highScoreReader(String path)
