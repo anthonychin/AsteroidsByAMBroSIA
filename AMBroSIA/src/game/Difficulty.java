@@ -25,7 +25,7 @@ public class Difficulty {
     final private static int ALIEN_SPAWN_RATE = 20;
     final private static int INITIAL_ASTEROID_SPEED = 20;
     final private static int INITIAL_ALIEN_SPEED = 10;
-    final private static int MAX_LEVEL = 20;
+    final private static int MAX_LEVEL = 30;
     final private static Random rand = new Random();
 
     /**
@@ -46,7 +46,11 @@ public class Difficulty {
     public static float randomAsteroidVelocity(int level) {
         float ratio = (float) level / MAX_LEVEL;
         int maxVal = (int) (ratio * INITIAL_ASTEROID_SPEED);
-        return randomFloat() * (randomInt(1, INITIAL_ASTEROID_SPEED));
+        float speed = randomFloat() * (randomInt(1, INITIAL_ASTEROID_SPEED)) ;
+        while(speed < 0.5){
+            speed = randomFloat() * (randomInt(1, INITIAL_ASTEROID_SPEED));
+        }
+        return speed;
     }
 
     /**
@@ -71,7 +75,11 @@ public class Difficulty {
      * @return random velocity for alien
      */
     public static float randomAlienVelocity() {
-        return randomFloat() * randomInt(1, 10);
+        float speed = randomFloat() * randomInt(1,10);
+        while (speed < 0.5){
+            speed = randomFloat() * randomInt(1,10);
+        }
+        return speed;
     }
 
     /**
