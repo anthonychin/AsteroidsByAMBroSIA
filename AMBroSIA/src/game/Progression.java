@@ -112,7 +112,7 @@ public class Progression implements Runnable {
         //start at level 1 (note: player ship needed, as setupLevel has as precondition that player ship != null
         //play warping in sound
         GameAssets.warp.play();
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, 1, 3, 1));
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, 3, 3, 3));
         setupLevel(1);
 
         //in case of 2 player, setupLevel saves the old score, so erase it
