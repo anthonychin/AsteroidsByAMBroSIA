@@ -150,8 +150,6 @@ public class EndGamePanel extends JPanel {
                         Object data = model.getValueAt(row, column);
                         String customName = data.toString();
                         
-                        System.out.println(customName);
-                        
                         // if the name is changed to p1 or p2, do not write to file
                         if(!customName.equals("p1") && !customName.equals("p2"))
                         {

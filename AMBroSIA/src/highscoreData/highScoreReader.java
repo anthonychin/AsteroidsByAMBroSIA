@@ -19,7 +19,7 @@ public class highScoreReader
     private Scanner fileScanner;
     private String path;
     private File file;
-    private final String delims = ";";
+    private final String delims = "Ħ";
     
     // initializes the path and a file
     public highScoreReader(String path)
@@ -43,7 +43,7 @@ public class highScoreReader
                 {   
                     String scoresLine = fileScanner.nextLine();
                     String[] scores  = scoresLine.split(delims);
-                    
+                    System.out.println("length is " + scores.length);
                     scoreList.add(scores);
                 }
                 fileScanner.close();
