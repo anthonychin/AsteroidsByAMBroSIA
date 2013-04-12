@@ -16,7 +16,14 @@ public class Progression implements Runnable {
     private boolean istwoPlayer = false;
     private boolean playerOneTurn = true;
     private boolean spawnAlien = true;
+
+    private final static int INITIAL_LEVEL = 1;    
+    private final static int INITIAL_LIVES = 3;
+    private final static int INITIAL_BOMB = 1;
+    private final static int INITIAL_SHIELD = 0;
+    
     private final static Logger log = Logger.getLogger(Progression.class.getName());
+
 
     /**
      * Creates Progression using given parameter.
@@ -111,8 +118,8 @@ public class Progression implements Runnable {
         //start at level 1 (note: player ship needed, as setupLevel has as precondition that player ship != null
         //play warping in sound
         GameAssets.warp.play();
-        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, 3, 3, 3));
-        setupLevel(1);
+        gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, INITIAL_LIVES, INITIAL_BOMB, INITIAL_SHIELD));
+        setupLevel(INITIAL_LEVEL);
 
         //in case of 2 player, setupLevel saves the old score, so erase it
         gameState.resetCurrentScore();
