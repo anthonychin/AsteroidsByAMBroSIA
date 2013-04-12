@@ -43,7 +43,6 @@ public class highScoreReader
                 {   
                     String scoresLine = fileScanner.nextLine();
                     String[] scores  = scoresLine.split(delims);
-                    System.out.println("length is " + scores.length);
                     scoreList.add(scores);
                 }
                 fileScanner.close();
@@ -95,6 +94,7 @@ public class highScoreReader
                 e.printStackTrace();
             }
         }
+        // else if there is no file to read from, create a new blank file
         else
         {
             file = new File(path);
