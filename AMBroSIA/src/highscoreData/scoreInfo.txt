@@ -24,3 +24,6 @@ En Y\ Ħ530 Ħ8 Ħ1 Ħ8.0 Ħ1 Ħ0 Ħ26.6666666666667
 Enter Y\ Ħ530 Ħ8 Ħ1 Ħ8.0 Ħ1 Ħ0 Ħ26.0
 hello world Ħ130 Ħ3 Ħ0 Ħ3.0 Ħ1 Ħ0 Ħ150.0
 hello world world Ħ80 Ħ2 Ħ0 Ħ2.0 Ħ1 Ħ0 Ħ200.0
+I put my name once Ħ380 Ħ9 Ħ1 Ħ9.0 Ħ3 Ħ2 Ħ0
+I put my name twice Ħ380 Ħ9 Ħ1 Ħ9.0 Ħ3 Ħ2 Ħ0
+I put my name three time Ħ380 Ħ9 Ħ1 Ħ9.0 Ħ3 Ħ2 Ħ0
