@@ -119,7 +119,7 @@ public class LeaderBoardPanel extends JPanel {
         if(scoreType >= 0)
         {
             
-            // if first column is returned, then sort names alphabeticaly
+            // if first column is returned, then sort names alphabeticaly in increasing order
             if(scoreType == 0)
             {
                 int j;
