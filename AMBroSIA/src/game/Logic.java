@@ -87,7 +87,6 @@ public class Logic extends KeyAdapter implements ActionListener {
      * tasks concurrently.
      */
     public static void startTimer() {
-
         timer = Executors.newScheduledThreadPool(4);
         timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
         timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
@@ -135,12 +134,6 @@ public class Logic extends KeyAdapter implements ActionListener {
     }
 
     /**
-     * Shows tutorial information to the player.
-     */
-    public static void showTutorial() {
-    }
-
-    /**
      * Checks if the game is paused.
      *
      * @return true if game is paused, false otherwise
@@ -165,12 +158,6 @@ public class Logic extends KeyAdapter implements ActionListener {
         gui.displayGameOver(gameState, singleP);
     }
 
-    /**
-     * Display information relevant to player two's turn.
-     */
-    public static void displayPlayerTwoTurn() {
-    }
-
     //set up some game essentials
     private static void setUpLevel(boolean twoPlayer) {
         gameState = new GameState();
@@ -182,11 +169,6 @@ public class Logic extends KeyAdapter implements ActionListener {
         gameAI = new AI(gameState);
         gameProgress.setupInitialLevel();
 
-    }
-    
-    public static void showLevelTransition()
-    {
-        
     }
 
     //called whenever a key is pressed (thread seperate from timer)

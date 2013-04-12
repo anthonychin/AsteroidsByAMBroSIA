@@ -69,7 +69,6 @@ public class Progression implements Runnable {
                     //restart game for player 2, save player 1 score
                     int player1Score = gameState.getCurrentScore();
                     int player1Level = gameState.getLevel();
-                    Logic.displayPlayerTwoTurn();
                     setupInitialLevel();
                     gameState.setPlayer1Score(player1Score);
                     gameState.setPlayer1Level(player1Level);
