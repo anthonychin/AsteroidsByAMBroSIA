@@ -43,14 +43,7 @@ public class highScoreReader
                 {   
                     String scoresLine = fileScanner.nextLine();
                     String[] scores  = scoresLine.split(delims);
-                    for(int i = 0 ; i < scores.length ; i++)
-                    {
-                        System.out.println(scores[i]);
-                        if(i == scores.length - 1)
-                        {
-                            System.out.println("end of array");
-                        }
-                    }
+                    
                     scoreList.add(scores);
                 }
                 fileScanner.close();
