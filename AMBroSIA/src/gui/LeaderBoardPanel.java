@@ -9,6 +9,7 @@ import javax.swing.JTable;
 
 import game.GameState;
 import highscoreData.highScoreReader;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -92,6 +93,10 @@ public class LeaderBoardPanel extends JPanel {
         table.setColumnSelectionAllowed( false );  
         table.setCellSelectionEnabled( false );
         
+        // set font
+        table.getTableHeader().setFont(new Font("SansSerif", Font.ITALIC, 13));
+        table.setFont(new Font("SansSerif", Font.BOLD, 12));
+        
         // disable the displaying of grids
         table.setShowGrid(false);
         
@@ -146,7 +151,7 @@ public class LeaderBoardPanel extends JPanel {
             }
             
             // if column 1,2,3,5 or 6 is returned sort with decreasing order
-            else if((scoreType == 1 || scoreType == 3) || scoreType == 5 || scoreType == 6)
+            else if(scoreType == 1 || scoreType == 2 || scoreType == 3 || scoreType == 5 || scoreType == 6)
             {
                 for (int i = 0; i < array.length; i++) {
                     for (int j = 1; j < array.length - i; j++) {
