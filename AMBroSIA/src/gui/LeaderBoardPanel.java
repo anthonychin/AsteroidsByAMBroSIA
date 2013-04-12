@@ -30,7 +30,7 @@ public class LeaderBoardPanel extends JPanel {
     private Image img;
     private String[] columns = {"Player", "Highscore", "Asteroid Destroyed", "Aliens destroyed", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
     String[][] rowdata;
-    private JScrollPane scrollPane;
+    private static JScrollPane scrollPane;
     private int selectedColumn;
 
     /**
@@ -84,6 +84,7 @@ public class LeaderBoardPanel extends JPanel {
         //make table visible
         table.setPreferredScrollableViewportSize(new Dimension(width / 2, height));
         table.setFillsViewportHeight(true);
+        scrollPane = new JScrollPane(table);
     }
 
     // set the layout with a scrollable table
@@ -95,13 +96,11 @@ public class LeaderBoardPanel extends JPanel {
         table.setColumnSelectionAllowed( false );  
         table.setCellSelectionEnabled( false );
         
-        // attempt to make JTable transparent
-        table.setOpaque(false);
-        ((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+        // disable the displaying of grids
         table.setShowGrid(false);
         
         add(table);
-        add(new JScrollPane(table));
+        add(scrollPane);
         
     }
 
