@@ -31,15 +31,12 @@ public class BonusDrop extends MapObjectTTL {
      * An int value that declares the type of bonus drop to 1 shield point.
      */
     final public static int SHIELD_ONE_POINT_DROP = 4;
-    
     final private static Color LIFE_COLOR = Color.GREEN;
     final private static Color BOMB_COLOR = Color.RED;
     final private static Color SHIELD = Color.BLUE;
-    private int type;
-    //10 sec.
+    private static int type;
     final private int TIME_TO_LIVE = 75;
 
-    //create bonus drop
     /**
      * Creates bonus drop with given parameters.
      *
@@ -52,21 +49,15 @@ public class BonusDrop extends MapObjectTTL {
         this.type = type;
         this.setTTL(TIME_TO_LIVE);
         //set color based on type: 
-        if (type == BOMB_BONUS_DROP)
-        {
+        if (type == BOMB_BONUS_DROP) {
             this.setColor(BOMB_COLOR);
-        }
-        else if (type == LIFE_BONUS_DROP)
-        {
+        } else if (type == LIFE_BONUS_DROP) {
             this.setColor(LIFE_COLOR);
-        }
-        else if ((type == SHIELD_THREE_POINTS_DROP) ||  (type == SHIELD_TWO_POINTS_DROP) ||  (type == SHIELD_ONE_POINT_DROP))
-        {
+        } else if ((type == SHIELD_THREE_POINTS_DROP) || (type == SHIELD_TWO_POINTS_DROP) || (type == SHIELD_ONE_POINT_DROP)) {
             this.setColor(SHIELD);
         }
     }
 
-    //the type of bonus drop
     /**
      * Returns the type of bonus drop.
      *
@@ -76,7 +67,9 @@ public class BonusDrop extends MapObjectTTL {
         return this.type;
     }
 
-    //remove the bonus drop from the game
+    /**
+     * Remove the bonus drop from the game
+     */
     @Override
     public void destroy() {
         getGameState().removeBonusDrop(this);
