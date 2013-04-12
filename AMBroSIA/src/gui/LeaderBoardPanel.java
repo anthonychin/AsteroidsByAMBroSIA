@@ -53,7 +53,7 @@ public class LeaderBoardPanel extends JPanel {
 
     // construct the main components and informative content 
     private void makeComponents(int width, int height) {
-        highScoreReader reader = new highScoreReader("./src/highscoreData/scoreInfo.txt");
+        highScoreReader reader = new highScoreReader(System.getProperty("user.dir") + "/scoreInfo.txt");
         reader.openFile();
         rowdata = reader.readFile();
         table = new JTable(rowdata, columns)

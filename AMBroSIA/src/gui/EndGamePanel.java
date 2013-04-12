@@ -154,7 +154,7 @@ public class EndGamePanel extends JPanel {
                         if(!customName.equals("Enter Your Name Here, Player1") &&  !customName.equals("Enter Your Name Here, Player2"))
                         {
                             String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
-                            highScoreWriter writer = new highScoreWriter(newScoreData, "./src/highscoreData/scoreInfo.txt");
+                            highScoreWriter writer = new highScoreWriter(newScoreData, System.getProperty("user.dir") + "/scoreInfo.txt");
                             writer.writeToFile();
                         }
                     }
