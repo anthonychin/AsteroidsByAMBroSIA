@@ -161,6 +161,6 @@ public class GameAssets {
         tutorialImage = new ImageIcon(GameAssets.class.getResource("images/keyboard.png")).getImage();
         gameOverImage = new ImageIcon(GameAssets.class.getResource("images/GameOver.jpg")).getImage();
         menuImage = new ImageIcon(GameAssets.class.getResource("images/asteroids.jpg")).getImage();
-        titleImage = new ImageIcon(GameAssets.class.getResource("images/AMBRoSIA.png")).getImage();
+        titleImage = new ImageIcon(GameAssets.class.getResource("images/AMBroSIA.png")).getImage();
     }
 }
