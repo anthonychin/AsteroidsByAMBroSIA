@@ -48,7 +48,7 @@ public class PlayerShipTest {
     
     @Test
     public void getShieldPoints() {
-        assertEquals("There should be 3 shield points when started", ps.getShieldPoints() , 3);
+        assertEquals("There should be 3 shield points when started", ps.getShieldPoints() , 0);
     }
 
     @Test

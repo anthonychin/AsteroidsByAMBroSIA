@@ -4,6 +4,7 @@ package UnitTests;
 import game.Sound;
 import game.GameAssets;
 import game.GameState;
+import game.PlayerShip;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +21,8 @@ public class SoundTest {
         GameAssets.loadSounds();
     }
     
-    @Ignore
     @Test
-    // Doesnt play. Will check later
+    // Doesnt play. Do not know why it doesnt play
     public void playSound(){
         GameAssets.theme.playLoop();
         GameAssets.theme.play();

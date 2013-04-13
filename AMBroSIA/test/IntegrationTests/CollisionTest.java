@@ -2,9 +2,7 @@ package IntegrationTests;
 
 import static org.mockito.Mockito.*;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import game.*;
 import static game.Collision.ALIEN_SHIELD_DAMAGE;
@@ -12,102 +10,267 @@ import static game.Collision.LARGE_ASTEROID_SHIELD_DAMAGE;
 import static game.Collision.MEDIUM_ASTEROID_SHIELD_DAMAGE;
 import static game.Collision.PROJECTILE_SHIELD_DAMAGE;
 import static game.Collision.SMALL_ASTEROID_SHIELD_DAMAGE;
-import gui.MenuGUI;
-import java.awt.Polygon;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
+
+
 /**
  *
  * @author Anthony Chin
  */
 public class CollisionTest {
+
     private GameState gameState;
-    private Logic logic;
-    private MapObject mapObject;
     private MapObjectTTL ttlObj;
-    private Physics physicEngine;
-    private Collision collision;
     private AlienShip alienShip;
     private PlayerShip playerShip;
     private Asteroid roid;
     private BonusDrop bd;
-    private static GraphicsEngine graphicsEngine;
-    private static Physics physicsEngine;
-    private static timeToLive ttlLogic;
-    private static Collision collisionCheck;
-    private static Progression gameProgress;
-    private static AI gameAI;
-    private Projectile p2;
-    private Projectile p;
-
-    private static ActionListener buttonPress = new Logic();
-    private static KeyListener keyboard = new Logic();    
-    
-    private static MenuGUI gui;
+    private static Projectile p2;
+    private static Projectile p;
     private static ScheduledExecutorService timer;
-    
-    
+
     @Before
-    public void setUp(){
+    public void setUp() {
         //gui = new MenuGUI(buttonPress,keyboard);
         gameState = new GameState();
-        physicEngine = new Physics(gameState);
-        graphicsEngine = new GraphicsEngine(gameState);
-        collision = new Collision(gameState,physicsEngine);
-        ttlLogic = new timeToLive(gameState);
-        gameProgress = new Progression(gameState, false);
-        gameAI = new AI(gameState);
-        
+
         GameAssets.loadSounds();
 
         timer = Executors.newScheduledThreadPool(4);
-        //timer.scheduleAtFixedRate(graphicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-        //timer.scheduleAtFixedRate(physicsEngine, 0, 17, TimeUnit.MILLISECONDS);
-        //timer.scheduleAtFixedRate(collision, 0, 17, TimeUnit.MILLISECONDS);
-        //timer.scheduleAtFixedRate(gui, 0, 17, TimeUnit.MILLISECONDS);
-        
+
     }
-    
+
     @After
-    public void tearDown(){
+    public void tearDown() {
         gameState = null;
-        mapObject = null;
-        collision = null;
         timer.shutdown();
     }
-    
+
+    // Due to majority of the collision methods are in private and what calls it is the run method, the best way to test is to make my own test cases and check the collision logic
     @Test
-    public void testCollision(){
-        mapObject = mock(MapObject.class);
-        ttlObj = new MapObjectTTL(new float[]{1.5f, 1.5f}, 350f, new int[]{650, 450},4, gameState);
+    public void testCollisionPlayerAlien() {
         playerShip = new PlayerShip(new float[]{1, 1}, 45, new int[]{360, 260}, gameState, 1, 0, 0);
-        alienShip = new AlienShip(new float[]{0,0}, 0, new int[]{400,300}, gameState);
-        roid = new Asteroid(new float[]{1.5f, 1.5f}, 350, new int[]{650, 450}, gameState, Asteroid.LARGE_ASTEROID_SIZE);
-        bd = new BonusDrop(new int[]{400,400}, gameState, 0);
-        p = new Projectile(playerShip, 350f, new int[]{600, 500},gameState);
-        p2 = new Projectile(alienShip, 350f, new int[]{610, 510},gameState);                
+        alienShip = new AlienShip(new float[]{0, 0}, 0, new int[]{400, 280}, gameState);
+        
         gameState.addAlienShip(alienShip);
         gameState.addPlayerShip(playerShip);
-        gameState.addExplosion(ttlObj);
+        // Sum of Polygon length
+        // X boundary : 16 + 40
+        // Y boundary : 20 + 14 (ship + alienship)
+        if ((Math.abs(gameState.getPlayerShip().getX() - gameState.getAlienShip().getX()) <= 16 + 40 && (Math.abs(gameState.getPlayerShip().getY() - gameState.getAlienShip().getY()) <= 20 + 14))) {
+            collisionLogic(playerShip, alienShip);
+        }
+        assertNull("player ship destroyed", gameState.getPlayerShip());
+    }
+
+    @Test
+    public void testCollisionPlayerAsteroid() {
+        playerShip = new PlayerShip(new float[]{1, 1}, 45, new int[]{360, 260}, gameState, 1, 0, 0);
+        roid = new Asteroid(new float[]{1.5f, 1.5f}, 350, new int[]{400, 300}, gameState, Asteroid.LARGE_ASTEROID_SIZE);
+        gameState.addPlayerShip(playerShip);
         gameState.addAsteroid(roid);
+        // sum of polygon length
+        // X boundary : 16 + 100
+        // Y boundary : 20 + 109 (ship + asteroid)
+        if ((Math.abs(gameState.getPlayerShip().getX() - gameState.getAsteroids().get(0).getX()) <= 16 + 100 && (Math.abs(gameState.getPlayerShip().getY() - gameState.getAsteroids().get(0).getY()) <= 20 + 109))) {
+            collisionLogic(playerShip, roid);
+        }
+
+        assertNull("player ship destroyed", gameState.getPlayerShip());
+    }
+
+    @Test
+    public void testCollisionPlayerProjectile() {
+        playerShip = new PlayerShip(new float[]{1, 1}, 45, new int[]{590, 509}, gameState, 1, 0, 0);
+        alienShip = new AlienShip(new float[]{0, 0}, 0, new int[]{400, 300}, gameState);
+        p = new Projectile(playerShip, 350f, new int[]{600, 500}, gameState);
+        p2 = new Projectile(alienShip, 350f, new int[]{595, 510}, gameState);
+
+        gameState.resetToDefaults();
+        gameState.addPlayerShip(playerShip);
+        gameState.addAlienShip(alienShip);
+        gameState.addProjectile(p);
+        gameState.addProjectile(p2);
+        // Summ of polygon length
+        // X boundary : 16 + 6
+        // Y boundary : 20 + 6 (ship + prjectile)
+        if ((Math.abs(gameState.getPlayerShip().getX() - gameState.getProjectiles().get(1).getX()) <= 16 + 6 && (Math.abs(gameState.getPlayerShip().getY() - gameState.getProjectiles().get(1).getY()) <= 20 + 6))) {
+            collisionLogic(playerShip, p2);
+        }
+        assertNull("player ship destroyed", gameState.getPlayerShip());
+    }
+
+    @Test
+    public void testCollisionPlayerBonusDrop() {
+        playerShip = new PlayerShip(new float[]{1, 1}, 45, new int[]{590, 509}, gameState, 1, 0, 0);
+        bd = new BonusDrop(new int[]{591, 500}, gameState, 0);
+
+
+        gameState.resetToDefaults();
+        gameState.addPlayerShip(playerShip);
         gameState.addBonusDrop(bd);
+        // X boundary : 16 + 16 (with respect to polygon length)
+        // Y boundary : 20 + 16 (ship + bonus)
+        if ((Math.abs(gameState.getPlayerShip().getX() - gameState.getBonusDrops().get(0).getX()) <= 16 + 16 && (Math.abs(gameState.getPlayerShip().getY() - gameState.getBonusDrops().get(0).getY()) <= 20 + 16))) {
+            collisionLogic(playerShip, bd);
+        }
+        assertEquals("bonus destroyed", gameState.getBonusDrops().size(), 0);
+    }
+
+    @Test
+    public void testCollisionAlienShipPlayerShip() {
+        playerShip = new PlayerShip(new float[]{1, 1}, 45, new int[]{360, 260}, gameState, 1, 0, 0);
+        alienShip = new AlienShip(new float[]{0, 0}, 0, new int[]{400, 280}, gameState);
+
+        gameState.addAlienShip(alienShip);
+        gameState.addPlayerShip(playerShip);
+
+
+        // X boundary : 16 + 40 
+        // Y boundary : 20 + 14 (ship + alienShip)
+        if ((Math.abs(gameState.getPlayerShip().getX() - gameState.getAlienShip().getX()) <= 16 + 40 && (Math.abs(gameState.getPlayerShip().getY() - gameState.getAlienShip().getY()) <= 20 + 14))) {
+            collisionLogic(playerShip, alienShip);
+        }
+        assertNull("alien ship destroyed", gameState.getAlienShip());
+
+    }
+
+    @Test
+    public void testCollisionProjectilePlayer() {
+        playerShip = new PlayerShip(new float[]{1, 1}, 45, new int[]{590, 509}, gameState, 1, 0, 0);
+        alienShip = new AlienShip(new float[]{0, 0}, 0, new int[]{400, 300}, gameState);
+        p = new Projectile(playerShip, 350f, new int[]{600, 500}, gameState);
+        p2 = new Projectile(alienShip, 350f, new int[]{595, 510}, gameState);
+
+        gameState.resetToDefaults();
+        gameState.addPlayerShip(playerShip);
+        gameState.addAlienShip(alienShip);
         gameState.addProjectile(p);
         gameState.addProjectile(p2);
 
-        // X boundary : 16 + 40
-        // Y boundary : 20 + 14 (ship + aship)
-        if((Math.abs(gameState.getPlayerShip().getX() - gameState.getAlienShip().getX()) <= 16 + 40 || (Math.abs(gameState.getPlayerShip().getY() - gameState.getAlienShip().getY()) <= 20 + 14))){
-            collisionLogic(playerShip,alienShip);
+        // X boundary : 16 + 6
+        // Y boundary : 20 + 6 (ship + prjectile)
+        if ((Math.abs(gameState.getPlayerShip().getX() - gameState.getProjectiles().get(1).getX()) <= 16 + 6 && (Math.abs(gameState.getPlayerShip().getY() - gameState.getProjectiles().get(1).getY()) <= 20 + 6))) {
+            collisionLogic(playerShip, p2);
         }
-        assertNull("player ship destroyed", gameState.getPlayerShip());
-        
+        assertEquals("only player projectile exist", gameState.getProjectiles().size(), 1);
+    }
+
+    @Test
+    public void testCollisionAsteroidPlayer() {
+        playerShip = new PlayerShip(new float[]{1, 1}, 45, new int[]{360, 260}, gameState, 1, 0, 0);
+        roid = new Asteroid(new float[]{1.5f, 1.5f}, 350, new int[]{400, 300}, gameState, Asteroid.LARGE_ASTEROID_SIZE);
+        gameState.addPlayerShip(playerShip);
+        gameState.addAsteroid(roid);
+        // X boundary : 16 + 100
+        // Y boundary : 20 + 109 (ship + asteroid)
+        if ((Math.abs(gameState.getPlayerShip().getX() - gameState.getAsteroids().get(0).getX()) <= 16 + 100 && (Math.abs(gameState.getPlayerShip().getY() - gameState.getAsteroids().get(0).getY()) <= 20 + 109))) {
+            collisionLogic(playerShip, roid);
+        }
+
+        assertEquals("2 asteroids", gameState.getAsteroids().size(),2);
+    }
+
+    @Test
+    public void testCollisionProjectileAlien() {
+        playerShip = new PlayerShip(new float[]{1, 1}, 45, new int[]{590, 509}, gameState, 1, 0, 0);
+        alienShip = new AlienShip(new float[]{0, 0}, 0, new int[]{400, 300}, gameState);
+        p = new Projectile(playerShip, 350f, new int[]{403, 302}, gameState);
+        p2 = new Projectile(alienShip, 350f, new int[]{595, 510}, gameState);
+
+        gameState.resetToDefaults();
+        gameState.addPlayerShip(playerShip);
+        gameState.addAlienShip(alienShip);
+        gameState.addProjectile(p2);
+        gameState.addProjectile(p);
+        // Polygon boundary conditions
+        // X boundary : 40 + 6 
+        // Y boundary : 14 + 6 (alienship + prjectile)
+        if ((Math.abs(gameState.getAlienShip().getX() - gameState.getProjectiles().get(1).getX()) <= 40 + 6 && (Math.abs(gameState.getAlienShip().getY() - gameState.getProjectiles().get(1).getY()) <= 14 + 6))) {
+            collisionLogic(alienShip, p);
+        }
+        assertEquals("only player projectile exist", gameState.getProjectiles().size(), 1);
+    }    
+    
+    @Test
+    public void testCollisionAlienProjectile() {
+        playerShip = new PlayerShip(new float[]{1, 1}, 45, new int[]{590, 509}, gameState, 1, 0, 0);
+        alienShip = new AlienShip(new float[]{0, 0}, 0, new int[]{400, 300}, gameState);
+        p = new Projectile(playerShip, 350f, new int[]{403, 302}, gameState);
+        p2 = new Projectile(alienShip, 350f, new int[]{595, 510}, gameState);
+
+        gameState.resetToDefaults();
+        gameState.addPlayerShip(playerShip);
+        gameState.addAlienShip(alienShip);
+        gameState.addProjectile(p2);
+        gameState.addProjectile(p);
+        // Polygon boundary conditions
+        // X boundary : 40 + 6 
+        // Y boundary : 14 + 6 (alienship + prjectile)
+        if ((Math.abs(gameState.getAlienShip().getX() - gameState.getProjectiles().get(1).getX()) <= 40 + 6 && (Math.abs(gameState.getAlienShip().getY() - gameState.getProjectiles().get(1).getY()) <= 14 + 6))) {
+            collisionLogic(alienShip, p);
+        }
+        assertNull("alien is dead", gameState.getAlienShip());
+    } 
+
+    @Test
+    public void testCollisionAsteroidAlien() {
+        alienShip = new AlienShip(new float[]{0, 0}, 0, new int[]{400, 300}, gameState);
+        roid = new Asteroid(new float[]{1.5f, 1.5f}, 350, new int[]{400, 300}, gameState, Asteroid.LARGE_ASTEROID_SIZE);
+        gameState.addAlienShip(alienShip);
+        gameState.addAsteroid(roid);
+        // X boundary : 40 + 100
+        // Y boundary : 14 + 109 (alienship + asteroid)
+        if ((Math.abs(gameState.getAlienShip().getX() - gameState.getAsteroids().get(0).getX()) <= 40 + 100 && (Math.abs(gameState.getAlienShip().getY() - gameState.getAsteroids().get(0).getY()) <= 14 + 109))) {
+            collisionLogic(alienShip, roid);
+        }
+
+        assertEquals("2 asteroids", gameState.getAsteroids().size(),2);
+    }    
+
+    @Test
+    public void testCollisionAlienAsteroid() {
+        alienShip = new AlienShip(new float[]{0, 0}, 0, new int[]{400, 300}, gameState);
+        roid = new Asteroid(new float[]{1.5f, 1.5f}, 350, new int[]{400, 300}, gameState, Asteroid.LARGE_ASTEROID_SIZE);
+        gameState.addAlienShip(alienShip);
+        gameState.addAsteroid(roid);
+        // X boundary : 40 + 100
+        // Y boundary : 14 + 109 (alienship + asteroid)
+        if ((Math.abs(gameState.getAlienShip().getX() - gameState.getAsteroids().get(0).getX()) <= 40 + 100 && (Math.abs(gameState.getAlienShip().getY() - gameState.getAsteroids().get(0).getY()) <= 14 + 109))) {
+            collisionLogic(alienShip, roid);
+        }
+
+        assertNull("alien collisions",gameState.getAlienShip());
+    }
+    
+    @Test
+    public void testCollisionProjectileAsteroid(){
+        roid = new Asteroid(new float[]{1.5f, 1.5f}, 350, new int[]{400, 300}, gameState, Asteroid.LARGE_ASTEROID_SIZE);
+        p = new Projectile(playerShip, 350f, new int[]{403, 302}, gameState);
+        gameState.addProjectile(p);
+        gameState.addAsteroid(roid);
+        // X boundary : 6 + 100
+        // Y boundary : 6 + 109 (alienship + asteroid)
+        if ((Math.abs(gameState.getProjectiles().get(0).getX() - gameState.getAsteroids().get(0).getX()) <= 6 + 100 && (Math.abs(gameState.getProjectiles().get(0).getY() - gameState.getAsteroids().get(0).getY()) <= 6 + 109))) {
+            collisionLogic(p, roid);
+        }       
+        assertEquals("size of projectile list is empty", gameState.getProjectiles().size(),0);   
+    }
+
+    @Test
+    public void testCollisionAsteroidProjectile(){
+        roid = new Asteroid(new float[]{1.5f, 1.5f}, 350, new int[]{400, 300}, gameState, Asteroid.LARGE_ASTEROID_SIZE);
+        p = new Projectile(playerShip, 350f, new int[]{403, 302}, gameState);
+        gameState.addProjectile(p);
+        gameState.addAsteroid(roid);
+        // X boundary : 6 + 100
+        // Y boundary : 6 + 109 (alienship + asteroid)
+        if ((Math.abs(gameState.getProjectiles().get(0).getX() - gameState.getAsteroids().get(0).getX()) <= 6 + 100 && (Math.abs(gameState.getProjectiles().get(0).getY() - gameState.getAsteroids().get(0).getY()) <= 6 + 109))) {
+            collisionLogic(p, roid);
+        }       
+        assertEquals("asteroid size is 2", gameState.getAsteroids().size(),2);   
     }
     
     private boolean collisionLogic(PlayerShip playerShip, Asteroid asteroid) {
