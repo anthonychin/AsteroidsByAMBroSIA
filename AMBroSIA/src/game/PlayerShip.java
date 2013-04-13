@@ -44,6 +44,9 @@ public class PlayerShip extends Ship {
      * Amount of debris shown when the bomb is used.
      */
     final public static int BOMB_EFFECT_DENSITY = 1000;
+    
+    final public static int MAX_BOMBS = 3;
+    
     private int bomb;
     private int shieldPoints;
     private boolean isAccelerating = false;
@@ -88,6 +91,9 @@ public class PlayerShip extends Ship {
     public void addBomb() {
         GameAssets.powerUp.play();
         this.bomb++;
+        if (this.bomb > 3) {
+            this.bomb = MAX_BOMBS;
+        }
     }
 
     /**
