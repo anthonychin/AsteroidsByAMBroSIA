@@ -1,8 +1,8 @@
 package IntegrationTests;
 
-import MapObjects.MapObject;
-import MapObjects.AlienShip;
-import MapObjects.PlayerShip;
+import mapObjects.MapObject;
+import mapObjects.AlienShip;
+import mapObjects.PlayerShip;
 import game.*;
 import java.util.ArrayList;
 import org.junit.After;

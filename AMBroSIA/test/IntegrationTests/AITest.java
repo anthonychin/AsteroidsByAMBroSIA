@@ -1,7 +1,7 @@
 package IntegrationTests;
 
-import MapObjects.AlienShip;
-import MapObjects.PlayerShip;
+import mapObjects.AlienShip;
+import mapObjects.PlayerShip;
 import game.*;
 import org.junit.After;
 import org.junit.Before;

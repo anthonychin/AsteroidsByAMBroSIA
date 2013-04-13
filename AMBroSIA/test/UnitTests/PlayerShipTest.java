@@ -4,7 +4,7 @@ package UnitTests;
 import game.GameAssets;
 import game.GameState;
 import game.Logic;
-import MapObjects.PlayerShip;
+import mapObjects.PlayerShip;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.management.timer.Timer;

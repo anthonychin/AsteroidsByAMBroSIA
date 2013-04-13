@@ -1,11 +1,11 @@
 package game;
 
-import MapObjects.AlienShip;
-import MapObjects.MapObject;
-import MapObjects.Projectile;
-import MapObjects.PlayerShip;
-import MapObjects.MapObjectTTL;
-import MapObjects.Asteroid;
+import mapObjects.AlienShip;
+import mapObjects.MapObject;
+import mapObjects.Projectile;
+import mapObjects.PlayerShip;
+import mapObjects.MapObjectTTL;
+import mapObjects.Asteroid;
 import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;

@@ -1,7 +1,7 @@
 
 package UnitTests;
 
-import MapObjects.AlienShip;
+import mapObjects.AlienShip;
 import game.GameAssets;
 import game.GameState;
 import org.junit.After;

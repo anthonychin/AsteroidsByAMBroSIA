@@ -1,10 +1,10 @@
 package UnitTests;
 
-import MapObjects.AlienShip;
-import MapObjects.Projectile;
-import MapObjects.Asteroid;
-import MapObjects.BonusDrop;
-import MapObjects.PlayerShip;
+import mapObjects.AlienShip;
+import mapObjects.Projectile;
+import mapObjects.Asteroid;
+import mapObjects.BonusDrop;
+import mapObjects.PlayerShip;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

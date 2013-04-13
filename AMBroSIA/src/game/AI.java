@@ -1,8 +1,8 @@
 package game;
 
-import MapObjects.AlienShip;
-import MapObjects.Projectile;
-import MapObjects.PlayerShip;
+import mapObjects.AlienShip;
+import mapObjects.Projectile;
+import mapObjects.PlayerShip;
 import java.util.ArrayList;
 
 /**

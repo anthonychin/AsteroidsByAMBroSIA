@@ -1,7 +1,7 @@
 
 package UnitTests;
 
-import MapObjects.MapObject;
+import mapObjects.MapObject;
 import game.GameAssets;
 import game.GameState;
 import org.junit.After;

@@ -4,7 +4,7 @@ package UnitTests;
 import game.Sound;
 import game.GameAssets;
 import game.GameState;
-import MapObjects.PlayerShip;
+import mapObjects.PlayerShip;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

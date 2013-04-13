@@ -1,12 +1,12 @@
 package game;
 
-import MapObjects.AlienShip;
-import MapObjects.MapObject;
-import MapObjects.Projectile;
-import MapObjects.PlayerShip;
-import MapObjects.BonusDrop;
-import MapObjects.Asteroid;
-import MapObjects.MapObjectTTL;
+import mapObjects.AlienShip;
+import mapObjects.MapObject;
+import mapObjects.Projectile;
+import mapObjects.PlayerShip;
+import mapObjects.BonusDrop;
+import mapObjects.Asteroid;
+import mapObjects.MapObjectTTL;
 import gui.MenuGUI;
 import java.awt.Polygon;
 import java.util.ArrayList;
