@@ -248,7 +248,7 @@ public class PlayerShip extends Ship {
     public void destroy() {
         createExplosionEffect();
 
-        if (getLives() > 1) {
+        if (getLives() >= 1) {
             resetShip();
         } else {
             getGameState().removePlayerShip();

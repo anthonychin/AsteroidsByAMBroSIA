@@ -6,9 +6,10 @@ import java.util.Arrays;
 import org.apache.log4j.Logger;
 
 /**
- * Handles all code involving collision between two objects,
- * including player and alien collisions.  Relies on
- * the destroy() methods of objects that inherit from MapObject.
+ * Handles all code involving collision between two objects, including player
+ * and alien collisions. Relies on the destroy() methods of objects that inherit
+ * from MapObject.
+ *
  * @author Nikolaos Bukas
  */
 public class Collision implements Runnable {
@@ -46,7 +47,7 @@ public class Collision implements Runnable {
     public Collision(GameState gameState, Physics physics) {
         log.setLevel(LOG_LEVEL);
         physicsEngine = physics;
-       this.gameState = gameState;
+        this.gameState = gameState;
     }
 
     /**
@@ -97,7 +98,7 @@ public class Collision implements Runnable {
                 } else if (collisionOne instanceof Projectile) {
                     Projectile p = (Projectile) collisionOne;
                     collisionLogic((Projectile) collisionOne, (Asteroid) collisionTwo);
-                    if(p.getOwner() == 1){
+                    if (p.getOwner() == 1) {
                         checkP1orP2cleanShotCounter();
                     }
                 }
@@ -112,29 +113,23 @@ public class Collision implements Runnable {
         if (asteroid.getSize() == Asteroid.LARGE_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= LARGE_ASTEROID_SHIELD_DAMAGE) {
                 playerShip.setShieldPoints(playerShip.getShieldPoints() - LARGE_ASTEROID_SHIELD_DAMAGE);
-            } else if (playerShip.getLives() == 1) {
-                playerShip.destroy();
             } else {
-                playerShip.setLives(playerShip.getLives() - 1);
                 playerShip.destroy();
+                playerShip.setLives(playerShip.getLives() - 1);
             }
         } else if (asteroid.getSize() == Asteroid.MEDIUM_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= MEDIUM_ASTEROID_SHIELD_DAMAGE) {
                 playerShip.setShieldPoints(playerShip.getShieldPoints() - MEDIUM_ASTEROID_SHIELD_DAMAGE);
-            } else if (playerShip.getLives() == 1) {
-                playerShip.destroy();
             } else {
-                playerShip.setLives(playerShip.getLives() - 1);
                 playerShip.destroy();
+                playerShip.setLives(playerShip.getLives() - 1);
             }
         } else if (asteroid.getSize() == Asteroid.SMALL_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= SMALL_ASTEROID_SHIELD_DAMAGE) {
                 playerShip.setShieldPoints(playerShip.getShieldPoints() - SMALL_ASTEROID_SHIELD_DAMAGE);
-            } else if (playerShip.getLives() == 1) {
-                playerShip.destroy();
             } else {
-                playerShip.setLives(playerShip.getLives() - 1);
                 playerShip.destroy();
+                playerShip.setLives(playerShip.getLives() - 1);
             }
         }
 
@@ -164,11 +159,9 @@ public class Collision implements Runnable {
         //take care of shield damage (and player destruction if necessary), and return true if the alien has been destroyed
         if (playerShip.getShieldPoints() >= ALIEN_SHIELD_DAMAGE) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() - ALIEN_SHIELD_DAMAGE);
-        } else if (playerShip.getLives() == 1) {
-            playerShip.destroy();
         } else {
-            playerShip.setLives(playerShip.getLives() - 1);
             playerShip.destroy();
+            playerShip.setLives(playerShip.getLives() - 1);
         }
         alienShip.destroy(false);
         //return has the player been removed
@@ -180,11 +173,9 @@ public class Collision implements Runnable {
         //deal with shield effects, and destroy player if necessary.
         if (playerShip.getShieldPoints() >= PROJECTILE_SHIELD_DAMAGE) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() - PROJECTILE_SHIELD_DAMAGE);
-        } else if (playerShip.getLives() == 1) {
-            playerShip.destroy();
         } else {
-            playerShip.setLives(playerShip.getLives() - 1);
             playerShip.destroy();
+            playerShip.setLives(playerShip.getLives() - 1);
         }
 
         //always destroy projectile
@@ -214,8 +205,8 @@ public class Collision implements Runnable {
         projectile.destroy();
         asteroid.destroy(false);
     }
-    
-    private void checkP1orP2cleanShotCounter(){
+
+    private void checkP1orP2cleanShotCounter() {
         if (!gameState.isPlayerTwoTurn()) {
             gameState.addP1cleanShotCounter();
         } else {
