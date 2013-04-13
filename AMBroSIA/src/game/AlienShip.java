@@ -6,12 +6,12 @@ import java.awt.Color;
  * The
  * <code>AlienShip</code> class defines all the properties and methods
  * appropriate to the alien ships that are not included in Ship.
+ * @author Anthony Chin
  */
 public class AlienShip extends Ship {
 
     final private static int NUM_DEBRIS = 20;
 
-    //create alien
     /**
      * Create AlienShip using given parameters.
      *
@@ -26,7 +26,6 @@ public class AlienShip extends Ship {
         GameAssets.alienDetected.play();
     }
 
-    //remove alien from game: add bonus drop where it was destroyed, play destruction sound, add sto core
     /**
      * Removes alien from the game state. Adds bonus drop where it was
      * destroyed, plays destruction sound, and adds score.
@@ -44,9 +43,7 @@ public class AlienShip extends Ship {
                 getGameState().addBonusDrop(new BonusDrop(lastCoord, getGameState(), type));
             }
         }
-
         checkP1orP2();
-
         createExplosionEffect();
     }
 
@@ -59,7 +56,6 @@ public class AlienShip extends Ship {
         }
     }
     // check for p1 or p2
-
     private void checkP1orP2() {
         if (!getGameState().isPlayerTwoTurn()) {
             getGameState().addP1alienDestroyed();

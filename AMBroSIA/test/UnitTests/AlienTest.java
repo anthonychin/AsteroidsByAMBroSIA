@@ -17,33 +17,33 @@ import org.junit.Ignore;
  */
 public class AlienTest {
     private GameState gameState;
-    private AlienShip as;
+    private AlienShip alienShip;
     
     @Before
     public void setUp(){
         gameState = new GameState();
         GameAssets.loadSounds();
-        as = new AlienShip(new float[]{1.5f,1.5f}, 20, new int[]{800,600}, gameState);
+        alienShip = new AlienShip(new float[]{1.5f,1.5f}, 20, new int[]{800,600}, gameState);
     }
     
     @After
     public void tearDown(){
         gameState = null;
-        as = null;
+        alienShip = null;
     }
     
     @Test
     public void killAllAlien(){
-        gameState.addAlienShip(as);
-        as.destroy(false);
+        gameState.addAlienShip(alienShip);
+        alienShip.destroy(false);
         assertNull("Alien should not exist", gameState.getAlienShip());
         assertEquals("Bonus drop should exist", gameState.getBonusDrops().size(), 1);
     }
     
     @Test
     public void killAlienWithBomb(){
-        gameState.addAlienShip(as);
-        as.destroy(true);
+        gameState.addAlienShip(alienShip);
+        alienShip.destroy(true);
         assertNull("Alien should not exist", gameState.getAlienShip());
         assertEquals("Bonus drop shouldnt exist", gameState.getBonusDrops().size(), 0);
     }

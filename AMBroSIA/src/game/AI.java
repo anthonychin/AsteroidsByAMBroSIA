@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * @author Anthony Chin
  */
 public class AI implements Runnable {
-
     private GameState gameState;
 
     /**
@@ -22,7 +21,6 @@ public class AI implements Runnable {
         this.gameState = gameState;
     }
 
-    //for AI thread
     /**
      * Runs targetPS method, which targets player ship and fires.
      */
@@ -30,22 +28,6 @@ public class AI implements Runnable {
         targetPS();
     }
 
-    /**
-     * Returns coordinates representing the path it should follow.
-     *
-     * @return set of path coordinates
-     */
-    public ArrayList<int[]> pathFind() {
-        return null;
-    }
-
-    /**
-     * The path that alien ship traverses before disappearing.
-     */
-    public void alienPath() {
-    }
-
-    //get player, target it and fire
     /**
      * Finds the set of coordinates of where the player ship is and shoots the
      * projectile.

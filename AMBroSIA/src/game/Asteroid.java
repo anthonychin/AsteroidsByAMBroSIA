@@ -86,7 +86,6 @@ public class Asteroid extends MapObject {
                 getGameState().addToCurrentScore(GameState.SMALL_ASTEROID_SCORE);
             }
         }
-
         //bomb or no bomb, remove asteroid
         getGameState().removeAsteroid(this);
         createExplosionEffect();

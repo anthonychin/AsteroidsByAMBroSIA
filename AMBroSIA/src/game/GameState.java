@@ -131,7 +131,6 @@ public class GameState {
         }
     }
 
-    //add a whole list of asteroids at once
     /**
      * Adds list of asteroids at once.
      *
@@ -722,7 +721,6 @@ public class GameState {
         }
     }
 
-    //essentially, performs the function of the bomb - remove alien & all asteroids
     /**
      * Performs the function of the bomb. Removes alien and all asteroids.
      */

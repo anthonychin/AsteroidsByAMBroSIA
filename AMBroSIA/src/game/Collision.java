@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
  */
 public class Collision implements Runnable {
 
-    //number of shield points used by colliding with various objects
     /**
      * Number of shield points used by colliding with alien ship.
      */
@@ -50,7 +49,6 @@ public class Collision implements Runnable {
        this.gameState = gameState;
     }
 
-    //actual collision check code
     /**
      * Checks collision.
      */
@@ -73,17 +71,14 @@ public class Collision implements Runnable {
                     if (collisionTwo instanceof AlienShip) {
                         // PlayerShip collided with AlienShip
                         if (collisionLogic((PlayerShip) collisionOne, (AlienShip) collisionTwo)) {
-                            //break;
                         }
                     } else if (collisionTwo instanceof Asteroid) {
                         // PlayerShip collided with an Asteroid
                         if (collisionLogic((PlayerShip) collisionOne, (Asteroid) collisionTwo)) {
-                            //break;
                         }
                     } else if (collisionTwo instanceof Projectile) {
                         // PlayerShip collided with a Projectile
                         if (collisionLogic((PlayerShip) collisionOne, (Projectile) collisionTwo)) {
-                            //break;
                         }
                     } else if (collisionTwo instanceof BonusDrop) {
                         // PlayerShip collided with a BonusDrop
@@ -112,9 +107,7 @@ public class Collision implements Runnable {
 
     private boolean collisionLogic(PlayerShip playerShip, Asteroid asteroid) {
         log.debug("Collision between Player and Asteroid");
-
         asteroid.destroy(false);
-
         //based on asteroid size, deal with player ship shield effects and destroy if necessary
         if (asteroid.getSize() == Asteroid.LARGE_ASTEROID_SIZE) {
             if (playerShip.getShieldPoints() >= LARGE_ASTEROID_SHIELD_DAMAGE) {
@@ -163,7 +156,6 @@ public class Collision implements Runnable {
         } else if (bonusDrop.getType() == BonusDrop.SHIELD_THREE_POINTS_DROP) {
             playerShip.setShieldPoints(playerShip.getShieldPoints() + 3);
         }
-
         bonusDrop.destroy();
     }
 
@@ -178,7 +170,6 @@ public class Collision implements Runnable {
             playerShip.setLives(playerShip.getLives() - 1);
         }
         alienShip.destroy(false);
-
         //return has the player been removed
         return gameState.getPlayerShip() == null;
     }

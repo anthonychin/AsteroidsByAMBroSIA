@@ -16,7 +16,6 @@ import javax.swing.ImageIcon;
  */
 public class GameAssets {
 
-    //all sounds and images are accessible
     /**
      * Sound for victory.
      */

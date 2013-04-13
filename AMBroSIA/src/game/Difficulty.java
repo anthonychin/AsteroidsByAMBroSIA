@@ -15,17 +15,19 @@ public class Difficulty {
     final private static int INITIAL_BONUS_DROP_RATE = 30;
     final private static int BOMB_DROP_RATE = 10;
     final private static int LIFE_DROP_RATE = 20;
-    final private static int SHIELD_ONE_DROP_RATE = 100;
+
     final private static int SHIELD_TWO_DROP_RATE = 70;
     final private static int SHIELD_THREE_DROP_RATE = 40;
     final private static int ASTEROID_SPAWN_RATE = 100;
-    final private static int LARGE_ASTEROID_SPAWN_RATE = 50;
     final private static int MEDIUM_ASTEROID_SPAWN_RATE = 30;
     final private static int SMALL_ASTEROID_SPAWN_RATE = 20;
     final private static int ALIEN_SPAWN_RATE = 20;
-    final private static int INITIAL_ASTEROID_SPEED = 20;
-    final private static int INITIAL_ALIEN_SPEED = 10;
-    final private static int MAX_LEVEL = 30;
+    final private static int INITIAL_ASTEROID_SPEED = 1;
+    final private static int FINAL_ASTEROID_SPEED = 20;
+    
+    final private static int INITIAL_ALIEN_SPEED = 1;
+    final private static int FINAL_ALIEN_SPEED = 10;    
+
     final private static Random rand = new Random();
 
     /**
@@ -44,11 +46,9 @@ public class Difficulty {
      * @return random velocity for asteroid
      */
     public static float randomAsteroidVelocity(int level) {
-        float ratio = (float) level / MAX_LEVEL;
-        int maxVal = (int) (ratio * INITIAL_ASTEROID_SPEED);
-        float speed = randomFloat() * (randomInt(1, INITIAL_ASTEROID_SPEED)) ;
+        float speed = randomFloat() * (randomInt(INITIAL_ASTEROID_SPEED, FINAL_ASTEROID_SPEED)) ;
         while(speed < 0.5){
-            speed = randomFloat() * (randomInt(1, INITIAL_ASTEROID_SPEED));
+            speed = randomFloat() * (randomInt(INITIAL_ASTEROID_SPEED, FINAL_ASTEROID_SPEED));
         }
         return speed;
     }
@@ -59,6 +59,7 @@ public class Difficulty {
      * @return random size for asteroid
      */
     public static int randomAsteroidSize() {
+        //random algorithm to spawn asteroid size
         int val = randomInt(0, 100);
         if (val <= SMALL_ASTEROID_SPAWN_RATE) {
             return Asteroid.SMALL_ASTEROID_SIZE;
@@ -75,9 +76,9 @@ public class Difficulty {
      * @return random velocity for alien
      */
     public static float randomAlienVelocity() {
-        float speed = randomFloat() * randomInt(1,10);
+        float speed = randomFloat() * randomInt(INITIAL_ALIEN_SPEED,FINAL_ALIEN_SPEED);
         while (speed < 0.5){
-            speed = randomFloat() * randomInt(1,10);
+            speed = randomFloat() * randomInt(INITIAL_ALIEN_SPEED,FINAL_ALIEN_SPEED);
         }
         return speed;
     }
