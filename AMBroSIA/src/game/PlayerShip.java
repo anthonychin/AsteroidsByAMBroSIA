@@ -91,7 +91,7 @@ public class PlayerShip extends Ship {
     public void addBomb() {
         GameAssets.powerUp.play();
         this.bomb++;
-        if (this.bomb > 3) {
+        if (this.bomb > MAX_BOMBS) {
             this.bomb = MAX_BOMBS;
         }
     }
