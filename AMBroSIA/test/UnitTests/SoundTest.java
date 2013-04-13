@@ -4,7 +4,7 @@ package UnitTests;
 import game.Sound;
 import game.GameAssets;
 import game.GameState;
-import game.PlayerShip;
+import MapObjects.PlayerShip;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,8 @@ public class SoundTest {
     }
     
     @Test
-    // Doesnt play. Do not know why it doesnt play
+    // Unforuntately the sound do not play. Please run other tests such as Collision.
+    // You can hear the sound playing from there
     public void playSound(){
         GameAssets.theme.playLoop();
         GameAssets.theme.play();

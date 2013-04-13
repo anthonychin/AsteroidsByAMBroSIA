@@ -1,5 +1,11 @@
 package IntegrationTests;
 
+import MapObjects.AlienShip;
+import MapObjects.Projectile;
+import MapObjects.MapObjectTTL;
+import MapObjects.Asteroid;
+import MapObjects.BonusDrop;
+import MapObjects.PlayerShip;
 import static org.mockito.Mockito.*;
 import org.junit.After;
 import org.junit.Before;

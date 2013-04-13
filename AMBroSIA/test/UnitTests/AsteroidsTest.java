@@ -4,7 +4,7 @@
  */
 package UnitTests;
 
-import game.Asteroid;
+import MapObjects.Asteroid;
 import game.GameAssets;
 import game.GameState;
 import org.junit.After;

@@ -1,10 +1,10 @@
 package UnitTests;
 
-import game.AlienShip;
-import game.Projectile;
+import MapObjects.AlienShip;
+import MapObjects.Projectile;
 import game.GameAssets;
 import game.GameState;
-import game.PlayerShip;
+import MapObjects.PlayerShip;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

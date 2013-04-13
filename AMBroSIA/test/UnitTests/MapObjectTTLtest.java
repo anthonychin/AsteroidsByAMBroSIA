@@ -4,7 +4,7 @@
  */
 package UnitTests;
 
-import game.MapObjectTTL;
+import MapObjects.MapObjectTTL;
 import game.GameAssets;
 import game.GameState;
 import org.junit.After;
