@@ -31,7 +31,7 @@ public class PlayerShipTest {
         gameState = new GameState(); 
         GameAssets.loadSounds();
         //Logic.startTimer();
-        ps = new PlayerShip(new float[]{0, 0}, 0, new int[]{800, 600}, gameState, 3, 1, 3);
+        ps = new PlayerShip(new float[]{0, 0}, 0, new int[]{800, 600}, gameState, 3, 1, 0);
     }
     
     @After
