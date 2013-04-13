@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -65,8 +66,15 @@ public class Logic extends KeyAdapter implements ActionListener {
      * @param args
      */
     public static void main(String args[]) {
-        GameAssets.loadSounds();
-        GameAssets.loadImages();
+
+        try {
+            GameAssets.loadSounds();
+            GameAssets.loadImages();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString(), "Image/Sound Loading Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
         //set log configuration to defaults
         BasicConfigurator.configure();
 
