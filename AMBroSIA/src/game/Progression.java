@@ -17,10 +17,10 @@ public class Progression implements Runnable {
     private boolean playerOneTurn = true;
     private boolean spawnAlien = true;
 
-    private final static int INITIAL_LEVEL = 1;    
-    private final static int INITIAL_LIVES = 3;
-    private final static int INITIAL_BOMB = 1;
-    private final static int INITIAL_SHIELD = 0;
+    private final int INITIAL_LEVEL = 1;    
+    private final int INITIAL_LIVES = 3;
+    private final int INITIAL_BOMB = 1;
+    private final int INITIAL_SHIELD = 0;
     
     private final static Logger log = Logger.getLogger(Progression.class.getName());
 
@@ -136,11 +136,12 @@ public class Progression implements Runnable {
             int oldScore = gameState.getCurrentScore();
             int oldPlayerLives = playerShip.getLives();
             int oldPlayerBomb = playerShip.getBomb();
+            int oldPlayerShield = playerShip.getShieldPoints();
             boolean playerTwo = gameState.isPlayerTwoTurn();
 
             //reset to default, and setup for next level
             gameState.resetToDefaults();
-            gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, oldPlayerLives, oldPlayerBomb, 3));
+            gameState.addPlayerShip(new PlayerShip(new float[]{0, 0}, 0, new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2}, gameState, oldPlayerLives, oldPlayerBomb, oldPlayerShield));
             addAsteroids(levelNumber);
             gameState.setLevel(levelNumber++);
             gameState.addToCurrentScore(oldScore);

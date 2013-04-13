@@ -263,7 +263,8 @@ public class PlayerShip extends Ship {
                 //to center of screen
                 getGameState().getPlayerShip().setCoord(new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2});
                 getGameState().getPlayerShip().setVelocity(new float[]{0, 0});
-                getGameState().getPlayerShip().setShieldPoints(3);
+                getGameState().getPlayerShip().setShieldPoints(0);
+                getGameState().getPlayerShip().addBomb();
                 getGameState().getPlayerShip().setHeading(0);
                 getGameState().getPlayerShip().turnLeft(false);
                 getGameState().getPlayerShip().turnRight(false);

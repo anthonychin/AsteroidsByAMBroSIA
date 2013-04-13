@@ -168,6 +168,7 @@ public class Collision implements Runnable {
             playerShip.destroy();
         } else {
             playerShip.setLives(playerShip.getLives() - 1);
+            playerShip.destroy();
         }
         alienShip.destroy(false);
         //return has the player been removed
@@ -183,6 +184,7 @@ public class Collision implements Runnable {
             playerShip.destroy();
         } else {
             playerShip.setLives(playerShip.getLives() - 1);
+            playerShip.destroy();
         }
 
         //always destroy projectile
