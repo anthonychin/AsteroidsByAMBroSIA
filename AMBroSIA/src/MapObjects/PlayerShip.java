@@ -1,5 +1,9 @@
-package game;
+package MapObjects;
 
+import game.Difficulty;
+import game.GameAssets;
+import game.GameState;
+import game.Logic;
 import static game.Logic.executeTask;
 import gui.MenuGUI;
 import java.awt.Color;

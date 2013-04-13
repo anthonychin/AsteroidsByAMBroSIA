@@ -1,5 +1,6 @@
-package game;
+package MapObjects;
 
+import game.GameState;
 import java.awt.Polygon;
 
 /**

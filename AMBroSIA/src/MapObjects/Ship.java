@@ -1,4 +1,6 @@
-package game;
+package MapObjects;
+
+import game.GameState;
 
 /**
  * The

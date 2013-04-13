@@ -1,5 +1,7 @@
 package game;
 
+import MapObjects.BonusDrop;
+import MapObjects.Asteroid;
 import gui.MenuGUI;
 import java.util.Random;
 

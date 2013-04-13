@@ -1,5 +1,8 @@
 package game;
 
+import MapObjects.AlienShip;
+import MapObjects.Projectile;
+import MapObjects.PlayerShip;
 import java.util.ArrayList;
 
 /**
@@ -25,14 +28,14 @@ public class AI implements Runnable {
      * Runs targetPS method, which targets player ship and fires.
      */
     public void run() {
-        targetPS();
+        targetPlayerShip();
     }
 
     /**
      * Finds the set of coordinates of where the player ship is and shoots the
      * projectile.
      */
-    public void targetPS() {
+    public void targetPlayerShip() {
         PlayerShip playerShip = gameState.getPlayerShip();
         AlienShip alienShip = gameState.getAlienShip();
         if (alienShip != null && playerShip != null) {

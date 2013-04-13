@@ -1,5 +1,8 @@
-package game;
+package MapObjects;
 
+import game.Difficulty;
+import game.GameAssets;
+import game.GameState;
 import java.awt.Color;
 
 /**
