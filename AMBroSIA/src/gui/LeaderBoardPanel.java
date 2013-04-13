@@ -118,6 +118,7 @@ public class LeaderBoardPanel extends JPanel {
      * Bubble sort which sorts the highscores in descending orders.
      *
      * @param array array that needs to be sorted
+     * @param scoreType type of score that is used to sort
      */
     public static void bblsort(String[][] array, int scoreType) {
         

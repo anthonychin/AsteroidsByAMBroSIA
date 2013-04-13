@@ -4,7 +4,6 @@ import game.GameAssets;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import javax.swing.JPanel;
 

@@ -5,15 +5,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.JPanel;
 
-/**
- * The tutorial menu, responsible for displaying
+/**The
+ * <code>TutorialPanel</code> class is responsible for displaying
  * the game's key mapping.
  * @author Haisin Yip
  */
 public class TutorialPanel extends JPanel {
 
+    // private property 
     private Image img;
-
     
     /**
      * Creates TutorialPanel with Image.
@@ -27,7 +27,6 @@ public class TutorialPanel extends JPanel {
         setLayout(null);
     }
 
-    
     /**
      * Sets background image.
      *

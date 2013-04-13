@@ -19,13 +19,12 @@ import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
 /**
- * The main GUI class.  Responsible for 
- * the main menu and the initialization of other GUI 
- * elements, such as single player mode
- * or the leaderboard.
- * 
- * Also provides high-level access to methods
- * responsible for redrawing the screen.
+ * The main GUI class. Responsible for the main menu and the initialization of
+ * other GUI elements, such as single player mode or the leaderboard.
+ *
+ * Also provides high-level access to methods responsible for redrawing the
+ * screen.
+ *
  * @author Haisin Yip
  * @author Michael Smith
  * @author Anrhony Chin
@@ -76,7 +75,6 @@ public class MenuGUI implements Runnable {
     public JButton backButton = new JButton("BACK");
     //keyboard, button press handlers
     private ActionListener buttonClick;
-    
     private KeyListener keyboard;
     //whether or not we are in single player mode
     private boolean singleP = false;
@@ -100,6 +98,7 @@ public class MenuGUI implements Runnable {
             //use system theme: windows/mac/linux: looks better
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         log.setLevel(Logic.LOG_LEVEL);
@@ -137,14 +136,14 @@ public class MenuGUI implements Runnable {
         //disable keyboard input
         frame.setFocusable(false);
         // create menu page panel, set it up, show it
-        MenuPanel cardMenu = new MenuPanel(new GridLayout(2,2));
-        
+        MenuPanel cardMenu = new MenuPanel(new GridLayout(2, 2));
+
         // initialize the 5 buttons that shall be in the menu page
-        JPanel buttonPanelMenu = new JPanel(new GridLayout(5,1));
+        JPanel buttonPanelMenu = new JPanel(new GridLayout(5, 1));
         makeJButtonPanel(buttonPanelMenu);
-       
+
         buttonPanelMenu.setOpaque(false);
-        
+
         JPanel filler = new JPanel();
         filler.setOpaque(false);
         JPanel filler2 = new JPanel();
@@ -155,16 +154,16 @@ public class MenuGUI implements Runnable {
 //        filler4.setOpaque(false);
 //        JPanel filler5 = new JPanel();
 //        filler5.setOpaque(false);
-        
+
         cardMenu.add(new TitlePanel());
         cardMenu.add(filler2);
         cardMenu.add(filler3);
         //cardMenu.add(filler4);
         cardMenu.add(buttonPanelMenu);
         //cardMenu.add(filler5);
-        
+
         card.add("Menu", cardMenu);
-        
+
         cardLayout.show(card, "Menu");
         //allow user to resize
         frame.setResizable(true);
@@ -216,7 +215,7 @@ public class MenuGUI implements Runnable {
      * @param gameState current game state
      */
     public void displayLeaderBoard(GameState gameState) {
-        leaderBoardPanel = new LeaderBoardPanel(GameAssets.spaceBackground,gameState);
+        leaderBoardPanel = new LeaderBoardPanel(GameAssets.spaceBackground, gameState);
         SpaceBackgroundPanel cardLeaderBoard = new SpaceBackgroundPanel(new BorderLayout());
         cardLeaderBoard.add(leaderBoardPanel);
 
@@ -233,7 +232,6 @@ public class MenuGUI implements Runnable {
         cardLayout.show(card, "LeaderBoard");
     }
 
-    //show tutorial screen
     /**
      * Display tutorial screen.
      */
@@ -241,7 +239,7 @@ public class MenuGUI implements Runnable {
         //create panel
         SpaceBackgroundPanel cardTutorial = new SpaceBackgroundPanel(new BorderLayout());
         JPanel tutorialPanel = new TutorialPanel(GameAssets.tutorialImage);
-        cardTutorial.add(tutorialPanel);        
+        cardTutorial.add(tutorialPanel);
         //initialize a back button
         JPanel buttonPanelTutorial = new JPanel();
         buttonPanelTutorial.setOpaque(false);
@@ -257,7 +255,6 @@ public class MenuGUI implements Runnable {
         cardLayout.show(card, "Tutorial");
     }
 
-    //display game over screen
     /**
      * Display game over screen.
      *
@@ -285,7 +282,6 @@ public class MenuGUI implements Runnable {
         cardLayout.show(card, "GameOver");
     }
 
-    //essentially the back button
     /**
      * The back button.
      */
@@ -323,8 +319,9 @@ public class MenuGUI implements Runnable {
         MenuGUI.WIDTH = frame.getWidth();
         MenuGUI.HEIGHT = frame.getHeight();
     }
+    
     //Take the whole Jbutton and make them into a panel
-    private void makeJButtonPanel(JPanel panel){
+    private void makeJButtonPanel(JPanel panel) {
         panel.add(singlePbutton);
         panel.add(twoPbutton);
         panel.add(leaderBoardButton);
@@ -343,8 +340,9 @@ public class MenuGUI implements Runnable {
         decorateButton(tutorialButton);
         decorateButton(quitButton);
     }
+    
     //decorate the JButton
-    private void decorateButton(JButton button){
+    private void decorateButton(JButton button) {
         button.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
         button.setOpaque(false);
         button.setContentAreaFilled(false);

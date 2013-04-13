@@ -20,6 +20,7 @@ import javax.swing.JPanel;
  */
 //prints game information in top left corner - score, lives, level, etc.
 public class DescriptionPanel extends JPanel {
+    // private properties
 
     private GameState gameState;
     private Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
@@ -50,6 +51,7 @@ public class DescriptionPanel extends JPanel {
             g2d.setColor(Color.red);
         }
 
+        // stores the basic player and game information
         String stringInfo;
         stringInfo = "Current Score: " + gameState.getCurrentScore() + "    Level: " + gameState.getLevel();
 

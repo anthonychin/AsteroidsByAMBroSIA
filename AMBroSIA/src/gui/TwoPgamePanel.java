@@ -2,12 +2,10 @@ package gui;
 
 import java.awt.Graphics;
 
-
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
-
 
 import game.GameState;
 
@@ -41,6 +39,10 @@ public class TwoPgamePanel extends DescriptionPanel {
         setLayout(null);
     }
 
+    /**
+     * paint the various in-game elements
+     * @param graphic graphics
+     */
     @Override
     public void paint(Graphics graphic) {
         super.setBounds(0, 0, MenuGUI.WIDTH, MenuGUI.HEIGHT);
@@ -60,7 +62,6 @@ public class TwoPgamePanel extends DescriptionPanel {
         repaint();
     }
     
-     // set endgame background image
     /**
      * Sets endgame background image.
      * @param graphic graphics

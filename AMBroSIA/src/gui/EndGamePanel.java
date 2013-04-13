@@ -18,7 +18,6 @@ import javax.swing.table.TableModel;
  * <code>EndGamePanel</code> class displays game over screen.
  *
  * @author Haisin Yip
- *
  */
 public class EndGamePanel extends JPanel {
 
@@ -28,8 +27,7 @@ public class EndGamePanel extends JPanel {
     private JScrollPane scrollPane;
     private Image img;
     String player, highscore, asteroidsDestroyed, aliensDestroyed, killDeathRatio, level, bombs, shootingAccuracy;
-    
-    
+
     /**
      * Creates EndGamePanel using given parameters. It initializes size, layout
      * and informative display.
@@ -54,51 +52,44 @@ public class EndGamePanel extends JPanel {
         makeLayout();
     }
 
-    // construct the main components and informative content 
+    // construct the main components and informative content which is displayed at the end of the game
     private void makeComponents(int width, int height, boolean singleP) {
-        // informative content will be displayed at end game
-        
-
         //when single player, display player's information
         if (singleP) {
             player = "Enter Your Name Here, Player1";
-            highscore = String.valueOf(gameState.getCurrentScore());  
-            asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());  
+            highscore = String.valueOf(gameState.getCurrentScore());
+            asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());
             aliensDestroyed = String.valueOf(gameState.getP1alienDestroyed());
-            killDeathRatio = String.valueOf((double)gameState.getP1asteroidDestroyed()/(double)gameState.getP1deaths());
-            if(gameState.getP1deaths() == 0 )
-            {
+            killDeathRatio = String.valueOf((double) gameState.getP1asteroidDestroyed() / (double) gameState.getP1deaths());
+            if (gameState.getP1deaths() == 0) {
                 killDeathRatio = String.valueOf(0);
             }
             level = String.valueOf(gameState.getLevel());
             bombs = String.valueOf(gameState.getP1BombUsed());
-            shootingAccuracy = String.valueOf(100*(double)gameState.getP1cleanShot()/(double)gameState.getP1shootCounter());
-            if(gameState.getP1shootCounter() == 0 )
-            {
+            shootingAccuracy = String.valueOf(100 * (double) gameState.getP1cleanShot() / (double) gameState.getP1shootCounter());
+            if (gameState.getP1shootCounter() == 0) {
                 shootingAccuracy = String.valueOf(0);
             }
-        } //two player
+        } //two player mode
         else {
             //player 1, player 2 scores
             int highscoreP1 = gameState.getPlayer1Score();
             int highscoreP2 = gameState.getPlayer2Score();
-            
-            //display winner's score
+
+            //display winner's score by comparing the player1's highscore and player2's highscore
             if (highscoreP1 >= highscoreP2) {
                 player = "Enter Your Name Here, Player1";
                 highscore = String.valueOf(highscoreP1);
                 asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gameState.getP1alienDestroyed());
-                killDeathRatio = String.valueOf((double)gameState.getP1asteroidDestroyed()/(double)gameState.getP1deaths());
-                if(gameState.getP1deaths() == 0 )
-                {
+                killDeathRatio = String.valueOf((double) gameState.getP1asteroidDestroyed() / (double) gameState.getP1deaths());
+                if (gameState.getP1deaths() == 0) {
                     killDeathRatio = String.valueOf(0);
                 }
                 level = String.valueOf(gameState.getPlayer1Level());
                 bombs = String.valueOf(gameState.getP1BombUsed());
-                shootingAccuracy = String.valueOf(100*(double)gameState.getP1cleanShot()/(double)gameState.getP1shootCounter());
-                if(gameState.getP1shootCounter() == 0 )
-                {
+                shootingAccuracy = String.valueOf(100 * (double) gameState.getP1cleanShot() / (double) gameState.getP1shootCounter());
+                if (gameState.getP1shootCounter() == 0) {
                     shootingAccuracy = String.valueOf(0);
                 }
             } else {
@@ -106,64 +97,61 @@ public class EndGamePanel extends JPanel {
                 highscore = String.valueOf(highscoreP2);
                 asteroidsDestroyed = String.valueOf(gameState.getP2asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gameState.getP2alienDestroyed());
-                killDeathRatio = String.valueOf((double)gameState.getP2cleanShot()/(double)gameState.getP1deaths());
-                if(gameState.getP1deaths() == 0 )
-                {
+                killDeathRatio = String.valueOf((double) gameState.getP2cleanShot() / (double) gameState.getP1deaths());
+                if (gameState.getP1deaths() == 0) {
                     killDeathRatio = String.valueOf(0);
                 }
                 level = String.valueOf(gameState.getPlayer2Level());
                 bombs = String.valueOf(gameState.getP2BombUsed());
-                shootingAccuracy = String.valueOf(100.0*(double)gameState.getP2asteroidDestroyed()/(double)gameState.getP1shootCounter());
-                if(gameState.getP1shootCounter() == 0 )
-                {
+                shootingAccuracy = String.valueOf(100.0 * (double) gameState.getP2asteroidDestroyed() / (double) gameState.getP1shootCounter());
+                if (gameState.getP1shootCounter() == 0) {
                     shootingAccuracy = String.valueOf(0);
                 }
             }
         }
-        
+
+        // JTable header
         String[] columnData = {"", ""};
-        String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", asteroidsDestroyed}, {"Aliens Destroyed", aliensDestroyed}, {"Kill-Death ratio", killDeathRatio}, {"Last level", level}, {"Bombs used", bombs}, {"Shooting Accuracy", shootingAccuracy+"%"}};
-        
-        StatisticsTable = new JTable(rowData, columnData){
+        // JTable rows
+        String[][] rowData = {{"Player name", player}, {"Highscore", highscore}, {"Asteroids Destroyed", asteroidsDestroyed}, {"Aliens Destroyed", aliensDestroyed}, {"Kill-Death ratio", killDeathRatio}, {"Last level", level}, {"Bombs used", bombs}, {"Shooting Accuracy", shootingAccuracy + "%"}};
+
+        // make cells uneditable except the player name cell
+        StatisticsTable = new JTable(rowData, columnData) {
             @Override
-            public boolean isCellEditable(int rowData, int columnData){
-                if (rowData == 0 && columnData == 1){
+            public boolean isCellEditable(int rowData, int columnData) {
+                if (rowData == 0 && columnData == 1) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             }
         };
-        
+
         StatisticsTable.getModel().addTableModelListener(
-                new TableModelListener()
-                {
-                    @Override
-                    public void tableChanged(TableModelEvent e)
-                    {
-                        // get cell update
-                        int row = e.getFirstRow();
-                        int column = e.getColumn();
-                        TableModel model = (TableModel)e.getSource();
-                        String columnName = model.getColumnName(column);
-                        Object data = model.getValueAt(row, column);
-                        String customName = data.toString();
-                        
-                        // write to file if the player name is changed to something different than the default "Enter Your Name Here, Player1(2)"
-                        if(!customName.equals("Enter Your Name Here, Player1") &&  !customName.equals("Enter Your Name Here, Player2"))
-                        {
-                            String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
-                            highScoreWriter writer = new highScoreWriter(newScoreData, System.getProperty("user.dir") + "/scoreInfo.txt");
-                            writer.writeToFile();
-                        }
-                    }
-                });
-        
+                new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                // get cell update
+                int row = e.getFirstRow();
+                int column = e.getColumn();
+                TableModel model = (TableModel) e.getSource();
+                String columnName = model.getColumnName(column);
+                Object data = model.getValueAt(row, column);
+                String customName = data.toString();
+
+                // write to file if the player name is changed to something different than the default "Enter Your Name Here, Player1(2)"
+                if (!customName.equals("Enter Your Name Here, Player1") && !customName.equals("Enter Your Name Here, Player2")) {
+                    String[] newScoreData = {customName + " ", highscore + " ", asteroidsDestroyed + " ", aliensDestroyed + " ", killDeathRatio + " ", level + " ", bombs + " ", shootingAccuracy};
+                    highScoreWriter writer = new highScoreWriter(newScoreData, System.getProperty("user.dir") + "/scoreInfo.txt");
+                    writer.writeToFile();
+                }
+            }
+        });
+
         //disable selecting for all cells in table
-        StatisticsTable.setRowSelectionAllowed( false );
-        StatisticsTable.setColumnSelectionAllowed( false );
-        StatisticsTable.setCellSelectionEnabled( false );
+        StatisticsTable.setRowSelectionAllowed(false);
+        StatisticsTable.setColumnSelectionAllowed(false);
+        StatisticsTable.setCellSelectionEnabled(false);
         StatisticsTable.setPreferredScrollableViewportSize(new Dimension(width / 2, height / 6));
         StatisticsTable.setFillsViewportHeight(true);
     }
@@ -175,7 +163,6 @@ public class EndGamePanel extends JPanel {
         add(new JScrollPane(StatisticsTable));
     }
 
-    
     /**
      * Sets endgame background image.
      *
