@@ -26,6 +26,12 @@ public class Progression implements Runnable {
     private final int INITIAL_BOMB = 1;
     private final int INITIAL_SHIELD = 0;
     
+    private int player1Score = 0;
+    private int player2Score = 0;
+    
+    private int player1Level = 0;
+    private int player2Level = 0;
+    
     private final static Logger log = Logger.getLogger(Progression.class.getName());
 
 
@@ -64,9 +70,9 @@ public class Progression implements Runnable {
         //single player
         if (!istwoPlayer) {
             if (isPlayerDead()) {
+                Logic.stopTimer();
                 gameState.setPlayer1Score(gameState.getCurrentScore());
                 gameState.setPlayer1Level(gameState.getLevel());
-                Logic.stopTimer();
                 Logic.displayGameOver(!gameState.isPlayerTwoTurn(), false);
             } //if the player is not dead, check for level completion and move to next level
             else if (allAsteroidsDestroyed() && isAlienDestroyed()) {
@@ -78,21 +84,21 @@ public class Progression implements Runnable {
             if (isPlayerDead()) {
                 if (playerOneTurn) {
                     //restart game for player 2, save player 1 score
-                    int player1Score = gameState.getCurrentScore();
-                    int player1Level = gameState.getLevel();
+                    player1Score = gameState.getCurrentScore();
+                    player1Level = gameState.getLevel();
                     setupInitialLevel();
-                    gameState.setPlayer1Score(player1Score);
-                    gameState.setPlayer1Level(player1Level);
                     gameState.setPlayerTwoTurn(true);
                     playerOneTurn = false;
                 } else {
-                    //game over: save player 2 score, put it in the game state, and stop updating
-                    int player2Score = gameState.getCurrentScore();
-                    int player2Level = gameState.getLevel();
+                    Logic.stopTimer();
+                    //game over: save player 2 score and player 1 score, put it in the game state, and stop updating
+                    player2Score = gameState.getCurrentScore();
+                    player2Level = gameState.getLevel();
+                    gameState.setPlayer1Score(player1Score);
+                    gameState.setPlayer1Level(player1Level);
                     gameState.setPlayer2Score(player2Score);
                     gameState.setPlayer2Level(player2Level);
                     //note: player 1 info already set beforehand
-                    Logic.stopTimer();
                     Logic.displayGameOver(!gameState.isPlayerTwoTurn(), false);
                 }
             } //same as 1 player
