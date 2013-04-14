@@ -49,6 +49,9 @@ public class PlayerShip extends Ship {
      */
     final public static int BOMB_EFFECT_DENSITY = 1000;
     
+    /**
+     * Maximum amount of bomb the player ship is allowed to have.
+     */
     final public static int MAX_BOMBS = 3;
     
     private int bomb;
