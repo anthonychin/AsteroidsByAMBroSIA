@@ -4,10 +4,12 @@ import game.GameState;
 import java.awt.Color;
 
 /**
- * A simple game object, similar to MapObject, except
- * with a color attribute that defines the object's
- * color and a Time To Live attribute that defines
- * how long the object remains on screen for.
+ * The
+ * <code>MapObjectTTL</code> class is a simple game object, similar to
+ * MapObject, except with a color attribute that defines the object's color and
+ * a Time To Live attribute that defines how long the object remains on screen
+ * for.
+ *
  * @author Michael
  */
 public class MapObjectTTL extends MapObject {
@@ -57,8 +59,8 @@ public class MapObjectTTL extends MapObject {
     }
 
     /**
-     * Sets the Time to Live property, in units of 200msec.
-     * (i.e. TTL = 5 would be 1 second)
+     * Sets the Time to Live property, in units of 200msec. (i.e. TTL = 5 would
+     * be 1 second)
      *
      * @param ttl new time to live value
      */
