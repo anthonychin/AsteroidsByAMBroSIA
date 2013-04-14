@@ -259,12 +259,12 @@ public class MenuGUI implements Runnable {
      * Display game over screen.
      *
      * @param gameState current game state
-     * @param mode boolean value that determines whether its single player mode
-     * or two player mode
+     * @param playerOneTurn boolean value representing which player is playing in two player mode, and in single player mode, it is true by default
+     * @param Esc boolean is for checking if the escape key is pressed
      */
-    public void displayGameOver(GameState gameState, boolean mode) {
+    public void displayGameOver(GameState gameState, boolean playerOneTurn, boolean Esc) {
         //create panel
-        gameOverPanel = new EndGamePanel(GameAssets.gameOverImage, gameState, mode);
+        gameOverPanel = new EndGamePanel(GameAssets.gameOverImage, gameState, playerOneTurn, Esc);
         SpaceBackgroundPanel cardGameOver = new SpaceBackgroundPanel(new BorderLayout());
         cardGameOver.setLayout(new BorderLayout());
         cardGameOver.add(gameOverPanel);

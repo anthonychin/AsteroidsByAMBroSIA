@@ -66,7 +66,7 @@ public class Progression implements Runnable {
                 gameState.setPlayer1Score(gameState.getCurrentScore());
                 gameState.setPlayer1Level(gameState.getLevel());
                 Logic.stopTimer();
-                Logic.displayGameOver(true);
+                Logic.displayGameOver(!gameState.isPlayerTwoTurn(), false);
             } //if the player is not dead, check for level completion and move to next level
             else if (allAsteroidsDestroyed() && isAlienDestroyed()) {
                 setupLevel(gameState.getLevel() + 1);
@@ -92,7 +92,7 @@ public class Progression implements Runnable {
                     gameState.setPlayer2Level(player2Level);
                     //note: player 1 info already set beforehand
                     Logic.stopTimer();
-                    Logic.displayGameOver(false);
+                    Logic.displayGameOver(!gameState.isPlayerTwoTurn(), false);
                 }
             } //same as 1 player
             else if (allAsteroidsDestroyed() && isAlienDestroyed()) {

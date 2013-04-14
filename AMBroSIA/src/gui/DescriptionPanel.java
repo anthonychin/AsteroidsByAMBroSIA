@@ -58,7 +58,7 @@ public class DescriptionPanel extends JPanel {
         //want to make sure player is not null - need to store variable, as player may become null in gameState while printing
         PlayerShip player = gameState.getPlayerShip();
         if (player != null) {
-            stringInfo = stringInfo + "    Lives " + player.getLives() + "    Bombs: " + player.getBomb() + "     Shields: " + player.getShieldPoints() + "    X: " + player.getX() + "    Y: " + player.getY() + "    Heading: " + Math.abs(player.getHeading()) % 360;
+            stringInfo = stringInfo + "    Lives " + player.getLives() + "    Bombs: " + player.getBomb() + "     Shields: " + player.getShieldPoints();
         }
         g2d.setFont(font);
         //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);        

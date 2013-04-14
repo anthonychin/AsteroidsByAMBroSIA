@@ -28,7 +28,7 @@ public class LeaderBoardPanel extends JPanel {
     private JTable table;
     private GameState gameState;
     private Image img;
-    private String[] columns = {"Player", "Highscore", "Asteroid Destroyed", "Aliens destroyed", "Kill-Death Ratio", "Level reached", "Bombs Used", "Shooting Accuracy"};
+    private String[] columns = {"Player", "Highscore", "Asteroid Destroyed", "Aliens Destroyed", "Kill-Death Ratio", "Level Reached", "Bombs Used", "Shooting Accuracy"};
     String[][] rowdata;
     private int selectedColumn;
 
