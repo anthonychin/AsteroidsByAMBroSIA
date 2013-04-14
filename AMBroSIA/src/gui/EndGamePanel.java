@@ -121,12 +121,14 @@ public class EndGamePanel extends JPanel {
                 asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gameState.getP1alienDestroyed());
                 killDeathRatio = String.valueOf((double) gameState.getP1asteroidDestroyed() / (double) gameState.getP1deaths());
+                // if the player's number of death is 0, assign 0 as killDeathRatio value to avoid division by 0
                 if (gameState.getP1deaths() == 0) {
                     killDeathRatio = String.valueOf(0);
                 }
                 level = String.valueOf(gameState.getLevel());
                 bombs = String.valueOf(gameState.getP1BombUsed());
                 shootingAccuracy = String.valueOf(100 * (double) gameState.getP1cleanShot() / (double) gameState.getP1shootCounter());
+                // if the player's number of shots is 0, assign 0 as shootingAccuracy value to avoid division by 0
                 if (gameState.getP1shootCounter() == 0) {
                     shootingAccuracy = String.valueOf(0);
                 }
@@ -136,12 +138,14 @@ public class EndGamePanel extends JPanel {
                 asteroidsDestroyed = String.valueOf(gameState.getP2asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gameState.getP2alienDestroyed());
                 killDeathRatio = String.valueOf((double) gameState.getP2cleanShot() / (double) gameState.getP1deaths());
+                // if the player's number of death is 0, assign 0 as killDeathRatio value to avoid division by 0
                 if (gameState.getP1deaths() == 0) {
                     killDeathRatio = String.valueOf(0);
                 }
                 level = String.valueOf(gameState.getPlayer2Level());
                 bombs = String.valueOf(gameState.getP2BombUsed());
                 shootingAccuracy = String.valueOf(100.0 * (double) gameState.getP2asteroidDestroyed() / (double) gameState.getP1shootCounter());
+                // if the player's number of shots is 0, assign 0 as killDeathRatio value to avoid division by 0
                 if (gameState.getP1shootCounter() == 0) {
                     shootingAccuracy = String.valueOf(0);
                 }
