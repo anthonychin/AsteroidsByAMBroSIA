@@ -19,15 +19,17 @@ import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
 /**
- * The main GUI class. Responsible for the main menu and the initialization of
- * other GUI elements, such as single player mode or the leaderboard.
+ * The
+ * <code>MenuGUI</code> class is the main GUI class. Responsible for the main
+ * menu and the initialization of other GUI elements, such as single player mode
+ * or the leaderboard.
  *
  * Also provides high-level access to methods responsible for redrawing the
  * screen.
  *
  * @author Haisin Yip
  * @author Michael Smith
- * @author Anrhony Chin
+ * @author Anthony Chin
  */
 public class MenuGUI implements Runnable {
     //default panel width/height
@@ -259,7 +261,8 @@ public class MenuGUI implements Runnable {
      * Display game over screen.
      *
      * @param gameState current game state
-     * @param playerOneTurn boolean value representing which player is playing in two player mode, and in single player mode, it is true by default
+     * @param playerOneTurn boolean value representing which player is playing
+     * in two player mode, and in single player mode, it is true by default
      * @param Esc boolean is for checking if the escape key is pressed
      */
     public void displayGameOver(GameState gameState, boolean playerOneTurn, boolean Esc) {
@@ -319,7 +322,7 @@ public class MenuGUI implements Runnable {
         MenuGUI.WIDTH = frame.getWidth();
         MenuGUI.HEIGHT = frame.getHeight();
     }
-    
+
     //Take the whole Jbutton and make them into a panel
     private void makeJButtonPanel(JPanel panel) {
         panel.add(singlePbutton);
@@ -340,7 +343,7 @@ public class MenuGUI implements Runnable {
         decorateButton(tutorialButton);
         decorateButton(quitButton);
     }
-    
+
     //decorate the JButton
     private void decorateButton(JButton button) {
         button.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));
