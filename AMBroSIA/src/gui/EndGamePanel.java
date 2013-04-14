@@ -131,9 +131,8 @@ public class EndGamePanel extends JPanel {
                     shootingAccuracy = String.valueOf(0);
                 }
             } else {
-                int highscoreP2 = gameState.getPlayer2Score();
                 player = "Enter Your Name Here, Player2";
-                highscore = String.valueOf(highscoreP2);
+                highscore = String.valueOf(gameState.getPlayer2Score());
                 asteroidsDestroyed = String.valueOf(gameState.getP2asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gameState.getP2alienDestroyed());
                 killDeathRatio = String.valueOf((double) gameState.getP2cleanShot() / (double) gameState.getP1deaths());
