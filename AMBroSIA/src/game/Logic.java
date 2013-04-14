@@ -243,7 +243,7 @@ public class Logic extends KeyAdapter implements ActionListener {
             paused = false;
             GameAssets.theme.stop();
             displayGameOver(!gameState.isPlayerTwoTurn(), true);
-        }
+        } 
     }
 
     /**

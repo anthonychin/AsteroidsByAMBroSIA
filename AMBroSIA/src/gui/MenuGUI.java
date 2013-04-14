@@ -264,7 +264,7 @@ public class MenuGUI implements Runnable {
      */
     public void displayGameOver(GameState gameState, boolean playerOneTurn, boolean Esc) {
         //create panel
-        gameOverPanel = new EndGamePanel(GameAssets.gameOverImage, gameState, playerOneTurn, Esc);
+        gameOverPanel = new EndGamePanel(GameAssets.gameOverImage, gameState, playerOneTurn, Esc, singleP);
         SpaceBackgroundPanel cardGameOver = new SpaceBackgroundPanel(new BorderLayout());
         cardGameOver.setLayout(new BorderLayout());
         cardGameOver.add(gameOverPanel);

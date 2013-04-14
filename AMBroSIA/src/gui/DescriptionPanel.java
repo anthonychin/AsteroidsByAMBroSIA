@@ -34,7 +34,6 @@ public class DescriptionPanel extends JPanel {
         this.gameState = gameState;
     }
 
-    // Method that actually prints the current score, lives and level
     /**
      * Prints the current score, lives and level.
      *
