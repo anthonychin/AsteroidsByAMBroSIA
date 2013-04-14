@@ -60,6 +60,7 @@ public class TitlePanel extends JPanel{
         graphic.drawString("Meong Hee Seo", 20, 160);
         graphic.drawString("Michael Smith", 20, 190);
         graphic.drawString("Nikolaos Bukas", 20, 220);
+        graphic.setFont(new Font(Font.MONOSPACED,Font.PLAIN,20));
         graphic.drawString("Copyright © 2013 AMBroSIA Ltd.", 20, 267);
     }
 }
