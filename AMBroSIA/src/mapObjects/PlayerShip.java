@@ -60,6 +60,7 @@ public class PlayerShip extends Ship {
     private boolean isTurningLeft = false;
     private boolean isTurningRight = false;
     private final static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PlayerShip.class.getName());
+    private boolean respawn = false;
 
     /**
      * Creates PlayerShip with the given parameters.
@@ -95,6 +96,9 @@ public class PlayerShip extends Ship {
      *
      */
     public void addBomb() {
+        if(!respawn){
+            GameAssets.powerUp.play();        
+        }
         this.bomb++;
         if (this.bomb > MAX_BOMBS) {
             this.bomb = MAX_BOMBS;
@@ -143,16 +147,16 @@ public class PlayerShip extends Ship {
     public void setShieldPoints(int shieldpoints) {
         this.shieldPoints = shieldpoints;
         if (this.shieldPoints > 3) {
-            GameAssets.powerUp.play();
+            GameAssets.shields3.play();
         } else if (this.shieldPoints == 3) {
             GameAssets.shields3.play();
         } else if (this.shieldPoints == 2) {
             GameAssets.shields2.play();
         } else if (this.shieldPoints == 1){
             GameAssets.shields1.play();
-        } else{
+        } else if(this.shieldPoints == 0 && !respawn){
             GameAssets.shields0.play();
-        }
+        } 
     }
 
     /**
@@ -272,6 +276,7 @@ public class PlayerShip extends Ship {
             public void run() {
                 getGameState().addPlayerShip(oldShip);
                 //to center of screen
+                respawn = true;
                 getGameState().getPlayerShip().setCoord(new int[]{MenuGUI.WIDTH / 2, MenuGUI.HEIGHT / 2});
                 getGameState().getPlayerShip().setVelocity(new float[]{0, 0});
                 getGameState().getPlayerShip().setShieldPoints(0);
@@ -281,6 +286,7 @@ public class PlayerShip extends Ship {
                 getGameState().getPlayerShip().turnRight(false);
                 getGameState().getPlayerShip().accelerate(false);
                 GameAssets.warp.play();
+                respawn = false;
             }
         };
 
