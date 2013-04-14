@@ -52,7 +52,7 @@ public class TitlePanel extends JPanel{
     @Override
     public void paintComponent(Graphics graphic) {
         
-        graphic.drawImage(img, 0, 0, this.getMinimumSize().width, this.getMinimumSize().height, this);
+        graphic.drawImage(img, 10, 10, this.getMinimumSize().width, this.getMinimumSize().height, this);
         graphic.setFont(font);
         graphic.setColor(Color.red);
         graphic.drawString("Anthony Chin", 20, 100);
