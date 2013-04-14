@@ -41,7 +41,7 @@ public class Logic extends KeyAdapter implements ActionListener {
     private static MenuGUI gui;
     private static GraphicsEngine graphicsEngine;
     private static Physics physicsEngine;
-    private static timeToLive ttlLogic;
+    private static TimeToLives ttlLogic;
     private static Collision collisionCheck;
     private static Progression gameProgress;
     private static AI gameAI;
@@ -173,7 +173,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         gameState = new GameState();
         graphicsEngine = new GraphicsEngine(gameState);
         physicsEngine = new Physics(gameState);
-        ttlLogic = new timeToLive(gameState);
+        ttlLogic = new TimeToLives(gameState);
         collisionCheck = new Collision(gameState, physicsEngine);
         gameProgress = new Progression(gameState, twoPlayer);
         gameAI = new AI(gameState);

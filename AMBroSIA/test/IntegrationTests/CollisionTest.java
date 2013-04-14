@@ -6,7 +6,6 @@ import mapObjects.MapObjectTTL;
 import mapObjects.Asteroid;
 import mapObjects.BonusDrop;
 import mapObjects.PlayerShip;
-import static org.mockito.Mockito.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
