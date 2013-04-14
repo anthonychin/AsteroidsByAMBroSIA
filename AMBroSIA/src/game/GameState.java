@@ -615,7 +615,6 @@ public class GameState {
     /**
      * Add the number of shots that hits a target taken by Player 1.
      *
-     * @param shot number of shots that needs to be added to shoot counter
      */
     public void addP1cleanShotCounter() {
         this.p1cleanShotCounter++;
@@ -624,7 +623,6 @@ public class GameState {
     /**
      * Add the number of shots that hits a target taken by Player 2.
      *
-     * @param shot number of shots that needs to be added to shoot counter
      */
     public void addP2cleanShotCounter() {
         this.p2cleanShotCounter++;
