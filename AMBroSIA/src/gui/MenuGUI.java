@@ -47,7 +47,6 @@ public class MenuGUI implements Runnable {
     private JFrame frame;
     private CardLayout cardLayout;
     private JPanel card = new JPanel();
-    // menu buttons
     /**
      * Menu button for single player mode.
      */
@@ -150,11 +149,7 @@ public class MenuGUI implements Runnable {
         filler2.setOpaque(false);
         JPanel filler3 = new JPanel();
         filler3.setOpaque(false);
-//        JPanel filler4 = new JPanel();
-//        filler4.setOpaque(false);
-//        JPanel filler5 = new JPanel();
-//        filler5.setOpaque(false);
-
+        
         cardMenu.add(new TitlePanel());
         cardMenu.add(filler2);
         cardMenu.add(filler3);
@@ -169,7 +164,6 @@ public class MenuGUI implements Runnable {
         frame.setResizable(true);
     }
 
-    //show single player interface
     /**
      * Displays single player mode interface.
      *
@@ -191,7 +185,6 @@ public class MenuGUI implements Runnable {
         frame.setResizable(false);
     }
 
-    //show two player interface
     /**
      * Displays two player mode interface.
      *
@@ -248,7 +241,6 @@ public class MenuGUI implements Runnable {
         buttonPanelTutorial.setBackground(Color.black);
         backButton.addActionListener(buttonClick);
         cardTutorial.add(buttonPanelTutorial, BorderLayout.SOUTH);
-        //cardTutorial.setBackground(Color.white);
 
         //show it
         card.add("Tutorial", cardTutorial);
@@ -292,7 +284,6 @@ public class MenuGUI implements Runnable {
         frame.setFocusable(false);
     }
 
-    //draw the game
     /**
      * Draws the game.
      */
@@ -304,7 +295,6 @@ public class MenuGUI implements Runnable {
         }
     }
 
-    //for gui thread: update the window size variables, as well as the screen
     /**
      * Update the window size variables as well as the screen.
      */
