@@ -52,13 +52,15 @@ public class TitlePanel extends JPanel{
     @Override
     public void paintComponent(Graphics graphic) {
         
-        graphic.drawImage(img, 0, 0, this.getMinimumSize().width, this.getMinimumSize().height, this);
+        graphic.drawImage(img, 10, 10, this.getMinimumSize().width, this.getMinimumSize().height, this);
         graphic.setFont(font);
         graphic.setColor(Color.red);
-        graphic.drawString("Anthony Chin", 10, 100);
-        graphic.drawString("Haisin Yip", 10, 130);
-        graphic.drawString("Meong Hee Seo", 10, 160);
-        graphic.drawString("Michael Smith", 10, 190);
-        graphic.drawString("Nikolaos Bukas", 10, 220);
+        graphic.drawString("Anthony Chin", 20, 100);
+        graphic.drawString("Haisin Yip", 20, 130);
+        graphic.drawString("Meong Hee Seo", 20, 160);
+        graphic.drawString("Michael Smith", 20, 190);
+        graphic.drawString("Nikolaos Bukas", 20, 220);
+        graphic.setFont(new Font(Font.MONOSPACED,Font.PLAIN,20));
+        graphic.drawString("Copyright © 2013 AMBroSIA Ltd.", 20, 267);
     }
 }

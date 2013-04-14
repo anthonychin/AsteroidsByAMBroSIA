@@ -83,7 +83,7 @@ public class GameState {
     private int p2AlienDestroyed;
     private int p1AlienDestroyed;
     private int p1cleanShotCounter;
-    private int p2cleanShotCounter;    
+    private int p2cleanShotCounter;
     //synchronization objects
     private static final Object asteroidSync = new Object();
     private static final Object projectileSync = new Object();
@@ -626,8 +626,8 @@ public class GameState {
      */
     public void addP2cleanShotCounter() {
         this.p2cleanShotCounter++;
-    }    
-    
+    }
+
     /**
      * Sets the number of shots taken by Player 1.
      *
