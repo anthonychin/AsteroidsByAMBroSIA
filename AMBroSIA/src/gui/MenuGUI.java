@@ -19,15 +19,17 @@ import javax.swing.UIManager;
 import org.apache.log4j.Logger;
 
 /**
- * The main GUI class. Responsible for the main menu and the initialization of
- * other GUI elements, such as single player mode or the leaderboard.
+ * The
+ * <code>MenuGUI</code> class is the main GUI class. Responsible for the main
+ * menu and the initialization of other GUI elements, such as single player mode
+ * or the leaderboard.
  *
  * Also provides high-level access to methods responsible for redrawing the
  * screen.
  *
  * @author Haisin Yip
  * @author Michael Smith
- * @author Anrhony Chin
+ * @author Anthony Chin
  */
 public class MenuGUI implements Runnable {
     //default panel width/height
@@ -47,7 +49,6 @@ public class MenuGUI implements Runnable {
     private JFrame frame;
     private CardLayout cardLayout;
     private JPanel card = new JPanel();
-    // menu buttons
     /**
      * Menu button for single player mode.
      */
@@ -150,11 +151,7 @@ public class MenuGUI implements Runnable {
         filler2.setOpaque(false);
         JPanel filler3 = new JPanel();
         filler3.setOpaque(false);
-//        JPanel filler4 = new JPanel();
-//        filler4.setOpaque(false);
-//        JPanel filler5 = new JPanel();
-//        filler5.setOpaque(false);
-
+        
         cardMenu.add(new TitlePanel());
         cardMenu.add(filler2);
         cardMenu.add(filler3);
@@ -169,7 +166,6 @@ public class MenuGUI implements Runnable {
         frame.setResizable(true);
     }
 
-    //show single player interface
     /**
      * Displays single player mode interface.
      *
@@ -191,7 +187,6 @@ public class MenuGUI implements Runnable {
         frame.setResizable(false);
     }
 
-    //show two player interface
     /**
      * Displays two player mode interface.
      *
@@ -248,7 +243,6 @@ public class MenuGUI implements Runnable {
         buttonPanelTutorial.setBackground(Color.black);
         backButton.addActionListener(buttonClick);
         cardTutorial.add(buttonPanelTutorial, BorderLayout.SOUTH);
-        //cardTutorial.setBackground(Color.white);
 
         //show it
         card.add("Tutorial", cardTutorial);
@@ -259,7 +253,8 @@ public class MenuGUI implements Runnable {
      * Display game over screen.
      *
      * @param gameState current game state
-     * @param playerOneTurn boolean value representing which player is playing in two player mode, and in single player mode, it is true by default
+     * @param playerOneTurn boolean value representing which player is playing
+     * in two player mode, and in single player mode, it is true by default
      * @param Esc boolean is for checking if the escape key is pressed
      */
     public void displayGameOver(GameState gameState, boolean playerOneTurn, boolean Esc) {
@@ -292,7 +287,6 @@ public class MenuGUI implements Runnable {
         frame.setFocusable(false);
     }
 
-    //draw the game
     /**
      * Draws the game.
      */
@@ -304,7 +298,6 @@ public class MenuGUI implements Runnable {
         }
     }
 
-    //for gui thread: update the window size variables, as well as the screen
     /**
      * Update the window size variables as well as the screen.
      */
@@ -319,7 +312,7 @@ public class MenuGUI implements Runnable {
         MenuGUI.WIDTH = frame.getWidth();
         MenuGUI.HEIGHT = frame.getHeight();
     }
-    
+
     //Take the whole Jbutton and make them into a panel
     private void makeJButtonPanel(JPanel panel) {
         panel.add(singlePbutton);
@@ -340,7 +333,7 @@ public class MenuGUI implements Runnable {
         decorateButton(tutorialButton);
         decorateButton(quitButton);
     }
-    
+
     //decorate the JButton
     private void decorateButton(JButton button) {
         button.setFont(new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE));

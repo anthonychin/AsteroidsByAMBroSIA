@@ -21,7 +21,8 @@ public class highScoreReader {
 
     /**
      * initializes the path and a file
-    */
+     * @param path new path
+     */
     public highScoreReader(String path) {
         this.path = path;
         this.file = new File(path);
@@ -30,6 +31,7 @@ public class highScoreReader {
     /**
      * each row contains a player's score summary
      * returns the list of all player scores in a 2D array
+     * @return list of all player scores in a 2D array
      */
     public String[][] readFile() {
         this.openFile();
@@ -62,6 +64,8 @@ public class highScoreReader {
 
     /**
      * turns arraylist of string arrays into 2d string array
+     * @param list string array that needs to be turned into 2D string array
+     * @return 2D string array
      */
     public static String[][] to2Darray(ArrayList<String[]> list) {
         String[][] arr = new String[list.size()][8];
