@@ -34,7 +34,8 @@ public class EndGamePanel extends JPanel {
      *
      * @param img image for EndGamePanel
      * @param gameState current game state
-     * @param playerOneTurn boolean value representing which player is playing in two player mode, and in single player mode, it is true by default
+     * @param playerOneTurn boolean value representing which player is playing
+     * in two player mode, and in single player mode, it is true by default
      * @param Esc boolean is for checking if the escape key is pressed
      */
     public EndGamePanel(Image img, GameState gameState, boolean playerOneTurn, boolean Esc) {
