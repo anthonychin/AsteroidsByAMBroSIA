@@ -258,6 +258,12 @@ public class EndGamePanel extends JPanel {
         // if escape key was not pressed, then print the victory message or tie message
         if (!Esc) {
             g2d.setFont(new Font("SansSerif", Font.BOLD, 20));
+            
+            if(!singleP){
+                g2d.setColor(Color.white);
+                g2d.drawString("Player 1 Score: " + gameState.getPlayer1Score(), this.getWidth()/2 - 117, this.getHeight()/2+50);
+                g2d.drawString("Player 2 Score: " + gameState.getPlayer2Score(), this.getWidth()/2 - 117, this.getHeight()/2+80);
+            }
             if (playerOneWins && !singleP) {
                 g2d.setColor(Color.red);
                 g2d.drawString("PLAYER 1 IS VICTORIOUS!", this.getWidth() / 2 - 117, this.getHeight() / 2);
