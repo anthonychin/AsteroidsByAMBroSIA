@@ -9,7 +9,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -45,6 +44,7 @@ public class EndGamePanel extends JPanel {
      * @param playerOneTurn boolean value representing which player is playing
      * in two player mode, and in single player mode, it is true by default
      * @param Esc boolean is for checking if the escape key is pressed
+     * @param singleP boolean for representing whether the game is in single player mode or not
      */
     public EndGamePanel(Image img, GameState gameState, boolean playerOneTurn, boolean Esc, boolean singleP) {
         this.gameState = gameState;

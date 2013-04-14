@@ -7,7 +7,7 @@ import java.io.FileWriter;
 /**
  * The
  * <code> highScoreWriter </code> class writes to an external text file which acts as a database containing all
- * highscores
+ * highscores.
  *
  * @author Haisin Yip
  */
@@ -22,7 +22,9 @@ public class highScoreWriter {
     private final String delimiter = ";";
 
     /**
-     * initializes data to be written, path, and file
+     * Initializes data to be written, path, and file
+     * @param data data to be written
+     * @param path path to be written
      */
     public highScoreWriter(String[] data, String path) {
         this.scoreData = data;

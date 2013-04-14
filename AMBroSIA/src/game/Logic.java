@@ -1,14 +1,12 @@
 package game;
 
 import mapObjects.PlayerShip;
-import mapObjects.Asteroid;
 import gui.MenuGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -154,6 +152,8 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     /**
      * Displays "Game Over" message.
+     * @param playerOneTurn true if one player turn false otherwise
+     * @param Esc checks if the escape key is pressed
      */
     public static void displayGameOver(boolean playerOneTurn, boolean Esc) {
         GameAssets.spaceSound.stop();
