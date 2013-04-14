@@ -1,7 +1,7 @@
 package gui;
 
 import game.GameState;
-import game.PlayerShip;
+import mapObjects.PlayerShip;
 
 import java.awt.Color;
 import java.awt.Font;

@@ -1,12 +1,12 @@
 package gui;
 
-import game.AlienShip;
-import game.Asteroid;
-import game.BonusDrop;
-import game.MapObjectTTL;
+import mapObjects.AlienShip;
+import mapObjects.Asteroid;
+import mapObjects.BonusDrop;
+import mapObjects.MapObjectTTL;
 import game.GameState;
-import game.PlayerShip;
-import game.Projectile;
+import mapObjects.PlayerShip;
+import mapObjects.Projectile;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;

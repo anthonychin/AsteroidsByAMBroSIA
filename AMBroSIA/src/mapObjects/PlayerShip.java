@@ -1,5 +1,9 @@
-package game;
+package mapObjects;
 
+import game.Difficulty;
+import game.GameAssets;
+import game.GameState;
+import game.Logic;
 import static game.Logic.executeTask;
 import gui.MenuGUI;
 import java.awt.Color;
@@ -248,7 +252,7 @@ public class PlayerShip extends Ship {
     public void destroy() {
         createExplosionEffect();
 
-        if (getLives() >= 1) {
+        if (getLives() > 1) {
             resetShip();
         } else {
             getGameState().removePlayerShip();

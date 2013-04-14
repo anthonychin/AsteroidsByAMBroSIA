@@ -1,5 +1,8 @@
 package game;
 
+import mapObjects.AlienShip;
+import mapObjects.PlayerShip;
+import mapObjects.Asteroid;
 import gui.MenuGUI;
 import org.apache.log4j.Logger;
 

@@ -1,5 +1,12 @@
 package game;
 
+import mapObjects.AlienShip;
+import mapObjects.MapObject;
+import mapObjects.Projectile;
+import mapObjects.PlayerShip;
+import mapObjects.BonusDrop;
+import mapObjects.Asteroid;
+import mapObjects.MapObjectTTL;
 import gui.MenuGUI;
 import java.awt.Polygon;
 import java.util.ArrayList;
@@ -110,7 +117,6 @@ public class Physics implements Runnable {
         float[] acceleration = calculate2DAcceleration(gameObject.getHeading(), gameObject.getAcceleration());
 
         int[] displacement = calculateDisplacement(velocity, acceleration, 1);
-        //int[] displacement = calculateDisplacement(velocity, gameObject.getVelocity(), 1);
         gameObject.setX(gameObject.getX() + displacement[0]);
         gameObject.setY(gameObject.getY() + displacement[1]);
 
@@ -277,8 +283,6 @@ public class Physics implements Runnable {
     private static int[] calculateDisplacement(float[] velocity, float[] acceleration, float time) {
         int[] displacement = {0, 0};
 
-//        displacement[0] = Math.round((velocity[0] * time + 0.5f * acceleration[0] * (float) Math.pow(time, 2)));
-//        displacement[1] = Math.round((float) velocity[1] * time + 0.5f * acceleration[1] * (float) Math.pow(time, 2));
         displacement[0] = Math.round(velocity[0] * time + 0.5f * acceleration[0]);
         displacement[1] = Math.round(velocity[1] * time + 0.5f * acceleration[1]);
 
@@ -307,8 +311,6 @@ public class Physics implements Runnable {
         } else if (gameObject.getY() < -1 * WRAP_AROUND_BUFFER) {
             gameObject.setY(height);
         }
-        //gameObject.setX(gameObject.getX() % (width + 100));
-        //gameObject.setY(gameObject.getY() % (height + 100));
     }
 
     /**

@@ -1,5 +1,10 @@
 package UnitTests;
 
+import mapObjects.AlienShip;
+import mapObjects.Projectile;
+import mapObjects.Asteroid;
+import mapObjects.BonusDrop;
+import mapObjects.PlayerShip;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -17,7 +22,7 @@ import org.junit.After;
  *
  * @author Anthony Chin
  */
-public class GameObjectTest {
+public class GameStateTest {
     private GameState gameState;
     private AlienShip as;
     private PlayerShip ps;

@@ -1,5 +1,8 @@
-package game;
+package mapObjects;
 
+import game.Difficulty;
+import game.GameState;
+import game.Logic;
 import java.awt.Color;
 import org.apache.log4j.Logger;
 

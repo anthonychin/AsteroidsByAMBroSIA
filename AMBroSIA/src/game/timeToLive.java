@@ -1,5 +1,8 @@
 package game;
 
+import mapObjects.Projectile;
+import mapObjects.BonusDrop;
+import mapObjects.MapObjectTTL;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;

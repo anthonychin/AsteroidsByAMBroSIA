@@ -1,11 +1,11 @@
-package UnitTests;
+package IntegrationTests;
 
 import game.Difficulty;
-import game.AlienShip;
-import game.Projectile;
+import mapObjects.AlienShip;
+import mapObjects.Projectile;
 import game.GameAssets;
 import game.GameState;
-import game.PlayerShip;
+import mapObjects.PlayerShip;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

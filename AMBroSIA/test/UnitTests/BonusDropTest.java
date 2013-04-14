@@ -1,6 +1,6 @@
 package UnitTests;
 
-import game.BonusDrop;
+import mapObjects.BonusDrop;
 import game.GameAssets;
 import game.GameState;
 import java.util.Iterator;

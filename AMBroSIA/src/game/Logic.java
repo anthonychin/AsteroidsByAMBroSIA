@@ -1,5 +1,7 @@
 package game;
 
+import mapObjects.PlayerShip;
+import mapObjects.Asteroid;
 import gui.MenuGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

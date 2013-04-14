@@ -1,7 +1,7 @@
 
 package UnitTests;
 
-import game.AlienShip;
+import mapObjects.AlienShip;
 import game.GameAssets;
 import game.GameState;
 import org.junit.After;
@@ -37,7 +37,6 @@ public class AlienTest {
         gameState.addAlienShip(alienShip);
         alienShip.destroy(false);
         assertNull("Alien should not exist", gameState.getAlienShip());
-        assertEquals("Bonus drop should exist", gameState.getBonusDrops().size(), 1);
     }
     
     @Test
@@ -45,6 +44,5 @@ public class AlienTest {
         gameState.addAlienShip(alienShip);
         alienShip.destroy(true);
         assertNull("Alien should not exist", gameState.getAlienShip());
-        assertEquals("Bonus drop shouldnt exist", gameState.getBonusDrops().size(), 0);
     }
 }
