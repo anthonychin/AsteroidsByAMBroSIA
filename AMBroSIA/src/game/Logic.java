@@ -156,7 +156,6 @@ public class Logic extends KeyAdapter implements ActionListener {
      * Displays "Game Over" message.
      */
     public static void displayGameOver(boolean playerOneTurn, boolean Esc) {
-        //GameAssets.theme.stop();
         GameAssets.spaceSound.stop();
         GameAssets.shields0.stop();
         GameAssets.shields1.stop();
