@@ -1,9 +1,10 @@
 package game;
-
+import game.Logic;
 import mapObjects.AlienShip;
 import mapObjects.PlayerShip;
 import mapObjects.Asteroid;
 import gui.MenuGUI;
+import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 
 /**
@@ -85,6 +86,11 @@ public class Progression implements Runnable {
                     gameState.setPlayerTwoTurn(true);
                     playerOneTurn = false;
                 } else {
+                    Thread wait = new Thread(){
+                        public void run(){
+                        }
+                    };
+                    Logic.executeTask(wait,5000,TimeUnit.MILLISECONDS);
                     //game over: save player 2 score, put it in the game state, and stop updating
                     int player2Score = gameState.getCurrentScore();
                     int player2Level = gameState.getLevel();

@@ -59,7 +59,6 @@ public class PlayerShip extends Ship {
     private boolean isAccelerating = false;
     private boolean isTurningLeft = false;
     private boolean isTurningRight = false;
-    private boolean isShieldOn = false;
     private final static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(PlayerShip.class.getName());
 
     /**
@@ -96,7 +95,6 @@ public class PlayerShip extends Ship {
      *
      */
     public void addBomb() {
-        GameAssets.powerUp.play();
         this.bomb++;
         if (this.bomb > MAX_BOMBS) {
             this.bomb = MAX_BOMBS;

@@ -148,6 +148,7 @@ public class Collision implements Runnable {
         log.debug("Collision between Player and Bonus");
         //give bonus to player, then remove
         if (bonusDrop.getType() == BonusDrop.BOMB_BONUS_DROP) {
+            GameAssets.powerUp.play();            
             playerShip.addBomb();
         } else if (bonusDrop.getType() == BonusDrop.LIFE_BONUS_DROP) {
             playerShip.setLives(playerShip.getLives() + 1);
