@@ -16,7 +16,7 @@ public class AI implements Runnable {
     private GameState gameState;
 
     /**
-     * Creates AI with given game state
+     * Creates AI with given game state.
      *
      * @param gameState current game state
      */
@@ -25,15 +25,14 @@ public class AI implements Runnable {
     }
 
     /**
-     * Runs targetPS method, which targets player ship and fires.
+     * Runs targetPlayerShip() method, which targets player ship and fires.
      */
     public void run() {
         targetPlayerShip();
     }
 
     /**
-     * Finds the set of coordinates of where the player ship is and shoots the
-     * projectile.
+     * Shoot at the player ship.  Current implementation is to fire at random.
      */
     public void targetPlayerShip() {
         PlayerShip playerShip = gameState.getPlayerShip();
