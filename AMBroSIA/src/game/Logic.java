@@ -152,10 +152,8 @@ public class Logic extends KeyAdapter implements ActionListener {
 
     /**
      * Displays "Game Over" message.
-     *
-     * @param singleP true if in single player mode, false otherwise
      */
-    public static void displayGameOver(boolean singleP) {
+    public static void displayGameOver(boolean playerOneTurn, boolean Esc) {
         //GameAssets.theme.stop();
         GameAssets.spaceSound.stop();
         GameAssets.shields0.stop();
@@ -163,7 +161,7 @@ public class Logic extends KeyAdapter implements ActionListener {
         GameAssets.shields2.stop();
         GameAssets.shields3.stop();
         GameAssets.gameOver.play();
-        gui.displayGameOver(gameState, singleP);
+        gui.displayGameOver(gameState, playerOneTurn, Esc);
     }
 
     //set up some game essentials
@@ -237,19 +235,19 @@ public class Logic extends KeyAdapter implements ActionListener {
             if (!paused && player != null) {
                 player.useBomb();
             }
-        } //REMOVE IN FINAL GAME
+        } //end game
+        else if (keyCode == KeyEvent.VK_ESCAPE) {
+            stopTimer();
+            paused = false;
+            GameAssets.theme.stop();
+            displayGameOver(!gameState.isPlayerTwoTurn(), true);
+        }
         else if (keyCode == KeyEvent.VK_Z) {
             Random randu = new Random();
             gameState.addAsteroid(new Asteroid(new float[]{1.5f, 1.5f}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
             //gameState.addAsteroid(new Asteroid(new float[]{Difficulty.randomAsteroidVelocity(10), Difficulty.randomHeading()}, randu.nextInt(360), new int[]{randu.nextInt(700), randu.nextInt(500)}, gameState, Asteroid.LARGE_ASTEROID_SIZE));
             //gameState.addProjectile(new Projectile(gameState.getAlienShip(), randu.nextInt(360), new int[] {gameState.getAlienShip().getX(), gameState.getAlienShip().getY()}, gameState));
         } //end game
-        else if (keyCode == KeyEvent.VK_ESCAPE) {
-            stopTimer();
-            paused = false;
-            GameAssets.theme.stop();
-            displayGameOver(true);
-        }
     }
 
     /**

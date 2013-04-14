@@ -34,10 +34,10 @@ public class EndGamePanel extends JPanel {
      *
      * @param img image for EndGamePanel
      * @param gameState current game state
-     * @param singleP boolean value representing single player mode or 2 player
-     * mode.
+     * @param playerOneTurn boolean value representing which player is playing in two player mode, and in single player mode, it is true by default
+     * @param Esc boolean is for checking if the escape key is pressed
      */
-    public EndGamePanel(Image img, GameState gameState, boolean singleP) {
+    public EndGamePanel(Image img, GameState gameState, boolean playerOneTurn, boolean Esc) {
         this.gameState = gameState;
 
         this.img = img;
@@ -48,51 +48,89 @@ public class EndGamePanel extends JPanel {
         setSize(size);
         setLayout(null);
 
-        makeComponents(getWidth(), getHeight(), singleP);
+        makeComponents(getWidth(), getHeight(), playerOneTurn, Esc);
         makeLayout();
     }
 
     // construct the main components and informative content which is displayed at the end of the game
-    private void makeComponents(int width, int height, boolean singleP) {
-        //when single player, display player's information
-        if (singleP) {
-            player = "Enter Your Name Here, Player1";
-            highscore = String.valueOf(gameState.getCurrentScore());
-            asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());
-            aliensDestroyed = String.valueOf(gameState.getP1alienDestroyed());
-            killDeathRatio = String.valueOf((double) gameState.getP1asteroidDestroyed() / (double) gameState.getP1deaths());
-            if (gameState.getP1deaths() == 0) {
-                killDeathRatio = String.valueOf(0);
-            }
-            level = String.valueOf(gameState.getLevel());
-            bombs = String.valueOf(gameState.getP1BombUsed());
-            shootingAccuracy = String.valueOf(100 * (double) gameState.getP1cleanShot() / (double) gameState.getP1shootCounter());
-            if (gameState.getP1shootCounter() == 0) {
-                shootingAccuracy = String.valueOf(0);
-            }
-        } //two player mode
-        else {
-            //player 1, player 2 scores
-            int highscoreP1 = gameState.getPlayer1Score();
-            int highscoreP2 = gameState.getPlayer2Score();
+    private void makeComponents(int width, int height, boolean playerOneTurn, boolean Esc) {
 
-            //display winner's score by comparing the player1's highscore and player2's highscore
-            if (highscoreP1 >= highscoreP2) {
+        // if escape key is not pressed
+        if (!Esc) {
+            // when single player, display player's information
+            if (playerOneTurn) {
                 player = "Enter Your Name Here, Player1";
-                highscore = String.valueOf(highscoreP1);
+                highscore = String.valueOf(gameState.getCurrentScore());
                 asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());
                 aliensDestroyed = String.valueOf(gameState.getP1alienDestroyed());
                 killDeathRatio = String.valueOf((double) gameState.getP1asteroidDestroyed() / (double) gameState.getP1deaths());
                 if (gameState.getP1deaths() == 0) {
                     killDeathRatio = String.valueOf(0);
                 }
-                level = String.valueOf(gameState.getPlayer1Level());
+                level = String.valueOf(gameState.getLevel());
+                bombs = String.valueOf(gameState.getP1BombUsed());
+                shootingAccuracy = String.valueOf(100 * (double) gameState.getP1cleanShot() / (double) gameState.getP1shootCounter());
+                if (gameState.getP1shootCounter() == 0) {
+                    shootingAccuracy = String.valueOf(0);
+                }
+            } //two player mode
+            else {
+                //player 1, player 2 scores
+                int highscoreP1 = gameState.getPlayer1Score();
+                int highscoreP2 = gameState.getPlayer2Score();
+
+                //display winner's score by comparing the player1's highscore and player2's highscore
+                if (highscoreP1 >= highscoreP2) {
+                    player = "Enter Your Name Here, Player1";
+                    highscore = String.valueOf(highscoreP1);
+                    asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());
+                    aliensDestroyed = String.valueOf(gameState.getP1alienDestroyed());
+                    killDeathRatio = String.valueOf((double) gameState.getP1asteroidDestroyed() / (double) gameState.getP1deaths());
+                    if (gameState.getP1deaths() == 0) {
+                        killDeathRatio = String.valueOf(0);
+                    }
+                    level = String.valueOf(gameState.getPlayer1Level());
+                    bombs = String.valueOf(gameState.getP1BombUsed());
+                    shootingAccuracy = String.valueOf(100 * (double) gameState.getP1cleanShot() / (double) gameState.getP1shootCounter());
+                    if (gameState.getP1shootCounter() == 0) {
+                        shootingAccuracy = String.valueOf(0);
+                    }
+                } else {
+                    player = "Enter Your Name Here, Player2";
+                    highscore = String.valueOf(highscoreP2);
+                    asteroidsDestroyed = String.valueOf(gameState.getP2asteroidDestroyed());
+                    aliensDestroyed = String.valueOf(gameState.getP2alienDestroyed());
+                    killDeathRatio = String.valueOf((double) gameState.getP2cleanShot() / (double) gameState.getP1deaths());
+                    if (gameState.getP1deaths() == 0) {
+                        killDeathRatio = String.valueOf(0);
+                    }
+                    level = String.valueOf(gameState.getPlayer2Level());
+                    bombs = String.valueOf(gameState.getP2BombUsed());
+                    shootingAccuracy = String.valueOf(100.0 * (double) gameState.getP2asteroidDestroyed() / (double) gameState.getP1shootCounter());
+                    if (gameState.getP1shootCounter() == 0) {
+                        shootingAccuracy = String.valueOf(0);
+                    }
+                }
+            }
+          // if escape key is pressed, then check which player is currently playing, and display the player's information 
+        } else {
+            if (playerOneTurn) {
+                player = "Enter Your Name Here, Player1";
+                highscore = String.valueOf(gameState.getCurrentScore());
+                asteroidsDestroyed = String.valueOf(gameState.getP1asteroidDestroyed());
+                aliensDestroyed = String.valueOf(gameState.getP1alienDestroyed());
+                killDeathRatio = String.valueOf((double) gameState.getP1asteroidDestroyed() / (double) gameState.getP1deaths());
+                if (gameState.getP1deaths() == 0) {
+                    killDeathRatio = String.valueOf(0);
+                }
+                level = String.valueOf(gameState.getLevel());
                 bombs = String.valueOf(gameState.getP1BombUsed());
                 shootingAccuracy = String.valueOf(100 * (double) gameState.getP1cleanShot() / (double) gameState.getP1shootCounter());
                 if (gameState.getP1shootCounter() == 0) {
                     shootingAccuracy = String.valueOf(0);
                 }
             } else {
+                int highscoreP2 = gameState.getPlayer2Score();
                 player = "Enter Your Name Here, Player2";
                 highscore = String.valueOf(highscoreP2);
                 asteroidsDestroyed = String.valueOf(gameState.getP2asteroidDestroyed());
@@ -109,7 +147,6 @@ public class EndGamePanel extends JPanel {
                 }
             }
         }
-
         // JTable header
         String[] columnData = {"", ""};
         // JTable rows
